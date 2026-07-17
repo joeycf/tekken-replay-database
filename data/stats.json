@@ -1,12 +1,12 @@
 {
   "totals": {
-    "replays": 14039,
+    "replays": 14040,
     "characters": 42,
     "players": 2690,
     "byPatch": {
       "S1": 5920,
       "S2": 5956,
-      "S3": 2163
+      "S3": 2164
     }
   },
   "characterUsage": {
@@ -14,7 +14,7 @@
     "anna": 620,
     "armor_king": 558,
     "asuka": 378,
-    "azucena": 485,
+    "azucena": 486,
     "bryan": 2180,
     "claudio": 533,
     "clive": 935,
@@ -31,7 +31,7 @@
     "kazuya": 1811,
     "king": 573,
     "kuma": 176,
-    "kunimitsu": 291,
+    "kunimitsu": 292,
     "lars": 452,
     "law": 673,
     "lee": 578,
@@ -138,7 +138,7 @@
       "anna": 77,
       "armor_king": 194,
       "asuka": 56,
-      "azucena": 64,
+      "azucena": 65,
       "bryan": 361,
       "claudio": 41,
       "clive": 78,
@@ -155,7 +155,7 @@
       "kazuya": 239,
       "king": 36,
       "kuma": 12,
-      "kunimitsu": 291,
+      "kunimitsu": 292,
       "lars": 52,
       "law": 78,
       "lee": 75,
@@ -1504,7 +1504,7 @@
       "heihachi": 2,
       "jack8": 1,
       "kazuya": 4,
-      "kunimitsu": 27,
+      "kunimitsu": 28,
       "miary_zo": 9,
       "shaheen": 3
     },
@@ -9170,7 +9170,7 @@
     },
     "watanabe": {
       "alisa": 10,
-      "azucena": 57,
+      "azucena": 58,
       "fahkumram": 4
     },
     "watanabefan": {
