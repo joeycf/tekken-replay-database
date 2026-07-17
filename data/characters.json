@@ -1,0 +1,631 @@
+[
+  {
+    "id": "alisa",
+    "name": "Alisa",
+    "imgPortrait": "/img/characters/alisa-portrait.webp",
+    "imgSplash": "/img/characters/alisa-splash.webp",
+    "accent": "#FF9ED2",
+    "extra": {
+      "aliases": [
+        "alisa",
+        "alisa bosconovitch"
+      ],
+      "full name": "Alisa Bosconovitch",
+      "japanese": "アリサ・ボスコノビッチ"
+    }
+  },
+  {
+    "id": "anna",
+    "name": "Anna",
+    "imgPortrait": "/img/characters/anna-portrait.webp",
+    "imgSplash": "/img/characters/anna-splash.webp",
+    "accent": "#FF4E6E",
+    "extra": {
+      "aliases": [
+        "anna",
+        "anna williams"
+      ],
+      "full name": "Anna Williams",
+      "japanese": "アンナ・ウィリアムズ"
+    }
+  },
+  {
+    "id": "armor_king",
+    "name": "Armor King",
+    "imgPortrait": "/img/characters/armor_king-portrait.webp",
+    "imgSplash": "/img/characters/armor_king-splash.webp",
+    "accent": "#97A2B8",
+    "extra": {
+      "aliases": [
+        "armor king",
+        "armorking",
+        "armour king"
+      ],
+      "full name": "Armor King",
+      "japanese": "アーマーキング"
+    }
+  },
+  {
+    "id": "asuka",
+    "name": "Asuka",
+    "imgPortrait": "/img/characters/asuka-portrait.webp",
+    "imgSplash": "/img/characters/asuka-splash.webp",
+    "accent": "#77B8F8",
+    "extra": {
+      "aliases": [
+        "asuka",
+        "asuka kazama"
+      ],
+      "full name": "Asuka Kazama",
+      "japanese": "風間 飛鳥"
+    }
+  },
+  {
+    "id": "azucena",
+    "name": "Azucena",
+    "imgPortrait": "/img/characters/azucena-portrait.webp",
+    "imgSplash": "/img/characters/azucena-splash.webp",
+    "accent": "#C98A4B",
+    "extra": {
+      "aliases": [
+        "azucena",
+        "azucena milagros ortiz castillo"
+      ],
+      "full name": "Azucena Milagros Ortiz Castillo",
+      "japanese": "アズセナ・ミラグロス・オルティス・カスティーリョ"
+    }
+  },
+  {
+    "id": "bob",
+    "name": "Bob",
+    "imgPortrait": "/img/characters/bob-portrait.webp",
+    "imgSplash": "/img/characters/bob-splash.webp",
+    "accent": "#F25C43",
+    "extra": {
+      "aliases": [
+        "bob"
+      ],
+      "full name": "Bob",
+      "japanese": "ボブ"
+    }
+  },
+  {
+    "id": "bryan",
+    "name": "Bryan",
+    "imgPortrait": "/img/characters/bryan-portrait.webp",
+    "imgSplash": "/img/characters/bryan-splash.webp",
+    "accent": "#A9E24A",
+    "extra": {
+      "aliases": [
+        "bryan",
+        "bryan fury"
+      ],
+      "full name": "Bryan Fury",
+      "japanese": "ブライアン・フューリー"
+    }
+  },
+  {
+    "id": "claudio",
+    "name": "Claudio",
+    "imgPortrait": "/img/characters/claudio-portrait.webp",
+    "imgSplash": "/img/characters/claudio-splash.webp",
+    "accent": "#7FA9F5",
+    "extra": {
+      "aliases": [
+        "claudio",
+        "claudio serafino"
+      ],
+      "full name": "Claudio Serafino",
+      "japanese": "クラウディオ・セラフィーノ"
+    }
+  },
+  {
+    "id": "clive",
+    "name": "Clive",
+    "imgPortrait": "/img/characters/clive-portrait.webp",
+    "imgSplash": "/img/characters/clive-splash.webp",
+    "accent": "#E88038",
+    "extra": {
+      "aliases": [
+        "clive",
+        "clive rosfield"
+      ],
+      "full name": "Clive Rosfield",
+      "japanese": "クライヴ・ロズフィールド"
+    }
+  },
+  {
+    "id": "devil_jin",
+    "name": "Devil Jin",
+    "imgPortrait": "/img/characters/devil_jin-portrait.webp",
+    "imgSplash": "/img/characters/devil_jin-splash.webp",
+    "accent": "#7A48E8",
+    "extra": {
+      "aliases": [
+        "devil jin",
+        "deviljin",
+        "dvj"
+      ],
+      "full name": "Devil Jin",
+      "japanese": "デビル仁"
+    }
+  },
+  {
+    "id": "dragunov",
+    "name": "Dragunov",
+    "imgPortrait": "/img/characters/dragunov-portrait.webp",
+    "imgSplash": "/img/characters/dragunov-splash.webp",
+    "accent": "#9FB9D6",
+    "extra": {
+      "aliases": [
+        "dragunov",
+        "sergei dragunov",
+        "sergei"
+      ],
+      "full name": "Sergei Dragunov",
+      "japanese": "セルゲイ・ドラグノフ"
+    }
+  },
+  {
+    "id": "eddy",
+    "name": "Eddy",
+    "imgPortrait": "/img/characters/eddy-portrait.webp",
+    "imgSplash": "/img/characters/eddy-splash.webp",
+    "accent": "#4FD65C",
+    "extra": {
+      "aliases": [
+        "eddy",
+        "eddy gordo"
+      ],
+      "full name": "Eddy Gordo",
+      "japanese": "エディ・ゴルド"
+    }
+  },
+  {
+    "id": "fahkumram",
+    "name": "Fahkumram",
+    "imgPortrait": "/img/characters/fahkumram-portrait.webp",
+    "imgSplash": "/img/characters/fahkumram-splash.webp",
+    "accent": "#D6C04A",
+    "extra": {
+      "aliases": [
+        "fahkumram",
+        "fakumram",
+        "fahkurmram"
+      ],
+      "full name": "Fahkumram",
+      "japanese": "ファーカムラム"
+    }
+  },
+  {
+    "id": "feng",
+    "name": "Feng",
+    "imgPortrait": "/img/characters/feng-portrait.webp",
+    "imgSplash": "/img/characters/feng-splash.webp",
+    "accent": "#2FB878",
+    "extra": {
+      "aliases": [
+        "feng",
+        "feng wei"
+      ],
+      "full name": "Feng Wei",
+      "japanese": "馮 威"
+    }
+  },
+  {
+    "id": "heihachi",
+    "name": "Heihachi",
+    "imgPortrait": "/img/characters/heihachi-portrait.webp",
+    "imgSplash": "/img/characters/heihachi-splash.webp",
+    "accent": "#E5B22F",
+    "extra": {
+      "aliases": [
+        "heihachi",
+        "heihachi mishima"
+      ],
+      "full name": "Heihachi Mishima",
+      "japanese": "三島 平八"
+    }
+  },
+  {
+    "id": "hwoarang",
+    "name": "Hwoarang",
+    "imgPortrait": "/img/characters/hwoarang-portrait.webp",
+    "imgSplash": "/img/characters/hwoarang-splash.webp",
+    "accent": "#FF6A30",
+    "extra": {
+      "aliases": [
+        "hwoarang",
+        "howarang",
+        "hworang"
+      ],
+      "full name": "Hwoarang",
+      "japanese": "ファラン"
+    }
+  },
+  {
+    "id": "jack8",
+    "name": "Jack-8",
+    "imgPortrait": "/img/characters/jack8-portrait.webp",
+    "imgSplash": "/img/characters/jack8-splash.webp",
+    "accent": "#7CB342",
+    "extra": {
+      "aliases": [
+        "jack-8",
+        "jack 8",
+        "jack"
+      ],
+      "full name": "Jack-8",
+      "japanese": "ジャック８"
+    }
+  },
+  {
+    "id": "jin",
+    "name": "Jin",
+    "imgPortrait": "/img/characters/jin-portrait.webp",
+    "imgSplash": "/img/characters/jin-splash.webp",
+    "accent": "#4D8DFF",
+    "extra": {
+      "aliases": [
+        "jin",
+        "jin kazama"
+      ],
+      "full name": "Jin Kazama",
+      "japanese": "風間 仁"
+    }
+  },
+  {
+    "id": "jun",
+    "name": "Jun",
+    "imgPortrait": "/img/characters/jun-portrait.webp",
+    "imgSplash": "/img/characters/jun-splash.webp",
+    "accent": "#8CDFC2",
+    "extra": {
+      "aliases": [
+        "jun",
+        "jun kazama"
+      ],
+      "full name": "Jun Kazama",
+      "japanese": "風間 準"
+    }
+  },
+  {
+    "id": "kazuya",
+    "name": "Kazuya",
+    "imgPortrait": "/img/characters/kazuya-portrait.webp",
+    "imgSplash": "/img/characters/kazuya-splash.webp",
+    "accent": "#E23B4E",
+    "extra": {
+      "aliases": [
+        "kazuya",
+        "kazuya mishima"
+      ],
+      "full name": "Kazuya Mishima",
+      "japanese": "三島 一八"
+    }
+  },
+  {
+    "id": "king",
+    "name": "King",
+    "imgPortrait": "/img/characters/king-portrait.webp",
+    "imgSplash": "/img/characters/king-splash.webp",
+    "accent": "#FFC145",
+    "extra": {
+      "aliases": [
+        "king"
+      ],
+      "full name": "King",
+      "japanese": "キング"
+    }
+  },
+  {
+    "id": "kuma",
+    "name": "Kuma",
+    "imgPortrait": "/img/characters/kuma-portrait.webp",
+    "imgSplash": "/img/characters/kuma-splash.webp",
+    "accent": "#B5824E",
+    "extra": {
+      "aliases": [
+        "kuma"
+      ],
+      "full name": "Kuma",
+      "japanese": "クマ"
+    }
+  },
+  {
+    "id": "kunimitsu",
+    "name": "Kunimitsu",
+    "imgPortrait": "/img/characters/kunimitsu-portrait.webp",
+    "imgSplash": "/img/characters/kunimitsu-splash.webp",
+    "accent": "#E062D8",
+    "extra": {
+      "aliases": [
+        "kunimitsu",
+        "kuni"
+      ],
+      "full name": "Kunimitsu",
+      "japanese": "州光"
+    }
+  },
+  {
+    "id": "lars",
+    "name": "Lars",
+    "imgPortrait": "/img/characters/lars-portrait.webp",
+    "imgSplash": "/img/characters/lars-splash.webp",
+    "accent": "#6BC6FF",
+    "extra": {
+      "aliases": [
+        "lars",
+        "lars alexandersson"
+      ],
+      "full name": "Lars Alexandersson",
+      "japanese": "ラース・アレクサンダーソン"
+    }
+  },
+  {
+    "id": "law",
+    "name": "Law",
+    "imgPortrait": "/img/characters/law-portrait.webp",
+    "imgSplash": "/img/characters/law-splash.webp",
+    "accent": "#FFE04A",
+    "extra": {
+      "aliases": [
+        "law",
+        "marshall law"
+      ],
+      "full name": "Marshall Law",
+      "japanese": "マーシャル・ロウ"
+    }
+  },
+  {
+    "id": "lee",
+    "name": "Lee",
+    "imgPortrait": "/img/characters/lee-portrait.webp",
+    "imgSplash": "/img/characters/lee-splash.webp",
+    "accent": "#C7A6FF",
+    "extra": {
+      "aliases": [
+        "lee",
+        "lee chaolan",
+        "violet"
+      ],
+      "full name": "Lee Chaolan",
+      "japanese": "李 超狼"
+    }
+  },
+  {
+    "id": "leo",
+    "name": "Leo",
+    "imgPortrait": "/img/characters/leo-portrait.webp",
+    "imgSplash": "/img/characters/leo-splash.webp",
+    "accent": "#EFCB7A",
+    "extra": {
+      "aliases": [
+        "leo"
+      ],
+      "full name": "Leo",
+      "japanese": "レオ"
+    }
+  },
+  {
+    "id": "leroy",
+    "name": "Leroy",
+    "imgPortrait": "/img/characters/leroy-portrait.webp",
+    "imgSplash": "/img/characters/leroy-splash.webp",
+    "accent": "#C9A227",
+    "extra": {
+      "aliases": [
+        "leroy",
+        "leroy smith"
+      ],
+      "full name": "Leroy Smith",
+      "japanese": "リロイ・スミス"
+    }
+  },
+  {
+    "id": "lidia",
+    "name": "Lidia",
+    "imgPortrait": "/img/characters/lidia-portrait.webp",
+    "imgSplash": "/img/characters/lidia-splash.webp",
+    "accent": "#8CD3E8",
+    "extra": {
+      "aliases": [
+        "lidia",
+        "lidia sobieska"
+      ],
+      "full name": "Lidia Sobieska",
+      "japanese": "リディア・ソビエスカ"
+    }
+  },
+  {
+    "id": "lili",
+    "name": "Lili",
+    "imgPortrait": "/img/characters/lili-portrait.webp",
+    "imgSplash": "/img/characters/lili-splash.webp",
+    "accent": "#F2B8D8",
+    "extra": {
+      "aliases": [
+        "lili",
+        "emilie de rochefort"
+      ],
+      "full name": "Lili",
+      "japanese": "リリ"
+    }
+  },
+  {
+    "id": "miary_zo",
+    "name": "Miary Zo",
+    "imgPortrait": "/img/characters/miary_zo-portrait.webp",
+    "imgSplash": "/img/characters/miary_zo-splash.webp",
+    "accent": "#45D4D8",
+    "extra": {
+      "aliases": [
+        "miary zo",
+        "miaryzo",
+        "miary"
+      ],
+      "full name": "Miary Zo",
+      "japanese": "ミアリズ"
+    }
+  },
+  {
+    "id": "nina",
+    "name": "Nina",
+    "imgPortrait": "/img/characters/nina-portrait.webp",
+    "imgSplash": "/img/characters/nina-splash.webp",
+    "accent": "#9B8AEC",
+    "extra": {
+      "aliases": [
+        "nina",
+        "nina williams"
+      ],
+      "full name": "Nina Williams",
+      "japanese": "ニーナ・ウィリアムズ"
+    }
+  },
+  {
+    "id": "panda",
+    "name": "Panda",
+    "imgPortrait": "/img/characters/panda-portrait.webp",
+    "imgSplash": "/img/characters/panda-splash.webp",
+    "accent": "#E8E4F0",
+    "extra": {
+      "aliases": [
+        "panda"
+      ],
+      "full name": "Panda",
+      "japanese": "パンダ"
+    }
+  },
+  {
+    "id": "paul",
+    "name": "Paul",
+    "imgPortrait": "/img/characters/paul-portrait.webp",
+    "imgSplash": "/img/characters/paul-splash.webp",
+    "accent": "#FF9C2E",
+    "extra": {
+      "aliases": [
+        "paul",
+        "paul phoenix"
+      ],
+      "full name": "Paul Phoenix",
+      "japanese": "ポール・フェニックス"
+    }
+  },
+  {
+    "id": "raven",
+    "name": "Raven",
+    "imgPortrait": "/img/characters/raven-portrait.webp",
+    "imgSplash": "/img/characters/raven-splash.webp",
+    "accent": "#6E62B8",
+    "extra": {
+      "aliases": [
+        "raven"
+      ],
+      "full name": "Raven",
+      "japanese": "レイヴン"
+    }
+  },
+  {
+    "id": "reina",
+    "name": "Reina",
+    "imgPortrait": "/img/characters/reina-portrait.webp",
+    "imgSplash": "/img/characters/reina-splash.webp",
+    "accent": "#C45CF0",
+    "extra": {
+      "aliases": [
+        "reina"
+      ],
+      "full name": "Reina",
+      "japanese": "麗奈"
+    }
+  },
+  {
+    "id": "shaheen",
+    "name": "Shaheen",
+    "imgPortrait": "/img/characters/shaheen-portrait.webp",
+    "imgSplash": "/img/characters/shaheen-splash.webp",
+    "accent": "#56C9A2",
+    "extra": {
+      "aliases": [
+        "shaheen"
+      ],
+      "full name": "Shaheen",
+      "japanese": "シャヒーン"
+    }
+  },
+  {
+    "id": "steve",
+    "name": "Steve",
+    "imgPortrait": "/img/characters/steve-portrait.webp",
+    "imgSplash": "/img/characters/steve-splash.webp",
+    "accent": "#2F82DC",
+    "extra": {
+      "aliases": [
+        "steve",
+        "steve fox"
+      ],
+      "full name": "Steve Fox",
+      "japanese": "スティーブ・フォックス"
+    }
+  },
+  {
+    "id": "victor",
+    "name": "Victor",
+    "imgPortrait": "/img/characters/victor-portrait.webp",
+    "imgSplash": "/img/characters/victor-splash.webp",
+    "accent": "#5A68E0",
+    "extra": {
+      "aliases": [
+        "victor",
+        "victor chevalier"
+      ],
+      "full name": "Victor Chevalier",
+      "japanese": "ヴィクター・シュヴァリエ"
+    }
+  },
+  {
+    "id": "xiaoyu",
+    "name": "Xiaoyu",
+    "imgPortrait": "/img/characters/xiaoyu-portrait.webp",
+    "imgSplash": "/img/characters/xiaoyu-splash.webp",
+    "accent": "#FF7F98",
+    "extra": {
+      "aliases": [
+        "xiaoyu",
+        "ling xiaoyu"
+      ],
+      "full name": "Ling Xiaoyu",
+      "japanese": "凌 暁雨"
+    }
+  },
+  {
+    "id": "yoshimitsu",
+    "name": "Yoshimitsu",
+    "imgPortrait": "/img/characters/yoshimitsu-portrait.webp",
+    "imgSplash": "/img/characters/yoshimitsu-splash.webp",
+    "accent": "#3DF0B8",
+    "extra": {
+      "aliases": [
+        "yoshimitsu",
+        "yoshi"
+      ],
+      "full name": "Yoshimitsu",
+      "japanese": "吉光"
+    }
+  },
+  {
+    "id": "zafina",
+    "name": "Zafina",
+    "imgPortrait": "/img/characters/zafina-portrait.webp",
+    "imgSplash": "/img/characters/zafina-splash.webp",
+    "accent": "#A65CC8",
+    "extra": {
+      "aliases": [
+        "zafina"
+      ],
+      "full name": "Zafina",
+      "japanese": "ザフィーナ"
+    }
+  }
+]
