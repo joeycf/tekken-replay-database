@@ -1,0 +1,59 @@
+name: Daily data refresh
+
+on:
+  schedule:
+    # 06:47 UTC daily (odd minute to dodge cron rush; offset from the 2XKO
+    # app's 06:17 so the two refreshes never contend)
+    - cron: '47 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # matches engines.node (the platform's Node policy — STACK.md §1)
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # fetch + parse + emit (character art is NOT part of the daily run —
+      # scripts/characters.ts only runs when the roster changes)
+      - name: Rebuild data
+        run: npm run data:build
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+
+      - name: Commit if changed
+        run: |
+          git config user.name "tekken-data-refresh[bot]"
+          git config user.email "data-refresh@users.noreply.github.com"
+          # substrate + generic artifacts land in the same commit or the
+          # site's data desyncs from the pipeline substrate (Phase-3 pattern).
+          git add data/videos.json data/replays.json data/stats.json data/players.json data/seasonBoundaries.json data/report.md
+          # report.md's "_Generated <timestamp>_" line changes every run; a diff
+          # that is ONLY that line is not a data change — drop it so a no-change
+          # day produces no commit (and no deploy). report.md still ships
+          # whenever anything real changes alongside it.
+          REAL=$(git diff --cached -- data/report.md | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | { grep -vc '^[+-]_Generated ' || true; })
+          if [ "$REAL" -eq 0 ]; then
+            git restore --staged --worktree data/report.md
+          fi
+          if git diff --cached --quiet; then
+            echo "No data changes — skipping commit."
+            exit 0
+          fi
+          N=$(node -p "require('./data/replays.json').length")
+          git commit -m "data: refresh $(date -u +%F) — ${N} replays"
+          git push
