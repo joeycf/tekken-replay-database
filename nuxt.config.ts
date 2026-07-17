@@ -34,14 +34,20 @@ export default defineNuxtConfig({
   // `install: true` is REQUIRED for git layers: without it the cloned layer
   // gets no node_modules and its runtime deps (@tailwindcss/vite, ufo, …)
   // don't resolve (STACK §5.5, verified in the Phase-3 remote-layer check).
-  extends: [process.env.ENGINE_PATH || ['github:joeycf/replay-engine#v0.5.0', { install: true }]],
+  extends: [process.env.ENGINE_PATH || ['github:joeycf/replay-engine#v0.5.1', { install: true }]],
 
   compatibilityDate: '2025-07-01',
 
-  // Tekken deploys at its own project root for now (PLAN §8 defers routing);
-  // the subpath flip ('/tekken') happens with the shell, later.
+  // Tekken lives under /tekken/ behind the shell (replaydatabase.com — the
+  // Phase-5 subpath cutover). The env expression is REQUIRED, not decorative:
+  // a literal baseURL here shadows the engine's own env read (app config wins
+  // the layer merge), and NUXT_APP_BASE_URL alone then flips only the runtime
+  // router — prerender seeds stay root-based and every route 404s the build
+  // (STACK §5.3 desync, reproduced empirically in Phase 5). The committed
+  // default IS the production truth; the env var overrides for special builds
+  // (e.g. NUXT_APP_BASE_URL=/ for a root-based local preview).
   app: {
-    baseURL: '/',
+    baseURL: process.env.NUXT_APP_BASE_URL || '/tekken/',
   },
 
   // The Tekken theme (palette + self-hosted fonts) — loads after the engine's

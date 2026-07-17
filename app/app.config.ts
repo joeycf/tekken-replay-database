@@ -29,7 +29,7 @@ export default defineAppConfig({
     // manifest short_name.
     shortName: 'TEKKEN',
     rightsHolder: 'Bandai Namco Entertainment',
-    baseURL: '/', // stays '/' until the shell phase, then '/tekken'
+    baseURL: '/tekken', // behind the shell at replaydatabase.com/tekken (Phase 5)
     siteUrl: 'https://replaydatabase.com',
     charactersPerSide: 1,
     filters: {

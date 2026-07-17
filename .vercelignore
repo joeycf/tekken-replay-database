@@ -1,0 +1,12 @@
+# CLI uploads (vercel deploy): this file REPLACES .gitignore-based exclusion,
+# so it must mirror .gitignore. Critically: .env must not ride an upload — the
+# remote build must resolve the engine from the pinned github: tag, never a
+# local ENGINE_PATH.
+.env*
+node_modules
+.nuxt
+.output
+.vercel
+.data
+dist
+public/data
