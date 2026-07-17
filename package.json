@@ -1,0 +1,53 @@
+{
+  "name": "tekken-replay-database",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Tekken 8 game app for the Replay Database platform: thin consumer of the replay-engine layer + the bespoke Tekken data pipeline (fetch/parse YouTube replay uploads, Bandai Namco roster scrape).",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "typecheck": "nuxt prepare && nuxt typecheck && tsc --noEmit -p tsconfig.pipeline.json",
+    "lint": "nuxt prepare && eslint .",
+    "lint:fix": "nuxt prepare && eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "data:fetch": "tsx --env-file-if-exists=.env scripts/fetch.ts",
+    "data:parse": "tsx scripts/parse.ts",
+    "data:build": "npm run data:fetch && npm run data:parse",
+    "data:emit": "tsx scripts/emit.ts",
+    "data:characters": "tsx scripts/characters.ts",
+    "test:e2e": "tsx scripts/e2e.ts"
+  },
+  "devDependencies": {
+    "@fontsource-variable/archivo": "^5.2.8",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/rajdhani": "^5.2.7",
+    "@nuxt/eslint": "^1.16.0",
+    "@types/node": "^24.13.3",
+    "animejs": "^4.5.0",
+    "eslint": "^10.6.0",
+    "eslint-config-prettier": "^10.1.8",
+    "nuxt": "^4.4.8",
+    "playwright-core": "^1.61.1",
+    "prettier": "^3.9.5",
+    "sharp": "^0.35.3",
+    "tsx": "^4.22.4",
+    "typescript": "^5.9.3",
+    "vue-tsc": "^3.3.7"
+  },
+  "overrides": {
+    "@vercel/analytics": {
+      "vue-router": "^5"
+    },
+    "@vercel/speed-insights": {
+      "vue-router": "^5"
+    }
+  },
+  "engines": {
+    "node": ">=24 <25"
+  }
+}

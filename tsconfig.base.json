@@ -1,0 +1,13 @@
+{
+  // Canonical shared TypeScript baseline, replicated from the engine
+  // (replay-engine/tsconfig.base.json — STACK.md §2): every repo on the
+  // platform compiles under the same strictness. Nuxt's generated per-context
+  // tsconfigs (.nuxt/tsconfig.*.json) carry the framework-required
+  // module/paths settings; this file pins the project-wide invariants.
+  "compilerOptions": {
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  }
+}

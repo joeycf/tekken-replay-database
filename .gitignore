@@ -1,0 +1,12 @@
+.env
+node_modules
+raw/
+
+# Nuxt / build artifacts
+.nuxt
+.output
+.vercel
+.data
+dist
+public/data/
+cache/

@@ -1,0 +1,17 @@
+# Generated / build output
+node_modules
+.nuxt
+.output
+.vercel
+dist
+package-lock.json
+
+# Data artifacts (pipeline-emitted JSON) + local caches
+data
+raw
+cache
+public/data
+
+# Binary assets
+public
+design

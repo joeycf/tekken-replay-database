@@ -1,0 +1,16 @@
+{
+  // Pipeline track: the tsx-run data scripts + their shared types, checked by
+  // plain tsc (never part of the Nuxt project graph). Second half of
+  // `npm run typecheck`.
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "include": ["scripts/**/*.ts", "types/**/*.ts"]
+}
