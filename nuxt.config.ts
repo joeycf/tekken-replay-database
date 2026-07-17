@@ -34,7 +34,7 @@ export default defineNuxtConfig({
   // `install: true` is REQUIRED for git layers: without it the cloned layer
   // gets no node_modules and its runtime deps (@tailwindcss/vite, ufo, …)
   // don't resolve (STACK §5.5, verified in the Phase-3 remote-layer check).
-  extends: [process.env.ENGINE_PATH || ['github:joeycf/replay-engine#v0.4.0', { install: true }]],
+  extends: [process.env.ENGINE_PATH || ['github:joeycf/replay-engine#v0.5.0', { install: true }]],
 
   compatibilityDate: '2025-07-01',
 
