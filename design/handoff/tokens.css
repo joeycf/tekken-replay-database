@@ -1,0 +1,91 @@
+/* ============================================================
+   TEKKEN 8 Replay Database — Design Tokens (handoff)
+   The Tekken skin, designed against the engine's existing
+   component structure (PLAN §2.6/§4b: a re-skin, not a redesign).
+   SOURCE OF TRUTH for app/assets/theme.css (semantic palette +
+   font families) and app/app.config.ts (per-character accents;
+   scripts/characters.ts reads the same --char-* values when
+   enriching data/characters.json, so config and data can't drift).
+
+   Identity: darker + metallic vs 2XKO's neon — carbon-steel
+   surfaces, Tekken crimson primary, devil-lightning violet
+   secondary. Fonts: Rajdhani (display) / Archivo (ui) /
+   JetBrains Mono (mono).
+   ============================================================ */
+:root {
+  /* --- Surfaces & depth (carbon → steel, warm-cold near-blacks) --- */
+  --bg-inset:      #070709;
+  --bg-base:       #0B0B0D;
+  --bg-surface:    #141317;
+  --bg-elevated:   #1C1B21;
+
+  /* --- Borders / dividers (gunmetal) --- */
+  --border-subtle: #211F27;
+  --border:        #32303A;
+
+  /* --- Text (polished-steel ramp) --- */
+  --text-primary:   #F2F1F4;
+  --text-secondary: #ABA8B4;
+  --text-muted:     #8B8794;
+  --text-faint:     #4A4752;
+  --text-on-accent: #0B0B0D;
+
+  /* --- Brand accents --- */
+  --accent:        #E13048;   /* Tekken crimson (rage) */
+  --accent-hover:  #F04E62;
+  --accent-2:      #9D5CFF;   /* devil-lightning violet */
+
+  /* --- Semantic status --- */
+  --success: #3ECF6E;
+  --warning: #F5B33C;
+  --danger:  #FF4B3E;
+
+  /* --- Per-character accent slots (roster of 42, S3 2026) --- */
+  --char-alisa:      #FF9ED2;
+  --char-anna:       #FF4E6E;
+  --char-armor_king: #97A2B8;
+  --char-asuka:      #77B8F8;
+  --char-azucena:    #C98A4B;
+  --char-bob:        #F25C43;
+  --char-bryan:      #A9E24A;
+  --char-claudio:    #7FA9F5;
+  --char-clive:      #E88038;
+  --char-devil_jin:  #7A48E8;
+  --char-dragunov:   #9FB9D6;
+  --char-eddy:       #4FD65C;
+  --char-fahkumram:  #D6C04A;
+  --char-feng:       #2FB878;
+  --char-heihachi:   #E5B22F;
+  --char-hwoarang:   #FF6A30;
+  --char-jack8:      #7CB342;
+  --char-jin:        #4D8DFF;
+  --char-jun:        #8CDFC2;
+  --char-kazuya:     #E23B4E;
+  --char-king:       #FFC145;
+  --char-kuma:       #B5824E;
+  --char-kunimitsu:  #E062D8;
+  --char-lars:       #6BC6FF;
+  --char-law:        #FFE04A;
+  --char-lee:        #C7A6FF;
+  --char-leo:        #EFCB7A;
+  --char-leroy:      #C9A227;
+  --char-lidia:      #8CD3E8;
+  --char-lili:       #F2B8D8;
+  --char-miary_zo:   #45D4D8;
+  --char-nina:       #9B8AEC;
+  --char-panda:      #E8E4F0;
+  --char-paul:       #FF9C2E;
+  --char-raven:      #6E62B8;
+  --char-reina:      #C45CF0;
+  --char-shaheen:    #56C9A2;
+  --char-steve:      #2F82DC;
+  --char-victor:     #5A68E0;
+  --char-xiaoyu:     #FF7F98;
+  --char-yoshimitsu: #3DF0B8;
+  --char-zafina:     #A65CC8;
+
+  /* --- Typography (families only; the scale is engine-structural) --- */
+  --font-display: 'Rajdhani', system-ui, sans-serif;
+  --font-sans:    'Archivo Variable', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+}

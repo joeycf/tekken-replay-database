@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- corner-cut tile in Tekken crimson (signature notch top-right + bottom-left) -->
+  <path d="M0 0 H52 L64 12 V64 H12 L0 52 Z" fill="#E13048"/>
+  <!-- the wordmark's slash, carbon on crimson -->
+  <path d="M39 8 H50 L25 56 H14 Z" fill="#0B0B0D"/>
+</svg>

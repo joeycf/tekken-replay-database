@@ -1,0 +1,75 @@
+/* =============================================================================
+   TEKKEN THEME — the carbon-steel/crimson skin (design/handoff/tokens.css is
+   the design source of truth; this file transcribes it onto the engine's
+   semantic variables).
+
+   Loads AFTER the engine layer's CSS, so this @theme SHADOWS the umbrella
+   defaults (teal/gold, Space Grotesk) — removing this file drops the site to
+   the neutral ReplayDB look, which is the override-contract proof. Values are
+   declared in full (not just the deltas) so the Tekken skin never drifts with
+   an engine default change.
+
+   Identity vs the platform's other skins: darker + metallic (carbon surfaces,
+   gunmetal borders, polished-steel text) with the Tekken crimson primary and
+   devil-lightning violet secondary — not 2XKO's neon pink/cyan, not the
+   umbrella teal/gold. Structural tokens (spacing, radii, corner cuts, shadow
+   geometry, motion, type scale) are engine-fixed and deliberately NOT
+   declared here.
+   ========================================================================== */
+
+/* ---- Self-hosted faces via @fontsource (Vite-processed, hashed, base-path-
+   safe — never public/ url()s). Rajdhani = the display face (squared, techy
+   terminals — evokes the Tekken HUD without imitating the trademarked
+   logotype); Archivo (variable) = the industrial grotesque UI face;
+   JetBrains Mono = data/mono. font-display: swap ships inside the
+   fontsource CSS. ---------------------------------------------------------- */
+@import '@fontsource/rajdhani/400.css';
+@import '@fontsource/rajdhani/500.css';
+@import '@fontsource/rajdhani/600.css';
+@import '@fontsource/rajdhani/700.css';
+@import '@fontsource-variable/archivo';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+@import '@fontsource/jetbrains-mono/700.css';
+
+/* :root, NOT @theme — deliberately. This file is a plain app stylesheet: it
+   never enters the engine's Tailwind root compile, so an `@theme` block here
+   ships to the browser as a raw unknown at-rule and is silently dropped in
+   the PRODUCTION bundle (the dev server compiles per-file and masks it —
+   found in the Phase-4 audit, where the live 2XKO build exhibited exactly
+   this). Plain `:root` custom properties are the README contract's other
+   documented form: they need no compilation, and being UNLAYERED they win
+   over the engine's `@layer theme` defaults in every build mode. Engine
+   utilities reference var(--color-*) at use time, so overrides flow through. */
+:root {
+  /* ---- Surfaces (inset → base → surface → elevated; carbon steel) --------- */
+  --color-bg: #0b0b0d;
+  --color-surface: #141317;
+  --color-surface-raised: #1c1b21;
+  --color-surface-sunken: #070709;
+  --color-border: #32303a;
+  --color-border-subtle: #211f27;
+
+  /* ---- Text tiers (polished-steel ramp) ----------------------------------- */
+  --color-text: #f2f1f4;
+  --color-text-secondary: #aba8b4;
+  --color-text-muted: #8b8794;
+  --color-text-faint: #4a4752;
+
+  /* ---- Brand: Tekken crimson + devil-lightning violet --------------------- */
+  --color-primary: #e13048;
+  --color-primary-hover: #f04e62;
+  --color-primary-contrast: #0b0b0d;
+  --color-secondary: #9d5cff;
+  --color-focus: #e13048;
+
+  /* ---- Status -------------------------------------------------------------- */
+  --color-danger: #ff4b3e;
+  --color-warning: #f5b33c;
+  --color-success: #3ecf6e;
+
+  /* ---- Font families (scale stays structural) ------------------------------ */
+  --font-display: 'Rajdhani', ui-sans-serif, system-ui, sans-serif;
+  --font-ui: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
