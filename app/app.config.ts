@@ -37,6 +37,13 @@ export default defineAppConfig({
       rank: true, // the ladder filter, options in ladder order
     },
     ranks,
+    // Tekken ships no GameStatsPanels override, so the stats page's
+    // `beside-timeline` anchor is empty — give the meta-over-time bump chart
+    // the whole row and, with the room, plot the top 10 characters.
+    stats: {
+      metaTimelineTopN: 8,
+      metaTimelineFullWidth: true,
+    },
     accents: {
       alisa: '#FF9ED2',
       anna: '#FF4E6E',
