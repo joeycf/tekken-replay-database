@@ -1136,6 +1136,10 @@
     "handle": "CANON"
   },
   {
+    "id": "cardinal",
+    "handle": "Cardinal"
+  },
+  {
     "id": "carpio",
     "handle": "CARPIO"
   },
@@ -6063,7 +6067,7 @@
   },
   {
     "id": "nacioss",
-    "handle": "NACIOSS"
+    "handle": "Nacioss"
   },
   {
     "id": "najn",
@@ -7379,6 +7383,10 @@
   {
     "id": "rlarud",
     "handle": "Rlarud"
+  },
+  {
+    "id": "roach",
+    "handle": "Roach"
   },
   {
     "id": "robmaster",
