@@ -322,8 +322,15 @@ async function main(): Promise<void> {
     `roster accent injected from app.config (${tokens.accentKazuya})`,
   );
   expect(/TEKKEN\s*\/\s*REPLAY/i.test(tokens.headerText), 'wordmark reads TEKKEN / REPLAY');
-  const disclaimer = (await page.locator('footer').textContent()) ?? '';
-  expect(disclaimer.includes('Bandai Namco'), 'footer disclaimer names the rights holder');
+  const footerText = (await page.locator('footer').textContent()) ?? '';
+  expect(
+    footerText.includes('built with passion and love for the game'),
+    'footer shows the brand tagline',
+  );
+  expect(
+    footerText.includes('Help support the site'),
+    'footer links the Buy Me a Coffee support page',
+  );
 
   // ── 8. Inherited build artifacts ───────────────────────────────────────────
   console.log('\n— Static artifacts');
