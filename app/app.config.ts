@@ -106,5 +106,12 @@ export default defineAppConfig({
       backgroundColor: '#0B0B0D',
     },
     ogImage: '/og-default.png',
+    // Tekken splashes are tall portrait renders with the head near the top;
+    // bias the hero crop up so it isn't cut off (engine default '70% 25%'
+    // suits 2XKO's wide splashes). '70% 4%' verified across the roster —
+    // Anna/Lili (tightest) and King's tall headdress all clear with a little
+    // headroom, nobody floats. X stays 70% to hold the subject right of the
+    // name/stat overlay.
+    heroFocus: '70% 4%',
   } satisfies GameConfig,
 });
