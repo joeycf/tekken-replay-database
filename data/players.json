@@ -3746,6 +3746,10 @@
     "handle": "Ichibanya"
   },
   {
+    "id": "igari",
+    "handle": "Igari"
+  },
+  {
     "id": "ignister",
     "handle": "Ignister"
   },
@@ -4773,7 +4777,7 @@
   },
   {
     "id": "ktn",
-    "handle": "KTN"
+    "handle": "Ktn"
   },
   {
     "id": "kuimai",
@@ -5335,6 +5339,10 @@
   {
     "id": "magic-electric",
     "handle": "Magic Electric"
+  },
+  {
+    "id": "magician",
+    "handle": "Magician"
   },
   {
     "id": "magiciank",
@@ -6260,6 +6268,10 @@
   {
     "id": "newtype",
     "handle": "NewType"
+  },
+  {
+    "id": "nez0xis",
+    "handle": "NeZ0XiS"
   },
   {
     "id": "nhelv",
