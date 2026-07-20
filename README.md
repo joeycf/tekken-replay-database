@@ -1,88 +1,257 @@
-# tekken-replay-database
+# Tekken 8 Replay Database
 
-The **Tekken 8** game app for the [Replay Database platform](https://replaydatabase.com) —
-a thin consumer of the [`replay-engine`](https://github.com/joeycf/replay-engine) Nuxt
-layer (pinned tag), plus everything genuinely Tekken's own: the bespoke data pipeline,
-the roster art, the `GameConfig`, and the carbon-steel/crimson theme.
+A competitive replay database for **Tekken 8** — 14,000+ high-level and ranked
+replays, filterable by character, matchup, player, rank, season, and channel,
+with a stats dashboard (character usage, top matchups, meta over time) and
+per-character / per-player pages.
 
-Built as **Phase 4** of the platform plan (engine `PLAN.md` §4/§10): the second game, and
-the proof that the engine is game-agnostic — Tekken is 1v1 with a rank ladder and no team
-composition, so it exercises exactly the knobs 2XKO doesn't:
+The app is a **thin layer over [replay-engine](https://github.com/joeycf/replay-engine)**
+(pinned by tag in `nuxt.config.ts`): the engine owns the generic replay-database
+UI and data contract, and this repo supplies the Tekken data pipeline, theme, and
+`GameConfig`. It ships under `/tekken/` behind the replaydatabase.com shell.
 
-| knob | 2XKO | Tekken |
-| --- | --- | --- |
-| `charactersPerSide` | 2 | **1** — single badge per side; duo/synergy panels self-hide |
-| `filters.coOccurrence` | true | **false** — the "same side" filter never renders |
-| `filters.rank` | false | **true** — the 30-rank ladder facet (`data/ranks.json`) |
-| `terms` / `characterRouteSegment` / `Side.players` | overridden | **engine defaults, deliberately** |
+Tekken was built as the platform's **second** game — the proof that the engine is
+genuinely game-agnostic. It is 1v1 with a rank ladder and no team composition, so
+it exercises exactly the knobs 2XKO doesn't:
 
-## Layout
+| knob                                               | 2XKO       | Tekken                                                                  |
+| -------------------------------------------------- | ---------- | ----------------------------------------------------------------------- |
+| `charactersPerSide`                                | 2          | **1** — single badge per side; duo/synergy panels self-hide             |
+| `filters.coOccurrence`                             | true       | **false** — the "same side" filter never renders                        |
+| `filters.rank`                                     | false      | **true** — the 30-rank ladder facet (`data/ranks.json`)                 |
+| `terms` / `characterRouteSegment` / `Side.players` | overridden | **engine defaults, deliberately** — Tekken really does say "characters" |
 
-- `nuxt.config.ts` — extends the pinned engine tag (`ENGINE_PATH=../replay-engine` in
-  `.env` for local co-development); prerender seeds from the registries; the
-  `build:before` copy of `data/replays.json → public/data/`.
-- `app/app.config.ts` — the Tekken `GameConfig` (accents transcribed from
-  `design/handoff/tokens.css`, ranks imported from `data/ranks.json`).
-- `app/assets/theme.css` — the full re-skin: every semantic token shadowed via a plain
-  `:root` block (**not `@theme`** — see the comment in the file: an app-side `@theme` is
-  silently dropped from the production bundle) + self-hosted Rajdhani / Archivo /
-  JetBrains Mono via `@fontsource`.
-- `app/plugins/registries.ts` — `provideRegistries({ characters, players, stats })`
-  (bundled registries → real prerendered HTML for character/player/stats pages).
-- `scripts/` — the bespoke pipeline (below) + `icons.ts` / `og.ts` brand asset
-  generators + `e2e.ts` (the Phase-4 genericity audit as an executable suite).
-- `data/` — committed pipeline artifacts (`videos.json` substrate, generic
-  `replays.json` / `stats.json` / `characters.json` / `players.json`, `ranks.json`,
-  `seasonBoundaries.json`, `overrides.json`, `report.md`).
-- `design/handoff/tokens.css` — the Tekken skin's design source of truth (palette,
-  fonts, all 42 `--char-*` accents).
+> Part of the **Replay Database** platform — [replaydatabase.com](https://replaydatabase.com) ·
+> [engine](https://github.com/joeycf/replay-engine) ·
+> [shell](https://github.com/joeycf/replay-database-shell) ·
+> [2XKO](https://github.com/joeycf/2xko-replay-database)
 
-## Data pipeline (bespoke; emits the engine's generic schema)
+## Architecture
 
-```bash
-npm run data:fetch       # YouTube Data API → raw/<channel>.json   (YT_API_KEY, local-only)
-npm run data:parse       # raw → data/videos.json + players.json + report.md, then emits
-npm run data:build       # fetch + parse
-npm run data:emit        # re-derive replays.json/stats.json from committed data (no network)
-npm run data:characters  # roster scrape (Bandai Namco official site) → art + characters.json
+```
+YouTube Data API v3
+      │  scripts/fetch.ts        (raw dumps → raw/*.json, gitignored)
+      ▼
+scripts/parse.ts                 (title parser + description ranks + aggregates)
+      │   merge order: title parse → rank/season resolution → overrides
+      ▼
+data/videos.json                 (RICH records — the pipeline substrate)
+      │  scripts/emit.ts         (runs at the end of every parse)
+      ▼
+data/replays.json + stats.json   (GENERIC engine-contract files)
+      │
+      └─ committed ──►  Nuxt 4 static site (nuxt generate, vercel-static)
+                          extends replay-engine layer
+                                  │
+                                  ├─ registries (characters/players/stats)
+                                  │    → provided via plugin, prerendered into HTML
+                                  └─ replays.json (4.5 MB) → copied to
+                                       public/data/ at build, fetched
+                                       client-side on Browse and entity pages
+                                       only (never bundled)
 ```
 
-- **Sources:** three tracked replay channels (`scripts/channels.ts`) with ≥98%
-  structurally parseable `PLAYER (Character) vs PLAYER (Character)` titles.
-- **Ranks** come from the video *descriptions* ("Keisuke (God of Destruction 6 Kazuya)
-  Versus …"), normalized onto the 30-rank ladder (GoD sub-tiers → God of Destruction);
-  ~45% of sides carry one. Title qualifiers ("#6 Ranked") are leaderboard positions, not
+Two schemas, deliberately: `videos.json` (6.4 MB, rich — parse provenance, miss
+reasons, raw title fields) never reaches the browser; `emit.ts` maps it onto the
+engine's generic `Replay[]` contract.
+
+- **2,743 routes prerendered**: Browse shell, Stats, characters and players
+  indexes, 42 character pages, all 2,696 player pages, plus `404.html`.
+- The engine's `modules/static-artifacts` emits **`sitemap.xml`**, **`robots.txt`**,
+  the web manifest and `404.html` from the _real_ prerendered route list. Per-page
+  **JSON-LD** is prerendered into the HTML.
+- The site builds **purely from committed JSON** — no API keys at deploy time.
+- `thumb` is deliberately omitted from `replays.json` (the engine derives it from
+  the YouTube id) — roughly a megabyte off the whale file.
+
+## Setup
+
+```sh
+npm install
+cp .env.example .env      # add your YouTube Data API v3 key (pipeline only)
+npm run dev
+```
+
+`.env` is only needed to run the data pipeline locally. The web app never
+reads it.
+
+Two other env vars matter locally, neither of them secret:
+
+- `ENGINE_PATH` — point at a local `replay-engine` checkout (e.g. `../replay-engine`)
+  to co-develop app and engine. Unset, the pinned git tag is used; **Vercel leaves
+  it unset**.
+- `NUXT_APP_BASE_URL` — the site ships under `/tekken/`; set `/` for a root-based
+  local preview. The committed default is production truth, so don't "simplify"
+  the env expression in `nuxt.config.ts` — a literal value there shadows the
+  engine's own read and 404s every prerendered route.
+
+## Scripts
+
+| script                                           | what it does                                                                                                                                          |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run dev` / `build` / `generate` / `preview` | Nuxt app (generate = full static build)                                                                                                               |
+| `npm run data:fetch`                             | Pull every upload from all three YouTube channels → `raw/` (needs `YT_API_KEY`)                                                                       |
+| `npm run data:parse`                             | Parse titles/descriptions → `data/videos.json`, `players.json`, `report.md`; calls `data:emit` at the end                                             |
+| `npm run data:emit`                              | Map the rich `videos.json` onto the engine contract → `data/replays.json`, `stats.json`. Deterministic, no YouTube access — safe to re-run standalone |
+| `npm run data:build`                             | fetch + parse                                                                                                                                         |
+| `npm run data:characters`                        | Roster scrape (Bandai Namco official site) → portraits + splashes in `public/img/characters/`, `data/characters.json`                                 |
+| `npm run typecheck`                              | App (`nuxt typecheck`) **and** pipeline (`tsc -p tsconfig.pipeline.json`) — both must pass                                                            |
+| `npm run lint` / `lint:fix`                      | ESLint over the whole repo                                                                                                                            |
+| `npm run format` / `format:check`                | Prettier                                                                                                                                              |
+| `npm run test:e2e`                               | The genericity audit — browser checks against the generated output (run `npm run generate` first)                                                     |
+| `npx tsx scripts/og.ts`                          | Regenerate the default OG card (`public/og-default.png`)                                                                                              |
+
+## Vercel
+
+Its own Vercel project. `vercel.json` commits the build command and framework
+preset; the rest is dashboard config:
+
+| setting               | value                                                                                                                                                 |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework preset      | **Nuxt** (`vercel.json` → `"framework": "nuxtjs"`)                                                                                                    |
+| Build command         | `npm run generate` (committed in `vercel.json`)                                                                                                       |
+| Output directory      | _(auto — Build Output API, `.vercel/output`)_                                                                                                         |
+| Node.js version       | 24 (`engines.node: ">=24 <25"`; the data-refresh Action runs 24 too)                                                                                  |
+| Environment variables | `NUXT_PUBLIC_SITE_URL` = the canonical origin (used for canonical/OG/sitemap absolute URLs). **No `YT_API_KEY`** — the pipeline never runs on Vercel. |
+
+`ENGINE_PATH` stays unset on Vercel, so the pinned `github:` tag is used.
+Deploys are triggered by pushes — including the daily data-refresh commit.
+
+The deployment's own `tekken-replay-database.vercel.app` alias stays reachable
+and is **never** host-redirected to the apex: the shell reaches this project
+through an edge rewrite, so a host redirect here would loop.
+
+## Analytics
+
+Both are Vercel-native, inherited from the engine, inert outside production, and
+inject nothing into the prerendered HTML (they attach client-side):
+
+- **Web Analytics** — `@vercel/analytics`, registered as a Nuxt module.
+- **Speed Insights** — `@vercel/speed-insights` via a client-only plugin at
+  `sampleRate 0.5`.
+
+## Daily data refresh
+
+`.github/workflows/data-refresh.yml` runs daily at 06:47 UTC (and via
+_Run workflow_) on Node 24: `npm run data:build` with `YT_API_KEY` from repo
+**Actions secrets**, then commits
+`data/{videos,replays,stats,players,seasonBoundaries}.json` + `report.md`
+**only if changed** ("data: refresh YYYY-MM-DD — N replays"). The push triggers
+the Vercel deploy. A run whose only diff is `report.md`'s `_Generated <timestamp>_`
+line counts as unchanged — no commit, no deploy — so a `report.md` diff in history
+always means real data changed. The 06:47 slot is offset from the 2XKO app's 06:17
+so the two refreshes never contend. Character art is deliberately not part of the
+daily run.
+
+## The parser: characters, ranks, and seasons
+
+Tekken's titles are far more structured than 2XKO's, so there is no computer
+vision here — everything comes out of the title and description text.
+
+- **Sources:** three tracked replay channels (`scripts/channels.ts`) with
+  `PLAYER (Character) vs PLAYER (Character)` titles. Latest run: **14,096 matches
+  parsed from 19,056 uploads** — per-channel coverage 99.2% (highLevel), 60.1%
+  (telly), 99.2% (ranked). The misses are dominated by material that isn't a
+  match at all: pre-launch footage, Shorts, and short-duration clips.
+- **Character matching** (`scripts/roster.ts`) is longest-alias-first whole-word
+  search, so "Armor King" beats "King" and "Devil Jin" beats "Jin". Aliases come
+  from `data/characters.json`, which the roster scrape writes — parse vocabulary
+  and the app's search vocabulary are the same data.
+- **Ranks** come from the video _descriptions_ ("Keisuke (God of Destruction 6
+  Kazuya) Versus …"), normalized onto the 30-rank ladder; **12,622 of 28,192
+  sides (44.8%)** carry one. Season 2's God of Destruction sub-tiers (I–VII, ∞)
+  sit above the named ladder as orb progression and all normalize back to "God of
+  Destruction". Title qualifiers like "#6 Ranked" are leaderboard positions, not
   ladder ranks, and are ignored.
 - **Seasons** (`Replay.patch` = S1/S2/S3) resolve by authoritative patch dates
-  (`scripts/parse.ts` SEASONS; S3 = 2026-03-17), with channel labels honored only near a
-  boundary — the report counts label conflicts.
-- **Roster** is discovered live from the official Tekken 8 site (42 characters incl. all
-  DLC), portraits/splashes optimized to webp; re-run `data:characters` when new DLC
-  drops (a missing `--char-*` accent in the design tokens fails loudly).
-- `data/overrides.json` — per-video `{ "<id>": { "exclude": true } }` corrections,
-  applied by parse and the standalone emit alike.
-- `thumb` is deliberately omitted from `replays.json` (the engine derives it from the
-  YouTube id) — ~1 MB off the whale file.
+  (`scripts/parse.ts` `SEASONS`; S3 = 2026-03-17), with channel labels honored
+  only within a ±14-day boundary grace. Date wins otherwise, and `report.md`
+  counts the conflicts.
+- `data/overrides.json` — per-video `{ "<id>": { "exclude": true } }`
+  corrections, applied by parse and the standalone emit alike. Currently empty;
+  it exists so a correction never has to be made by editing `videos.json` in
+  place, which the next refresh would erase.
 
-## Build & verify
+## New-character / DLC runbook
 
-```bash
-npm run generate     # SSG → .vercel/output/static (~2,750 pages + sitemap/robots/manifest/404)
-npm run typecheck    # nuxt typecheck (vue-tsc) + pipeline tsc
-npm run lint         # @nuxt/eslint flat config (+ prettier last)
-npm run test:e2e     # the Phase-4 audit: 51 browser checks against the generated output
-```
+1. Add the accent token `--char-<id>` to `design/handoff/tokens.css`, and the
+   matching entry to `accents` in `app/app.config.ts`.
+2. Run `npm run data:characters` — the roster is rediscovered live from the
+   official site each run, so a new DLC character is picked up automatically:
+   portrait + splash are downloaded and optimized to webp, and
+   `data/characters.json` is rewritten. A roster id with no `--char-*` token
+   **fails loudly** rather than shipping an unstyled character.
+3. Re-run `npm run data:parse` and check `data/report.md`: a spike in
+   `char-unresolved` misses means titles mention a character the registry
+   doesn't know yet.
+4. Commit + push (redeploys).
 
-## Deploy
+## Tech stack & engineering notes
 
-Its own Vercel project: build command `npm run generate`, output `.vercel/output`
-(vercel-static preset via the engine), env `NUXT_PUBLIC_SITE_URL` set to the project's
-canonical origin. Vercel never runs the pipeline — the site builds from committed JSON;
-`ENGINE_PATH` stays unset there so the pinned `github:` tag is used.
-`.github/workflows/data-refresh.yml` refreshes data daily (repo secret `YT_API_KEY`)
-and pushes only when something real changed, which triggers the Vercel rebuild.
+For engineers reading the source — the stack, and the decisions worth knowing.
+
+### Stack
+
+Shape only; the engine's [`STACK.md`](https://github.com/joeycf/replay-engine/blob/main/STACK.md)
+is the single source of pinned versions.
+
+| layer         | choice                                         | notes                                                                                                                                                |
+| ------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework     | **Nuxt 4** (Vue 3, `<script setup>`)           | `ssr: true` for prerender fidelity, but the output is **100% static** — `nitro` `vercel-static` preset, `nuxt generate`                              |
+| Base layer    | **replay-engine**, pinned by tag               | `extends:` a git layer (`install: true` is required, or its runtime deps don't resolve). `ENGINE_PATH` swaps in a local checkout for co-development  |
+| Language      | **TypeScript** end to end                      | dual typecheck: `nuxt typecheck` (vue-tsc) for the app, `tsc -p tsconfig.pipeline.json` for the pipeline; shared types in `types/index.ts`           |
+| Styling       | **Tailwind CSS v4**, via the engine layer      | no `tailwind.config.js` anywhere in the build — the Tekken skin is `app/assets/theme.css`, which loads after the engine CSS and shadows its defaults |
+| Fonts         | **`@fontsource/*`**, imported in `theme.css`   | Rajdhani / Archivo / JetBrains Mono, Vite-processed and hashed — no runtime CDN, no `public/` `url()`s                                               |
+| Images        | **sharp**                                      | roster portraits + splashes (webp), OG card                                                                                                          |
+| Data pipeline | standalone **`tsx`** scripts                   | no build step; YouTube Data API v3 for metadata                                                                                                      |
+| Tests         | **playwright-core** (bespoke harness)          | not `@playwright/test` — the suite is a plain script                                                                                                 |
+| Analytics     | Vercel **Web Analytics** + **Speed Insights**  | inherited from the engine; client-only, inert outside production                                                                                     |
+| Host          | **Vercel** Build Output API (`.vercel/output`) | daily GitHub Actions cron for the data refresh                                                                                                       |
+| Node          | **24** (`engines.node: ">=24 <25"`)            | matched by the data-refresh Action                                                                                                                   |
+
+### Things worth knowing
+
+- **This repo is deliberately small.** `app/` holds exactly three files —
+  `app.config.ts`, `assets/theme.css`, `plugins/registries.ts`. Every page,
+  component, and composable comes from the engine. If something here starts
+  looking like generic replay-database UI, it belongs upstream instead.
+- **The engine defaults are load-bearing, not laziness.** Tekken leaves `terms`,
+  `characterRouteSegment`, and `Side.players` unset because it genuinely says
+  "characters", ships at `/characters/*`, and has one player per side. Exercising
+  the defaults is what proves they work.
+- **The theme must stay in `:root`.** `app/assets/theme.css` declares the Tekken
+  palette as plain `:root` custom properties, never `@theme`. Under `@theme` the
+  dev server still looks correct while the production build drops the tokens — a
+  failure that only shows up after deploy. Removing the file entirely should drop
+  the site to the neutral engine look; that's the override-contract proof.
+- **The design tokens are the source of truth for accents.**
+  `design/handoff/tokens.css` carries all 42 `--char-*` values;
+  `app/app.config.ts` transcribes them and `scripts/characters.ts` reads the same
+  file when enriching `data/characters.json`, so config and data can't drift.
+- **Two-tier data loading.** The registries (characters/players/stats) are
+  provided through `app/plugins/registries.ts` and prerendered into the HTML; the
+  4.5 MB `replays.json` is copied to `public/data/` at build and fetched
+  client-side only on the pages that need it — **never bundled**, so the JS
+  payload stays flat as the catalog grows.
+- **Stats are computed once.** `scripts/stats.ts` is shared by `parse.ts` and the
+  standalone `emit.ts` so both derive identical numbers from the same records.
+  1v1 usage counts **side appearances**, so a Kazuya mirror adds 2 — the same
+  denominator the engine's usage bars, per-season timelines, and player tables
+  all read.
+- **Zero-secret static deploy.** The whole site builds from committed JSON with
+  no API keys at deploy time; the YouTube key only ever lives in local `.env` and
+  GitHub Actions secrets, never on Vercel.
+- **Hero framing is config, not CSS.** Tekken's splashes are tall portrait renders
+  with the head near the top, so `heroFocus: '70% 4%'` biases the character-page
+  crop upward (the engine default `'70% 25%'` suits 2XKO's wide splashes). X stays
+  at 70% to hold the subject clear of the name/stat overlay.
+- **The stats page gives the timeline the whole row.** Tekken ships no
+  `GameStatsPanels` override, so the engine's `beside-timeline` anchor is empty —
+  `stats.metaTimelineFullWidth` reclaims the space rather than leaving a hole.
 
 ---
 
 Tekken 8 Replay Database is an unofficial fan project, not endorsed by or affiliated
 with Bandai Namco Entertainment.
+
+> Feature requests and bug reports are welcome via Issues.
