@@ -1,14 +1,14 @@
 # Tekken pipeline report
 
-**14075 matches** parsed from 19035 uploads across 3 channels · 2695 players · ranked sides 12590/28150 (44.7%)
+**14096 matches** parsed from 19056 uploads across 3 channels · 2696 players · ranked sides 12622/28192 (44.8%)
 
 | channel | uploads | parsed | coverage |
 | --- | ---: | ---: | ---: |
-| highLevel | 4344 | 4311 | 99.2% |
-| telly | 12278 | 7371 | 60.0% |
-| ranked | 2413 | 2393 | 99.2% |
+| highLevel | 4351 | 4318 | 99.2% |
+| telly | 12287 | 7380 | 60.1% |
+| ranked | 2418 | 2398 | 99.2% |
 
-Seasons: S1 5920 · S2 5956 · S3 2199
+Seasons: S1 5920 · S2 5956 · S3 2220
 
 Misses by reason: pre-launch 1988 · short-duration 1630 · shorts 1116 · char-unresolved 131 · no-vs-title 91 · bad-handle 3 · live-or-upcoming 1
 
@@ -47,4 +47,4 @@ Season-label conflicts (channel label ≠ date-derived season, outside the ±14d
 - `4Pf63UozmxA` [highLevel] no-vs-title: T8 🔥 Kkokkoma (Dragunov) 🔥 Tekken 8
 - `RUDWRC5M738` [highLevel] no-vs-title: T8 🔥 Shadow 20z (Zafina) 🔥 Tekken 8
 
-_Generated 2026-07-19T09:01:42.052Z_
+_Generated 2026-07-20T09:49:46.056Z_
