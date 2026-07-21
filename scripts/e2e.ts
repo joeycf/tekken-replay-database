@@ -8,7 +8,7 @@
 //
 // Prereq: npm run generate       Run: npm run test:e2e
 
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { dirname, extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -18,6 +18,26 @@ import type { CharacterRecord, MatchVideo, PlayerRecord, VideoOverride } from '.
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, '.vercel/output/static');
+
+// The base the build was generated under. DETECTED, not assumed: the committed
+// default is '/tekken/', but a root-based build (NUXT_APP_BASE_URL=/) is a
+// legitimate local preview and the suite must pass against either. nitro's
+// static presets nest the whole site under the base inside publicDir, so the
+// prerendered index.html marks the base directory.
+//
+// Getting this wrong is not a subtle failure: the suite navigated root-relative
+// paths against a '/tekken/' build for the whole of Phase 5, so every page 404'd
+// and the audit gated nothing until it was noticed by hand on 2026-07-20.
+function detectBase(): string {
+  if (existsSync(join(OUT, 'index.html'))) return '';
+  for (const name of readdirSync(OUT)) {
+    if (existsSync(join(OUT, name, 'index.html'))) return `/${name}`;
+  }
+  throw new Error(
+    `no prerendered index.html under ${OUT} — run \`npm run generate\` before \`npm run test:e2e\``,
+  );
+}
+const BASE = detectBase();
 
 // ── Node-side expectations: the SAME record set the site carries ─────────────
 const allVideos = JSON.parse(readFileSync(join(ROOT, 'data/videos.json'), 'utf8')) as MatchVideo[];
@@ -43,6 +63,16 @@ const stats = JSON.parse(readFileSync(join(ROOT, 'data/stats.json'), 'utf8')) as
 const fmt = (n: number) => n.toLocaleString('en-US');
 const count = (pred: (v: MatchVideo) => boolean) => videos.filter(pred).length;
 
+// The rank chips the facet actually renders (engine v0.5.0 — STACK §10): the
+// canonical ascending ladder intersected with the ranks PRESENT in the data,
+// displayed highest-first. The engine deliberately stopped rendering the whole
+// ladder — a chip that would filter to zero replays is never shown — so
+// asserting RANKS.length here would re-assert the pre-v0.5.0 behavior.
+const ranksPresent = new Set<string>();
+for (const v of videos) for (const s of v.sides) if (s.rank) ranksPresent.add(s.rank);
+const rankChipsAsc = RANKS.filter((r) => ranksPresent.has(r));
+const rankChipsExpected = [...rankChipsAsc].reverse();
+
 // ── tiny static server over the generated output ─────────────────────────────
 const MIME: Record<string, string> = {
   '.html': 'text/html',
@@ -59,7 +89,7 @@ const MIME: Record<string, string> = {
   '.ico': 'image/x-icon',
   '.webmanifest': 'application/manifest+json',
 };
-function serve(): Promise<{ base: string; close: () => void }> {
+function serve(): Promise<{ at: (path: string) => string; close: () => void }> {
   const server = createServer((req, res) => {
     const path = decodeURIComponent((req.url ?? '/').split('?')[0]!);
     const candidates = [join(OUT, path), join(OUT, path, 'index.html'), join(OUT, '404.html')];
@@ -80,7 +110,11 @@ function serve(): Promise<{ base: string; close: () => void }> {
   return new Promise((resolve) => {
     server.listen(0, '127.0.0.1', () => {
       const addr = server.address() as { port: number };
-      resolve({ base: `http://127.0.0.1:${addr.port}`, close: () => server.close() });
+      const origin = `http://127.0.0.1:${addr.port}`;
+      // Serve the static ROOT (as Vercel does) and address pages under the
+      // base — never re-root the server at the base dir, which would resolve
+      // the site's own absolute /<base>/_nuxt/… asset URLs to 404s.
+      resolve({ at: (path: string) => `${origin}${BASE}${path}`, close: () => server.close() });
     });
   });
 }
@@ -108,7 +142,7 @@ const gotoIdle = async (page: Page, url: string) => {
 };
 
 async function main(): Promise<void> {
-  const { base, close } = await serve();
+  const { at, close } = await serve();
   const browser: Browser = await chromium.launch({
     executablePath: '/usr/bin/google-chrome-stable',
     headless: true,
@@ -120,7 +154,7 @@ async function main(): Promise<void> {
 
   // ── 1. /health — counts + provisioning paths + the active GameConfig ──────
   console.log('\n— /health');
-  await gotoIdle(page, `${base}/health`);
+  await gotoIdle(page, at('/health'));
   const health = (await page.textContent('body')) ?? '';
   expect(
     health.includes(fmt(videos.length)) || health.includes(String(videos.length)),
@@ -149,15 +183,21 @@ async function main(): Promise<void> {
 
   // ── 2. Browse — grid, gated facets, every always-on facet ─────────────────
   console.log('\n— Browse (/)');
-  await gotoIdle(page, `${base}/`);
+  await gotoIdle(page, at('/'));
   await page.waitForSelector('[data-replay-id]');
   expect((await resultCount(page)) === videos.length, `result count = ${videos.length}`);
   const co = await page.locator('[data-testid="co-occurrence-toggle"]').count();
   expect(co === 0, 'co-occurrence filter is ABSENT (1v1)');
-  const rankChips = await page.locator('[data-testid="rank-chip"]').count();
+  const rankChips = (await page.locator('[data-testid="rank-chip"]').allTextContents()).map((t) =>
+    t.trim(),
+  );
   expect(
-    rankChips === RANKS.length,
-    `rank filter PRESENT with the full ${RANKS.length}-rank ladder`,
+    rankChips.length === rankChipsExpected.length,
+    `rank filter PRESENT with the ${rankChipsExpected.length} data-present ranks (ladder has ${RANKS.length})`,
+  );
+  expect(
+    rankChips.join('|') === rankChipsExpected.join('|'),
+    `rank chips render highest-first (${rankChipsExpected[0]} … ${rankChipsExpected.at(-1)})`,
   );
   // Cards represent each side with ONE CharacterBadge (aria-label = the
   // character's name) — 2 per card for 1v1, where 2XKO shows 4.
@@ -214,14 +254,14 @@ async function main(): Promise<void> {
     ],
   ];
   for (const [url, expected, label] of deepLinks) {
-    await gotoIdle(page, `${base}${url}`);
+    await gotoIdle(page, at(url));
     const got = await resultCount(page);
     expect(got === expected, `${label}: ${url} → ${got} (want ${expected})`);
   }
 
   // ── 3. Modal + related ─────────────────────────────────────────────────────
   console.log('\n— Video modal');
-  await gotoIdle(page, `${base}/?c=kazuya`);
+  await gotoIdle(page, at('/?c=kazuya'));
   await page.waitForSelector('[data-replay-id]');
   await page.locator('[data-replay-id]').first().click();
   await page.waitForTimeout(600);
@@ -240,7 +280,7 @@ async function main(): Promise<void> {
 
   // ── 4. Stats — 1v1 panel gating ────────────────────────────────────────────
   console.log('\n— /stats');
-  await gotoIdle(page, `${base}/stats`);
+  await gotoIdle(page, at('/stats'));
   expect((await page.locator('[data-testid="usage-bars"]').count()) > 0, 'character usage renders');
   expect(
     (await page.locator('[data-testid="meta-timeline"]').count()) > 0,
@@ -258,7 +298,7 @@ async function main(): Promise<void> {
 
   // ── 5. Roster + character page (default /characters/* segment) ────────────
   console.log('\n— /characters');
-  await gotoIdle(page, `${base}/characters`);
+  await gotoIdle(page, at('/characters'));
   const rosterPortraits = await page.locator('img[src*="-portrait.webp"]').count();
   expect(
     rosterPortraits >= characters.length,
@@ -266,7 +306,7 @@ async function main(): Promise<void> {
   );
 
   console.log('\n— /characters/kazuya');
-  await gotoIdle(page, `${base}/characters/kazuya`);
+  await gotoIdle(page, at('/characters/kazuya'));
   const charH1 = (await page.locator('h1').first().textContent()) ?? '';
   expect(charH1.includes('Kazuya'), 'h1 renders the character name');
   const charBody = (await page.textContent('body')) ?? '';
@@ -275,7 +315,7 @@ async function main(): Promise<void> {
     (await page.locator('[data-testid="character-appearances"]').count()) > 0,
     'appearance stat renders',
   );
-  const rawCharHtml = readFileSync(join(OUT, 'characters/kazuya/index.html'), 'utf8');
+  const rawCharHtml = readFileSync(join(OUT, BASE, 'characters/kazuya/index.html'), 'utf8');
   expect(
     rawCharHtml.includes(`Kazuya — ${fmt(stats.characterUsage.kazuya!)} appearances`),
     'PRERENDERED title carries data-derived count (registries provided at build)',
@@ -283,7 +323,7 @@ async function main(): Promise<void> {
 
   // ── 6. Player page ─────────────────────────────────────────────────────────
   console.log('\n— /players/knee');
-  await gotoIdle(page, `${base}/players/knee`);
+  await gotoIdle(page, at('/players/knee'));
   const playerH1 = (await page.locator('h1').first().textContent()) ?? '';
   expect(playerH1.includes('Knee'), 'h1 renders the player handle');
   expect(
@@ -293,7 +333,7 @@ async function main(): Promise<void> {
 
   // ── 7. The re-skin — Tekken tokens, engine styles untouched ───────────────
   console.log('\n— Theme (re-skin check)');
-  await gotoIdle(page, `${base}/`);
+  await gotoIdle(page, at('/'));
   const tokens = await page.evaluate(() => {
     const cs = getComputedStyle(document.documentElement);
     const h1 = document.querySelector('header') ?? document.body;
@@ -334,12 +374,16 @@ async function main(): Promise<void> {
 
   // ── 8. Inherited build artifacts ───────────────────────────────────────────
   console.log('\n— Static artifacts');
-  const sitemap = readFileSync(join(OUT, 'sitemap.xml'), 'utf8');
+  // Placement is itself the assertion (engine v0.5.1 / STACK §10): sitemap,
+  // robots and manifest land UNDER the base, while 404.html is copied to the
+  // static ROOT because Vercel's 404 lookup ignores the base.
+  const sitemap = readFileSync(join(OUT, BASE, 'sitemap.xml'), 'utf8');
   expect(sitemap.includes('/characters/kazuya'), 'sitemap carries character routes');
   expect(!sitemap.includes('/health'), 'sitemap excludes /health');
+  expect(existsSync(join(OUT, BASE, 'robots.txt')), 'robots.txt emitted under the base');
   const four = readFileSync(join(OUT, '404.html'), 'utf8');
-  expect(four.includes('No data at this route'), 'designed 404 shipped');
-  const manifest = JSON.parse(readFileSync(join(OUT, 'manifest.webmanifest'), 'utf8')) as {
+  expect(four.includes('No data at this route'), 'designed 404 shipped at the static root');
+  const manifest = JSON.parse(readFileSync(join(OUT, BASE, 'manifest.webmanifest'), 'utf8')) as {
     name: string;
     theme_color: string;
   };
