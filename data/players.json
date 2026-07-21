@@ -68,6 +68,14 @@
     "handle": "AAAA"
   },
   {
+    "id": "abel-del-maester",
+    "handle": "Abel Del Maester"
+  },
+  {
+    "id": "abel-del-maestro",
+    "handle": "Abel Del Maestro"
+  },
+  {
     "id": "aberin",
     "handle": "ABERIN"
   },
@@ -142,14 +150,6 @@
   {
     "id": "adu",
     "handle": "Adu"
-  },
-  {
-    "id": "aeg-chaos",
-    "handle": "Aeg Chaos"
-  },
-  {
-    "id": "aeg-chaoz",
-    "handle": "Aeg Chaoz"
   },
   {
     "id": "afmar",
@@ -1128,6 +1128,10 @@
     "handle": "Caltox"
   },
   {
+    "id": "camaney",
+    "handle": "Camaney"
+  },
+  {
     "id": "candy",
     "handle": "Candy"
   },
@@ -1232,6 +1236,10 @@
     "handle": "Chao"
   },
   {
+    "id": "chaos",
+    "handle": "Chaos"
+  },
+  {
     "id": "chaotic-perf",
     "handle": "CHAOTIC PERF"
   },
@@ -1241,7 +1249,7 @@
   },
   {
     "id": "chaoz",
-    "handle": "CHAOZ"
+    "handle": "Chaoz"
   },
   {
     "id": "chapterx",
@@ -1989,14 +1997,6 @@
     "handle": "DNDB HAO"
   },
   {
-    "id": "dnf-cbm",
-    "handle": "DNF CBM"
-  },
-  {
-    "id": "dnf-mulgold",
-    "handle": "DNF Mulgold 🇰🇷"
-  },
-  {
     "id": "dofla",
     "handle": "Dofla"
   },
@@ -2109,6 +2109,10 @@
     "handle": "DOUBLR"
   },
   {
+    "id": "doujin",
+    "handle": "Doujin"
+  },
+  {
     "id": "dowon",
     "handle": "Dowon"
   },
@@ -2209,18 +2213,6 @@
     "handle": "DRUNKENTOMATO"
   },
   {
-    "id": "drx-chanel",
-    "handle": "DRX Chanel"
-  },
-  {
-    "id": "drx-infested",
-    "handle": "DRX Infested"
-  },
-  {
-    "id": "drx-knee",
-    "handle": "DRX KNEE"
-  },
-  {
     "id": "dtnim",
     "handle": "DTNIM"
   },
@@ -2277,6 +2269,10 @@
     "handle": "DX Musalli"
   },
   {
+    "id": "dx3g0",
+    "handle": "DX3G0"
+  },
+  {
     "id": "dxmusalli",
     "handle": "DXMusalli"
   },
@@ -2295,6 +2291,10 @@
   {
     "id": "eddie",
     "handle": "Eddie"
+  },
+  {
+    "id": "eddyy",
+    "handle": "Eddyy"
   },
   {
     "id": "edge",
@@ -2558,18 +2558,6 @@
     "handle": "FASTGAME"
   },
   {
-    "id": "fate-atif-butt",
-    "handle": "Fate Atif Butt"
-  },
-  {
-    "id": "fate-jodd",
-    "handle": "Fate Jodd"
-  },
-  {
-    "id": "fate-jode",
-    "handle": "Fate JODE"
-  },
-  {
     "id": "favian-club",
     "handle": "Favian Club"
   },
@@ -2596,6 +2584,10 @@
   {
     "id": "felys",
     "handle": "Felys"
+  },
+  {
+    "id": "fen-g",
+    "handle": "Fen-G"
   },
   {
     "id": "fergus",
@@ -2816,6 +2808,10 @@
   {
     "id": "galgonge",
     "handle": "Galgonge"
+  },
+  {
+    "id": "galliard",
+    "handle": "Galliard"
   },
   {
     "id": "gamelife",
@@ -4048,6 +4044,10 @@
     "featured": true
   },
   {
+    "id": "jode",
+    "handle": "JODE"
+  },
+  {
     "id": "joe-budden",
     "handle": "Joe Budden"
   },
@@ -4433,26 +4433,6 @@
     "handle": "Kazuuu"
   },
   {
-    "id": "kdf-cbm",
-    "handle": "KDF CBM"
-  },
-  {
-    "id": "kdf-meo-il",
-    "handle": "KDF Meo iL"
-  },
-  {
-    "id": "kdf-meoil",
-    "handle": "KDF MEOIL"
-  },
-  {
-    "id": "kdf-mulgold",
-    "handle": "KDF Mulgold"
-  },
-  {
-    "id": "kdf-ulsan",
-    "handle": "KDF Ulsan"
-  },
-  {
     "id": "kdx2003",
     "handle": "Kdx2003"
   },
@@ -4536,6 +4516,11 @@
   {
     "id": "khajit",
     "handle": "KHAJIT"
+  },
+  {
+    "id": "khan",
+    "handle": "Khan",
+    "featured": true
   },
   {
     "id": "khan-imran",
@@ -5144,10 +5129,6 @@
     "handle": "LiRLi"
   },
   {
-    "id": "lmg-mob",
-    "handle": "Lmg Mob"
-  },
-  {
     "id": "locke",
     "handle": "Locke"
   },
@@ -5251,6 +5232,10 @@
   {
     "id": "lukkidan",
     "handle": "LuKKidan"
+  },
+  {
+    "id": "lumiel-umbrella",
+    "handle": "Lumiel_Umbrella"
   },
   {
     "id": "luna",
@@ -5525,8 +5510,8 @@
     "handle": "Mbc"
   },
   {
-    "id": "md-luffy",
-    "handle": "MD Luffy"
+    "id": "mccheese",
+    "handle": "McCheese"
   },
   {
     "id": "md-luffy-19",
@@ -5709,6 +5694,10 @@
     "handle": "Missile"
   },
   {
+    "id": "mister-batch",
+    "handle": "Mister-batch"
+  },
+  {
     "id": "mitoman",
     "handle": "Mitoman"
   },
@@ -5762,7 +5751,7 @@
   },
   {
     "id": "mob",
-    "handle": "MOB"
+    "handle": "Mob"
   },
   {
     "id": "mocha-unicorn",
@@ -5873,6 +5862,10 @@
     "handle": "MORUMI"
   },
   {
+    "id": "mosman",
+    "handle": "Mosman"
+  },
+  {
     "id": "mosol",
     "handle": "MOSOL"
   },
@@ -5947,10 +5940,6 @@
   {
     "id": "mtbt",
     "handle": "Mtbt"
-  },
-  {
-    "id": "mtbt-kagemaru",
-    "handle": "Mtbt Kagemaru"
   },
   {
     "id": "mtkd",
@@ -6186,6 +6175,10 @@
     "handle": "Neia"
   },
   {
+    "id": "neo",
+    "handle": "Neo"
+  },
+  {
     "id": "neomu",
     "handle": "Neomu"
   },
@@ -6388,6 +6381,10 @@
     "handle": "NodiPupa"
   },
   {
+    "id": "noel",
+    "handle": "Noel"
+  },
+  {
     "id": "noface",
     "handle": "NoFace"
   },
@@ -6482,6 +6479,10 @@
   {
     "id": "nueoto",
     "handle": "NUEOTO"
+  },
+  {
+    "id": "numan-ch",
+    "handle": "Numan CH"
   },
   {
     "id": "nycfab",
@@ -6614,6 +6615,10 @@
   {
     "id": "oracle",
     "handle": "ORACLE"
+  },
+  {
+    "id": "oracle-99",
+    "handle": "Oracle_99"
   },
   {
     "id": "orangejello",
@@ -7814,6 +7819,10 @@
     "handle": "Ser"
   },
   {
+    "id": "sergie-mazter",
+    "handle": "Sergie Mazter"
+  },
+  {
     "id": "service",
     "handle": "Service"
   },
@@ -7876,6 +7885,10 @@
   {
     "id": "shangles",
     "handle": "Shangles"
+  },
+  {
+    "id": "shaoling",
+    "handle": "Shaoling"
   },
   {
     "id": "sharp",
@@ -8136,6 +8149,10 @@
   {
     "id": "skull",
     "handle": "Skull"
+  },
+  {
+    "id": "skywalker",
+    "handle": "Skywalker"
   },
   {
     "id": "sleepy",
@@ -8498,10 +8515,6 @@
     "handle": "T R I B A L"
   },
   {
-    "id": "t1-edge",
-    "handle": "T1 Edge"
-  },
-  {
     "id": "tabasa",
     "handle": "Tabasa"
   },
@@ -8568,18 +8581,6 @@
   {
     "id": "talon",
     "handle": "Talon"
-  },
-  {
-    "id": "talon-book",
-    "handle": "Talon Book"
-  },
-  {
-    "id": "talon-kkokkoma",
-    "handle": "TALON KKOKKOMA"
-  },
-  {
-    "id": "talon-kokoma",
-    "handle": "Talon Kokoma"
   },
   {
     "id": "tama",
@@ -9702,6 +9703,10 @@
     "handle": "The Joker Guy"
   },
   {
+    "id": "the-jon",
+    "handle": "The Jon"
+  },
+  {
     "id": "the-jot",
     "handle": "The Jot"
   },
@@ -9768,10 +9773,6 @@
   {
     "id": "thunder-mike",
     "handle": "Thunder Mike"
-  },
-  {
-    "id": "thy-chikurin",
-    "handle": "THY Chikurin"
   },
   {
     "id": "tibbalicious",
@@ -9876,14 +9877,6 @@
   {
     "id": "tooya",
     "handle": "TOOYA"
-  },
-  {
-    "id": "top-x-c-c",
-    "handle": "Top X C C"
-  },
-  {
-    "id": "top-xcc",
-    "handle": "Top XCC"
   },
   {
     "id": "toph",
@@ -10135,12 +10128,20 @@
     "handle": "Uno"
   },
   {
+    "id": "unusual-asila",
+    "handle": "Unusual Asila"
+  },
+  {
     "id": "usagi",
     "handle": "Usagi"
   },
   {
     "id": "usama-abbasi",
     "handle": "Usama Abbasi"
+  },
+  {
+    "id": "uslan",
+    "handle": "Uslan"
   },
   {
     "id": "valo",
@@ -10173,14 +10174,6 @@
   {
     "id": "varel-pinya",
     "handle": "Varel PINYA"
-  },
-  {
-    "id": "varrel-ao",
-    "handle": "Varrel AO"
-  },
-  {
-    "id": "varrel-pinya",
-    "handle": "Varrel Pinya"
   },
   {
     "id": "vengeancetk",
@@ -10484,18 +10477,6 @@
     "handle": "YamadaMisago"
   },
   {
-    "id": "yamasa-nobi",
-    "handle": "Yamasa Nobi"
-  },
-  {
-    "id": "yamasa-take",
-    "handle": "Yamasa Take"
-  },
-  {
-    "id": "yamasa-yuu",
-    "handle": "Yamasa YUU"
-  },
-  {
     "id": "yamasayuu",
     "handle": "YamasaYUU"
   },
@@ -10754,14 +10735,6 @@
   {
     "id": "zerolar",
     "handle": "ZeroLar"
-  },
-  {
-    "id": "zeta-double",
-    "handle": "Zeta Double"
-  },
-  {
-    "id": "zeta-keisuke",
-    "handle": "Zeta Keisuke"
   },
   {
     "id": "zexnkai",

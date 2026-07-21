@@ -143,7 +143,7 @@ export async function emitGeneric(opts: {
   // ── contract assertions (drift = hard fail, the Phase-3 discipline) ──────
   const rosterIds = new Set(characters.map((c) => c.id));
   const playerIds = new Set(players.map((p) => p.id));
-  const sourceIds = new Set<string>(CHANNELS.map((c) => c.id));
+  const sourceIds = new Set<string>(CHANNELS.map((c) => c.source));
   if (replays.length !== records.length)
     throw new Error(`emit: replay count ${replays.length} !== record count ${records.length}`);
   for (const r of replays) {

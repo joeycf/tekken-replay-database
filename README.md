@@ -55,8 +55,8 @@ Two schemas, deliberately: `videos.json` (6.4 MB, rich — parse provenance, mis
 reasons, raw title fields) never reaches the browser; `emit.ts` maps it onto the
 engine's generic `Replay[]` contract.
 
-- **2,743 routes prerendered**: Browse shell, Stats, characters and players
-  indexes, 42 character pages, all 2,696 player pages, plus `404.html`.
+- **2,736 routes prerendered**: Browse shell, Stats, characters and players
+  indexes, 42 character pages, all 2,689 player pages, plus `404.html`.
 - The engine's `modules/static-artifacts` emits **`sitemap.xml`**, **`robots.txt`**,
   the web manifest and `404.html` from the _real_ prerendered route list. Per-page
   **JSON-LD** is prerendered into the HTML.
@@ -90,7 +90,7 @@ Two other env vars matter locally, neither of them secret:
 | script                                           | what it does                                                                                                                                          |
 | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `npm run dev` / `build` / `generate` / `preview` | Nuxt app (generate = full static build)                                                                                                               |
-| `npm run data:fetch`                             | Pull every upload from all three YouTube channels → `raw/` (needs `YT_API_KEY`)                                                                       |
+| `npm run data:fetch`                             | Pull every upload from all four YouTube channels → `raw/` (needs `YT_API_KEY`)                                                                        |
 | `npm run data:parse`                             | Parse titles/descriptions → `data/videos.json`, `players.json`, `report.md`; calls `data:emit` at the end                                             |
 | `npm run data:emit`                              | Map the rich `videos.json` onto the engine contract → `data/replays.json`, `stats.json`. Deterministic, no YouTube access — safe to re-run standalone |
 | `npm run data:build`                             | fetch + parse                                                                                                                                         |
@@ -148,18 +148,32 @@ daily run.
 Tekken's titles are far more structured than 2XKO's, so there is no computer
 vision here — everything comes out of the title and description text.
 
-- **Sources:** three tracked replay channels (`scripts/channels.ts`) with
-  `PLAYER (Character) vs PLAYER (Character)` titles. Latest run: **14,096 matches
-  parsed from 19,056 uploads** — per-channel coverage 99.2% (highLevel), 60.1%
-  (telly), 99.2% (ranked). The misses are dominated by material that isn't a
-  match at all: pre-launch footage, Shorts, and short-duration clips.
+- **Sources:** four tracked channels (`scripts/channels.ts`) with
+  `PLAYER (Character) vs PLAYER (Character)` titles, feeding four sources.
+  Latest run: **14,322 matches parsed from 21,909 uploads** — per-channel
+  coverage 99.2% (highLevel), 60.1% (telly), 99.2% (ranked), 7.5% (bneEsports).
+  The misses are dominated by material that isn't a match at all: pre-launch
+  footage, Shorts, and short-duration clips.
+- **A source may aggregate several channels.** `tournament` is fed by the event
+  organizers' channels — currently Bandai Namco Esports (TEKKEN World Tour),
+  213 matches. Its low coverage is the parser working as intended: the channel
+  is mostly multi-hour stream VODs and a Tekken _7_ back-catalogue, and only
+  the per-match uploads carry the title contract. `ChannelConfig.id` is the
+  intake key (`raw/<id>.json`, report row); `ChannelConfig.source` is the
+  public `Replay.source`.
+- **Org tags are stripped from handles** (`ORG_PREFIXES` in `scripts/parse.ts`):
+  tournament uploads credit the sponsor ("VIT JeonDDing", "KDF Mulgold"), which
+  would otherwise mint one player page per sponsor — and Mulgold has appeared
+  under KDF, DNF and bare. The list is curated rather than inferred; the
+  tempting heuristic scores `ARSLAN ASH → ASH` and `BUFFALO SOLDIER → SOLDIER`.
 - **Character matching** (`scripts/roster.ts`) is longest-alias-first whole-word
   search, so "Armor King" beats "King" and "Devil Jin" beats "Jin". Aliases come
   from `data/characters.json`, which the roster scrape writes — parse vocabulary
   and the app's search vocabulary are the same data.
 - **Ranks** come from the video _descriptions_ ("Keisuke (God of Destruction 6
-  Kazuya) Versus …"), normalized onto the 30-rank ladder; **12,622 of 28,192
-  sides (44.8%)** carry one. Season 2's God of Destruction sub-tiers (I–VII, ∞)
+  Kazuya) Versus …"), normalized onto the 30-rank ladder; **12,640 of 28,644
+  sides (44.1%)** carry one. Tournament uploads state no ladder rank, so their
+  sides ship rank-less (`rank` is optional per side). Season 2's God of Destruction sub-tiers (I–VII, ∞)
   sit above the named ladder as orb progression and all normalize back to "God of
   Destruction". Title qualifiers like "#6 Ranked" are leaderboard positions, not
   ladder ranks, and are ignored.

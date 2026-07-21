@@ -1,16 +1,17 @@
 # Tekken pipeline report
 
-**14096 matches** parsed from 19056 uploads across 3 channels · 2696 players · ranked sides 12622/28192 (44.8%)
+**14322 matches** parsed from 21909 uploads across 4 channels · 2689 players · ranked sides 12640/28644 (44.1%)
 
-| channel | uploads | parsed | coverage |
-| --- | ---: | ---: | ---: |
-| highLevel | 4351 | 4318 | 99.2% |
-| telly | 12287 | 7380 | 60.1% |
-| ranked | 2418 | 2398 | 99.2% |
+| channel | source | uploads | parsed | coverage |
+| --- | --- | ---: | ---: | ---: |
+| highLevel | highLevel | 4354 | 4321 | 99.2% |
+| telly | telly | 12293 | 7386 | 60.1% |
+| ranked | ranked | 2422 | 2402 | 99.2% |
+| bneEsports | tournament | 2840 | 213 | 7.5% |
 
-Seasons: S1 5920 · S2 5956 · S3 2220
+Seasons: S1 6025 · S2 6034 · S3 2263
 
-Misses by reason: pre-launch 1988 · short-duration 1630 · shorts 1116 · char-unresolved 131 · no-vs-title 91 · bad-handle 3 · live-or-upcoming 1
+Misses by reason: pre-launch 4444 · short-duration 1675 · shorts 1119 · no-vs-title 186 · char-unresolved 158 · bad-handle 3 · live-or-upcoming 2
 
 Season-label conflicts (channel label ≠ date-derived season, outside the ±14d boundary grace; date wins): 146
 
@@ -47,4 +48,4 @@ Season-label conflicts (channel label ≠ date-derived season, outside the ±14d
 - `4Pf63UozmxA` [highLevel] no-vs-title: T8 🔥 Kkokkoma (Dragunov) 🔥 Tekken 8
 - `RUDWRC5M738` [highLevel] no-vs-title: T8 🔥 Shadow 20z (Zafina) 🔥 Tekken 8
 
-_Generated 2026-07-20T09:49:46.056Z_
+_Generated 2026-07-21T04:08:47.140Z_

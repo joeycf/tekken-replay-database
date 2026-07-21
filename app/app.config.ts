@@ -90,11 +90,15 @@ export default defineAppConfig({
     },
     // Order matters: SourceBadge styles by index (0 = filled primary,
     // 1 = secondary outline, 2+ = warning outline). Ids mirror
-    // scripts/channels.ts — the pipeline's Replay.source contract.
+    // scripts/channels.ts `source` — the pipeline's Replay.source contract.
+    // 'tournament' is appended rather than inserted so the three original
+    // badges keep the styling they already ship with; it aggregates every
+    // event organizer's channel (currently Bandai Namco Esports / TWT).
     sourceChannels: [
       { id: 'highLevel', name: 'High Level' },
       { id: 'telly', name: 'Telly' },
       { id: 'ranked', name: 'Ranked' },
+      { id: 'tournament', name: 'Tournament' },
     ],
     fonts: {
       display: 'Rajdhani',

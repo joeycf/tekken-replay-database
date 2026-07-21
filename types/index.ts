@@ -2,13 +2,22 @@
 // the engine contract is restated where emitted shapes must mirror it, exactly
 // like the 2XKO pipeline does).
 
-/** Tracked source channels. The id doubles as GameConfig.sourceChannels[].id
- *  and Replay.source — the badge/filter contract. */
-export type SourceId = 'highLevel' | 'telly' | 'ranked';
+/** The Replay.source contract: doubles as GameConfig.sourceChannels[].id
+ *  (badge/filter). One source may be fed by SEVERAL YouTube channels —
+ *  'tournament' aggregates the event organizers' channels, whose uploads are
+ *  the same kind of replay regardless of who published them. */
+export type SourceId = 'highLevel' | 'telly' | 'ranked' | 'tournament';
+
+/** Per-YouTube-channel intake key: names raw/<key>.json and the coverage
+ *  report's rows, so channels sharing a source stay separately auditable. */
+export type ChannelKey = 'highLevel' | 'telly' | 'ranked' | 'bneEsports';
 
 export interface ChannelConfig {
-  /** Replay.source / sourceChannels id (badge styling is index-based). */
-  id: SourceId;
+  /** Raw-dump key / report row (unique per YouTube channel). */
+  id: ChannelKey;
+  /** The source this channel's replays are published under. Several channels
+   *  may share one; badge styling is index-based over sourceChannels. */
+  source: SourceId;
   /** Display name (mirrors app/app.config.ts sourceChannels[].name). */
   name: string;
   /** YouTube channel id. */
@@ -20,7 +29,8 @@ export interface ChannelConfig {
 /** One upload as fetched from the YouTube Data API (raw/<id>.json). */
 export interface RawVideoRecord {
   id: string;
-  channel: SourceId;
+  /** Intake channel, NOT the source — parse maps it via CHANNELS. */
+  channel: ChannelKey;
   title: string;
   description: string;
   publishedAt: string; // ISO
@@ -49,6 +59,7 @@ export interface MatchSide {
  *  matches enter it; misses are reported, not stored. */
 export interface MatchVideo {
   id: string;
+  /** Resolved source (Replay.source), not the intake channel. */
   channel: SourceId;
   title: string;
   publishedAt: string;

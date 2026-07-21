@@ -246,6 +246,8 @@ async function main(): Promise<void> {
     ],
     ['/?patch=S2', count((v) => v.season === 2), 'patch facet'],
     ['/?src=telly', count((v) => v.channel === 'telly'), 'source facet'],
+    // a source fed by its own channel vs. one aggregating organizers' channels
+    ['/?src=tournament', count((v) => v.channel === 'tournament'), 'source facet (aggregated)'],
     ['/?p=knee', count((v) => v.sides.some((s) => s.player === 'knee')), 'player facet'],
     [
       '/?from=2026-07-01',

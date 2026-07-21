@@ -88,6 +88,54 @@ const slug = (handle: string): string =>
     .replace(/^-+|-+$/g, '');
 const isUpper = (s: string) => s === s.toUpperCase() && s !== s.toLowerCase();
 
+// ── esports org tags ─────────────────────────────────────────────────────────
+// Channels prepend the player's team to the handle ("KDF Mulgold", "DRX Knee",
+// "VIT JeonDDing"), which would otherwise mint a separate player id — and a
+// separate player page — per sponsor. Worse, it fragments across TIME: Mulgold
+// appears as KDF, DNF and bare, so one pro's matches would land on three pages.
+//
+// This list is CURATED, not inferred, and that is deliberate. The obvious
+// heuristic — "leading token whose remainder is a handle seen standalone" —
+// scores ARSLAN ASH → ASH (135 sides), NINA ASSASSIN → ASSASSIN, PARK DUCKSIK,
+// BUFFALO SOLDIER, TEKKEN MASTER and LIL MAJIN, none of which are org tags:
+// handles like "Ash", "Master" and "Majin" are simply common enough to belong
+// to somebody else too. A wrong merge silently rewrites a real player's page,
+// so entries earn their place by being recognizable Tekken/FGC organizations.
+// Add new ones as rosters change; ambiguous leading words stay out.
+const ORG_PREFIXES = new Set([
+  'aeg',
+  'drx',
+  'dnf',
+  'falcons',
+  'faze',
+  'fate',
+  'kdf',
+  'lmg',
+  'md',
+  'mtbt',
+  'pbe',
+  'rb',
+  't1',
+  'talon',
+  'thy',
+  'top',
+  'varrel',
+  'vit',
+  'yamasa',
+  'zeta',
+]);
+
+/** Drop leading org tags ("VIT JeonDDing" → "JeonDDing"). Loops so stacked
+ *  tags collapse, and never strips a handle down to nothing. */
+function stripOrgPrefix(handle: string): string {
+  let h = handle;
+  for (;;) {
+    const m = /^([A-Za-z0-9]{1,9})[\s|]+(\S.*)$/.exec(h);
+    if (!m || !ORG_PREFIXES.has(m[1]!.toLowerCase())) return h;
+    h = m[2]!.trim();
+  }
+}
+
 // ── title parsing ────────────────────────────────────────────────────────────
 const VS_RE = /(.+?)\(([^()]{1,60})\)\s*(?:vs\.?|versus)\s*(.+?)\(([^()]{1,60})\)/iu;
 // channel-brand segment delimiters seen in the tracked channels' titles
@@ -96,11 +144,13 @@ const SEG_RE = /[▰🔥⚡•▶►|]+/u;
 function cleanHandle(raw: string): string | null {
   let t = raw.split(SEG_RE).pop() ?? '';
   t = t.split(/\s[-–—]\s/).pop() ?? '';
-  t = t
-    .replace(/^[\s,.:;–—-]+/u, '')
-    .replace(/[\s,.:;–—-]+$/u, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+  t = stripOrgPrefix(
+    t
+      .replace(/^[\s,.:;–—-]+/u, '')
+      .replace(/[\s,.:;–—-]+$/u, '')
+      .replace(/\s+/g, ' ')
+      .trim(),
+  );
   if (!t || t.length > 40) return null;
   return t;
 }
@@ -133,8 +183,11 @@ function parseDescSides(
 ): [DescSide, DescSide] | null {
   const m = DESC_RE.exec(description);
   if (!m) return null;
+  // org tags are stripped here too: the description handle is matched against
+  // the title's by slug, so both sides must normalize the same way or the
+  // nicer description casing is lost.
   const side = (name: string, paren: string): DescSide => ({
-    handle: name.replace(/\s+/g, ' ').trim(),
+    handle: stripOrgPrefix(name.replace(/\s+/g, ' ').trim()),
     character: matcher.one(paren),
     ...(extractRank(paren) ? { rank: extractRank(paren) } : {}),
   });
@@ -182,6 +235,10 @@ function resolveSeason(date: string, label: number | null): number {
 // ── main ─────────────────────────────────────────────────────────────────────
 const characters = await loadCharacters();
 const matcher = buildAliasMatcher(characters);
+
+/** intake channel → the source its replays publish under (several channels
+ *  may share one, e.g. every event organizer feeds 'tournament'). */
+const SOURCE_OF = new Map(CHANNELS.map((c) => [c.id, c.source]));
 
 const readJson = async <T>(p: string): Promise<T> => JSON.parse(await readFile(p, 'utf8')) as T;
 const raws: RawVideoRecord[] = [];
@@ -312,7 +369,7 @@ const videos: MatchVideo[] = candidates.map((c) => {
   }) as [MatchSide, MatchSide];
   return {
     id: c.raw.id,
-    channel: c.raw.channel,
+    channel: SOURCE_OF.get(c.raw.channel)!,
     title: c.raw.title,
     publishedAt: c.raw.publishedAt,
     durationSec: c.raw.durationSec,
@@ -352,9 +409,12 @@ await writeFile(
 );
 
 // ── report ───────────────────────────────────────────────────────────────────
+// records carry the SOURCE, so coverage is counted back through the intake
+// channel each video came from (sources may aggregate several channels).
+const channelOf = new Map(raws.map((r) => [r.id, r.channel]));
 const byChannel = (id: string) => ({
   raw: raws.filter((r) => r.channel === id).length,
-  parsed: records.filter((v) => v.channel === id).length,
+  parsed: records.filter((v) => channelOf.get(v.id) === id).length,
   missed: misses.filter((m) => m.channel === id),
 });
 const rankSides = records.reduce((n, v) => n + v.sides.filter((s) => s.rank).length, 0);
@@ -373,11 +433,11 @@ const report = [
   `**${records.length} matches** parsed from ${raws.length} uploads across ${CHANNELS.length} channels · ` +
     `${players.length} players · ranked sides ${rankSides}/${records.length * 2} (${((rankSides / (records.length * 2)) * 100).toFixed(1)}%)`,
   '',
-  '| channel | uploads | parsed | coverage |',
-  '| --- | ---: | ---: | ---: |',
+  '| channel | source | uploads | parsed | coverage |',
+  '| --- | --- | ---: | ---: | ---: |',
   ...CHANNELS.map((ch) => {
     const s = byChannel(ch.id);
-    return `| ${ch.id} | ${s.raw} | ${s.parsed} | ${((s.parsed / Math.max(1, s.raw)) * 100).toFixed(1)}% |`;
+    return `| ${ch.id} | ${ch.source} | ${s.raw} | ${s.parsed} | ${((s.parsed / Math.max(1, s.raw)) * 100).toFixed(1)}% |`;
   }),
   '',
   `Seasons: ${Object.entries(seasonDist)
