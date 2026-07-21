@@ -1,31 +1,31 @@
 {
   "totals": {
-    "replays": 14322,
+    "replays": 14325,
     "characters": 42,
-    "players": 2689,
+    "players": 2690,
     "byPatch": {
       "S1": 6025,
       "S2": 6034,
-      "S3": 2263
+      "S3": 2266
     }
   },
   "characterUsage": {
     "alisa": 500,
     "anna": 635,
-    "armor_king": 567,
+    "armor_king": 568,
     "asuka": 390,
     "azucena": 488,
     "bryan": 2220,
     "claudio": 558,
     "clive": 940,
     "devil_jin": 991,
-    "dragunov": 1664,
+    "dragunov": 1665,
     "eddy": 308,
     "fahkumram": 436,
     "feng": 997,
     "heihachi": 1008,
-    "hwoarang": 1112,
-    "jack8": 505,
+    "hwoarang": 1113,
+    "jack8": 507,
     "jin": 780,
     "jun": 607,
     "kazuya": 1834,
@@ -33,7 +33,7 @@
     "kuma": 186,
     "kunimitsu": 302,
     "lars": 456,
-    "law": 712,
+    "law": 713,
     "lee": 579,
     "leo": 240,
     "leroy": 378,
@@ -136,20 +136,20 @@
     "S3": {
       "alisa": 105,
       "anna": 81,
-      "armor_king": 203,
+      "armor_king": 204,
       "asuka": 57,
       "azucena": 67,
       "bryan": 375,
       "claudio": 45,
       "clive": 79,
       "devil_jin": 92,
-      "dragunov": 214,
+      "dragunov": 215,
       "eddy": 22,
       "fahkumram": 76,
       "feng": 130,
       "heihachi": 119,
-      "hwoarang": 181,
-      "jack8": 92,
+      "hwoarang": 182,
+      "jack8": 94,
       "jin": 91,
       "jun": 74,
       "kazuya": 253,
@@ -157,7 +157,7 @@
       "kuma": 13,
       "kunimitsu": 302,
       "lars": 53,
-      "law": 94,
+      "law": 95,
       "lee": 76,
       "leo": 34,
       "leroy": 50,
@@ -412,6 +412,9 @@
     },
     "amigo": {
       "jin": 1
+    },
+    "amnesiac": {
+      "hwoarang": 1
     },
     "amnesiac-kicks": {
       "hwoarang": 1
@@ -1781,7 +1784,7 @@
       "hwoarang": 5
     },
     "deeongrey": {
-      "jack8": 1,
+      "jack8": 2,
       "lidia": 2
     },
     "defensive-patch": {
@@ -3584,7 +3587,7 @@
       "steve": 1
     },
     "jdcr": {
-      "armor_king": 39,
+      "armor_king": 40,
       "bryan": 12,
       "clive": 1,
       "dragunov": 246,
@@ -3721,7 +3724,7 @@
       "clive": 3,
       "eddy": 1,
       "fahkumram": 8,
-      "jack8": 27,
+      "jack8": 28,
       "kazuya": 5
     },
     "joehyeon": {
@@ -5765,7 +5768,7 @@
     "ninjakilla": {
       "armor_king": 4,
       "fahkumram": 9,
-      "law": 78,
+      "law": 79,
       "lee": 2,
       "miary_zo": 2
     },
@@ -9241,7 +9244,7 @@
       "xiaoyu": 1
     },
     "wizzy": {
-      "dragunov": 28,
+      "dragunov": 29,
       "lili": 3
     },
     "wrestle": {

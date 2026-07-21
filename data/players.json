@@ -304,6 +304,10 @@
     "handle": "AMIGO"
   },
   {
+    "id": "amnesiac",
+    "handle": "Amnesiac"
+  },
+  {
     "id": "amnesiac-kicks",
     "handle": "Amnesiac Kicks"
   },
@@ -1806,7 +1810,7 @@
   },
   {
     "id": "deeongrey",
-    "handle": "Deeongrey"
+    "handle": "DeeonGrey"
   },
   {
     "id": "defensive-patch",
