@@ -10,3 +10,6 @@ raw/
 dist
 public/data/
 cache/
+
+# Local agent config
+.claude/
