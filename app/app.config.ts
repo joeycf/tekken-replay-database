@@ -100,6 +100,15 @@ export default defineAppConfig({
       { id: 'ranked', name: 'Ranked' },
       { id: 'tournament', name: 'Tournament' },
     ],
+    // Filter chips are consolidated to two groups (the per-video SourceBadge keeps
+    // the real channel name from sourceChannels above). Toggling a group filters its
+    // member ids as a set via the same ?src= param, so per-channel deep links still
+    // work. 'Online' spans the three gameplay channels; 'Tournament' is the aggregated
+    // event-organizer source.
+    sourceGroups: [
+      { id: 'online', name: 'Online', sources: ['highLevel', 'telly', 'ranked'] },
+      { id: 'tournament', name: 'Tournament', sources: ['tournament'] },
+    ],
     fonts: {
       display: 'Rajdhani',
       ui: 'Archivo',

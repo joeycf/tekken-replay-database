@@ -248,6 +248,12 @@ async function main(): Promise<void> {
     ['/?src=telly', count((v) => v.channel === 'telly'), 'source facet'],
     // a source fed by its own channel vs. one aggregating organizers' channels
     ['/?src=tournament', count((v) => v.channel === 'tournament'), 'source facet (aggregated)'],
+    // the Online group chip (v0.5.5) writes the three gameplay sources as a set
+    [
+      '/?src=highLevel,telly,ranked',
+      count((v) => ['highLevel', 'telly', 'ranked'].includes(v.channel)),
+      'source group (Online set)',
+    ],
     ['/?p=knee', count((v) => v.sides.some((s) => s.player === 'knee')), 'player facet'],
     [
       '/?from=2026-07-01',
@@ -260,6 +266,21 @@ async function main(): Promise<void> {
     const got = await resultCount(page);
     expect(got === expected, `${label}: ${url} → ${got} (want ${expected})`);
   }
+
+  // source filter consolidated to Online + Tournament (v0.5.5) — per-channel chips
+  // gone (the card SourceBadge still shows the real channel via spans, not buttons)
+  await gotoIdle(page, at('/'));
+  const srcBtns: string[] = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('button')).map((b) => (b.textContent || '').trim()),
+  );
+  expect(
+    srcBtns.includes('Online') && srcBtns.includes('Tournament'),
+    'Online + Tournament chips render',
+  );
+  expect(
+    !srcBtns.includes('High Level') && !srcBtns.includes('Telly') && !srcBtns.includes('Ranked'),
+    'per-channel source chips are consolidated away',
+  );
 
   // ── 3. Modal + related ─────────────────────────────────────────────────────
   console.log('\n— Video modal');
