@@ -3630,6 +3630,10 @@
     "handle": "Hoonie"
   },
   {
+    "id": "hopper",
+    "handle": "Hopper"
+  },
+  {
     "id": "horchata",
     "handle": "Horchata"
   },
@@ -7010,6 +7014,10 @@
     "handle": "POTIVE"
   },
   {
+    "id": "powder",
+    "handle": "Powder"
+  },
+  {
     "id": "pprtru",
     "handle": "PprTru"
   },
@@ -9739,6 +9747,10 @@
     "handle": "The4Philzz"
   },
   {
+    "id": "thebltch",
+    "handle": "THEBlTCH"
+  },
+  {
     "id": "thebm",
     "handle": "TheBM"
   },
@@ -10206,6 +10218,10 @@
   {
     "id": "villain",
     "handle": "Villain"
+  },
+  {
+    "id": "vimil",
+    "handle": "Vimil"
   },
   {
     "id": "violent-vira",
