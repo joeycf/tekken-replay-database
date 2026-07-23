@@ -1,0 +1,99 @@
+[
+  {
+    "id": "S1",
+    "children": [
+      {
+        "id": "1.01",
+        "note": "launch"
+      },
+      {
+        "id": "1.02",
+        "note": "TEKKEN SHOP"
+      },
+      {
+        "id": "1.03",
+        "note": "Eddy"
+      },
+      {
+        "id": "1.04"
+      },
+      {
+        "id": "1.05"
+      },
+      {
+        "id": "1.06",
+        "note": "Lidia"
+      },
+      {
+        "id": "1.07"
+      },
+      {
+        "id": "1.08",
+        "note": "Heihachi"
+      },
+      {
+        "id": "1.09"
+      },
+      {
+        "id": "1.10",
+        "note": "Clive"
+      },
+      {
+        "id": "1.11"
+      },
+      {
+        "id": "1.12"
+      },
+      {
+        "id": "1.13",
+        "note": "Ghost vs. Ghost"
+      }
+    ]
+  },
+  {
+    "id": "S2",
+    "children": [
+      {
+        "id": "2.00",
+        "note": "Anna"
+      },
+      {
+        "id": "2.01"
+      },
+      {
+        "id": "2.02"
+      },
+      {
+        "id": "2.03",
+        "note": "Fahkumram"
+      },
+      {
+        "id": "2.04"
+      },
+      {
+        "id": "2.05"
+      },
+      {
+        "id": "2.06",
+        "note": "Armor King"
+      },
+      {
+        "id": "2.08",
+        "note": "Miary Zo"
+      }
+    ]
+  },
+  {
+    "id": "S3",
+    "children": [
+      {
+        "id": "3.00",
+        "note": "Season 3"
+      },
+      {
+        "id": "3.01",
+        "note": "Kunimitsu"
+      }
+    ]
+  }
+]

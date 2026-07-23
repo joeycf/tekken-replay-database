@@ -1,3 +1,4 @@
+import patchGroups from '../data/patchGroups.json';
 import ranks from '../data/ranks.json';
 import type { GameConfig } from '@engine/types';
 
@@ -109,6 +110,13 @@ export default defineAppConfig({
       { id: 'online', name: 'Online', sources: ['highLevel', 'telly', 'ranked'] },
       { id: 'tournament', name: 'Tournament', sources: ['tournament'] },
     ],
+    // Season→patch hierarchy for the grouped patch facet (engine v0.6.0).
+    // PIPELINE-EMITTED (scripts/emit.ts → data/patchGroups.json) from the same
+    // boundary authority that derives every replay's patch token, so the UI
+    // hierarchy and the data can never drift. The shipped flat ?patch=S1..S3
+    // facet is ABSORBED: season tokens are the parent tokens, so existing
+    // deep links keep their exact counts.
+    patchGroups,
     fonts: {
       display: 'Rajdhani',
       ui: 'Archivo',

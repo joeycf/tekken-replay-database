@@ -8,6 +8,8 @@
 //
 // Prereq: npm run generate       Run: npm run test:e2e
 
+import { execSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { dirname, extname, join } from 'node:path';
@@ -281,6 +283,99 @@ async function main(): Promise<void> {
     !srcBtns.includes('High Level') && !srcBtns.includes('Telly') && !srcBtns.includes('Ranked'),
     'per-channel source chips are consolidated away',
   );
+
+  // ── 2b. Grouped patch facet (engine v0.6.0) ────────────────────────────────
+  // The shipped flat season facet is ABSORBED: parent tokens ARE the old
+  // S1/S2/S3 tokens (the ?patch=S2 deep-link row above is the legacy parity
+  // anchor — same param, same exact count), children are the wavu-folded
+  // patch versions from data/patchBoundaries.json.
+  console.log('\n— Grouped patch facet');
+  const byVersion = (ver: string) => count((v) => v.patchVersion === ver);
+  await gotoIdle(page, at('/?patch=2.03'));
+  expect(
+    (await resultCount(page)) === byVersion('2.03'),
+    `fine patch ?patch=2.03 → ${fmt(byVersion('2.03'))}`,
+  );
+  const mixedN = count((v) => v.season === 1) + byVersion('2.03');
+  await gotoIdle(page, at('/?patch=S1,2.03'));
+  expect((await resultCount(page)) === mixedN, `mixed ?patch=S1,2.03 unions to ${fmt(mixedN)}`);
+
+  // tri-state parent + child dropdown round-trip with canonical URL collapse
+  await gotoIdle(page, at('/'));
+  await page.click('[data-testid="patch-group-S3"]');
+  await page.waitForFunction(() => new URL(location.href).searchParams.get('patch') === 'S3');
+  expect(
+    (await resultCount(page)) === count((v) => v.season === 3),
+    'parent toggle-all → whole-season count (incl. patch-unknown records)',
+  );
+  expect(
+    (await page.locator('[data-testid="patch-group-S3"]').getAttribute('aria-pressed')) === 'true',
+    'parent aria-pressed=true when fully selected',
+  );
+  await page.click('[data-testid="patch-group-S3-expander"]');
+  await page.click('[data-testid="patch-child-3.00"]');
+  await page.waitForFunction(() =>
+    (new URL(location.href).searchParams.get('patch') ?? '')
+      .split(',')
+      .every((t) => t !== 'S3' && t !== '3.00'),
+  );
+  expect(
+    (await page.locator('[data-testid="patch-group-S3"]').getAttribute('aria-pressed')) === 'mixed',
+    'partial selection reads aria-pressed=mixed',
+  );
+  expect(
+    (await resultCount(page)) === byVersion('3.01'),
+    'children-only URL counts only the remaining patch',
+  );
+  await page.click('[data-testid="patch-child-3.00"]');
+  await page.waitForFunction(() => new URL(location.href).searchParams.get('patch') === 'S3');
+  expect(
+    (await resultCount(page)) === count((v) => v.season === 3),
+    're-completed era collapses back to ?patch=S3 with the season count',
+  );
+
+  // modal meta line reads "era · patch · rank · …" for fine-token replays
+  await gotoIdle(page, at('/?patch=2.03'));
+  await page.waitForSelector('[data-replay-id]');
+  await page.locator('[data-replay-id]').first().click();
+  await page.waitForTimeout(600);
+  const dialogText = (await page.locator('[role="dialog"][aria-modal="true"]').innerText()) ?? '';
+  expect(/S2 · 2\.03/.test(dialogText), 'modal meta line reads "S2 · 2.03 · …"');
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(300);
+
+  // stats stay ERA-keyed; every emitted token is an era or declared version
+  const eraRe = /^S\d+$/;
+  for (const key of Object.keys(stats.totals.byPatch))
+    expect(eraRe.test(key), `stats key "${key}" stays era-level`);
+  const { patches: declaredPatches } = JSON.parse(
+    readFileSync(join(ROOT, 'data/patchBoundaries.json'), 'utf8'),
+  ) as { patches: { version: string }[] };
+  const declared = new Set(declaredPatches.map((p) => p.version));
+  const emittedReplays = JSON.parse(readFileSync(join(ROOT, 'data/replays.json'), 'utf8')) as {
+    id: string;
+    patch?: string;
+  }[];
+  expect(
+    emittedReplays.every((r) => eraRe.test(r.patch ?? '') || declared.has(r.patch ?? '')),
+    'every emitted patch token is an era key or a declared version',
+  );
+
+  // double-emit byte-identity: the standalone emitter must be deterministic
+  {
+    const files = ['data/replays.json', 'data/stats.json', 'data/patchGroups.json'];
+    const hash = (p: string) =>
+      createHash('sha256')
+        .update(readFileSync(join(ROOT, p)))
+        .digest('hex');
+    const before = files.map(hash);
+    execSync('npm run data:emit', { cwd: ROOT, stdio: 'pipe' });
+    const after = files.map(hash);
+    expect(
+      files.every((_, i) => before[i] === after[i]),
+      'double-emit: replays/stats/patchGroups byte-stable across runs',
+    );
+  }
 
   // ── 3. Modal + related ─────────────────────────────────────────────────────
   console.log('\n— Video modal');

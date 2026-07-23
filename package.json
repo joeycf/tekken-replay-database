@@ -19,6 +19,7 @@
     "data:parse": "tsx scripts/parse.ts",
     "data:build": "npm run data:fetch && npm run data:parse",
     "data:emit": "tsx scripts/emit.ts",
+    "data:migration-report": "tsx scripts/season-migration-report.ts",
     "data:characters": "tsx scripts/characters.ts",
     "test:e2e": "tsx scripts/e2e.ts"
   },

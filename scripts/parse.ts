@@ -18,10 +18,12 @@ import { fileURLToPath } from 'node:url';
 
 import { CHANNELS } from './channels';
 import { applyOverrides, emitGeneric } from './emit';
+import { buildPatchTable } from './patches';
 import { buildAliasMatcher, extractRank, loadCharacters } from './roster';
 import type {
   MatchSide,
   MatchVideo,
+  PatchBoundary,
   PlayerRecord,
   RawVideoRecord,
   SeasonBoundary,
@@ -48,6 +50,22 @@ const SEASONS: SeasonBoundary[] = [
   { season: 3, start: '2026-03-17', end: null },
 ];
 const LABEL_GRACE_DAYS = 14;
+
+// ── patch boundaries: the per-patch layer under SEASONS (engine v0.6.0
+//    grouped facet). data/patchBoundaries.json is wavu-authored + folded;
+//    buildPatchTable validates it against SEASONS (the season authority) and
+//    scripts/patches.ts's header carries the Bandai replay-expiry accuracy
+//    basis for date-derivation. Season resolution below is UNCHANGED — the
+//    label grace stays; a grace-flipped season simply nulls patchVersion in
+//    the normalize step ("season known, patch unknown"). ────────────────────
+const patchTable = buildPatchTable(
+  SEASONS,
+  (
+    JSON.parse(await readFile(join(DATA, 'patchBoundaries.json'), 'utf8')) as {
+      patches: PatchBoundary[];
+    }
+  ).patches,
+);
 
 // Curated famous-pro list (marks Player.featured when present in the data —
 // harmless for ids that never appear).
@@ -375,12 +393,21 @@ const videos: MatchVideo[] = candidates.map((c) => {
     durationSec: c.raw.durationSec,
     ...(c.raw.viewCount !== undefined ? { viewCount: c.raw.viewCount } : {}),
     season: resolveSeason(c.raw.publishedAt.slice(0, 10), c.label),
+    patchVersion: patchTable.patchForDate(c.raw.publishedAt)?.version ?? null,
     sides,
   };
 });
 videos.sort((a, b) => a.publishedAt.localeCompare(b.publishedAt) || a.id.localeCompare(b.id));
 
-const records = applyOverrides(videos, overrides);
+// Hierarchy consistency normalize (after label-grace and overrides settled
+// season): a patchVersion whose release-date season contradicts the record's
+// season becomes null — emitted as the bare era token, "season known, patch
+// unknown", matching whole-season selections but never a specific patch.
+const records = applyOverrides(videos, overrides).map((v) =>
+  v.patchVersion !== null && patchTable.seasonOfPatch(v.patchVersion) !== v.season
+    ? { ...v, patchVersion: null }
+    : v,
+);
 
 // registry from the post-override records; best casing per id
 const playerIds = new Map<string, string>(); // id → best handle
@@ -444,6 +471,16 @@ const report = [
     .sort()
     .map(([k, n]) => `${k} ${n}`)
     .join(' · ')}`,
+  '',
+  `Patches: ${Object.entries(
+    records.reduce<Record<string, number>>((acc, v) => {
+      acc[v.patchVersion ?? 'unknown'] = (acc[v.patchVersion ?? 'unknown'] ?? 0) + 1;
+      return acc;
+    }, {}),
+  )
+    .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+    .map(([k, n]) => `${k} ${n}`)
+    .join(' · ')} (unknown = season contradicts the date: label-grace/override)`,
   '',
   `Misses by reason: ${
     Object.entries(reasonCounts)

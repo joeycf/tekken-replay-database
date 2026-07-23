@@ -66,8 +66,13 @@ export interface MatchVideo {
   durationSec: number;
   viewCount?: number;
   /** Tekken 8 season, resolved from title/description tokens or the date
-   *  boundaries (data/seasonBoundaries.json). Replay.patch = `S${season}`. */
+   *  boundaries (data/seasonBoundaries.json). Replay.patch = patchVersion,
+   *  falling back to `S${season}` when the fine patch is unknown. */
   season: number;
+  /** boundary-derived patch token ("2.03", from data/patchBoundaries.json);
+   *  null = the season (label-grace or override) contradicts the date —
+   *  "season known, patch unknown", emitted as the bare era token */
+  patchVersion: string | null;
   sides: [MatchSide, MatchSide];
 }
 
@@ -93,7 +98,7 @@ export interface CharacterRecord {
 
 /** Per-video manual corrections (data/overrides.json): exclude stray uploads
  *  or patch a bad parse. Applied by parse.ts AND the standalone emit. */
-export type VideoOverride = Partial<Pick<MatchVideo, 'season' | 'sides'>> & {
+export type VideoOverride = Partial<Pick<MatchVideo, 'season' | 'patchVersion' | 'sides'>> & {
   exclude?: boolean;
 };
 
@@ -104,4 +109,20 @@ export interface SeasonBoundary {
   season: number;
   start: string; // ISO date, inclusive
   end: string | null; // exclusive; null = open (current season)
+}
+
+/** One released patch (data/patchBoundaries.json — see its "//" header for
+ *  the wavu-sourced authoring + fold rules). Windows are computed by
+ *  scripts/patches.ts, never authored. */
+export interface PatchBoundary {
+  /** the folded patch token as the community names it, e.g. "2.03" */
+  version: string;
+  /** release day (ISO; a season opener starts at the season boundary) */
+  start: string;
+  /** X.YY.ZZ hotfix releases folded into this patch (documentation only) */
+  includes?: string[];
+  /** short community-facing hint (DLC character, headline feature) */
+  note?: string;
+  /** unconfirmed-row marker — exempts the row from the opening-patch validation */
+  todo?: string;
 }
