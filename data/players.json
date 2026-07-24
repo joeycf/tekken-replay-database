@@ -912,7 +912,7 @@
   },
   {
     "id": "bomber",
-    "handle": "BOMBER"
+    "handle": "Bomber"
   },
   {
     "id": "bone",
@@ -1423,6 +1423,10 @@
   {
     "id": "cloud9-yuyu",
     "handle": "Cloud9 YUYU"
+  },
+  {
+    "id": "cloudt7",
+    "handle": "CloudT7"
   },
   {
     "id": "clutch",
@@ -8553,6 +8557,10 @@
   {
     "id": "taiheiyo",
     "handle": "Taiheiyo"
+  },
+  {
+    "id": "tails",
+    "handle": "Tails"
   },
   {
     "id": "taito",
