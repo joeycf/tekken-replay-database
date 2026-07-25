@@ -988,6 +988,10 @@
     "handle": "Breaker"
   },
   {
+    "id": "breaman",
+    "handle": "BREAMAN"
+  },
+  {
     "id": "briddy-speerz",
     "handle": "Briddy Speerz"
   },
@@ -5934,6 +5938,10 @@
     "handle": "Mr Kaiser"
   },
   {
+    "id": "mr-lame",
+    "handle": "Mr. Lame"
+  },
+  {
     "id": "mr-naps",
     "handle": "MR NAPS"
   },
@@ -6466,7 +6474,7 @@
   },
   {
     "id": "notgoodatewgf",
-    "handle": "Notgoodatewgf"
+    "handle": "NotgoodatEWGF"
   },
   {
     "id": "noto",
@@ -8197,6 +8205,10 @@
   {
     "id": "snake-fury",
     "handle": "Snake Fury"
+  },
+  {
+    "id": "snotn",
+    "handle": "Snotn"
   },
   {
     "id": "snowey",
@@ -10137,7 +10149,7 @@
   },
   {
     "id": "ungchiki",
-    "handle": "UNGCHIKI"
+    "handle": "Ungchiki"
   },
   {
     "id": "unglow",
