@@ -10,7 +10,8 @@
 //   data/replays.json     (generic Replay[])      → EMITTED (compact — the
 //                                                   client-fetched whale file)
 //   data/stats.json       (KnownStats, 1v1 keys)  → EMITTED
-//   public/data/replays.json                      → EMITTED copy (gitignored;
+//   data/summary.json     (the shell selector's card) → EMITTED (Phase 6)
+//   public/data/{replays,summary}.json            → EMITTED copies (gitignored;
 //                                                   the build's build:before
 //                                                   hook does the same on
 //                                                   Vercel, which never runs
@@ -48,6 +49,15 @@ export interface GenericReplay {
   views?: number;
   durationSec?: number;
 }
+
+/** The game's identity as it appears in data/summary.json — the shell selector
+ *  keys its cards on it. Restated here for the same reason the generic shapes
+ *  above are: the pipeline can't resolve the Nuxt `@engine`/app.config graph.
+ *  app/app.config.ts is the authority (note id 'tekken8' ≠ slug 'tekken'); the
+ *  shell's verify:cutover asserts these two values against its own GAMES table,
+ *  so a drift fails at the apex. */
+const GAME_ID = 'tekken8';
+const GAME_NAME = 'Tekken 8';
 
 /** Season number → the patch key the UI filters/timelines on. */
 const patchKey = (season: number): string => `S${season}`;
@@ -184,8 +194,44 @@ export async function emitGeneric(opts: {
       );
   }
 
+  // ── the shell selector's payload (Phase 6) ───────────────────────────────
+  // Tiny, and fetched same-origin by the apex selector through its /tekken
+  // rewrite — so it has to be COMMITTED (Vercel never runs the pipeline);
+  // data/summary.json is the committed artifact and the build's build:before
+  // hook copies it into public/data/ alongside the whale.
+  //
+  // `updated` is the newest replay's DATE, never build time. A build timestamp
+  // would rewrite this file on a zero-new-video day and defeat the cron's
+  // commit guard, turning every no-op day into a commit and a deploy.
+  const newest = records.reduce((max, v) => (v.publishedAt > max ? v.publishedAt : max), '');
+  // The counts are READ FROM the stats artifact rather than re-derived, so the
+  // selector and the site's own stats page cannot disagree by construction.
+  // (Re-deriving them here and asserting equality would compare `players.length`
+  // with `players.length` — a throw that can never fire is not a gate.) What
+  // follows are the two comparisons that CAN fire; `updated` gets its real teeth
+  // in scripts/e2e.ts, which recomputes it from the substrate independently.
+  const summary = {
+    game: GAME_ID,
+    name: GAME_NAME,
+    replays: genericStats.totals.replays,
+    players: genericStats.totals.players,
+    characters: genericStats.totals.characters,
+    updated: newest.slice(0, 10),
+  };
+  if (summary.replays !== replays.length)
+    throw new Error(
+      `emit: summary.replays ${summary.replays} !== emitted replay count ${replays.length}`,
+    );
+  if (summary.players < 1 || summary.characters < 1)
+    throw new Error(
+      `emit: summary has an empty registry (players ${summary.players}, characters ${summary.characters})`,
+    );
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(summary.updated))
+    throw new Error(`emit: summary.updated is not a replay date ("${summary.updated}")`);
+
   await writeFile(join(DATA, 'replays.json'), JSON.stringify(replays) + '\n', 'utf8');
   await writeFile(join(DATA, 'stats.json'), JSON.stringify(genericStats, null, 2) + '\n', 'utf8');
+  await writeFile(join(DATA, 'summary.json'), JSON.stringify(summary, null, 2) + '\n', 'utf8');
   // the UI's season→patch hierarchy, derived from the SAME authority as the
   // tokens above so config and derivation can never drift (app.config imports
   // this committed artifact — Vercel builds never run the pipeline)
@@ -200,6 +246,7 @@ export async function emitGeneric(opts: {
   const pub = join(root, 'public/data');
   mkdirSync(pub, { recursive: true });
   await writeFile(join(pub, 'replays.json'), JSON.stringify(replays) + '\n', 'utf8');
+  await writeFile(join(pub, 'summary.json'), JSON.stringify(summary, null, 2) + '\n', 'utf8');
 
   const rankSides = replays.reduce((n, r) => n + r.sides.filter((s) => s.rank).length, 0);
   console.log(
@@ -207,6 +254,7 @@ export async function emitGeneric(opts: {
       `(characters ${characters.length} · players ${players.length} · patches ${Object.keys(genericStats.byPatchUsage).join(',')} · ` +
       `ranked sides ${rankSides}/${replays.length * 2})`,
   );
+  console.log(`  summary.json → ${summary.replays} replays, newest ${summary.updated}`);
 }
 
 // ── standalone: re-derive generic files from the committed artifacts ─────────

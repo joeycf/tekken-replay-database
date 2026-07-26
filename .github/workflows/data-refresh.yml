@@ -41,7 +41,11 @@ jobs:
           git config user.email "data-refresh@users.noreply.github.com"
           # substrate + generic artifacts land in the same commit or the
           # site's data desyncs from the pipeline substrate (Phase-3 pattern).
-          git add data/videos.json data/replays.json data/stats.json data/players.json data/seasonBoundaries.json data/report.md
+          # summary.json is the apex selector's card payload (Phase 6); it is
+          # content-derived (newest replay date, not build time), so a
+          # no-new-video day leaves it byte-identical and the guard below still
+          # skips the commit.
+          git add data/videos.json data/replays.json data/stats.json data/players.json data/summary.json data/seasonBoundaries.json data/report.md
           # report.md's "_Generated <timestamp>_" line changes every run; a diff
           # that is ONLY that line is not a data change — drop it so a no-change
           # day produces no commit (and no deploy). report.md still ships

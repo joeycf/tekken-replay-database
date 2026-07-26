@@ -363,7 +363,14 @@ async function main(): Promise<void> {
 
   // double-emit byte-identity: the standalone emitter must be deterministic
   {
-    const files = ['data/replays.json', 'data/stats.json', 'data/patchGroups.json'];
+    const files = [
+      'data/replays.json',
+      'data/stats.json',
+      'data/patchGroups.json',
+      // content-derived, so it must NOT move between runs — a build timestamp
+      // here would commit (and deploy) on every zero-new-video day
+      'data/summary.json',
+    ];
     const hash = (p: string) =>
       createHash('sha256')
         .update(readFileSync(join(ROOT, p)))
@@ -373,7 +380,7 @@ async function main(): Promise<void> {
     const after = files.map(hash);
     expect(
       files.every((_, i) => before[i] === after[i]),
-      'double-emit: replays/stats/patchGroups byte-stable across runs',
+      'double-emit: replays/stats/patchGroups/summary byte-stable across runs',
     );
   }
 
@@ -508,6 +515,43 @@ async function main(): Promise<void> {
   expect(
     manifest.name === 'Tekken 8 Replay Database' && manifest.theme_color === '#E13048',
     'manifest carries Tekken identity',
+  );
+
+  // ── summary.json: the apex selector's payload (Phase 6) ───────────────────
+  // Three checks emit itself cannot make, because emit can only compare the
+  // payload against numbers it just derived:
+  //  1. it is IN THE BUILD — the nuxt.config build:before copy is otherwise
+  //     ungated (nothing in this app reads summary.json), so dropping it would
+  //     pass this whole suite and 404 the selector's fetch in production;
+  //  2. `updated` recomputed from the substrate HERE — the only assertion that
+  //     can distinguish the newest replay's date from a BUILD timestamp, which
+  //     would rewrite the file every day and defeat the cron's commit guard.
+  //     The double-emit hash gate can't: two runs on the same day agree;
+  //  3. identity matches the GameConfig this build actually rendered.
+  const summaryPath = join(OUT, BASE, 'data/summary.json');
+  expect(existsSync(summaryPath), 'summary.json shipped under the base in the generated output');
+  const summary = JSON.parse(readFileSync(summaryPath, 'utf8')) as {
+    game: string;
+    name: string;
+    replays: number;
+    players: number;
+    characters: number;
+    updated: string;
+  };
+  const newestReplay = videos.reduce((max, v) => (v.publishedAt > max ? v.publishedAt : max), '');
+  expect(
+    summary.updated === newestReplay.slice(0, 10),
+    `summary.updated is the NEWEST REPLAY's date, not a build stamp (${summary.updated} vs ${newestReplay.slice(0, 10)})`,
+  );
+  expect(
+    summary.replays === videos.length &&
+      summary.characters === characters.length &&
+      summary.players === players.length,
+    `summary counts match the substrate (${summary.replays}/${summary.characters}/${summary.players} vs ${videos.length}/${characters.length}/${players.length})`,
+  );
+  expect(
+    manifest.name === `${summary.name} Replay Database` && summary.game === 'tekken8',
+    `summary identity agrees with the rendered GameConfig (game=${summary.game}, name=${summary.name})`,
   );
 
   await browser.close();

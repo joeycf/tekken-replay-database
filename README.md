@@ -38,17 +38,20 @@ scripts/parse.ts                 (title parser + description ranks + aggregates)
 data/videos.json                 (RICH records — the pipeline substrate)
       │  scripts/emit.ts         (runs at the end of every parse)
       ▼
-data/replays.json + stats.json   (GENERIC engine-contract files)
+data/replays.json + stats.json + summary.json   (GENERIC engine-contract files)
       │
       └─ committed ──►  Nuxt 4 static site (nuxt generate, vercel-static)
                           extends replay-engine layer
                                   │
                                   ├─ registries (characters/players/stats)
                                   │    → provided via plugin, prerendered into HTML
-                                  └─ replays.json (4.5 MB) → copied to
-                                       public/data/ at build, fetched
-                                       client-side on Browse and entity pages
-                                       only (never bundled)
+                                  ├─ replays.json (4.5 MB) → copied to
+                                  │    public/data/ at build, fetched
+                                  │    client-side on Browse and entity pages
+                                  │    only (never bundled)
+                                  └─ summary.json → copied to public/data/ at
+                                       build; the apex selector's card counts
+                                       (never read by this app)
 ```
 
 Two schemas, deliberately: `videos.json` (6.4 MB, rich — parse provenance, miss
@@ -87,19 +90,19 @@ Two other env vars matter locally, neither of them secret:
 
 ## Scripts
 
-| script                                           | what it does                                                                                                                                          |
-| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `npm run dev` / `build` / `generate` / `preview` | Nuxt app (generate = full static build)                                                                                                               |
-| `npm run data:fetch`                             | Pull every upload from all four YouTube channels → `raw/` (needs `YT_API_KEY`)                                                                        |
-| `npm run data:parse`                             | Parse titles/descriptions → `data/videos.json`, `players.json`, `report.md`; calls `data:emit` at the end                                             |
-| `npm run data:emit`                              | Map the rich `videos.json` onto the engine contract → `data/replays.json`, `stats.json`. Deterministic, no YouTube access — safe to re-run standalone |
-| `npm run data:build`                             | fetch + parse                                                                                                                                         |
-| `npm run data:characters`                        | Roster scrape (Bandai Namco official site) → portraits + splashes in `public/img/characters/`, `data/characters.json`                                 |
-| `npm run typecheck`                              | App (`nuxt typecheck`) **and** pipeline (`tsc -p tsconfig.pipeline.json`) — both must pass                                                            |
-| `npm run lint` / `lint:fix`                      | ESLint over the whole repo                                                                                                                            |
-| `npm run format` / `format:check`                | Prettier                                                                                                                                              |
-| `npm run test:e2e`                               | The genericity audit — browser checks against the generated output (run `npm run generate` first)                                                     |
-| `npx tsx scripts/og.ts`                          | Regenerate the default OG card (`public/og-default.png`)                                                                                              |
+| script                                           | what it does                                                                                                                                                          |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run dev` / `build` / `generate` / `preview` | Nuxt app (generate = full static build)                                                                                                                               |
+| `npm run data:fetch`                             | Pull every upload from all four YouTube channels → `raw/` (needs `YT_API_KEY`)                                                                                        |
+| `npm run data:parse`                             | Parse titles/descriptions → `data/videos.json`, `players.json`, `report.md`; calls `data:emit` at the end                                                             |
+| `npm run data:emit`                              | Map the rich `videos.json` onto the engine contract → `data/replays.json`, `stats.json`, `summary.json`. Deterministic, no YouTube access — safe to re-run standalone |
+| `npm run data:build`                             | fetch + parse                                                                                                                                                         |
+| `npm run data:characters`                        | Roster scrape (Bandai Namco official site) → portraits + splashes in `public/img/characters/`, `data/characters.json`                                                 |
+| `npm run typecheck`                              | App (`nuxt typecheck`) **and** pipeline (`tsc -p tsconfig.pipeline.json`) — both must pass                                                                            |
+| `npm run lint` / `lint:fix`                      | ESLint over the whole repo                                                                                                                                            |
+| `npm run format` / `format:check`                | Prettier                                                                                                                                                              |
+| `npm run test:e2e`                               | The genericity audit — browser checks against the generated output (run `npm run generate` first)                                                                     |
+| `npx tsx scripts/og.ts`                          | Regenerate the default OG card (`public/og-default.png`)                                                                                                              |
 
 ## Vercel
 
