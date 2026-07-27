@@ -2658,6 +2658,10 @@
     "handle": "Fist"
   },
   {
+    "id": "flex",
+    "handle": "Flex"
+  },
+  {
     "id": "flicker",
     "handle": "Flicker"
   },
@@ -4223,6 +4227,10 @@
   {
     "id": "k1",
     "handle": "K1"
+  },
+  {
+    "id": "kaai",
+    "handle": "Kaai"
   },
   {
     "id": "kaeng",
@@ -6931,6 +6939,10 @@
   {
     "id": "planky",
     "handle": "Planky"
+  },
+  {
+    "id": "planted-medusa",
+    "handle": "PLANTED MEDUSA"
   },
   {
     "id": "plantedmedusa",
