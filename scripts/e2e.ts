@@ -554,6 +554,87 @@ async function main(): Promise<void> {
     `summary identity agrees with the rendered GameConfig (game=${summary.game}, name=${summary.name})`,
   );
 
+  // ── observability wiring ──────────────────────────────────────────────────
+  // The gate that DID NOT EXIST when the subpath cutover silently killed
+  // analytics for ~10 days (found 2026-07-27; engine PLAN Phase-7 retro). The
+  // cutover battery checked themes, canonicals, sitemaps and redirects, but
+  // nothing ever asserted a beacon resolves, so both SDKs 404'd into the void
+  // and every dashboard read zero.
+  //
+  // Two failure modes, both visible only on the BUILT output:
+  //   1. the per-project obfuscated path Vercel bakes into the bundle
+  //      ("/2eaa11be5fdac02d/script.js") — exists only on this project's own
+  //      host, 404s the moment the shell proxies the page onto the apex;
+  //   2. the base-STRIPPED path both SDK wrappers report — /tekken/stats
+  //      arriving as /stats, colliding with 2XKO's /stats in the dashboard.
+  //
+  // The endpoints 404 locally (a static dir has no /view) and that is fine:
+  // what is gated here is the SHAPE — which URL is asked for, and what path is
+  // reported. That a proxied beacon actually LANDS is a property of Vercel's
+  // routing, gated in the shell's verify-cutover.mjs against a real deployment.
+  console.log('\n— observability');
+  {
+    const octx = await browser.newContext();
+    const opage = await octx.newPage();
+    const asked: string[] = [];
+    opage.on('request', (r) => {
+      const p = new URL(r.url()).pathname;
+      if (/insights|vitals/.test(p)) asked.push(p);
+    });
+
+    await gotoIdle(opage, at('/stats'));
+    // both SDKs attach on idle, after networkidle has already resolved
+    await opage.waitForTimeout(4000);
+
+    const srcs = (await opage.evaluate(
+      `[...document.querySelectorAll('script[src]')].map((s) => s.getAttribute('src'))`,
+    )) as string[];
+    const observability = srcs.filter((s) => /insights|vitals/.test(s));
+
+    // must match app.config.ts game.observability.insights AND the matching
+    // rewrite in the shell's vercel.json — all three move together
+    expect(
+      observability.includes('/tekken-insights/script.js'),
+      `web analytics script src is /tekken-insights/script.js (got ${JSON.stringify(observability)})`,
+    );
+    // Speed Insights stays on the stable path on purpose: single-project on
+    // Hobby, so its beacons must reach whichever project has it enabled
+    expect(
+      observability.includes('/_vercel/speed-insights/script.js'),
+      `speed insights script src is /_vercel/speed-insights/script.js (got ${JSON.stringify(observability)})`,
+    );
+    // THE REGRESSION ITSELF: a 16-hex baked path means the explicit endpoints
+    // stopped winning over VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG
+    const baked = [...observability, ...asked].filter((s) => /^\/[0-9a-f]{16}\//.test(s));
+    expect(baked.length === 0, `no baked per-project hash path (got ${JSON.stringify(baked)})`);
+    const stray = asked.filter(
+      (p) => !p.startsWith('/tekken-insights/') && !p.startsWith('/_vercel/speed-insights/'),
+    );
+    expect(
+      stray.length === 0,
+      `no insights request outside the configured prefixes (got ${JSON.stringify(stray)})`,
+    );
+
+    // the reported pageview must carry the base. The script 404s here, so the
+    // queue never drains and window.vaq still holds what WOULD be sent.
+    const queued = (await opage.evaluate(`JSON.stringify(window.vaq ?? [])`)) as string;
+    const pageviews = (JSON.parse(queued) as [string, { route?: string; path?: string }][]).filter(
+      ([kind]) => kind === 'pageview',
+    );
+    expect(pageviews.length > 0, `a pageview is queued (window.vaq = ${queued})`);
+    const reported = pageviews[0]?.[1] ?? {};
+    expect(
+      reported.path === `${BASE}/stats`,
+      `reported path carries the base (expected ${BASE}/stats, got ${reported.path})`,
+    );
+    expect(
+      reported.route === `${BASE}/stats`,
+      `reported route carries the base (expected ${BASE}/stats, got ${reported.route})`,
+    );
+
+    await octx.close();
+  }
+
   await browser.close();
   close();
 

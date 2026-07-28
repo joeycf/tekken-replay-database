@@ -124,14 +124,40 @@ The deployment's own `tekken-replay-database.vercel.app` alias stays reachable
 and is **never** host-redirected to the apex: the shell reaches this project
 through an edge rewrite, so a host redirect here would loop.
 
+`vercel.json` carries one **path** redirect, `/` → `/tekken`. The build nests
+every route under `app.baseURL`, so this project's own root holds nothing but
+`404.html` — which is what the Vercel dashboard's Visit link used to land on. Two
+constraints keep it safe, and both are easy to "improve" into an outage:
+
+- The destination stays **relative**. An absolute `https://replaydatabase.com/tekken`
+  would fire on every **preview** deployment too, bouncing a reviewer off the
+  preview they meant to inspect and onto production.
+- It stays a **path** redirect, never a host one — see the paragraph above.
+
+It cannot disturb the shell, which only ever requests `/tekken` and `/tekken/*`
+at this child, never `/`.
+
 ## Analytics
 
 Both are Vercel-native, inherited from the engine, inert outside production, and
 inject nothing into the prerendered HTML (they attach client-side):
 
-- **Web Analytics** — `@vercel/analytics`, registered as a Nuxt module.
-- **Speed Insights** — `@vercel/speed-insights` via a client-only plugin at
-  `sampleRate 0.5`.
+- **Web Analytics** — reports to **this project**, via
+  `observability.insights: '/tekken-insights'` in `app/app.config.ts`.
+- **Speed Insights** — reports to the **shell's** project at `sampleRate 0.5`.
+  Not per-game on purpose: Speed Insights is single-project on Hobby.
+
+The wiring lives in the engine (`app/plugins/vercel-observability.client.ts`);
+this repo configures only the endpoint. That one line is **paired with a rewrite
+in the shell's `vercel.json`** — `/tekken-insights/:path*` →
+`https://tekken-replay-database.vercel.app/_vercel/insights/:path*`. Change one
+without the other and every beacon 404s, silently.
+
+That is not hypothetical: the Phase-5 subpath cutover killed analytics outright
+for ~10 days. Vercel bakes a per-project obfuscated script path into each build,
+and proxied onto the apex it 404s, so both SDKs reported **nothing** — dropped,
+not misattributed. `npm run test:e2e` now gates the wiring, and the shell's
+`verify:cutover` gates that it resolves through the apex.
 
 ## Daily data refresh
 

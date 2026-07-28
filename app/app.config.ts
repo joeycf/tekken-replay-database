@@ -32,6 +32,14 @@ export default defineAppConfig({
     rightsHolder: 'Bandai Namco Entertainment',
     baseURL: '/tekken', // behind the shell at replaydatabase.com/tekken (Phase 5)
     siteUrl: 'https://replaydatabase.com',
+    // Web Analytics beacons go to THIS project instead of pooling into the
+    // shell. Paired 1:1 with the shell vercel.json rewrite
+    //   /tekken-insights/:path* → https://tekken-replay-database.vercel.app/_vercel/insights/:path*
+    // — the two ship together or every beacon 404s. Same-origin on purpose:
+    // the child's endpoints send no CORS headers, so an absolute URL here
+    // would die at preflight. speedInsights is deliberately left at the engine
+    // default (single-project on Hobby — it must reach the enabled project).
+    observability: { insights: '/tekken-insights' },
     charactersPerSide: 1,
     filters: {
       coOccurrence: false, // tag-fighter filter — not a Tekken concept
