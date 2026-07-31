@@ -1148,6 +1148,10 @@
     "handle": "CANON"
   },
   {
+    "id": "captain-tyna",
+    "handle": "Captain Tyna"
+  },
+  {
     "id": "cardinal",
     "handle": "Cardinal"
   },
@@ -4540,6 +4544,10 @@
   {
     "id": "keylo",
     "handle": "Keylo"
+  },
+  {
+    "id": "keylo3",
+    "handle": "Keylo3"
   },
   {
     "id": "kgi-ronin",
@@ -10166,6 +10174,10 @@
   {
     "id": "unari",
     "handle": "Unari"
+  },
+  {
+    "id": "uncqualizer",
+    "handle": "Uncqualizer"
   },
   {
     "id": "ungchiki",
