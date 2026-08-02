@@ -2570,6 +2570,10 @@
     "handle": "FALSEGOOD"
   },
   {
+    "id": "fame",
+    "handle": "Fame"
+  },
+  {
     "id": "farzeen",
     "handle": "Farzeen 🇵🇰"
   },
@@ -3156,6 +3160,10 @@
   {
     "id": "great",
     "handle": "Great"
+  },
+  {
+    "id": "greyhound",
+    "handle": "GreyHound"
   },
   {
     "id": "greyking",
@@ -4418,7 +4426,7 @@
   },
   {
     "id": "kav",
-    "handle": "Kav"
+    "handle": "KAV"
   },
   {
     "id": "kavboy",
@@ -4975,6 +4983,10 @@
   {
     "id": "lcl",
     "handle": "LCL"
+  },
+  {
+    "id": "lee-hwa",
+    "handle": "Lee Hwa"
   },
   {
     "id": "lee-hyun",
@@ -8080,7 +8092,7 @@
   },
   {
     "id": "shiro",
-    "handle": "SHIRO"
+    "handle": "Shiro"
   },
   {
     "id": "shiru-qudans",
