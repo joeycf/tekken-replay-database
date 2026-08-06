@@ -32,7 +32,7 @@
             <span class="text-text">{{ cursor + 1 }}</span> / {{ items.length }}
           </span>
           <span class="text-success">{{ resolvedCount }} resolved</span>
-          <span class="text-text-muted">keys: ⏎ save · x exclude · ←/→</span>
+          <span class="text-text-muted">keys: ⏎ save · s swap handles · x exclude · ←/→</span>
         </div>
 
         <!-- jump strip: one cell per item, colour = state -->
@@ -134,20 +134,46 @@
               <span class="text-text">tsx scripts/spike/extract-chars.ts --ids {{ item.id }}</span>
             </p>
 
-            <div class="mt-4 grid gap-3 sm:grid-cols-2">
+            <!-- Handles get their own row so the swap sits BETWEEN them. It is
+                 needed often: the handles pre-fill in the TITLE's order, and on
+                 this channel the title names the left player second about a
+                 third of the time, while the bands above are read left to
+                 right. Without the swap that mismatch is entered silently. -->
+            <div class="mt-4 flex items-end gap-2 font-mono text-[12px] text-text-secondary">
+              <label class="min-w-0 flex-1">
+                side 1 handle
+                <input
+                  v-model="handles[0]"
+                  type="text"
+                  class="mt-1 w-full border border-white/15 bg-transparent px-2 py-1 text-text"
+                />
+              </label>
+              <button
+                type="button"
+                class="cursor-pointer border border-white/20 px-3 py-1.5 font-mono text-[12px] text-text-secondary hover:border-white/40"
+                title="[s] swap the two handles — the characters stay where they are"
+                aria-label="swap the two player handles"
+                @click="swapHandles()"
+              >
+                ⇄
+              </button>
+              <label class="min-w-0 flex-1">
+                side 2 handle
+                <input
+                  v-model="handles[1]"
+                  type="text"
+                  class="mt-1 w-full border border-white/15 bg-transparent px-2 py-1 text-text"
+                />
+              </label>
+            </div>
+
+            <div class="mt-3 grid gap-3 sm:grid-cols-2">
               <div
                 v-for="i in [0, 1]"
                 :key="i"
                 class="font-mono text-[12px] text-text-secondary"
               >
-                <label>
-                  side {{ i + 1 }} handle
-                  <input
-                    v-model="handles[i]"
-                    type="text"
-                    class="mt-1 w-full border border-white/15 bg-transparent px-2 py-1 text-text"
-                  />
-                </label>
+                <p class="text-text-muted">side {{ i + 1 }} — {{ handles[i] || '(no handle)' }}</p>
 
                 <!-- Every character this side played, in the order they first
                      appear in the bands above. A single-game upload is the
@@ -248,7 +274,12 @@ interface QueueItem {
   handles?: [string, string];
   /** cached HUD frame stems under cache/evo/frames/<id>/ */
   frames: string[];
-  saved: { verdict: 'exclude' | 'channel' | 'sides'; channel?: string } | null;
+  saved: {
+    verdict: 'exclude' | 'channel' | 'sides';
+    channel?: string;
+    /** the verdict already recorded in data/overrides.json, for revisits */
+    sides?: { handle: string; characters: string[] }[];
+  } | null;
 }
 
 // This app is served under a base path (/tekken/ in production, and in `nuxt
@@ -270,6 +301,16 @@ const { data, error } = useAsyncData(
 const items = computed(() => data.value?.items ?? []);
 const roster = computed(() => data.value?.roster ?? []);
 const cursor = ref(0);
+
+// ?id=<videoId> opens straight at one item. Adjudicating a specific verdict
+// otherwise means finding its cell among sixty-odd identical squares.
+const route = useRoute();
+watch(items, (list) => {
+  const wanted = route.query.id;
+  if (typeof wanted !== 'string' || !list.length) return;
+  const i = list.findIndex((it) => it.id === wanted);
+  if (i >= 0) cursor.value = i;
+});
 const posting = ref(false);
 const item = computed(() => items.value[cursor.value] ?? null);
 const resolvedCount = computed(() => items.value.filter((it) => it.saved).length);
@@ -282,9 +323,15 @@ const savedLabel = (it: QueueItem) =>
 // players.json by scripts/spike/queue-evo.ts, which is what stops a verdict
 // minting a second page for an existing player.
 //
-// CHARACTERS NEVER PRE-FILL. This page is also the ground-truth labelling
-// surface for the extraction spike, and a suggested answer would contaminate
-// the measurement it feeds. The labels must stay blind to the extractor.
+// CHARACTERS NEVER PRE-FILL FROM THE EXTRACTOR. This page is also the
+// ground-truth labelling surface for the extraction spike, and a suggested
+// answer would contaminate the measurement it feeds. The labels must stay blind.
+//
+// A REVISIT IS DIFFERENT, and the distinction is the whole point: an item that
+// already carries a verdict loads THAT verdict back, because it is the
+// reviewer's own previous answer rather than a machine suggestion. An
+// unresolved item still opens blank, so a first pass is unaffected. Without
+// this, correcting one side of one video means retyping both.
 //
 // `chars` is one ORDERED LIST per side: a tournament set is several games and a
 // player may counter-pick between them, so a side records every character it
@@ -296,11 +343,28 @@ const chars = ref<[string[], string[]]>([[], []]);
 watch(
   item,
   () => {
+    const prior = item.value?.saved?.verdict === 'sides' ? item.value.saved.sides : undefined;
+    if (prior?.length === 2) {
+      handles.value = [prior[0]!.handle, prior[1]!.handle];
+      chars.value = [[...(prior[0]!.characters ?? [])], [...(prior[1]!.characters ?? [])]];
+      return;
+    }
     handles.value = item.value?.handles ? [...item.value.handles] : ['', ''];
     chars.value = [[], []];
   },
   { immediate: true },
 );
+
+/** Swap the two handles, leaving the characters where they are.
+ *
+ *  Only the handles move, and that is the entire point. Moving handles AND
+ *  characters together would be a no-op — every handle would keep the same
+ *  characters and only the stored array order would change. A mis-pairing is
+ *  fixed by sliding the handles across stationary characters, because the
+ *  characters were read off the bands (screen order) and are already right. */
+function swapHandles(): void {
+  handles.value = [handles.value[1]!, handles.value[0]!];
+}
 const sidesComplete = computed(
   () =>
     handles.value.every((h) => h.trim().length > 0) && chars.value.every((list) => list.length > 0),
@@ -359,6 +423,7 @@ function onKey(e: KeyboardEvent): void {
   if (inField) return;
   if (e.key === 'ArrowRight') cursor.value = Math.min(cursor.value + 1, items.value.length - 1);
   else if (e.key === 'ArrowLeft') cursor.value = Math.max(cursor.value - 1, 0);
+  else if (e.key === 's') swapHandles();
   else if (e.key === 'x') void exclude();
 }
 onMounted(() => window.addEventListener('keydown', onKey));
