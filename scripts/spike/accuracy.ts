@@ -45,6 +45,43 @@ const truth = await readJson<Record<string, Label>>(join(CACHE, 'ground-truth.js
 const extracted = await readJson<Extraction[]>(join(CACHE, 'extracted.json'), []);
 const byId = new Map(extracted.map((e) => [e.id, e]));
 
+/** Videos whose extractor prediction was VISIBLE to the labeller before they
+ *  labelled, and whose labels are therefore not blind.
+ *
+ *  The corpus was extracted while the harness was being built, and the build
+ *  log surfaced per-video predictions: three recon frames were displayed as
+ *  images, a smoke test printed one result, progress lines printed several
+ *  more, and the multi-character and shaky-side summaries named the rest. That
+ *  is 19 of 63 — too many to wave away and too few to invalidate the run.
+ *
+ *  Blindness is the entire basis of the accuracy claim, so the honest fix is to
+ *  report BOTH numbers: the whole corpus, and the subset that was never shown.
+ *  If the two agree, exposure did not matter; if the unexposed subset scores
+ *  materially worse, the headline was flattered and the unexposed number is the
+ *  real one. This is a caveat with a measurement attached rather than a
+ *  footnote. */
+const EXPOSED = new Set([
+  'FsbLumb6iuU', // recon frame shown + progress line
+  'QGRjiOfPCtQ', // recon frame shown
+  'Let0_1UY6fQ', // recon frame shown + smoke test
+  'aoLFvn0LRO8', // progress line
+  'ylRyKzVcfPY', // progress line + multi-character summary
+  '4KhttuouEW4', // multi-character summary
+  'qNhjjvaXyII',
+  'a4IkUcphIig',
+  'nMoUdGdL3C8',
+  'I1VKVOiu03s',
+  'n38QoGY33yE',
+  'Ea5pGcudoXA',
+  'JS9kQQ3CI2Q',
+  'uGcUrpwTtHE',
+  '0eYwQ51XwOs', // shaky-side summary
+  'tvqjFbTyxpA',
+  'BjaQASUORjQ',
+  'oawl9W1QlAk',
+  'K4ZQtV-rTRU', // tail of the run log
+]);
+
 const setKey = (xs: string[]) => [...new Set(xs)].sort().join(',');
 
 const scored = Object.entries(truth)
@@ -90,6 +127,27 @@ console.log(
 console.log(
   `  sides reading none ${String(scored.flatMap((s) => s.got).filter((g) => !g.length).length).padStart(3)}`,
 );
+
+// ── blind subset ────────────────────────────────────────────────────────────
+// The headline above includes videos whose prediction the labeller had already
+// seen (see EXPOSED). This is the number that is actually blind.
+const blind = scored.filter((s) => !EXPOSED.has(s.id));
+const exposed = scored.filter((s) => EXPOSED.has(s.id));
+console.log('\n── blindness ─────────────────────────────────────────────');
+console.log(
+  `  BLIND (never shown)  ${String(blind.filter(bothOk).length).padStart(3)}/${blind.length}   ${pct(blind.filter(bothOk).length, blind.length)}   ← the honest headline`,
+);
+console.log(
+  `  prediction was shown ${String(exposed.filter(bothOk).length).padStart(3)}/${exposed.length}   ${pct(exposed.filter(bothOk).length, exposed.length)}`,
+);
+if (blind.length && exposed.length) {
+  const d =
+    (100 * blind.filter(bothOk).length) / blind.length -
+    (100 * exposed.filter(bothOk).length) / exposed.length;
+  console.log(
+    `  gap ${d >= 0 ? '+' : ''}${d.toFixed(1)}pp — ${Math.abs(d) < 5 ? 'exposure did not move the number' : 'EXPOSURE MATTERED; trust the blind row'}`,
+  );
+}
 
 // ── the multi-character subset, reported separately ─────────────────────────
 // This is the population the union design exists for; it is the number that
