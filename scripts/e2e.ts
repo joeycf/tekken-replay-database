@@ -172,9 +172,14 @@ async function main(): Promise<void> {
   const roundTripBroken = videos.filter((v) => {
     const r = emittedById.get(v.id);
     if (!r) return true;
-    return v.sides.some((s, i) => s.characters.join(',') !== (r.sides[i]?.characters ?? []).join(','));
+    return v.sides.some(
+      (s, i) => s.characters.join(',') !== (r.sides[i]?.characters ?? []).join(','),
+    );
   });
-  expect(roundTripBroken.length === 0, `union round-trips into replays.json (${videos.length} records)`);
+  expect(
+    roundTripBroken.length === 0,
+    `union round-trips into replays.json (${videos.length} records)`,
+  );
 
   // Zero characters must be impossible — this is the shape an unresolved
   // charactersFromFootage record would have if one escaped the review queue.
