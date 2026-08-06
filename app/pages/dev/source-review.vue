@@ -88,15 +88,17 @@
           </div>
 
           <div class="border-t border-white/[0.07] px-4 py-3">
-            <!-- HUD bands. Tekken 8 prints the CHARACTER name BELOW the health
-                 bar (the top strip carries the player handle), so one band per
-                 sampled moment shows both sides — and shows a mid-set character
-                 change, which no single frame does. -->
+            <!-- HUD bands, cropped from the top of the frame so each one shows
+                 the PLAYER handle (top strip) above the CHARACTER name (below
+                 the health bar). Both facts, vertically aligned, so the
+                 player↔character pairing is confirmable without opening the
+                 VOD — and a mid-set character change is visible down the
+                 column, which no single frame shows. -->
             <div v-if="item.frames.length">
               <p class="font-mono text-label uppercase text-text-muted">
                 HUD — {{ item.frames.length }} sampled moments
                 <span class="ml-2 normal-case text-text-secondary"
-                  >left = side 1 · right = side 2</span
+                  >left = side 1 · right = side 2 · handle above, character below</span
                 >
               </p>
               <!-- Boundary bleed: the one failure mode the bands cannot settle

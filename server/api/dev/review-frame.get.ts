@@ -41,18 +41,28 @@ function setHead(event: unknown, key: string, value: string): void {
 // kind exists is that no text states it. Without frames the reviewer has to
 // open YouTube and scrub each VOD by hand; with them the answer is on screen.
 //
-// `?band=1` returns just the nameplate strip. Tekken 8 prints the character
-// name BELOW the health bar (scripts/hud-read.ts REGIONS — not in the top
-// corners, which carry the player handle), on a band about 4% of frame height.
-// It is unreadable in a whole-frame thumbnail, so a column of bands lets a
-// reviewer read every sampled moment of a VOD at a glance — including a
-// character CHANGING mid-set, which any single frame hides.
+// `?band=1` returns the HUD strip. A column of these lets a reviewer read every
+// sampled moment of a VOD at a glance — including a character CHANGING mid-set,
+// which any single frame hides.
+//
+// THE BAND STARTS AT THE TOP OF THE FRAME, and that is the point. Tekken 8
+// splits the two facts a reviewer needs across the HUD: the PLAYER handle is in
+// the top strip ("VARREL RANGCHU [L]", "TM | RB ARSLAN ASH") and the CHARACTER
+// name sits below the health bar (scripts/hud-read.ts REGIONS). A band tight
+// around the character alone — which is all the extractor needs — makes the
+// reviewer confirm *which character* while giving them no way to confirm *whose
+// character it is*, so verifying the handle meant opening the VOD.
+//
+// Cropping from y=0 through the character row costs ~70px of height and shows
+// both, vertically aligned, so the player↔character pairing is readable in one
+// glance. The extractor is unaffected: it crops from the frame, never from this
+// endpoint.
 //
 // The strict-shape query guards double as path-traversal guards: `id` must be
 // exactly a YouTube id and `n` exactly six digits, so neither can contain a
 // separator or a dot segment.
-const BAND_TOP = 0.098;
-const BAND_HEIGHT = 0.05;
+const BAND_TOP = 0;
+const BAND_HEIGHT = 0.15;
 
 export default defineEventHandler(async (event) => {
   if (!import.meta.dev) throw createError({ statusCode: 404 });
