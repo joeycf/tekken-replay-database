@@ -21,6 +21,7 @@
     "data:emit": "tsx scripts/emit.ts",
     "data:migration-report": "tsx scripts/season-migration-report.ts",
     "data:characters": "tsx scripts/characters.ts",
+    "data:evo-overlap": "tsx scripts/evo-overlap.ts",
     "test:e2e": "tsx scripts/e2e.ts"
   },
   "devDependencies": {
@@ -36,6 +37,7 @@
     "playwright-core": "^1.61.1",
     "prettier": "^3.9.5",
     "sharp": "^0.35.3",
+    "tesseract.js": "^7.0.0",
     "tsx": "^4.22.4",
     "typescript": "^5.9.3",
     "vue-tsc": "^3.3.7"

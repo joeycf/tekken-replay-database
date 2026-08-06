@@ -36,7 +36,8 @@ import type { CharacterRecord, MatchVideo, PlayerRecord, VideoOverride } from '.
 //    resolve the Nuxt alias, so the contract is restated here) ───────────────
 export interface GenericSide {
   player: string;
-  characters: string[]; // length 1 — Tekken is 1v1
+  /** ≥1 — one per game played, first-appearance order (see MatchSide). */
+  characters: string[];
   rank?: string;
 }
 export interface GenericReplay {
@@ -75,7 +76,7 @@ function toReplay(v: MatchVideo): GenericReplay {
     id: v.id,
     sides: v.sides.map((s) => ({
       player: s.player,
-      characters: [s.character],
+      characters: s.characters,
       ...(s.rank ? { rank: s.rank } : {}),
     })) as [GenericSide, GenericSide],
     date: v.publishedAt,
@@ -163,10 +164,17 @@ export async function emitGeneric(opts: {
   for (const r of replays) {
     if (r.sides.length !== 2) throw new Error(`emit: ${r.id} lost its two-sides invariant`);
     for (const s of r.sides) {
-      if (s.characters.length !== 1)
-        throw new Error(`emit: ${r.id} side has ${s.characters.length} characters (Tekken is 1v1)`);
-      if (!rosterIds.has(s.characters[0]!))
-        throw new Error(`emit: ${r.id} references unknown character '${s.characters[0]}'`);
+      // 1..N, not exactly-1: a set VOD's side holds every character it played
+      // (see MatchSide). ZERO is still a hard fail and is the case that
+      // actually matters — it is what an unresolved charactersFromFootage
+      // record would look like if one ever escaped the review queue into the
+      // emitted substrate.
+      if (s.characters.length < 1) throw new Error(`emit: ${r.id} has a side with no character`);
+      if (new Set(s.characters).size !== s.characters.length)
+        throw new Error(`emit: ${r.id} side repeats a character (${s.characters.join(',')})`);
+      for (const c of s.characters) {
+        if (!rosterIds.has(c)) throw new Error(`emit: ${r.id} references unknown character '${c}'`);
+      }
       if (!playerIds.has(s.player))
         throw new Error(`emit: ${r.id} references unknown player '${s.player}'`);
       if (s.rank && !RANK_SET.has(s.rank))
@@ -177,6 +185,20 @@ export async function emitGeneric(opts: {
   }
   if (genericStats.totals.replays !== records.length)
     throw new Error('emit: stats.totals.replays drifted from the record count');
+  // characterUsage counts CHARACTER appearances per side, so the expected total
+  // is the COMPUTED sum of every side's list length — NOT records × 2. Those
+  // agree for every title-parsed record (one character per side) and diverge
+  // exactly when a set VOD records a counter-pick, which is the case a
+  // hardcoded × 2 would have turned into a spurious hard failure.
+  const usageTotal = Object.values(stats.characterUsage).reduce((a, b) => a + b, 0);
+  const expectedUsage = records.reduce(
+    (n, r) => n + r.sides.reduce((m, s) => m + s.characters.length, 0),
+    0,
+  );
+  if (usageTotal !== expectedUsage)
+    throw new Error(
+      `emit: characterUsage sums to ${usageTotal}, expected ${expectedUsage} character appearances`,
+    );
   // every emitted patch token must be an era key or a declared boundary
   // version, and a fine token's release-date season must equal the record's —
   // the invariant the grouped facet's counts depend on. (parse normalizes;

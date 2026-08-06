@@ -381,13 +381,17 @@ const videos: MatchVideo[] = candidates.map((c) => {
     return {
       player: id,
       handle,
-      character,
+      // A title-parsed side names exactly one character; the array is the union
+      // shape a footage-read set VOD needs (see MatchSide), and length-1 is the
+      // ordinary case rather than a special one.
+      characters: [character],
       ...(c.ranks[i] ? { rank: c.ranks[i] } : {}),
     } as MatchSide;
   }) as [MatchSide, MatchSide];
   return {
     id: c.raw.id,
     channel: SOURCE_OF.get(c.raw.channel)!,
+    intake: c.raw.channel,
     title: c.raw.title,
     publishedAt: c.raw.publishedAt,
     durationSec: c.raw.durationSec,

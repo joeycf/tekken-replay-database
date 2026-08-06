@@ -11,5 +11,9 @@ dist
 public/data/
 cache/
 
+# Local credentials — yt-dlp YouTube session cookies (scripts/hud-frames.ts,
+# EVO_COOKIES to override). A live Google session; must never be committed.
+secrets/
+
 # Local agent config
 .claude/

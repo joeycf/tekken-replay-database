@@ -3,9 +3,12 @@
 // the same records (the 2XKO pipeline's discipline). Any change to counting
 // rules happens here, once.
 //
-// 1v1 semantics: `characterUsage` counts SIDE appearances (a Kazuya mirror
-// adds 2 — the engine contract's documented unit), so usage bars, per-patch
-// timelines, and player-character tables all share the same denominator.
+// `characterUsage` counts CHARACTER appearances per side (a Kazuya mirror adds
+// 2 — the engine contract's documented unit), so usage bars, per-patch
+// timelines, and player-character tables all share the same denominator. That
+// is side-appearances for every title-parsed record, whose sides name one
+// character each, and diverges from records × 2 exactly when a tournament SET
+// records a counter-pick — see MatchSide.
 // The duo-only keys (pairingUsage / playerPairings) are deliberately absent:
 // every engine duo panel hides itself when charactersPerSide === 1.
 
@@ -32,10 +35,16 @@ export function buildStats(records: MatchVideo[]): PipelineStats {
     inc(stats.totals.bySeason, sk);
     stats.bySeasonUsage[sk] ??= {};
     for (const side of v.sides) {
-      inc(stats.characterUsage, side.character);
-      inc(stats.bySeasonUsage[sk], side.character);
       stats.playerCharacters[side.player] ??= {};
-      inc(stats.playerCharacters[side.player], side.character);
+      // Every character the side played counts. A set where one player
+      // counter-picked contributes to BOTH characters' usage, which is what a
+      // usage bar should show — the alternative (count only the first) would
+      // silently under-report every counter-pick in the tournament corpus.
+      for (const c of side.characters) {
+        inc(stats.characterUsage, c);
+        inc(stats.bySeasonUsage[sk], c);
+        inc(stats.playerCharacters[side.player], c);
+      }
     }
   }
   return stats;

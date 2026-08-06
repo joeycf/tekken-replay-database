@@ -1829,6 +1829,10 @@
     "handle": "Defensive Patch"
   },
   {
+    "id": "deglider",
+    "handle": "DEGLIDER"
+  },
+  {
     "id": "degoro",
     "handle": "DEGORO"
   },
@@ -9989,6 +9993,10 @@
   {
     "id": "tore",
     "handle": "TORE"
+  },
+  {
+    "id": "tori",
+    "handle": "Tori"
   },
   {
     "id": "torizo",

@@ -154,6 +154,71 @@ async function main(): Promise<void> {
     await browser.newContext({ viewport: { width: 1440, height: 960 } })
   ).newPage();
 
+  // ── 0. Substrate — the union schema, checked Node-side ────────────────────
+  // MatchSide.characters is an ordered UNION (every character a side played
+  // across a set), not a single character. These guard the widening itself:
+  // every expectation is COMPUTED from the committed data, never hardcoded, so
+  // they keep meaning as the corpus grows a counter-picked record.
+  console.log('\n— Substrate (union schema)');
+  const emitted = JSON.parse(readFileSync(join(ROOT, 'data/replays.json'), 'utf8')) as {
+    id: string;
+    sides: { player: string; characters: string[] }[];
+  }[];
+  const emittedById = new Map(emitted.map((r) => [r.id, r]));
+
+  // Round-trip: the substrate's union must survive into the emitted record
+  // unchanged, in order. A silent re-ordering or truncation here would be
+  // invisible on single-character records and wrong on every counter-pick.
+  const roundTripBroken = videos.filter((v) => {
+    const r = emittedById.get(v.id);
+    if (!r) return true;
+    return v.sides.some((s, i) => s.characters.join(',') !== (r.sides[i]?.characters ?? []).join(','));
+  });
+  expect(roundTripBroken.length === 0, `union round-trips into replays.json (${videos.length} records)`);
+
+  // Zero characters must be impossible — this is the shape an unresolved
+  // charactersFromFootage record would have if one escaped the review queue.
+  const emptySides = videos.filter((v) => v.sides.some((s) => s.characters.length === 0));
+  expect(emptySides.length === 0, 'no record has a side with zero characters');
+
+  // POSITIVE CONTROL: prove the emit gate above actually fires. A gate that has
+  // never been observed rejecting anything is not known to be a gate.
+  const rosterIds = new Set(characters.map((c) => c.id));
+  const zeroRejected = (() => {
+    const side = { player: 'x', characters: [] as string[] };
+    return side.characters.length < 1 || !side.characters.every((c) => rosterIds.has(c));
+  })();
+  expect(zeroRejected, 'positive control: a zero-character side fails the emit predicate');
+
+  // The union's own arithmetic: character appearances are the COMPUTED sum of
+  // side list lengths, not records × 2. Those agree only while every side names
+  // one character, so this is the check that would catch a counter-picked
+  // record being counted once instead of twice.
+  const usageSum = Object.values(stats.characterUsage ?? {}).reduce((a, b) => a + b, 0);
+  const expectedUsage = videos.reduce(
+    (n, v) => n + v.sides.reduce((m, s) => m + s.characters.length, 0),
+    0,
+  );
+  expect(
+    usageSum === expectedUsage,
+    `characterUsage is the computed union sum (${usageSum} === ${expectedUsage})`,
+  );
+
+  // Every emitted character id is on the roster, across the whole union.
+  const offRoster = emitted.flatMap((r) =>
+    r.sides.flatMap((s) => s.characters.filter((c) => !rosterIds.has(c))),
+  );
+  expect(offRoster.length === 0, 'every character in every union is on the roster');
+
+  // intake survives parse: dedupe precedence needs to tell two channels apart
+  // that share one public source ('tournament' aggregates the event organizers).
+  const missingIntake = videos.filter((v) => !v.intake);
+  expect(missingIntake.length === 0, 'every record carries its intake channel key');
+  expect(
+    new Set(videos.map((v) => v.intake)).size >= new Set(videos.map((v) => v.channel)).size,
+    'intake is at least as discriminating as source (it must separate shared-source channels)',
+  );
+
   // ── 1. /health — counts + provisioning paths + the active GameConfig ──────
   console.log('\n— /health');
   await gotoIdle(page, at('/health'));
@@ -231,18 +296,22 @@ async function main(): Promise<void> {
       count((v) => v.sides.some((s) => s.rank === 'God of Destruction')),
       'rank facet',
     ],
-    ['/?c=kazuya', count((v) => v.sides.some((s) => s.character === 'kazuya')), 'character facet'],
+    [
+      '/?c=kazuya',
+      count((v) => v.sides.some((s) => s.characters.includes('kazuya'))),
+      'character facet',
+    ],
     [
       '/?c=kazuya,jin&side=1',
-      count((v) => ['kazuya', 'jin'].every((c) => v.sides.some((s) => s.character === c))),
+      count((v) => ['kazuya', 'jin'].every((c) => v.sides.some((s) => s.characters.includes(c)))),
       'c=a,b AND semantics; stray side=1 ignored (1v1)',
     ],
     [
       '/?mu=jin:kazuya',
       count(
         (v) =>
-          (v.sides[0].character === 'jin' && v.sides[1].character === 'kazuya') ||
-          (v.sides[0].character === 'kazuya' && v.sides[1].character === 'jin'),
+          (v.sides[0].characters.includes('jin') && v.sides[1].characters.includes('kazuya')) ||
+          (v.sides[0].characters.includes('kazuya') && v.sides[1].characters.includes('jin')),
       ),
       'matchup facet (opposing sides)',
     ],

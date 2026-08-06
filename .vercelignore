@@ -1,9 +1,14 @@
 # CLI uploads (vercel deploy): this file REPLACES .gitignore-based exclusion,
 # so it must mirror .gitignore. Critically: .env must not ride an upload — the
 # remote build must resolve the engine from the pinned github: tag, never a
-# local ENGINE_PATH.
+# local ENGINE_PATH. secrets/ holds a live Google session and must never ride
+# an upload; raw/ and cache/ are gitignored bulk this file has to restate to
+# actually exclude them (they were missing here, so the mirror was incomplete).
 .env*
 node_modules
+secrets
+raw
+cache
 .nuxt
 .output
 .vercel

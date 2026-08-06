@@ -66,6 +66,15 @@ export default defineNuxtConfig({
     },
   ],
 
+  nitro: {
+    prerender: {
+      // The /dev curation page (source-review) guards itself behind
+      // import.meta.dev and 404s outside `nuxt dev`; keep the crawler from
+      // discovering and prerendering it (2XKO's and SF6's exact arrangement).
+      ignore: ['/dev'],
+    },
+  },
+
   hooks: {
     // The client-fetched files: data/*.json (committed, pipeline-emitted) →
     // public/data/ (gitignored). Lives in the BUILD because Vercel never runs
