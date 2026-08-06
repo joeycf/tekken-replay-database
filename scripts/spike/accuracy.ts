@@ -84,6 +84,29 @@ const EXPOSED = new Set([
 
 const setKey = (xs: string[]) => [...new Set(xs)].sort().join(',');
 
+/** THE SIDES ARE COMPARED AS AN UNORDERED PAIR, and that is a deliberate
+ *  narrowing of what this number claims.
+ *
+ *  Neither array is in a trustworthy order:
+ *
+ *   · The extraction's p1/p2 are SCREEN positions (left/right crop).
+ *   · The corpus `handles` are TITLE order — and measured over this corpus, the
+ *     title order is REVERSED relative to the screen on 21 of 56 decidable
+ *     videos (37.5%). "Evo 2026: Arslan Ash vs Rangchu" has Rangchu on the left.
+ *   · The label's sides[] are in whatever order the reviewer left the form in,
+ *     which followed the screen on some videos and the pre-fill on others.
+ *
+ *  So a positional comparison and a handle-aligned comparison BOTH measure the
+ *  reviewer's data-entry order as much as the extractor. Matching the two
+ *  character-sets as an unordered pair measures exactly the claim the reader
+ *  can actually support: "these two character-sets are in this video".
+ *
+ *  WHICH PLAYER PLAYED WHICH IS A SEPARATE, UNSOLVED PROBLEM — see the
+ *  attribution section below. It is not folded into this number, because doing
+ *  so would hide it. */
+const setKeyOf = (xs: string[]) => [...new Set(xs)].sort().join(',');
+const pairKeyOf = (a: string[], b: string[]) => [setKeyOf(a), setKeyOf(b)].sort().join(' | ');
+
 const scored = Object.entries(truth)
   .filter(([id]) => byId.has(id))
   .map(([id, label]) => {
@@ -98,6 +121,8 @@ const scored = Object.entries(truth)
       got: [e.p1.characters, e.p2.characters] as [string[], string[]],
       conf: [e.p1.confidence, e.p2.confidence] as [number, number],
       shaky: [e.p1.shaky, e.p2.shaky] as [boolean, boolean],
+      handles: e.handles,
+      labelSides: label.sides,
     };
   });
 
@@ -110,14 +135,24 @@ if (!scored.length) {
 }
 
 const pct = (n: number, d: number) => (d ? `${((100 * n) / d).toFixed(1)}%` : '—');
-const sideOk = (s: (typeof scored)[number], i: 0 | 1) => setKey(s.got[i]) === setKey(s.want[i]);
-const bothOk = (s: (typeof scored)[number]) => sideOk(s, 0) && sideOk(s, 1);
+/** Both character-sets present, in either arrangement. */
+const bothOk = (s: (typeof scored)[number]) =>
+  pairKeyOf(s.got[0], s.got[1]) === pairKeyOf(s.want[0], s.want[1]);
+/** Per-side, after choosing the arrangement that fits best — so a correct read
+ *  in the opposite arrangement scores as two hits, not two misses. */
+const orient = (s: (typeof scored)[number]): 0 | 1 =>
+  setKey(s.got[0]) === setKey(s.want[0]) || setKey(s.got[1]) === setKey(s.want[1]) ? 0 : 1;
+const sideOk = (s: (typeof scored)[number], i: 0 | 1) =>
+  orient(s) === 0
+    ? setKey(s.got[i]) === setKey(s.want[i])
+    : setKey(s.got[i]) === setKey(s.want[i === 0 ? 1 : 0]);
 
 // ── headline ────────────────────────────────────────────────────────────────
 const sideHits = scored.flatMap((s) => [sideOk(s, 0), sideOk(s, 1)]);
 const bothHits = scored.filter(bothOk);
 
 console.log(`\n── scored against ${scored.length} hand-labelled videos ──────────`);
+console.log('  (sides matched as an unordered pair — see the note above scored[])');
 console.log(
   `  both-sides-exact   ${String(bothHits.length).padStart(3)}/${scored.length}   ${pct(bothHits.length, scored.length)}`,
 );
@@ -127,6 +162,45 @@ console.log(
 console.log(
   `  sides reading none ${String(scored.flatMap((s) => s.got).filter((g) => !g.length).length).padStart(3)}`,
 );
+
+// ── player attribution ──────────────────────────────────────────────────────
+// Reading the characters is only half a record. The other half is WHICH PLAYER
+// played which, and the extractor currently infers that from the title's word
+// order — which this corpus says is wrong more than a third of the time.
+//
+// Measured only on videos whose characters were read correctly and whose two
+// sides differ (a mirror match carries no signal about orientation).
+const norm = (h: string) => h.toLowerCase().replace(/[^a-z0-9]+/g, '');
+let titleRight = 0;
+let titleReversed = 0;
+const reversed: string[] = [];
+for (const s of scored) {
+  if (!bothOk(s)) continue;
+  if (setKey(s.got[0]) === setKey(s.got[1])) continue; // mirror
+  const leftLabel = s.labelSides.find((x) => setKey(x.characters) === setKey(s.got[0]));
+  if (!leftLabel) continue;
+  if (norm(leftLabel.handle) === norm(s.handles[0] ?? '')) titleRight++;
+  else if (norm(leftLabel.handle) === norm(s.handles[1] ?? '')) {
+    titleReversed++;
+    reversed.push(s.id);
+  }
+}
+const decidable = titleRight + titleReversed;
+console.log('\n── player attribution (the title-order assumption) ───────');
+console.log(
+  `  title order IS screen order    ${String(titleRight).padStart(3)}/${decidable}   ${pct(titleRight, decidable)}`,
+);
+console.log(
+  `  title order is REVERSED        ${String(titleReversed).padStart(3)}/${decidable}   ${pct(titleReversed, decidable)}`,
+);
+if (titleReversed) {
+  console.log(
+    `\n  ✖ BLOCKING: pairing title-order handles with screen-order characters\n` +
+      `    mis-attributes ${pct(titleReversed, decidable)} of records — every character correct,\n` +
+      `    every player wrong. The side must be resolved from the footage\n` +
+      `    (the handle is in the HUD's top strip), not from the title.`,
+  );
+}
 
 // ── blind subset ────────────────────────────────────────────────────────────
 // The headline above includes videos whose prediction the labeller had already

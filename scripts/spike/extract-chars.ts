@@ -73,8 +73,15 @@ export interface Extraction {
 
 const corpus = await readJson<CorpusItem[]>(join(CACHE, 'corpus.json'));
 const outPath = join(CACHE, 'extracted.json');
+// ALWAYS load the existing results, --force included. `force` means "redo the
+// ids in scope", never "forget everything else": the file is rewritten whole
+// from this map after every video, so loading it conditionally made
+// `--force --ids a,b` silently truncate extracted.json to two entries and
+// discard the other 61 — two hours of downloads, gone, with a ✔ on stdout.
+// (Inherited from SF6's spike, where --force is only ever used bare and the
+// bug therefore cannot fire.)
 const done = new Map<string, Extraction>();
-if (existsSync(outPath) && !force) {
+if (existsSync(outPath)) {
   for (const e of await readJson<Extraction[]>(outPath)) done.set(e.id, e);
 }
 
