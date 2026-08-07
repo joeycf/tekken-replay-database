@@ -32,6 +32,14 @@ export interface ChannelConfig {
    *  queued as 'character-completion' rather than counted as parse misses and
    *  the characters are read from the footage (scripts/hud-read.ts). */
   charactersFromFootage?: boolean;
+  /** This channel publishes MORE THAN TEKKEN, so an upload must carry a Tekken 8
+   *  marker to be considered at all.
+   *
+   *  The four original channels need no such test — they are Tekken-only by
+   *  construction, which is why parse.ts had no game predicate before Evo. Evo
+   *  runs every game at the event, so the marker exists for this channel and
+   *  only this channel; leaving it unset preserves the old behaviour exactly. */
+  gameSignal?: 'titleOrDescription';
 }
 
 /** One upload as fetched from the YouTube Data API (raw/<id>.json). */
@@ -141,6 +149,13 @@ export type VideoOverride = Partial<Pick<MatchVideo, 'season' | 'patchVersion' |
   /** Extractor confidence at resolution time (see scripts/hud-read.ts's fold).
    *  Recorded for auditing; nothing reads it back to re-decide. */
   confidence?: number;
+  /** Signed vote margin from reading the HUD's player plates to decide which
+   *  side each handle sat on (scripts/hud-read.ts `resolveSide`). Recorded
+   *  because attribution is the half of a footage-read record that no
+   *  confidence number covers: the characters can be perfect while the players
+   *  are swapped, so a later dispute needs to see how firmly the side was
+   *  decided. Positive = the title's first-named player was on the left. */
+  sideVotes?: number;
 };
 
 /** One pending item in data/review-queue.json — parseable footage the pipeline

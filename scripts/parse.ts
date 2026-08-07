@@ -21,8 +21,10 @@ import { applyOverrides, emitGeneric } from './emit';
 import { buildPatchTable } from './patches';
 import { buildAliasMatcher, extractRank, loadCharacters } from './roster';
 import type {
+  ChannelConfig,
   MatchSide,
   MatchVideo,
+  ReviewQueueItem,
   PatchBoundary,
   PlayerRecord,
   RawVideoRecord,
@@ -257,6 +259,9 @@ const matcher = buildAliasMatcher(characters);
 /** intake channel → the source its replays publish under (several channels
  *  may share one, e.g. every event organizer feeds 'tournament'). */
 const SOURCE_OF = new Map(CHANNELS.map((c) => [c.id, c.source]));
+/** intake channel → its whole config, for the per-channel behaviour flags
+ *  (gameSignal, charactersFromFootage). */
+const CHANNEL_OF = new Map(CHANNELS.map((c) => [c.id, c]));
 
 const readJson = async <T>(p: string): Promise<T> => JSON.parse(await readFile(p, 'utf8')) as T;
 const raws: RawVideoRecord[] = [];
@@ -273,7 +278,90 @@ const overrides = await readJson<Record<string, VideoOverride>>(join(DATA, 'over
   () => ({}) as Record<string, VideoOverride>,
 );
 
+// ── the game marker (gameSignal channels only) ───────────────────────────────
+// The four original channels are Tekken-only by construction, so this pipeline
+// never needed a game predicate. Evo runs every game at the event, so an upload
+// from a gameSignal channel must say TEKKEN 8 and must not say TEKKEN 7.
+//
+// SPELLED FORMS ONLY — no bare \bT8\b. On that channel "T8" overwhelmingly
+// means TOP 8: 26 titles carry a bare T8 and 23 of them are "ST 3v3 EVO 2014:
+// T8 Quarters" (Super Turbo) or multi-game stream VODs. Measured against the
+// full enumeration, the bare token admits ZERO uploads the spelled form does
+// not already match — all false positive, no signal.
+//
+// BOTH GATES ARE LOAD-BEARING. Tekken 8 launched 2024-01-26, so Evo 2023's
+// Tekken is Tekken 7 and the pre-launch date gate excludes it — but two
+// T7-marked uploads POST-DATE the launch ("LowHigh wins Evo 2018"), which the
+// date gate alone would let through. A T7 match read against the T8 roster is
+// silent garbage: most of the T7 cast is still on the roster, so a wrong read
+// looks entirely plausible.
+const T8_RE = /\bTEKKEN\s*8\b|鉄拳\s*8/i;
+const T7_RE = /\bTEKKEN\s*7\b|鉄拳\s*7/i;
+const isTekken8 = (r: RawVideoRecord, cfg: ChannelConfig): boolean => {
+  if (!cfg.gameSignal) return true; // Tekken-only channel: nothing to test
+  const text = `${r.title}\n${r.description}`;
+  return T8_RE.test(text) && !T7_RE.test(text);
+};
+
+// ── footage-title parsing (charactersFromFootage channels) ───────────────────
+// Evo states players, game and round but never a character, in grammars that
+// have been reshuffled three times across 2024→2026, all delimited by "|":
+//   "Evo Japan 2025: Tekken 8 | ULSAN vs Rangchu"
+//   "Evo 2026: NOBI vs Meo-IL | TEKKEN 8 | Losers Round 1"
+// Rather than a regex per grammar, split on "|" and take the ONE segment
+// carrying a versus — the players always sit inside a single segment, the game
+// name and round always in others.
+//
+// The versus shape alone excludes every stream VOD, bracket compilation,
+// best-of and intro on the channel, so NOT_A_MATCH_RE stays narrow: it only has
+// to catch the non-matches that ALSO carry a versus. It must never test
+// "Top \d+" — Evo writes the bracket round as "Top 24" / "Losers Top 8", and
+// filtering on that eats real single matches.
+const FOOTAGE_VS = /\s+(?:vs\.?|versus)\s+/i;
+const NOT_A_MATCH_RE =
+  /\bOG\s*Hunt\b|watch\s*party|\bbest\s*of\b|\bintro\b|dev\s*panel|road\s+to\s+evo|matches\s+you\s+missed|\brecap\b|highlights?/i;
+/** A bracket set runs 5–25 min here. Longer versus-titled uploads are
+ *  exhibitions where a player may change character freely across many games —
+ *  a different problem, deferred rather than silently mis-recorded. */
+const MAX_SET_SEC = 30 * 60;
+
+function footageTitle(title: string): [string, string] | null {
+  if (NOT_A_MATCH_RE.test(title)) return null;
+  const segs = title
+    .split('|')
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (segs.length < 2) return null;
+  // the "Evo Japan 2026:" event prefix rides on whichever segment is first,
+  // which differs by grammar, so strip it wherever it appears
+  const noEvent = (s: string) => {
+    const i = s.indexOf(':');
+    return i === -1 ? s : s.slice(i + 1).trim();
+  };
+  const withVs = segs.filter((s) => FOOTAGE_VS.test(noEvent(s)));
+  if (withVs.length !== 1) return null;
+  const parts = noEvent(withVs[0]!).split(FOOTAGE_VS);
+  if (parts.length !== 2) return null;
+  const a = parts[0]!.trim();
+  const b = parts[1]!.trim();
+  if (!a || !b || a.length > 40 || b.length > 40) return null;
+  return [a, b];
+}
+
+// Handle VARIANTS, which no normalization can catch: a suffix is not a spelling
+// difference. Evo writes "Ninjakilla_212" (the player's full FGC handle); the
+// four Tekken channels write "Ninjakilla", which already owns 100+ replays.
+// Without this the Evo verdicts slug to `ninjakilla-212` and build a second
+// page for the same competitor.
+//
+// CURATED, NOT INFERRED — the same discipline ORG_PREFIXES documents above, and
+// for the same reason: a wrong merge silently rewrites a real player's page.
+const HANDLE_ALIASES = new Map<string, string>([
+  ['ninjakilla_212', 'Ninjakilla'], // Evo 2026 Losers Round 1 vs JeonDDing
+]);
+
 type MissReason =
+  | 'not-tekken8'
   | 'live-or-upcoming'
   | 'shorts'
   | 'short-duration'
@@ -282,8 +370,18 @@ type MissReason =
   | 'char-unresolved'
   | 'bad-handle';
 const misses: { id: string; channel: string; reason: MissReason; title: string }[] = [];
-const miss = (r: RawVideoRecord, reason: MissReason) =>
+// Misses stay reachable by id so the character-completion path below can build
+// a record from raw + a sides verdict in overrides.json.
+const missedById = new Map<string, RawVideoRecord>();
+const miss = (r: RawVideoRecord, reason: MissReason) => {
   misses.push({ id: r.id, channel: r.channel, reason, title: r.title });
+  missedById.set(r.id, r);
+};
+// Match-shaped uploads on a charactersFromFootage channel, awaiting a character
+// verdict. Held aside rather than queued in place because the queue wants the
+// CANONICAL handle spelling, and that is only known once the player registry is
+// built from the whole parsed corpus below.
+const footagePending: { raw: RawVideoRecord; handles: [string, string] }[] = [];
 
 interface Candidate {
   raw: RawVideoRecord;
@@ -296,6 +394,10 @@ interface Candidate {
 const candidates: Candidate[] = [];
 
 for (const r of raws) {
+  if (!isTekken8(r, CHANNEL_OF.get(r.channel)!)) {
+    miss(r, 'not-tekken8');
+    continue;
+  }
   if (r.liveBroadcastContent !== 'none' || r.durationSec === 0) {
     miss(r, 'live-or-upcoming');
     continue;
@@ -314,6 +416,21 @@ for (const r of raws) {
   }
   const t = parseTitle(r.title);
   if (!t) {
+    // A channel whose titles never name a character (charactersFromFootage): a
+    // match-shaped upload is not a parse failure, it is a completion item. It
+    // still goes through miss() — that is what registers it in missedById,
+    // which is what lets a sides verdict build the record later — but it is
+    // subtracted from the REPORTED misses below.
+    const cfg = CHANNEL_OF.get(r.channel)!;
+    if (cfg.charactersFromFootage && r.durationSec <= MAX_SET_SEC) {
+      const handles = footageTitle(r.title);
+      const ov = overrides[r.id];
+      // an id already carrying a verdict must not be re-queued; an excluded one
+      // must not be queued at all. This is what makes the queue self-clearing.
+      if (handles && !ov?.sides && ov?.exclude !== true) {
+        footagePending.push({ raw: r, handles });
+      }
+    }
     miss(r, 'no-vs-title');
     continue;
   }
@@ -401,6 +518,39 @@ const videos: MatchVideo[] = candidates.map((c) => {
     sides,
   };
 });
+// ── character-completion: records built from a footage verdict ───────────────
+// An overrides.json entry with a complete sides pair on a MISSED id is
+// authoritative — the record is built from raw + override with the title gates
+// bypassed by design, because the title never had the characters in it. Ids
+// that parsed normally take their sides override through applyOverrides
+// instead, and ids absent from raw/ cannot be completed at all: a record needs
+// the upload's own metadata.
+//
+// Rank is never set here. These are offline tournament sets with no ladder
+// rank on screen, and MatchSide.rank is optional precisely so a source that
+// does not state one can ship without inventing it.
+const completedIds = new Set<string>();
+for (const [id, ov] of Object.entries(overrides)) {
+  if (!ov.sides || ov.exclude) continue;
+  const r = missedById.get(id);
+  if (!r) continue;
+  completedIds.add(id);
+  for (const s of ov.sides) noteHandle(s.player, s.handle, 1);
+  const season = resolveSeason(r.publishedAt.slice(0, 10), labeledSeason(r));
+  videos.push({
+    id,
+    channel: SOURCE_OF.get(r.channel)!,
+    intake: r.channel,
+    title: r.title,
+    publishedAt: r.publishedAt,
+    durationSec: r.durationSec,
+    ...(r.viewCount !== undefined ? { viewCount: r.viewCount } : {}),
+    season,
+    patchVersion: patchTable.patchForDate(r.publishedAt)?.version ?? null,
+    sides: ov.sides as [MatchSide, MatchSide],
+  });
+}
+
 videos.sort((a, b) => a.publishedAt.localeCompare(b.publishedAt) || a.id.localeCompare(b.id));
 
 // Hierarchy consistency normalize (after label-grace and overrides settled
@@ -427,10 +577,51 @@ const players: PlayerRecord[] = [...seen].sort().map((id) => ({
   ...(FEATURED.has(id) ? { featured: true } : {}),
 }));
 
+// ── the review queue ─────────────────────────────────────────────────────────
+// Footage-completion items, now that canonical spellings exist. Pre-filling the
+// handle with the corpus's own spelling is what stops a verdict minting a
+// second player page for someone already in players.json — the review POST
+// slugs whatever the form contains and does not run this file's identity merge.
+const reviewQueue: ReviewQueueItem[] = [];
+const footagePendingIds = new Set(footagePending.map((p) => p.raw.id));
+for (const { raw, handles } of footagePending) {
+  const canonical = (h: string): string => {
+    const aliased = HANDLE_ALIASES.get(h.toLowerCase()) ?? h;
+    return playerIds.get(slug(aliased)) ?? aliased;
+  };
+  reviewQueue.push({
+    id: raw.id,
+    kind: 'character-completion',
+    channel: raw.channel,
+    title: raw.title,
+    publishedAt: raw.publishedAt,
+    durationSec: raw.durationSec,
+    handles: [canonical(handles[0]), canonical(handles[1])],
+    reason: 'no title or description on this channel names a character',
+  });
+}
+reviewQueue.sort((a, b) => a.publishedAt.localeCompare(b.publishedAt) || a.id.localeCompare(b.id));
+
+// A completed id is not a miss (the override built its record), and neither is
+// one sitting in the queue awaiting a verdict — that is pending work, counted
+// separately, not coverage the parser lost.
+const reportedMisses = misses.filter(
+  (m) => !completedIds.has(m.id) && !footagePendingIds.has(m.id),
+);
+
 // normalize side handles to the registry's chosen casing
 for (const v of records) for (const s of v.sides) s.handle = playerIds.get(s.player) ?? s.handle;
 
 // ── write artifacts ──────────────────────────────────────────────────────────
+// Derived state, regenerated wholesale every run: resolutions live solely in
+// overrides.json, so a resolved item simply stops being generated. Committed
+// (and in the cron's git add) so the pending set is visible history and the
+// /dev/source-review UI reads real substrate.
+await writeFile(
+  join(DATA, 'review-queue.json'),
+  JSON.stringify(reviewQueue, null, 2) + '\n',
+  'utf8',
+);
 await writeFile(join(DATA, 'videos.json'), JSON.stringify(records, null, 1) + '\n', 'utf8');
 await writeFile(join(DATA, 'players.json'), JSON.stringify(players, null, 2) + '\n', 'utf8');
 await writeFile(
@@ -446,14 +637,14 @@ const channelOf = new Map(raws.map((r) => [r.id, r.channel]));
 const byChannel = (id: string) => ({
   raw: raws.filter((r) => r.channel === id).length,
   parsed: records.filter((v) => channelOf.get(v.id) === id).length,
-  missed: misses.filter((m) => m.channel === id),
+  missed: reportedMisses.filter((m) => m.channel === id),
 });
 const rankSides = records.reduce((n, v) => n + v.sides.filter((s) => s.rank).length, 0);
 const seasonDist = records.reduce<Record<string, number>>((acc, v) => {
   acc[`S${v.season}`] = (acc[`S${v.season}`] ?? 0) + 1;
   return acc;
 }, {});
-const reasonCounts = misses.reduce<Record<string, number>>((acc, m) => {
+const reasonCounts = reportedMisses.reduce<Record<string, number>>((acc, m) => {
   acc[m.reason] = (acc[m.reason] ?? 0) + 1;
   return acc;
 }, {});
@@ -495,9 +686,11 @@ const report = [
   '',
   `Season-label conflicts (channel label ≠ date-derived season, outside the ±${LABEL_GRACE_DAYS}d boundary grace; date wins): ${labelConflicts}`,
   '',
+  `Pending review: ${reviewQueue.length} (data/review-queue.json)`,
+  '',
   '## Sample misses (first 30 that are not shorts/live)',
   '',
-  ...misses
+  ...reportedMisses
     .filter((m) => m.reason !== 'shorts' && m.reason !== 'live-or-upcoming')
     .slice(0, 30)
     .map((m) => `- \`${m.id}\` [${m.channel}] ${m.reason}: ${m.title.slice(0, 110)}`),
@@ -508,7 +701,8 @@ const report = [
 await writeFile(join(DATA, 'report.md'), report, 'utf8');
 
 console.log(
-  `✔ Parsed ${records.length}/${raws.length} uploads → data/videos.json (misses: ${misses.length}; see data/report.md)`,
+  `✔ Parsed ${records.length}/${raws.length} uploads → data/videos.json ` +
+    `(misses: ${reportedMisses.length}; pending review: ${reviewQueue.length}; see data/report.md)`,
 );
 console.log(
   `  seasons ${Object.entries(seasonDist)

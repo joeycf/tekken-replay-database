@@ -59,19 +59,46 @@ export const REGIONS = {
 export type Side = keyof typeof REGIONS;
 export const SIDES: Side[] = ['p1', 'p2'];
 
+/** The two PLAYER plates in the HUD's top strip.
+ *
+ *  Deliberately wide: the plate's left edge moves with the org tag's length
+ *  ("TM | RB ARSLAN ASH", "DRX KNEE", "NIP MEO-IL"), so a tight box would clip
+ *  the handle on exactly the sponsored players whose names matter most. The
+ *  surrounding noise — org tag, country code, round score — is harmless here
+ *  because both candidate handles are scored against the same string; it only
+ *  has to favour the right one. */
+export const HANDLE_REGIONS = {
+  p1: [0.1, 0.0, 0.3, 0.042],
+  p2: [0.6, 0.0, 0.3, 0.042],
+} as const;
+
 const THRESHOLDS = [140, 170, 200, 225];
+/** Fewer passes for the handle plates: they are flat UI chrome on a solid fill,
+ *  not glyphs over animated splash art, so the ensemble that the character row
+ *  needs is wasted work here. */
+const HANDLE_THRESHOLDS = [0, 150, 190];
 const UPSCALE = 4;
 
-/** Crop one nameplate and reduce it to black glyphs on white. */
+/** Crop one HUD region and tone it for OCR.
+ *
+ *  Two tonings, and the difference is measured rather than stylistic. The
+ *  CHARACTER row is thresholded and negated — near-white glyphs over the
+ *  character's own animated splash art, which tesseract reads best as black on
+ *  white. The PLAYER plates are flat UI chrome on a solid fill and are read
+ *  WITHOUT the negate, normalised instead of thresholded on the first pass.
+ *  That combination is what the 61/61 side-resolution measurement was taken
+ *  with; changing it changes a measured number, so it is a parameter rather
+ *  than a cleanup. */
 export async function prep(
   file: string,
   region: readonly number[],
   threshold: number,
+  plate = false,
 ): Promise<Buffer> {
   const meta = await sharp(file).metadata();
   const W = meta.width ?? 1280;
   const H = meta.height ?? 720;
-  return sharp(file)
+  const base = sharp(file)
     .extract({
       left: Math.round(region[0]! * W),
       top: Math.round(region[1]! * H),
@@ -79,11 +106,9 @@ export async function prep(
       height: Math.round(region[3]! * H),
     })
     .resize({ width: Math.round(region[2]! * W * UPSCALE), kernel: 'lanczos3' })
-    .greyscale()
-    .threshold(threshold)
-    .negate()
-    .png()
-    .toBuffer();
+    .greyscale();
+  const toned = threshold > 0 ? base.threshold(threshold) : base.normalise();
+  return (plate ? toned : toned.negate()).png().toBuffer();
 }
 
 // ── fuzzy alias matching ─────────────────────────────────────────────────────
@@ -289,6 +314,38 @@ export interface SideResult {
 /** A member needs a run of at least this many CONSECUTIVE reading frames. */
 const MIN_RUN = 2;
 
+/** Sides at or above this auto-resolve; below it a human confirms.
+ *
+ *  Measured over all 63 hand-labelled Tekken Evo VODs (2026-08-07), where the
+ *  extractor scored 63/63 both-sides-exact and 126/126 per-side. Precision is
+ *  therefore 100% at EVERY threshold and this number cannot be tuned against
+ *  observed mistakes — it is a prudence margin for footage nobody has checked,
+ *  not a filter for known errors. It costs 4 of 63 videos (6.3%) in review.
+ *
+ *  0.90 deliberately matches SF6's, so the two pipelines stay comparable rather
+ *  than each carrying a differently-derived number that means the same thing.
+ *
+ *  What a threshold CANNOT do: rescue a confidently-wrong read. Before the
+ *  labels were corrected, the corpus's two worst records both sat at confidence
+ *  1.00 — one a missed counter-pick, one a swapped attribution. Both were fixed
+ *  at the reader (dense re-sampling) and at the attribution (resolveSide), not
+ *  at this gate. */
+export const AUTO_ACCEPT = 0.9;
+
+/** Below this, re-sample the video densely and fold again before judging it.
+ *
+ *  A character that occupies a single sampled frame is dropped by MIN_RUN, and
+ *  nine samples is too few to tell a real brief appearance from noise. Four
+ *  corpus videos failed exactly that way; re-sampling them at 21 frames
+ *  recovered every one and moved all four to confidence 1.00, taking the corpus
+ *  from 58/63 to 62/63.
+ *
+ *  The rule is LABEL-BLIND, which is what makes it a policy rather than a fit:
+ *  the four videos it fires on are precisely the four with any side below 0.60,
+ *  selected without reference to any label. */
+export const RESAMPLE_BELOW = 0.6;
+export const RESAMPLE_FRAMES = 21;
+
 /** Fold one side's frame reads (in timestamp order) into an ordered union.
  *
  *  CONTIGUITY, NOT SHARE — inherited from SF6 unchanged, because the reasoning
@@ -367,6 +424,86 @@ export function foldSide(reads: FrameRead[]): SideResult {
   };
 }
 
+// ── which player is on which side ────────────────────────────────────────────
+/** Score how well `text` contains `handle`; 0 is a clean hit, 99 is nothing.
+ *
+ *  Scored over the best WINDOW of the read rather than the whole string,
+ *  because the plate carries an org tag and a country code around the handle
+ *  and a whole-string distance would drown the signal in them. */
+export function scoreHandle(text: string, handle: string): number {
+  const t = text.toLowerCase().replace(/[^a-z0-9]+/g, '');
+  const h = handle.toLowerCase().replace(/[^a-z0-9]+/g, '');
+  if (!t || !h) return 99;
+  if (t.includes(h)) return 0;
+  let best = 99;
+  for (let i = 0; i <= Math.max(0, t.length - h.length); i++) {
+    for (const w of [h.length, h.length + 1, h.length + 2]) {
+      const d = osa(t.slice(i, i + w), h);
+      if (d < best) best = d;
+    }
+  }
+  return best;
+}
+
+export interface SideResolution {
+  /** true when candidates[0] is the player on the LEFT of the screen */
+  leftIsFirst: boolean;
+  /** signed vote margin across frames; 0 means the footage could not say */
+  votes: number;
+  decided: boolean;
+}
+
+/** Decide which of two known players occupies the LEFT of the screen.
+ *
+ *  WHY THIS EXISTS. `foldSide` reads characters by SCREEN position, and the
+ *  corpus supplies handles in TITLE order. Pairing them assumes the title names
+ *  the left player first — measured over the labelled Evo corpus, that is wrong
+ *  on 23 of 61 videos (37.7%). "Evo 2026: Arslan Ash vs Rangchu" has Rangchu on
+ *  the left. Pairing positionally therefore produces records where every
+ *  character is correct and every player is wrong, and no confidence signal can
+ *  catch it because the character reads are perfect.
+ *
+ *  The handle is on screen too, and the job is far easier than reading a
+ *  character: both candidates are already known from the title, so this is a
+ *  TWO-WAY CHOICE rather than open-vocabulary recognition. Read each plate,
+ *  score both candidates against it, and let every frame vote. Measured 61/61
+ *  on the labelled corpus, 0 undecided.
+ *
+ *  Returns decided=false rather than guessing when the frames disagree or say
+ *  nothing; the caller must treat that as "not resolvable", never as a default. */
+export async function resolveSide(
+  worker: Worker,
+  frames: string[],
+  candidates: [string, string],
+): Promise<SideResolution> {
+  let votes = 0;
+  for (const f of frames) {
+    let first = 0; // total distance if candidates[0] is on the LEFT
+    let second = 0; // total distance if candidates[1] is on the LEFT
+    let read = false;
+    for (const th of HANDLE_THRESHOLDS) {
+      for (const side of SIDES) {
+        const png = await prep(f, HANDLE_REGIONS[side], th, true);
+        const { data } = await worker.recognize(png);
+        const text = data.text.replace(/\s+/g, ' ').trim();
+        if (!text) continue;
+        const self = side === 'p1' ? 0 : 1;
+        const other = side === 'p1' ? 1 : 0;
+        const dSelf = scoreHandle(text, candidates[self]!);
+        const dOther = scoreHandle(text, candidates[other]!);
+        // a plate that matches neither candidate is chrome, not evidence
+        if (Math.min(dSelf, dOther) > 3) continue;
+        read = true;
+        first += dSelf;
+        second += dOther;
+      }
+    }
+    if (!read || first === second) continue;
+    votes += first < second ? 1 : -1;
+  }
+  return { leftIsFirst: votes > 0, votes, decided: votes !== 0 };
+}
+
 export async function makeWorker(): Promise<Worker> {
   // logger/errorHandler silence tesseract.js's progress chatter; debug_file
   // silences the engine's per-call statistics dump, which it prints for every
@@ -385,6 +522,27 @@ export async function makeWorker(): Promise<Worker> {
     // resolves, because a bare "jack" alias happens to exist — but only by
     // luck, and the next numbered character would have no such fallback.
     tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ8.- ',
+    tessedit_pageseg_mode: '7' as never, // single text line
+    debug_file: '/dev/null',
+  });
+  return worker;
+}
+
+/** A SECOND worker, with NO character whitelist, for the player plates.
+ *
+ *  It cannot share the character worker: that one is whitelisted to letters
+ *  plus "8", which is right for a 42-name roster and wrong for handles.
+ *  "Shadow 20z", "Ninjakilla_212" and "Meo-IL" would all arrive mangled, and
+ *  the side resolution scores candidates against exactly those strings. The
+ *  61/61 measurement was taken with an unwhitelisted worker, so this keeps the
+ *  measured configuration rather than economising on a process. */
+export async function makeHandleWorker(): Promise<Worker> {
+  const worker = await createWorker('eng', undefined, {
+    logger: () => {},
+    errorHandler: () => {},
+    cachePath: CACHE,
+  });
+  await worker.setParameters({
     tessedit_pageseg_mode: '7' as never, // single text line
     debug_file: '/dev/null',
   });

@@ -63,15 +63,41 @@ export const CHANNELS: ChannelConfig[] = [
     channelId: 'UCKHx_yf3dI2ajWAjXRJ_9Rw',
     uploadsPlaylist: 'UUKHx_yf3dI2ajWAjXRJ_9Rw',
   },
+  {
+    // "Evo Events" — the event's own channel, 2,748 uploads across every game
+    // it runs. 63 of them are single Tekken 8 matches (Evo, Evo Japan and Evo
+    // France, 2024→2026), and none names a character: "Evo 2026: Arslan Ash vs
+    // Rangchu | TEKKEN 8 | Grand Final" gives players, game and round and
+    // nothing else. That is why the 2026-07 recon rejected the channel outright.
+    //
+    // It is tracked from 2026-08-07 because the characters can now be READ off
+    // the broadcast HUD — Tekken 8 prints them below the health bars (the top
+    // strip carries the player). Measured against 63 blind hand labels: 63/63
+    // both-sides-exact, 126/126 per-side. See scripts/hud-read.ts.
+    //
+    // gameSignal is required and is the only channel that sets it: everything
+    // else here is Tekken-only by construction, while this channel publishes
+    // Street Fighter, Guilty Gear, 2XKO and the rest alongside. The marker is
+    // the spelled "TEKKEN 8" and never a bare "T8" — on this channel T8
+    // overwhelmingly means TOP 8 ("ST 3v3 EVO 2014: T8 Quarters" is Super
+    // Turbo), and the bare token admits zero uploads the spelled form misses.
+    //
+    // charactersFromFootage routes its match-shaped uploads into the review
+    // queue instead of counting them as parse misses.
+    //
+    // It publishes under the EXISTING 'tournament' source rather than minting
+    // its own: that source already aggregates the event organizers, whose
+    // uploads are the same kind of replay whoever posted them.
+    id: 'evoEvents',
+    source: 'tournament',
+    name: 'Evo',
+    channelId: 'UCWI626ZNdqM5tOlctPUTW2g',
+    uploadsPlaylist: 'UUWI626ZNdqM5tOlctPUTW2g',
+    gameSignal: 'titleOrDescription',
+    charactersFromFootage: true,
+  },
 ];
 
-// Evaluated and deliberately NOT tracked (recon 2026-07):
-//
-// "Evo Events" (UCWI626ZNdqM5tOlctPUTW2g) — 67 single-match Tekken 8 uploads
-// across Evo/Evo Japan/Evo France 2024-2026, and every one of them is
-// unusable here: the titles name the players but never the characters ("Evo
-// 2026: Arslan Ash vs Rangchu | TEKKEN 8 | Grand Final"), the descriptions
-// only restate the title, and the videos carry no tags at all. A record needs
-// a character per side (charactersPerSide: 1; emit.ts hard-fails without
-// one), so these can only be added by watching each match and hand-writing
-// data/overrides.json. Revisit if Evo ever starts tagging characters.
+// No other candidate channel is pending. The bar the 2026-07 recon used was:
+// dense uploads of full match VODs, and titles that are either structurally
+// parseable or resolvable from the footage.

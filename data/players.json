@@ -332,6 +332,10 @@
     "handle": "ANGEL"
   },
   {
+    "id": "angelfs",
+    "handle": "AngelFS"
+  },
+  {
     "id": "anifaz",
     "handle": "Anifaz"
   },
@@ -1827,10 +1831,6 @@
   {
     "id": "defensive-patch",
     "handle": "Defensive Patch"
-  },
-  {
-    "id": "deglider",
-    "handle": "DEGLIDER"
   },
   {
     "id": "degoro",
@@ -3348,6 +3348,10 @@
   {
     "id": "hapace",
     "handle": "Hapace"
+  },
+  {
+    "id": "harada",
+    "handle": "Harada"
   },
   {
     "id": "harada-s-vision",
@@ -5131,6 +5135,10 @@
   {
     "id": "lilmajin",
     "handle": "LilMajin"
+  },
+  {
+    "id": "lilypichu",
+    "handle": "LilyPichu"
   },
   {
     "id": "limited-slip",

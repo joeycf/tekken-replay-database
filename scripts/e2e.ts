@@ -215,6 +215,70 @@ async function main(): Promise<void> {
   );
   expect(offRoster.length === 0, 'every character in every union is on the roster');
 
+  // ── the review queue ──────────────────────────────────────────────────────
+  // Pending items are footage whose characters no text states. They must be
+  // visible in the queue and absent from BOTH published artifacts — a pending
+  // item that leaked into replays.json would be a record with invented sides.
+  const queue = JSON.parse(readFileSync(join(ROOT, 'data/review-queue.json'), 'utf8')) as {
+    id: string;
+    kind: string;
+    channel: string;
+    title: string;
+    publishedAt: string;
+    durationSec: number;
+    handles?: [string, string];
+  }[];
+  const KINDS = new Set(['source-classification', 'character-completion']);
+  expect(
+    queue.every(
+      (q) =>
+        typeof q.id === 'string' &&
+        q.id.length > 0 &&
+        KINDS.has(q.kind) &&
+        typeof q.title === 'string' &&
+        /^\d{4}-\d{2}-\d{2}T/.test(q.publishedAt) &&
+        q.durationSec > 0,
+    ),
+    `review-queue.json schema validates (${queue.length} pending)`,
+  );
+  // A character-completion item exists to be answered by a human or the
+  // extractor, and both need the two handles the title DID state.
+  expect(
+    queue.every((q) => q.kind !== 'character-completion' || q.handles?.length === 2),
+    'every character-completion item carries both handles',
+  );
+  const queuedIds = new Set(queue.map((q) => q.id));
+  expect(
+    allVideos.every((v) => !queuedIds.has(v.id)),
+    'pending review items never reach videos.json',
+  );
+  expect(
+    emitted.every((r) => !queuedIds.has(r.id)),
+    'pending review items never reach replays.json',
+  );
+  const reportMd = readFileSync(join(ROOT, 'data/report.md'), 'utf8');
+  const pendingLine = /Pending review: (\d+)/.exec(reportMd);
+  expect(
+    pendingLine !== null && Number(pendingLine[1]) === queue.length,
+    `report.md pending count matches the queue (${queue.length})`,
+  );
+
+  // A charactersFromFootage channel's records exist ONLY because a sides
+  // verdict was recorded, so every one of them must have an override. If this
+  // fires, records are being minted from somewhere they should not be.
+  const footageIntakes = new Set(
+    (JSON.parse(readFileSync(join(ROOT, 'data/videos.json'), 'utf8')) as MatchVideo[])
+      .map((v) => v.intake)
+      .filter((k) => k === 'evoEvents'),
+  );
+  if (footageIntakes.size) {
+    const footage = videos.filter((v) => v.intake === 'evoEvents');
+    expect(
+      footage.length > 0 && footage.every((v) => overrides[v.id]?.sides !== undefined),
+      `every footage-read record is backed by a sides verdict (${footage.length})`,
+    );
+  }
+
   // intake survives parse: dedupe precedence needs to tell two channels apart
   // that share one public source ('tournament' aggregates the event organizers).
   const missingIntake = videos.filter((v) => !v.intake);
