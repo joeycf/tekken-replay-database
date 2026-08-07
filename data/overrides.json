@@ -1,1 +1,1277 @@
-{}
+{
+  "K4ZQtV-rTRU": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "chanel",
+        "handle": "Chanel",
+        "characters": [
+          "alisa"
+        ]
+      },
+      {
+        "player": "chikurin",
+        "handle": "Chikurin",
+        "characters": [
+          "lili"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "vjxefrfhl94": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "double",
+        "handle": "Double",
+        "characters": [
+          "law"
+        ]
+      },
+      {
+        "player": "chanel",
+        "handle": "Chanel",
+        "characters": [
+          "alisa"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "vR-dwoE7IbA": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "infested",
+        "handle": "Infested",
+        "characters": [
+          "nina"
+        ]
+      },
+      {
+        "player": "mangja",
+        "handle": "Mangja",
+        "characters": [
+          "law"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "uGcUrpwTtHE": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "lowhigh",
+        "handle": "LowHigh",
+        "characters": [
+          "dragunov"
+        ]
+      },
+      {
+        "player": "chanel",
+        "handle": "Chanel",
+        "characters": [
+          "zafina",
+          "alisa"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "JS9kQQ3CI2Q": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "lowhigh",
+        "handle": "LowHigh",
+        "characters": [
+          "steve",
+          "dragunov"
+        ]
+      },
+      {
+        "player": "chikurin",
+        "handle": "Chikurin",
+        "characters": [
+          "lili"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "VofcNKtDeH8": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "lowhigh",
+        "handle": "LowHigh",
+        "characters": [
+          "dragunov"
+        ]
+      },
+      {
+        "player": "chikurin",
+        "handle": "Chikurin",
+        "characters": [
+          "lili"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "JGYTOzQxfRY": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "lowhigh",
+        "handle": "LowHigh",
+        "characters": [
+          "dragunov"
+        ]
+      },
+      {
+        "player": "infested",
+        "handle": "Infested",
+        "characters": [
+          "nina"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "a56RpES4W6E": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "mangja",
+        "handle": "Mangja",
+        "characters": [
+          "law"
+        ]
+      },
+      {
+        "player": "chanel",
+        "handle": "Chanel",
+        "characters": [
+          "alisa"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "eNk2TsBgyOg": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "harada",
+        "handle": "Harada",
+        "characters": [
+          "feng"
+        ]
+      },
+      {
+        "player": "lilypichu",
+        "handle": "LilyPichu",
+        "characters": [
+          "lili"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "OkcGc0zY85w": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "atif",
+        "handle": "Atif",
+        "characters": [
+          "dragunov"
+        ]
+      },
+      {
+        "player": "keisuke",
+        "handle": "Keisuke",
+        "characters": [
+          "kazuya"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "MBgwTtqXduw": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "raef",
+        "handle": "Raef",
+        "characters": [
+          "jin"
+        ]
+      },
+      {
+        "player": "arslan-ash",
+        "handle": "Arslan Ash",
+        "characters": [
+          "nina"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "hz1wGor_4EQ": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "nobi",
+        "handle": "Nobi",
+        "characters": [
+          "dragunov"
+        ]
+      },
+      {
+        "player": "raef",
+        "handle": "Raef",
+        "characters": [
+          "jin"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "PcmhWH5-MjQ": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "ulsan",
+        "handle": "Ulsan",
+        "characters": [
+          "dragunov"
+        ]
+      },
+      {
+        "player": "keisuke",
+        "handle": "Keisuke",
+        "characters": [
+          "kazuya"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "Let0_1UY6fQ": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "arslan-ash",
+        "handle": "Arslan Ash",
+        "characters": [
+          "nina"
+        ]
+      },
+      {
+        "player": "atif",
+        "handle": "Atif",
+        "characters": [
+          "dragunov"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "QMzo9Q7pD-M": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "ulsan",
+        "handle": "Ulsan",
+        "characters": [
+          "reina"
+        ]
+      },
+      {
+        "player": "nobi",
+        "handle": "Nobi",
+        "characters": [
+          "dragunov"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "bCANUt1e4O0": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "atif",
+        "handle": "Atif",
+        "characters": [
+          "dragunov"
+        ]
+      },
+      {
+        "player": "nobi",
+        "handle": "Nobi",
+        "characters": [
+          "dragunov"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "Ea5pGcudoXA": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "atif",
+        "handle": "Atif",
+        "characters": [
+          "dragunov",
+          "feng"
+        ]
+      },
+      {
+        "player": "arslan-ash",
+        "handle": "Arslan Ash",
+        "characters": [
+          "nina"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "IpB0o6wgiXM": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "mangja",
+        "handle": "Mangja",
+        "characters": [
+          "law"
+        ]
+      },
+      {
+        "player": "meo-il",
+        "handle": "Meo-Il",
+        "characters": [
+          "jack8"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "QGRjiOfPCtQ": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "knee",
+        "handle": "Knee",
+        "characters": [
+          "bryan"
+        ]
+      },
+      {
+        "player": "mulgold",
+        "handle": "Mulgold",
+        "characters": [
+          "claudio"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "n38QoGY33yE": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-07]",
+    "sides": [
+      {
+        "player": "rangchu",
+        "handle": "Rangchu",
+        "characters": [
+          "kuma",
+          "panda"
+        ]
+      },
+      {
+        "player": "ulsan",
+        "handle": "Ulsan",
+        "characters": [
+          "dragunov"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "qa9hG1s-4eY": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "pinya",
+        "handle": "Pinya",
+        "characters": [
+          "raven"
+        ]
+      },
+      {
+        "player": "shadow-20z",
+        "handle": "Shadow 20z",
+        "characters": [
+          "zafina"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "oawl9W1QlAk": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "ulsan",
+        "handle": "Ulsan",
+        "characters": [
+          "dragunov",
+          "reina"
+        ]
+      },
+      {
+        "player": "mulgold",
+        "handle": "Mulgold",
+        "characters": [
+          "claudio"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "mggxo9430ig": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "pinya",
+        "handle": "Pinya",
+        "characters": [
+          "raven"
+        ]
+      },
+      {
+        "player": "meo-il",
+        "handle": "Meo-Il",
+        "characters": [
+          "jack8"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "I1VKVOiu03s": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "knee",
+        "handle": "Knee",
+        "characters": [
+          "bryan"
+        ]
+      },
+      {
+        "player": "mangja",
+        "handle": "Mangja",
+        "characters": [
+          "lidia",
+          "law"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "2SGY2bcRwF0": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "pinya",
+        "handle": "Pinya",
+        "characters": [
+          "raven"
+        ]
+      },
+      {
+        "player": "mulgold",
+        "handle": "Mulgold",
+        "characters": [
+          "claudio"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "YArUPo2MooI": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "mangja",
+        "handle": "Mangja",
+        "characters": [
+          "law"
+        ]
+      },
+      {
+        "player": "mulgold",
+        "handle": "Mulgold",
+        "characters": [
+          "claudio"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "BjaQASUORjQ": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "knee",
+        "handle": "Knee",
+        "characters": [
+          "bryan"
+        ]
+      },
+      {
+        "player": "mulgold",
+        "handle": "Mulgold",
+        "characters": [
+          "claudio",
+          "feng"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "rJ4hrSg8n80": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "nobi",
+        "handle": "Nobi",
+        "characters": [
+          "lars"
+        ]
+      },
+      {
+        "player": "arslan-ash",
+        "handle": "Arslan Ash",
+        "characters": [
+          "anna"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "qCi43Hjm3jc": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "lowhigh",
+        "handle": "LowHigh",
+        "characters": [
+          "bryan"
+        ]
+      },
+      {
+        "player": "chikurin",
+        "handle": "Chikurin",
+        "characters": [
+          "clive"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "sFt8fQRPTyU": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "mulgold",
+        "handle": "Mulgold",
+        "characters": [
+          "claudio"
+        ]
+      },
+      {
+        "player": "meo-il",
+        "handle": "Meo-Il",
+        "characters": [
+          "jack8"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "AsVfV5qo9ZA": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "atif",
+        "handle": "Atif",
+        "characters": [
+          "anna"
+        ]
+      },
+      {
+        "player": "jdcr",
+        "handle": "Jdcr",
+        "characters": [
+          "dragunov"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "sfVAmYRYHyc": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "mulgold",
+        "handle": "Mulgold",
+        "characters": [
+          "claudio"
+        ]
+      },
+      {
+        "player": "lowhigh",
+        "handle": "LowHigh",
+        "characters": [
+          "bryan"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "YI_01V3Nwws": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "nobi",
+        "handle": "Nobi",
+        "characters": [
+          "lars"
+        ]
+      },
+      {
+        "player": "atif",
+        "handle": "Atif",
+        "characters": [
+          "anna"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "nMoUdGdL3C8": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "arslan-ash",
+        "handle": "Arslan Ash",
+        "characters": [
+          "anna",
+          "nina"
+        ]
+      },
+      {
+        "player": "chikurin",
+        "handle": "Chikurin",
+        "characters": [
+          "clive"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "imEG4FPpSDg": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "atif",
+        "handle": "Atif",
+        "characters": [
+          "anna"
+        ]
+      },
+      {
+        "player": "mulgold",
+        "handle": "Mulgold",
+        "characters": [
+          "claudio"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "iyje_2DJhw8": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "chikurin",
+        "handle": "Chikurin",
+        "characters": [
+          "lili"
+        ]
+      },
+      {
+        "player": "atif",
+        "handle": "Atif",
+        "characters": [
+          "anna"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "ewKTvKdzUHo": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "fergus",
+        "handle": "Fergus",
+        "characters": [
+          "asuka"
+        ]
+      },
+      {
+        "player": "kingreyjr",
+        "handle": "KingReyJr",
+        "characters": [
+          "asuka"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "RrG0j6aNSaU": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "jeondding",
+        "handle": "JeonDDing",
+        "characters": [
+          "eddy"
+        ]
+      },
+      {
+        "player": "kaneandtrench",
+        "handle": "Kaneandtrench",
+        "characters": [
+          "yoshimitsu"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "VyWjlmYlrGw": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "qudans",
+        "handle": "Qudans",
+        "characters": [
+          "heihachi"
+        ]
+      },
+      {
+        "player": "arslan-ash",
+        "handle": "Arslan Ash",
+        "characters": [
+          "nina"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "5zBT6TZ61oA": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "sin",
+        "handle": "Sin",
+        "characters": [
+          "yoshimitsu"
+        ]
+      },
+      {
+        "player": "lowhigh",
+        "handle": "LowHigh",
+        "characters": [
+          "bryan"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "aWmFbuAQ-hY": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "arslan-ash",
+        "handle": "Arslan Ash",
+        "characters": [
+          "anna"
+        ]
+      },
+      {
+        "player": "kaneandtrench",
+        "handle": "Kaneandtrench",
+        "characters": [
+          "yoshimitsu"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "ECOxS2apJpA": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "fergus",
+        "handle": "Fergus",
+        "characters": [
+          "asuka"
+        ]
+      },
+      {
+        "player": "jeondding",
+        "handle": "JeonDDing",
+        "characters": [
+          "eddy"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "ZR7cip5JbnY": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "kingreyjr",
+        "handle": "KingReyJr",
+        "characters": [
+          "asuka"
+        ]
+      },
+      {
+        "player": "lowhigh",
+        "handle": "LowHigh",
+        "characters": [
+          "bryan"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "LlAboEwgsrc": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "fergus",
+        "handle": "Fergus",
+        "characters": [
+          "asuka"
+        ]
+      },
+      {
+        "player": "arslan-ash",
+        "handle": "Arslan Ash",
+        "characters": [
+          "anna"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "tvqjFbTyxpA": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "ulsan",
+        "handle": "Ulsan",
+        "characters": [
+          "azucena",
+          "dragunov"
+        ]
+      },
+      {
+        "player": "ikari",
+        "handle": "iKari",
+        "characters": [
+          "kazuya"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "a4IkUcphIig": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "atif",
+        "handle": "Atif",
+        "characters": [
+          "bryan",
+          "law"
+        ]
+      },
+      {
+        "player": "hafiz-tanveer",
+        "handle": "Hafiz Tanveer",
+        "characters": [
+          "claudio"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "oqDIjb5JW1s": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "the-jon",
+        "handle": "The Jon",
+        "characters": [
+          "king"
+        ]
+      },
+      {
+        "player": "ak",
+        "handle": "Ak",
+        "characters": [
+          "shaheen"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "7BHQv4uqyiY": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "tetsu",
+        "handle": "Tetsu",
+        "characters": [
+          "lidia"
+        ]
+      },
+      {
+        "player": "knee",
+        "handle": "Knee",
+        "characters": [
+          "bryan"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "c1kQW9VPfOE": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "atif",
+        "handle": "Atif",
+        "characters": [
+          "bryan"
+        ]
+      },
+      {
+        "player": "ak",
+        "handle": "Ak",
+        "characters": [
+          "shaheen"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "0eYwQ51XwOs": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "knee",
+        "handle": "Knee",
+        "characters": [
+          "bryan"
+        ]
+      },
+      {
+        "player": "ulsan",
+        "handle": "Ulsan",
+        "characters": [
+          "dragunov",
+          "azucena",
+          "lars"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "qNhjjvaXyII": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "hafiz-tanveer",
+        "handle": "Hafiz Tanveer",
+        "characters": [
+          "claudio",
+          "nina"
+        ]
+      },
+      {
+        "player": "ikari",
+        "handle": "iKari",
+        "characters": [
+          "kazuya"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "HoR0nS6pLH8": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "knee",
+        "handle": "Knee",
+        "characters": [
+          "bryan"
+        ]
+      },
+      {
+        "player": "ak",
+        "handle": "Ak",
+        "characters": [
+          "shaheen"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "u41xpcuUNzk": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "knee",
+        "handle": "Knee",
+        "characters": [
+          "bryan"
+        ]
+      },
+      {
+        "player": "hafiz-tanveer",
+        "handle": "Hafiz Tanveer",
+        "characters": [
+          "claudio"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "oBagUZGKep8": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "lowhigh",
+        "handle": "LowHigh",
+        "characters": [
+          "bryan"
+        ]
+      },
+      {
+        "player": "arslan-ash",
+        "handle": "Arslan Ash",
+        "characters": [
+          "kunimitsu"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "4KhttuouEW4": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "qasim-meer",
+        "handle": "Qasim Meer",
+        "characters": [
+          "azucena",
+          "zafina"
+        ]
+      },
+      {
+        "player": "rangchu",
+        "handle": "Rangchu",
+        "characters": [
+          "fahkumram"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "ylRyKzVcfPY": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-07]",
+    "sides": [
+      {
+        "player": "meo-il",
+        "handle": "Meo-Il",
+        "characters": [
+          "jack8"
+        ]
+      },
+      {
+        "player": "nobi",
+        "handle": "Nobi",
+        "characters": [
+          "steve",
+          "lars"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "N5cPhRz-eW0": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "jeondding",
+        "handle": "JeonDDing",
+        "characters": [
+          "eddy"
+        ]
+      },
+      {
+        "player": "ninjakilla",
+        "handle": "Ninjakilla",
+        "characters": [
+          "law"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "aoLFvn0LRO8": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "meo-il",
+        "handle": "Meo-Il",
+        "characters": [
+          "jack8"
+        ]
+      },
+      {
+        "player": "lowhigh",
+        "handle": "LowHigh",
+        "characters": [
+          "bryan"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "WsH4DW-mCQk": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "jeondding",
+        "handle": "JeonDDing",
+        "characters": [
+          "eddy"
+        ]
+      },
+      {
+        "player": "qasim-meer",
+        "handle": "Qasim Meer",
+        "characters": [
+          "zafina"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "0CwgNelL-go": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "arslan-ash",
+        "handle": "Arslan Ash",
+        "characters": [
+          "nina"
+        ]
+      },
+      {
+        "player": "rangchu",
+        "handle": "Rangchu",
+        "characters": [
+          "fahkumram"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "vWqL9SM1nRI": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "jeondding",
+        "handle": "JeonDDing",
+        "characters": [
+          "eddy"
+        ]
+      },
+      {
+        "player": "lowhigh",
+        "handle": "LowHigh",
+        "characters": [
+          "bryan"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "FI4BNkVi5NU": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "lowhigh",
+        "handle": "LowHigh",
+        "characters": [
+          "bryan"
+        ]
+      },
+      {
+        "player": "rangchu",
+        "handle": "Rangchu",
+        "characters": [
+          "fahkumram"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  },
+  "FsbLumb6iuU": {
+    "//": "review verdict: hand-completed sides [/dev/source-review 2026-08-06]",
+    "sides": [
+      {
+        "player": "rangchu",
+        "handle": "Rangchu",
+        "characters": [
+          "fahkumram"
+        ]
+      },
+      {
+        "player": "arslan-ash",
+        "handle": "Arslan Ash",
+        "characters": [
+          "nina"
+        ]
+      }
+    ],
+    "resolvedBy": "human"
+  }
+}

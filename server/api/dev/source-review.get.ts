@@ -55,6 +55,43 @@ export default defineEventHandler(() => {
       .map((f) => f.replace('.png', ''));
   };
 
+  // ── disputed: does the extractor read this differently from the verdict? ───
+  //
+  // ONLY A BOOLEAN CROSSES THE WIRE. The extractor's actual answer is computed
+  // with here and deliberately thrown away, because this page is also the
+  // ground-truth labelling surface: shipping the machine's characters would put
+  // a suggested answer one devtools tab away from a reviewer who is supposed to
+  // be labelling blind. A flag says "look again"; it cannot say "say this".
+  //
+  // The comparison is the UNORDERED PAIR of character sets, the same rule
+  // scripts/spike/accuracy.ts scores on, because neither side array is in a
+  // trustworthy order — the extractor's is screen order, the verdict's is
+  // whatever order the reviewer left the form in. Comparing positionally would
+  // flag a third of the corpus as disputed purely on data-entry order.
+  interface Extraction {
+    id: string;
+    p1: { characters: string[] };
+    p2: { characters: string[] };
+  }
+  const extPath = join(root, 'cache/evo/extracted.json');
+  const extractions = new Map<string, Extraction>();
+  if (existsSync(extPath)) {
+    for (const e of JSON.parse(readFileSync(extPath, 'utf8')) as Extraction[]) {
+      extractions.set(e.id, e);
+    }
+  }
+  const setKey = (xs: string[]) => [...new Set(xs)].sort().join(',');
+  const pairKey = (a: string[], b: string[]) => [setKey(a), setKey(b)].sort().join(' | ');
+  const disputedBy = (id: string, sides: unknown[] | undefined): boolean => {
+    const e = extractions.get(id);
+    if (!e || !sides || sides.length !== 2) return false;
+    const [a, b] = sides as { characters?: string[] }[];
+    return (
+      pairKey(a?.characters ?? [], b?.characters ?? []) !==
+      pairKey(e.p1.characters, e.p2.characters)
+    );
+  };
+
   return {
     roster,
     items: queue.map((q) => {
@@ -68,7 +105,12 @@ export default defineEventHandler(() => {
               ? { verdict: 'channel' as const, channel: ov.channel }
               : null
         : null;
-      return { ...q, saved, frames: framesFor(q.id) };
+      return {
+        ...q,
+        saved,
+        frames: framesFor(q.id),
+        disputed: saved?.verdict === 'sides' && disputedBy(q.id, ov?.sides),
+      };
     }),
   };
 });

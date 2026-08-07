@@ -32,7 +32,18 @@
             <span class="text-text">{{ cursor + 1 }}</span> / {{ items.length }}
           </span>
           <span class="text-success">{{ resolvedCount }} resolved</span>
-          <span class="text-text-muted">keys: ⏎ save · s swap handles · x exclude · ←/→</span>
+          <button
+            v-if="disputedCount"
+            type="button"
+            class="cursor-pointer text-warning underline decoration-warning/40 hover:decoration-warning"
+            title="jump to the next item the extractor reads differently"
+            @click="nextDisputed()"
+          >
+            {{ disputedCount }} disputed
+          </button>
+          <span class="text-text-muted"
+            >keys: ⏎ save · s swap handles · x exclude · d next disputed · ←/→</span
+          >
         </div>
 
         <!-- jump strip: one cell per item, colour = state -->
@@ -41,12 +52,16 @@
             v-for="(it, i) in items"
             :key="it.id"
             type="button"
-            :title="`${i + 1}. ${it.id} — ${stateOf(it)}`"
+            :title="`${i + 1}. ${it.id} — ${stateOf(it)}${it.disputed ? ' · extractor disagrees' : ''}`"
             class="h-2.5 w-2.5 border transition-transform"
             :class="[
               stateOf(it) === 'resolved'
                 ? 'border-success/40 bg-success/70'
                 : 'border-white/15 bg-white/[0.06]',
+              // FILL is save state, BORDER is dispute — the two are independent
+              // facts and collapsing them into one colour would make a disputed
+              // item indistinguishable from an unreviewed one.
+              it.disputed ? '!border-warning scale-125' : '',
               i === cursor ? 'scale-150 !border-primary' : '',
             ]"
             @click="cursor = i"
@@ -274,6 +289,11 @@ interface QueueItem {
   handles?: [string, string];
   /** cached HUD frame stems under cache/evo/frames/<id>/ */
   frames: string[];
+  /** the extractor read this video differently from the saved verdict.
+   *  A BOOLEAN ONLY — the server computes it and discards the extractor's
+   *  answer, so this page never carries a suggestion a blind label could
+   *  absorb. It says "look again", never "say this". */
+  disputed: boolean;
   saved: {
     verdict: 'exclude' | 'channel' | 'sides';
     channel?: string;
@@ -314,6 +334,21 @@ watch(items, (list) => {
 const posting = ref(false);
 const item = computed(() => items.value[cursor.value] ?? null);
 const resolvedCount = computed(() => items.value.filter((it) => it.saved).length);
+const disputedCount = computed(() => items.value.filter((it) => it.disputed).length);
+
+/** Jump to the next disputed item, wrapping. With every tile green the strip
+ *  cannot be scanned by eye for the two that need a second look — which is the
+ *  situation this exists for. */
+function nextDisputed(): void {
+  const n = items.value.length;
+  for (let k = 1; k <= n; k++) {
+    const i = (cursor.value + k) % n;
+    if (items.value[i]?.disputed) {
+      cursor.value = i;
+      return;
+    }
+  }
+}
 const stateOf = (it: QueueItem) => (it.saved ? 'resolved' : 'pending');
 const savedLabel = (it: QueueItem) =>
   it.saved?.verdict === 'channel' ? (it.saved.channel ?? 'channel') : (it.saved?.verdict ?? '');
@@ -424,6 +459,7 @@ function onKey(e: KeyboardEvent): void {
   if (e.key === 'ArrowRight') cursor.value = Math.min(cursor.value + 1, items.value.length - 1);
   else if (e.key === 'ArrowLeft') cursor.value = Math.max(cursor.value - 1, 0);
   else if (e.key === 's') swapHandles();
+  else if (e.key === 'd') nextDisputed();
   else if (e.key === 'x') void exclude();
 }
 onMounted(() => window.addEventListener('keydown', onKey));
