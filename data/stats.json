@@ -1,16 +1,16 @@
 {
   "totals": {
-    "replays": 14686,
+    "replays": 14688,
     "characters": 42,
     "players": 2720,
     "byPatch": {
       "S1": 6042,
       "S2": 6058,
-      "S3": 2586
+      "S3": 2588
     }
   },
   "characterUsage": {
-    "alisa": 512,
+    "alisa": 513,
     "anna": 649,
     "armor_king": 601,
     "asuka": 399,
@@ -23,7 +23,7 @@
     "eddy": 315,
     "fahkumram": 454,
     "feng": 1018,
-    "heihachi": 1026,
+    "heihachi": 1027,
     "hwoarang": 1134,
     "jack8": 536,
     "jin": 792,
@@ -31,14 +31,14 @@
     "kazuya": 1870,
     "king": 601,
     "kuma": 190,
-    "kunimitsu": 328,
+    "kunimitsu": 329,
     "lars": 467,
     "law": 737,
     "lee": 591,
     "leo": 244,
     "leroy": 389,
     "lidia": 532,
-    "lili": 1525,
+    "lili": 1526,
     "miary_zo": 292,
     "nina": 856,
     "panda": 92,
@@ -134,7 +134,7 @@
       "zafina": 227
     },
     "S3": {
-      "alisa": 114,
+      "alisa": 115,
       "anna": 88,
       "armor_king": 237,
       "asuka": 61,
@@ -147,7 +147,7 @@
       "eddy": 27,
       "fahkumram": 94,
       "feng": 148,
-      "heihachi": 136,
+      "heihachi": 137,
       "hwoarang": 203,
       "jack8": 120,
       "jin": 101,
@@ -155,14 +155,14 @@
       "kazuya": 287,
       "king": 52,
       "kuma": 16,
-      "kunimitsu": 328,
+      "kunimitsu": 329,
       "lars": 62,
       "law": 113,
       "lee": 88,
       "leo": 38,
       "leroy": 61,
       "lidia": 84,
-      "lili": 525,
+      "lili": 526,
       "miary_zo": 59,
       "nina": 210,
       "panda": 6,
@@ -562,7 +562,7 @@
       "reina": 1
     },
     "arurun": {
-      "alisa": 14,
+      "alisa": 15,
       "armor_king": 1,
       "kunimitsu": 3,
       "miary_zo": 3
@@ -3799,7 +3799,7 @@
       "eddy": 1,
       "fahkumram": 3,
       "feng": 96,
-      "heihachi": 153,
+      "heihachi": 154,
       "jin": 2,
       "kazuya": 8,
       "kunimitsu": 1,
@@ -4335,7 +4335,7 @@
       "kazuya": 87,
       "king": 69,
       "kuma": 3,
-      "kunimitsu": 17,
+      "kunimitsu": 18,
       "lars": 5,
       "law": 8,
       "lee": 26,
@@ -7304,7 +7304,7 @@
     },
     "shine": {
       "anna": 1,
-      "lili": 346
+      "lili": 347
     },
     "shinigami-panda": {
       "lee": 1
