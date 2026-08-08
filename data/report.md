@@ -1,18 +1,18 @@
 # Tekken pipeline report
 
-**14688 matches** parsed from 24968 uploads across 5 channels · 2720 players · ranked sides 13064/29376 (44.5%)
+**14707 matches** parsed from 24987 uploads across 5 channels · 2721 players · ranked sides 13094/29414 (44.5%)
 
 | channel | source | uploads | parsed | coverage |
 | --- | --- | ---: | ---: | ---: |
-| highLevel | highLevel | 4441 | 4408 | 99.3% |
-| telly | telly | 12428 | 7517 | 60.5% |
-| ranked | ranked | 2497 | 2477 | 99.2% |
+| highLevel | highLevel | 4446 | 4413 | 99.3% |
+| telly | telly | 12438 | 7527 | 60.5% |
+| ranked | ranked | 2501 | 2481 | 99.2% |
 | bneEsports | tournament | 2853 | 223 | 7.8% |
 | evoEvents | tournament | 2749 | 63 | 2.3% |
 
-Seasons: S1 6042 · S2 6058 · S3 2588
+Seasons: S1 6042 · S2 6058 · S3 2607
 
-Patches: 1.01 574 · 1.02 494 · 1.03 386 · 1.04 608 · 1.05 566 · 1.06 608 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 367 · 1.11 440 · 1.12 245 · 1.13 238 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1286 · 3.01 1293 · unknown 10 (unknown = season contradicts the date: label-grace/override)
+Patches: 1.01 574 · 1.02 494 · 1.03 386 · 1.04 608 · 1.05 566 · 1.06 608 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 367 · 1.11 440 · 1.12 245 · 1.13 238 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1286 · 3.01 1312 · unknown 10 (unknown = season contradicts the date: label-grace/override)
 
 Misses by reason: pre-launch 4456 · not-tekken8 2616 · short-duration 1681 · shorts 1122 · no-vs-title 241 · char-unresolved 159 · bad-handle 3 · live-or-upcoming 2
 
@@ -53,4 +53,4 @@ Pending review: 0 (data/review-queue.json)
 - `4Pf63UozmxA` [highLevel] no-vs-title: T8 🔥 Kkokkoma (Dragunov) 🔥 Tekken 8
 - `RUDWRC5M738` [highLevel] no-vs-title: T8 🔥 Shadow 20z (Zafina) 🔥 Tekken 8
 
-_Generated 2026-08-07T08:03:51.797Z_
+_Generated 2026-08-08T07:39:26.859Z_
