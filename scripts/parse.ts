@@ -563,6 +563,80 @@ const records = applyOverrides(videos, overrides).map((v) =>
     : v,
 );
 
+// ── channel-collapse guard ────────────────────────────────────────────────────
+// A tracked channel can vanish between refreshes — deleted, renamed, made
+// private, or REBRANDED to another game with its back catalogue unlisted. The
+// last of those actually happened: 2XKO's "Pro Replays" channel became "MARVEL
+// TOKON Pro Replays" on 2026-08-07, its 1,317 uploads left the uploads playlist
+// while still existing and still playing, and the cron published a catalogue
+// 24% smaller — then treated it as the new baseline. Nothing stopped it.
+//
+// PARSED vs COMMITTED, not raw vs committed. 2XKO gates multi-game channels at
+// FETCH, so its raw dump is already this-game-only and raw is a fair proxy for
+// what will publish. This repo gates at PARSE, so raw holds every upload the
+// channel ever made — telly is 12,427 raw against 7,516 committed — and a raw
+// comparison would measure the game filter rather than the loss. Parsed records
+// are what actually reach the site, so that is what is compared.
+//
+// TWO THRESHOLDS, BOTH REQUIRED. A percentage alone punishes a small channel for
+// ordinary churn; an absolute alone misses a large channel bleeding slowly.
+// Runs after `records` is final and before the first write, so a fired guard
+// costs nothing and leaves the committed data intact.
+const COLLAPSE_PCT = 0.1; // >10% of the committed count
+const COLLAPSE_ABS = 20; // AND >20 records
+{
+  const allowIdx = process.argv.indexOf('--allow-collapse');
+  const allowed = new Set(
+    allowIdx === -1 ? [] : (process.argv[allowIdx + 1] ?? '').split(',').map((x) => x.trim()),
+  );
+  const committed = await readJson<typeof records>(join(DATA, 'videos.json')).catch(() => []);
+  if (committed.length > 0) {
+    const tally = (rs: typeof records): Map<string, number> => {
+      const m = new Map<string, number>();
+      for (const v of rs) {
+        const k = (v as { intake?: string }).intake ?? v.channel;
+        m.set(k, (m.get(k) ?? 0) + 1);
+      }
+      return m;
+    };
+    const before = tally(committed);
+    const now = tally(records);
+    const collapsed: string[] = [];
+    for (const ch of CHANNELS) {
+      // A channel's committed records may carry more than one token (a source
+      // plus an eventSource), so sum every token this channel can produce.
+      const tokens = [ch.id];
+      const was = tokens.reduce((n, t) => n + (before.get(t) ?? 0), 0);
+      if (was === 0) continue; // a new channel has no history to fall from
+      const is = tokens.reduce((n, t) => n + (now.get(t) ?? 0), 0);
+      const lost = was - is;
+      if (lost > COLLAPSE_ABS && lost / was > COLLAPSE_PCT) {
+        collapsed.push(
+          `  ${ch.id}: ${was} → ${is}  (lost ${lost}, ${((lost / was) * 100).toFixed(1)}%)` +
+            (allowed.has(ch.id) ? '  [allowed]' : ''),
+        );
+      }
+    }
+    const blocking = collapsed.filter((l) => !l.endsWith('[allowed]'));
+    if (collapsed.length > 0) console.error('Channel collapse detected:\n' + collapsed.join('\n'));
+    if (blocking.length > 0) {
+      console.error(
+        [
+          ``,
+          `✖ Refusing to write: a channel lost more than ${COLLAPSE_ABS} records AND more than`,
+          `  ${COLLAPSE_PCT * 100}% of its committed count. Publishing this would bake the loss in,`,
+          `  and the next run would treat the smaller number as the new normal.`,
+          `  Check the channel before overriding — it may have been renamed, made private,`,
+          `  or rebranded to another game (2XKO lost 1,317 records that way on 2026-08-07).`,
+          ``,
+          `  Accept the prune:  npm run data:parse -- --allow-collapse ${blocking.map((l) => l.trim().split(':')[0]).join(',')}`,
+        ].join('\n'),
+      );
+      process.exit(1);
+    }
+  }
+}
+
 // registry from the post-override records; best casing per id
 const playerIds = new Map<string, string>(); // id → best handle
 for (const [id, variants] of casing) {
