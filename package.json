@@ -18,6 +18,7 @@
     "data:fetch": "tsx --env-file-if-exists=.env scripts/fetch.ts",
     "data:parse": "tsx scripts/parse.ts",
     "data:build": "npm run data:fetch && npm run data:parse",
+    "verify:deployed": "tsx scripts/verify-deployed.ts",
     "data:emit": "tsx scripts/emit.ts",
     "data:migration-report": "tsx scripts/season-migration-report.ts",
     "data:characters": "tsx scripts/characters.ts",

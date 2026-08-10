@@ -17,11 +17,12 @@
 // SEPARATE one-second windows spread across the match: what identifies a
 // character on screen is not guaranteed to sit in the first 12 seconds.
 //
-// WHAT THIS ADDS OVER SF6: a cookie preflight. SF6 silently degrades to a
-// cookieless download when the file is missing and only discovers the problem
-// one bot-check later, by which point it has already exited 2 mid-corpus. 2XKO
-// catches it before the first request (refresh-all.sh) and this does the same,
-// lazily — so re-folding from cached frames still needs no credentials at all.
+// THE COOKIE PREFLIGHT: 2XKO catches a bad credential before the first request
+// (refresh-all.sh) and this does the same, lazily — so re-folding from cached
+// frames still needs no credentials at all. SF6 used to be the odd one out,
+// degrading silently to a cookieless download and only discovering it one
+// bot-check later; it was back-ported this preflight in the 2026-08 housekeeping
+// batch, so all three pipelines now check the same things in the same order.
 
 import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
