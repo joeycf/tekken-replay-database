@@ -352,6 +352,10 @@
     "handle": "Ao"
   },
   {
+    "id": "aomine",
+    "handle": "Aomine"
+  },
+  {
     "id": "aoyama",
     "handle": "Aoyama"
   },
@@ -1787,6 +1791,10 @@
   {
     "id": "dbwod",
     "handle": "DBWOD"
+  },
+  {
+    "id": "ddp",
+    "handle": "DDP"
   },
   {
     "id": "ddt23",
