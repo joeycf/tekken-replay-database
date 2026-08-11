@@ -1136,6 +1136,10 @@
     "handle": "Cactus"
   },
   {
+    "id": "cacuko",
+    "handle": "Cacuko"
+  },
+  {
     "id": "cadence",
     "handle": "Cadence"
   },
@@ -1906,7 +1910,7 @@
   },
   {
     "id": "devicjin",
-    "handle": "DevicJin"
+    "handle": "Devicjin"
   },
   {
     "id": "devil-buu",
@@ -10839,6 +10843,10 @@
   {
     "id": "zatch",
     "handle": "Zatch"
+  },
+  {
+    "id": "zayum",
+    "handle": "Zayum"
   },
   {
     "id": "zechariah",
