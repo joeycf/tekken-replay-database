@@ -6998,7 +6998,7 @@
   },
   {
     "id": "planted-medusa",
-    "handle": "PLANTED MEDUSA"
+    "handle": "Planted Medusa"
   },
   {
     "id": "plantedmedusa",
@@ -7568,6 +7568,10 @@
   {
     "id": "rox3",
     "handle": "ROX3"
+  },
+  {
+    "id": "roxen",
+    "handle": "Roxen"
   },
   {
     "id": "roynichi",
@@ -10262,6 +10266,10 @@
   {
     "id": "unusual-asila",
     "handle": "Unusual Asila"
+  },
+  {
+    "id": "unveil",
+    "handle": "Unveil"
   },
   {
     "id": "usagi",
