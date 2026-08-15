@@ -5774,6 +5774,10 @@
     "handle": "Mishimaksa"
   },
   {
+    "id": "miso",
+    "handle": "Miso"
+  },
+  {
     "id": "missile",
     "handle": "Missile"
   },
@@ -7540,6 +7544,10 @@
   {
     "id": "ronaldo",
     "handle": "Ronaldo"
+  },
+  {
+    "id": "ronaldo-of-tekken",
+    "handle": "Ronaldo of Tekken"
   },
   {
     "id": "ronaldo-sui",
