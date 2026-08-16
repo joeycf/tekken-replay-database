@@ -1,20 +1,20 @@
 # Tekken pipeline report
 
-**14815 matches** parsed from 25101 uploads across 5 channels · 2731 players · ranked sides 13244/29630 (44.7%)
+**14830 matches** parsed from 25117 uploads across 5 channels · 2732 players · ranked sides 13264/29660 (44.7%)
 
 | channel | source | uploads | parsed | coverage |
 | --- | --- | ---: | ---: | ---: |
-| highLevel | highLevel | 4481 | 4448 | 99.3% |
-| telly | telly | 12479 | 7567 | 60.6% |
-| ranked | ranked | 2534 | 2514 | 99.2% |
-| bneEsports | tournament | 2854 | 223 | 7.8% |
+| highLevel | highLevel | 4486 | 4453 | 99.3% |
+| telly | telly | 12484 | 7572 | 60.7% |
+| ranked | ranked | 2539 | 2519 | 99.2% |
+| bneEsports | tournament | 2855 | 223 | 7.8% |
 | evoEvents | tournament | 2753 | 63 | 2.3% |
 
-Seasons: S1 6042 · S2 6058 · S3 2715
+Seasons: S1 6042 · S2 6058 · S3 2730
 
-Patches: 1.01 574 · 1.02 494 · 1.03 386 · 1.04 608 · 1.05 566 · 1.06 608 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 367 · 1.11 440 · 1.12 245 · 1.13 238 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1286 · 3.01 1420 · unknown 10 (unknown = season contradicts the date: label-grace/override)
+Patches: 1.01 574 · 1.02 494 · 1.03 386 · 1.04 608 · 1.05 566 · 1.06 608 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 367 · 1.11 440 · 1.12 245 · 1.13 238 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1286 · 3.01 1435 · unknown 10 (unknown = season contradicts the date: label-grace/override)
 
-Misses by reason: pre-launch 4456 · not-tekken8 2619 · short-duration 1682 · shorts 1123 · no-vs-title 241 · char-unresolved 159 · bad-handle 3 · live-or-upcoming 3
+Misses by reason: pre-launch 4456 · not-tekken8 2619 · short-duration 1682 · shorts 1123 · no-vs-title 243 · char-unresolved 159 · bad-handle 3 · live-or-upcoming 2
 
 Season-label conflicts (channel label ≠ date-derived season, outside the ±14d boundary grace; date wins): 146
 
@@ -53,4 +53,4 @@ Pending review: 0 (data/review-queue.json)
 - `4Pf63UozmxA` [highLevel] no-vs-title: T8 🔥 Kkokkoma (Dragunov) 🔥 Tekken 8
 - `RUDWRC5M738` [highLevel] no-vs-title: T8 🔥 Shadow 20z (Zafina) 🔥 Tekken 8
 
-_Generated 2026-08-15T07:21:01.137Z_
+_Generated 2026-08-16T07:22:21.978Z_
