@@ -4684,7 +4684,7 @@
   },
   {
     "id": "kitiku",
-    "handle": "KITIKU"
+    "handle": "Kitiku"
   },
   {
     "id": "kitikuou",
@@ -7231,6 +7231,10 @@
     "handle": "R.200WON"
   },
   {
+    "id": "r-im-your-father",
+    "handle": "R.IM YOUR FATHER"
+  },
+  {
     "id": "r-imyoufather",
     "handle": "R.Imyoufather"
   },
@@ -7728,6 +7732,10 @@
   {
     "id": "saintloran",
     "handle": "SaintLoran"
+  },
+  {
+    "id": "sairo",
+    "handle": "Sairo"
   },
   {
     "id": "saitama",
