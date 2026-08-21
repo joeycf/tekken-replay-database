@@ -274,6 +274,19 @@
 // 'character-completion'. The 'source-classification' kind is still in the
 // schema and the endpoint still validates it — adding a channel that publishes
 // two kinds of footage should not need a schema change.
+
+// Declares this tool on the /dev index (engine app/pages/dev/index.vue). Every
+// value MUST stay a plain quoted literal — the build extracts them from the AST
+// and a variable or backtick string drops the key silently.
+definePageMeta({
+  devTool: {
+    title: 'Source review',
+    category: 'Curation',
+    description: 'Adjudicate the character-completion review queue from sampled HUD frames.',
+    writes: 'data/overrides.json',
+  },
+});
+
 if (!import.meta.dev) {
   throw createError({ statusCode: 404, statusMessage: 'Not Found' });
 }

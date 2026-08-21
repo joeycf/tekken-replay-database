@@ -229,6 +229,26 @@ vision here — everything comes out of the title and description text.
    doesn't know yet.
 4. Commit + push (redeploys).
 
+## Dev tooling (local-only)
+
+**Start at [`/dev`](http://localhost:3000/tekken/dev)** — it lists every tool below with its
+description, and there is a **Dev** entry in the site nav while the dev server is
+running. That index is the engine's (`app/pages/dev/index.vue`); it builds itself
+from what each page declares in `definePageMeta({ devTool })`, so a new tool
+appears there the moment it exists.
+
+One page does the hand-curation the parser can't.
+
+Everything under `/dev` is **`nuxt dev` only**: the page and every `/api/dev/*`
+route it uses guard on `import.meta.dev` and 404 otherwise,
+`nitro.prerender.ignore` skips the whole `/dev` prefix, and nothing public links
+to them (the nav entry is compiled out of production builds). They read and write
+the committed JSON directly — there is no database.
+
+| page                 | what it's for                                                                                    |
+| -------------------- | -------------------------------------------------------------------------------------------------- |
+| `/dev/source-review` | Adjudicate the character-completion review queue from sampled HUD frames → `data/overrides.json` |
+
 ## Tech stack & engineering notes
 
 For engineers reading the source — the stack, and the decisions worth knowing.
