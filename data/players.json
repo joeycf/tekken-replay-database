@@ -2337,6 +2337,10 @@
     "handle": "DX3G0"
   },
   {
+    "id": "dxmonslayer",
+    "handle": "Dxmonslayer"
+  },
+  {
     "id": "dxmusalli",
     "handle": "DXMusalli"
   },
@@ -2379,6 +2383,10 @@
   {
     "id": "elbee",
     "handle": "Elbee"
+  },
+  {
+    "id": "eleumas",
+    "handle": "Eleumas"
   },
   {
     "id": "elexon",
@@ -3156,6 +3164,10 @@
   {
     "id": "gorge",
     "handle": "GORGE"
+  },
+  {
+    "id": "gorgonzola",
+    "handle": "Gorgonzola"
   },
   {
     "id": "gorilla",
@@ -4680,7 +4692,7 @@
   },
   {
     "id": "kingjae",
-    "handle": "KingJae"
+    "handle": "Kingjae"
   },
   {
     "id": "kingreyjr",
@@ -6589,6 +6601,10 @@
     "handle": "Nori"
   },
   {
+    "id": "noroma",
+    "handle": "Noroma"
+  },
+  {
     "id": "noskip",
     "handle": "NoSkip"
   },
@@ -7382,6 +7398,10 @@
   {
     "id": "rain",
     "handle": "RAIN"
+  },
+  {
+    "id": "rainbet",
+    "handle": "RainBet"
   },
   {
     "id": "rajaendar",
@@ -10057,6 +10077,10 @@
   {
     "id": "tk-master",
     "handle": "TK MASTER"
+  },
+  {
+    "id": "tk-novi",
+    "handle": "Tk Novi"
   },
   {
     "id": "tk-sikander",
