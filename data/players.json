@@ -264,6 +264,10 @@
     "handle": "Alisa the Goddess"
   },
   {
+    "id": "alkaid",
+    "handle": "Alkaid"
+  },
+  {
     "id": "all-black",
     "handle": "All Black"
   },
@@ -3466,6 +3470,10 @@
     "handle": "Hate Me"
   },
   {
+    "id": "hatsumi",
+    "handle": "Hatsumi"
+  },
+  {
     "id": "hawg",
     "handle": "Hawg"
   },
@@ -5182,7 +5190,7 @@
   },
   {
     "id": "lightscrap",
-    "handle": "Lightscrap"
+    "handle": "LightScrap"
   },
   {
     "id": "lihan",
@@ -5198,7 +5206,7 @@
   },
   {
     "id": "liliyoon",
-    "handle": "Liliyoon"
+    "handle": "LiliYoon"
   },
   {
     "id": "lilmajin",
@@ -6528,6 +6536,10 @@
     "handle": "NO MERCY"
   },
   {
+    "id": "no-name",
+    "handle": "No Name"
+  },
+  {
     "id": "noah",
     "handle": "Noah"
   },
@@ -7644,6 +7656,10 @@
   {
     "id": "roku",
     "handle": "Roku"
+  },
+  {
+    "id": "roman-reign",
+    "handle": "Roman Reign"
   },
   {
     "id": "ronaldo",
