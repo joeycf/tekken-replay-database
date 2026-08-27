@@ -300,6 +300,10 @@
     "handle": "Allocution"
   },
   {
+    "id": "alpaca",
+    "handle": "Alpaca"
+  },
+  {
     "id": "altura",
     "handle": "ALTURA"
   },
@@ -6415,6 +6419,10 @@
     "handle": "NEVER HESIT8"
   },
   {
+    "id": "never1197",
+    "handle": "NEVER1197"
+  },
+  {
     "id": "never1997",
     "handle": "Never1997"
   },
@@ -8405,6 +8413,10 @@
   {
     "id": "skance",
     "handle": "SKANCE"
+  },
+  {
+    "id": "skug-sama",
+    "handle": "Skug sama"
   },
   {
     "id": "skull",
