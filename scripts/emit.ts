@@ -158,6 +158,24 @@ export async function emitGeneric(opts: {
   // ── contract assertions (drift = hard fail, the Phase-3 discipline) ──────
   const rosterIds = new Set(characters.map((c) => c.id));
   const playerIds = new Set(players.map((p) => p.id));
+
+  /**
+   * THE REGISTRY'S OWN INVARIANTS, which no game on this platform asserted until
+   * a `""` player id shipped in tokon-replay-database: the slug strips to
+   * [a-z0-9], so a handle written entirely in another script reduced to nothing,
+   * and every downstream gate passed because the empty id WAS in the registry.
+   * Uniqueness has never been checked for players either — patchGroups ids are,
+   * sitemap locs are — and identity resolution is exactly the kind of change
+   * that could break it.
+   */
+  for (const p of players) {
+    if (!p.id) throw new Error(`emit: player '${p.handle}' has an empty id`);
+  }
+  if (playerIds.size !== players.length) {
+    const seenIds = new Set<string>();
+    const dupe = players.find((p) => seenIds.size === seenIds.add(p.id).size);
+    throw new Error(`emit: duplicate player id '${dupe?.id}' in the registry`);
+  }
   const sourceIds = new Set<string>(CHANNELS.map((c) => c.source));
   if (replays.length !== records.length)
     throw new Error(`emit: replay count ${replays.length} !== record count ${records.length}`);
@@ -293,6 +311,18 @@ if (isMain) {
     join(root, 'data/overrides.json'),
   ).catch(() => ({}));
   const records = applyOverrides(all, overrides);
+  /**
+   * RESOLVE AFTER OVERRIDES, exactly as parse.ts does. An override stores its
+   * whole `sides` array INCLUDING the derived `player` id — a snapshot of what
+   * the handle slugged to the day a person wrote the verdict — and that id goes
+   * stale the moment identity resolution changes which spelling is canonical. A
+   * verdict written when "KingReyJr" was its own player carries
+   * `player: 'kingreyjr'`; the registry now says `king-rey-jr`, and this entry
+   * point reintroduced the dead id and threw on emit's own contract. The handle
+   * is the authority; the id is derived from it at every entry point.
+   */
+  const { resolvePlayers } = await import('./players');
+  resolvePlayers(records);
   const characters = await readJson<CharacterRecord[]>(join(root, 'data/characters.json'));
   const players = await readJson<PlayerRecord[]>(join(root, 'data/players.json'));
   await emitGeneric({ records, characters, players, root });

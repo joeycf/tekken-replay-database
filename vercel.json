@@ -7,6 +7,566 @@
       "source": "/",
       "destination": "/tekken",
       "permanent": false
+    },
+    {
+      "source": "/tekken/players/afro-king",
+      "destination": "/tekken/players/afroking",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/aimed-two",
+      "destination": "/tekken/players/aimedtwo",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/ayo-richie",
+      "destination": "/tekken/players/ayorichie",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/baekmai",
+      "destination": "/tekken/players/baek-mai",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/barechi",
+      "destination": "/tekken/players/bare-chi",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/big-boss",
+      "destination": "/tekken/players/bigboss",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/binchanhap",
+      "destination": "/tekken/players/binch-anhap",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/blue-berry-mango",
+      "destination": "/tekken/players/blueberrymango",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/brawl-pro",
+      "destination": "/tekken/players/brawlpro",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/bryan-theory",
+      "destination": "/tekken/players/bryantheory",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/cdgken",
+      "destination": "/tekken/players/cd-gken",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/cheese-yoni",
+      "destination": "/tekken/players/cheeseyoni",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/cherryberrymango",
+      "destination": "/tekken/players/cherry-berry-mango",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/crazy-dong-pal",
+      "destination": "/tekken/players/crazy-dongpal",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/crazydongpal",
+      "destination": "/tekken/players/crazy-dongpal",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/cuddlecore",
+      "destination": "/tekken/players/cuddle-core",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/daddy-king",
+      "destination": "/tekken/players/daddyking",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/dal-bit06",
+      "destination": "/tekken/players/dalbit06",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/dalbit",
+      "destination": "/tekken/players/dal-bit",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/daniel-mado",
+      "destination": "/tekken/players/danielmado",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/death-row",
+      "destination": "/tekken/players/deathrow",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/devil-buu",
+      "destination": "/tekken/players/devilbuu",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/dfp",
+      "destination": "/tekken/players/d-f-p",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/dhome-50",
+      "destination": "/tekken/players/dhome50",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/dirty-style",
+      "destination": "/tekken/players/dirtystyle",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/divineexorcist",
+      "destination": "/tekken/players/divine-exorcist",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/dporsche",
+      "destination": "/tekken/players/d-porsche",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/dr-king",
+      "destination": "/tekken/players/drking",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/dx-musalli",
+      "destination": "/tekken/players/dxmusalli",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/eltoro-alba",
+      "destination": "/tekken/players/el-toro-alba",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/endless-affect",
+      "destination": "/tekken/players/endlessaffect",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/g-bob",
+      "destination": "/tekken/players/gbob",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/go-go-attacker",
+      "destination": "/tekken/players/gogo-attacker",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/goattack",
+      "destination": "/tekken/players/go-attack",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/helpme",
+      "destination": "/tekken/players/help-me",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/hey-broken",
+      "destination": "/tekken/players/heybroken",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/hide-tone",
+      "destination": "/tekken/players/hidetone",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/hk47tk",
+      "destination": "/tekken/players/hk-47-tk",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/howfoolish",
+      "destination": "/tekken/players/how-foolish",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/i-m-your-father",
+      "destination": "/tekken/players/imyourfather",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/im-your-father",
+      "destination": "/tekken/players/imyourfather",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/jacob-kaas",
+      "destination": "/tekken/players/jacobkaas",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/jimmy-j-tran",
+      "destination": "/tekken/players/jimmyjtran",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/joecrush",
+      "destination": "/tekken/players/joe-crush",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/joeyfury",
+      "destination": "/tekken/players/joey-fury",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/joya-sakio",
+      "destination": "/tekken/players/joyasakio",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/justinhyuga",
+      "destination": "/tekken/players/justin-hyuga",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/kaizoku-lars",
+      "destination": "/tekken/players/kaizokulars",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/kajunggong",
+      "destination": "/tekken/players/kajung-gong",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/kane-and-trench",
+      "destination": "/tekken/players/kaneandtrench",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/keiosan",
+      "destination": "/tekken/players/keio-san",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/kim-shrimp",
+      "destination": "/tekken/players/kimshrimp",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/kingjae",
+      "destination": "/tekken/players/king-jae",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/kingreyjr",
+      "destination": "/tekken/players/king-rey-jr",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/kira-kira",
+      "destination": "/tekken/players/kirakira",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/kwiss",
+      "destination": "/tekken/players/k-wiss",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/l-i-r-l-i",
+      "destination": "/tekken/players/li-r-li",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/lee-mishima",
+      "destination": "/tekken/players/leemishima",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/leehwa",
+      "destination": "/tekken/players/lee-hwa",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/lifeismyheaven",
+      "destination": "/tekken/players/life-is-my-heaven",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/lilmajin",
+      "destination": "/tekken/players/lil-majin",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/ling-sj",
+      "destination": "/tekken/players/lingsj",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/linia-pacific",
+      "destination": "/tekken/players/liniapacific",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/lirli",
+      "destination": "/tekken/players/li-r-li",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/m-v-p",
+      "destination": "/tekken/players/mvp",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/made-of-clay",
+      "destination": "/tekken/players/madeofclay",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/md-luffy-19",
+      "destination": "/tekken/players/m-d-luffy-19",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/megaclinton",
+      "destination": "/tekken/players/mega-clinton",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/meoil",
+      "destination": "/tekken/players/meo-il",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/mishimaksa",
+      "destination": "/tekken/players/mishima-ksa",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/momodog",
+      "destination": "/tekken/players/momo-dog",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/morristhewalrus",
+      "destination": "/tekken/players/morris-the-walrus",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/mr-jnc",
+      "destination": "/tekken/players/mrjnc",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/mung-guri",
+      "destination": "/tekken/players/mungguri",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/na-arks",
+      "destination": "/tekken/players/naarks",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/nab-do",
+      "destination": "/tekken/players/nabdo",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/neon-kay-fujiwara",
+      "destination": "/tekken/players/neonkayfujiwara",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/neonkay",
+      "destination": "/tekken/players/neon-kay",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/neonkay-fujiwara",
+      "destination": "/tekken/players/neonkayfujiwara",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/nicebird",
+      "destination": "/tekken/players/nice-bird",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/ninaassassin",
+      "destination": "/tekken/players/nina-assassin",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/ninesquare",
+      "destination": "/tekken/players/nine-square",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/ninjakilla-212",
+      "destination": "/tekken/players/ninjakilla",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/onlyace",
+      "destination": "/tekken/players/only-ace",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/onlypractice",
+      "destination": "/tekken/players/only-practice",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/p-t-j",
+      "destination": "/tekken/players/ptj",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/planted-medusa",
+      "destination": "/tekken/players/plantedmedusa",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/play-joy",
+      "destination": "/tekken/players/playjoy",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/r-200won",
+      "destination": "/tekken/players/r200won",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/r-im-your-father",
+      "destination": "/tekken/players/r-imyourfather",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/river-dark",
+      "destination": "/tekken/players/riverdark",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/saeyoung",
+      "destination": "/tekken/players/sae-young",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/saram-ida",
+      "destination": "/tekken/players/saramida",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/say-you",
+      "destination": "/tekken/players/sayyou",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/shadow20z",
+      "destination": "/tekken/players/shadow-20z",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/shin-blade",
+      "destination": "/tekken/players/shinblade",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/shin-moong",
+      "destination": "/tekken/players/shinmoong",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/star-breaker",
+      "destination": "/tekken/players/starbreaker",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/steve-pi",
+      "destination": "/tekken/players/stevepi",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/super-brine",
+      "destination": "/tekken/players/superbrine",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/super-brine-tk",
+      "destination": "/tekken/players/superbrinetk",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/surely-not-chris",
+      "destination": "/tekken/players/surelynotchris",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/t-ara",
+      "destination": "/tekken/players/tara",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/t-r-i-b-a-l",
+      "destination": "/tekken/players/tribal",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/the-main-man",
+      "destination": "/tekken/players/themainman",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/thejakeman",
+      "destination": "/tekken/players/the-jakeman",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tripleh",
+      "destination": "/tekken/players/triple-h",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/u-n-o",
+      "destination": "/tekken/players/uno",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/valor-sora",
+      "destination": "/tekken/players/valorsora",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/warning-i-spam",
+      "destination": "/tekken/players/warning-ispam",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/warningispam",
+      "destination": "/tekken/players/warning-ispam",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/x-c-c",
+      "destination": "/tekken/players/xcc",
+      "permanent": true
     }
   ]
 }

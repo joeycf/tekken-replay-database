@@ -16,6 +16,7 @@ import { dirname, extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium, type Browser, type Page } from 'playwright-core';
 import RANKS from '../data/ranks.json';
+import { DISTINCT_KEYS, idKey } from './players';
 import type { CharacterRecord, MatchVideo, PlayerRecord, VideoOverride } from '../types/index';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -681,6 +682,41 @@ async function main(): Promise<void> {
     summary.updated === newestReplay.slice(0, 10),
     `summary.updated is the NEWEST REPLAY's date, not a build stamp (${summary.updated} vs ${newestReplay.slice(0, 10)})`,
   );
+  // ── player identity ───────────────────────────────────────────────────────
+  // One player, one page. idKey collapses spelling variants at parse time; this
+  // asserts the result, because the failure is invisible from the site — two
+  // profiles for one person both render correctly, each holding some of the
+  // matches, and nothing looks broken from either.
+  expect(
+    players.every((p) => p.id.length > 0),
+    'every player id is non-empty',
+  );
+  expect(
+    new Set(players.map((p) => p.id)).size === players.length,
+    'player ids are unique',
+  );
+  {
+    const byKey = new Map<string, string[]>();
+    for (const p of players) {
+      const k = idKey(p.handle);
+      byKey.set(k, [...(byKey.get(k) ?? []), p.handle]);
+    }
+    const undeclared = [...byKey.entries()].filter(
+      ([k, hs]) => hs.length > 1 && !DISTINCT_KEYS.has(k),
+    );
+    expect(
+      undeclared.length === 0,
+      `no two players share a normalised key undeclared${
+        undeclared.length
+          ? ` (${undeclared
+              .slice(0, 3)
+              .map(([k, hs]) => `${k}: ${hs.join('/')}`)
+              .join(', ')})`
+          : ''
+      }`,
+    );
+  }
+
   expect(
     summary.replays === videos.length &&
       summary.characters === characters.length &&

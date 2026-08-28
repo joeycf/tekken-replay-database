@@ -20,6 +20,7 @@ import { CHANNELS } from './channels';
 import { applyOverrides, emitGeneric } from './emit';
 import { buildPatchTable } from './patches';
 import { buildAliasMatcher, extractRank, loadCharacters } from './roster';
+import { HANDLE_ALIASES, idKey, resolvePlayers, undeclaredCollisions } from './players';
 import type {
   ChannelConfig,
   MatchSide,
@@ -101,6 +102,14 @@ const FEATURED = new Set([
 ]);
 
 // ── small utils ──────────────────────────────────────────────────────────────
+/** Read a JSON object, or {} when the file does not exist yet. */
+async function readJsonSafe(path: string): Promise<Record<string, string>> {
+  try {
+    return JSON.parse(await readFile(path, 'utf8')) as Record<string, string>;
+  } catch {
+    return {};
+  }
+}
 const slug = (handle: string): string =>
   handle
     .toLowerCase()
@@ -348,17 +357,10 @@ function footageTitle(title: string): [string, string] | null {
   return [a, b];
 }
 
-// Handle VARIANTS, which no normalization can catch: a suffix is not a spelling
-// difference. Evo writes "Ninjakilla_212" (the player's full FGC handle); the
-// four Tekken channels write "Ninjakilla", which already owns 100+ replays.
-// Without this the Evo verdicts slug to `ninjakilla-212` and build a second
-// page for the same competitor.
-//
-// CURATED, NOT INFERRED — the same discipline ORG_PREFIXES documents above, and
-// for the same reason: a wrong merge silently rewrites a real player's page.
-const HANDLE_ALIASES = new Map<string, string>([
-  ['ninjakilla_212', 'Ninjakilla'], // Evo 2026 Losers Round 1 vs JeonDDing
-]);
+// HANDLE_ALIASES moved to scripts/players.ts, which is where the identity
+// resolution that needs it lives. It sat here holding one entry and was
+// consulted only by the review-queue prefill below — never by the id path,
+// which is the one place a variant spelling actually mints a second page.
 
 type MissReason =
   | 'not-tekken8'
@@ -637,11 +639,21 @@ const COLLAPSE_ABS = 20; // AND >20 records
   }
 }
 
+/**
+ * ONE PLAYER, ONE PAGE — run before the registry is built, over the
+ * post-override records.
+ *
+ * The loop this replaces picked the best casing PER ID, which is right about
+ * casing and blind to the split it was choosing between: two spellings of one
+ * player have two ids, so it never compared them. "X c c" (155 records) and
+ * "Xcc" (83) were two pages and each looked correct from the inside.
+ */
+const mergeReport = resolvePlayers(records, casing, slug);
+
 // registry from the post-override records; best casing per id
 const playerIds = new Map<string, string>(); // id → best handle
-for (const [id, variants] of casing) {
-  const best = [...variants.entries()].sort((a, b) => b[1] - a[1])[0]![0];
-  playerIds.set(id, best);
+for (const v of records) {
+  for (const s of v.sides) if (!playerIds.has(s.player)) playerIds.set(s.player, s.handle);
 }
 const seen = new Set<string>();
 for (const v of records) for (const s of v.sides) seen.add(s.player);
@@ -650,6 +662,7 @@ const players: PlayerRecord[] = [...seen].sort().map((id) => ({
   handle: playerIds.get(id) ?? id,
   ...(FEATURED.has(id) ? { featured: true } : {}),
 }));
+const collisions = undeclaredCollisions(players);
 
 // ── the review queue ─────────────────────────────────────────────────────────
 // Footage-completion items, now that canonical spellings exist. Pre-filling the
@@ -660,7 +673,7 @@ const reviewQueue: ReviewQueueItem[] = [];
 const footagePendingIds = new Set(footagePending.map((p) => p.raw.id));
 for (const { raw, handles } of footagePending) {
   const canonical = (h: string): string => {
-    const aliased = HANDLE_ALIASES.get(h.toLowerCase()) ?? h;
+    const aliased = HANDLE_ALIASES.get(idKey(h)) ?? h;
     return playerIds.get(slug(aliased)) ?? aliased;
   };
   reviewQueue.push({
@@ -696,8 +709,39 @@ await writeFile(
   JSON.stringify(reviewQueue, null, 2) + '\n',
   'utf8',
 );
+/**
+ * THE RETIRED-ID LEDGER — append-only, and that is the whole point.
+ *
+ * A merged spelling's id is only observable at the moment of the merge: once
+ * data/videos.json is canonicalised, the old spelling is gone and nothing can
+ * rediscover it, so recomputing this set from committed data yields nothing. It
+ * also decays — when the last record carrying an old spelling leaves the corpus,
+ * a recomputed set would silently drop that redirect and the indexed URL would
+ * 404 again with no diff to explain it.
+ *
+ * Feeds `npm run data:redirects`. A row leaves it only by hand.
+ */
+const priorRedirects: Record<string, string> = await readJsonSafe(
+  join(DATA, 'player-redirects.json'),
+);
+const proposedRedirects: Record<string, string> = { ...priorRedirects };
+for (const [canonical, absorbed] of mergeReport.merged) {
+  for (const dead of absorbed) proposedRedirects[dead] = canonical;
+}
+const playerIdSet = new Set(players.map((p) => p.id));
+const redirectLedger = Object.fromEntries(
+  Object.entries(proposedRedirects)
+    .filter(([from, to]) => from !== to && playerIdSet.has(to))
+    .sort(([a], [b]) => a.localeCompare(b)),
+);
+
 await writeFile(join(DATA, 'videos.json'), JSON.stringify(records, null, 1) + '\n', 'utf8');
 await writeFile(join(DATA, 'players.json'), JSON.stringify(players, null, 2) + '\n', 'utf8');
+await writeFile(
+  join(DATA, 'player-redirects.json'),
+  JSON.stringify(redirectLedger, null, 2) + '\n',
+  'utf8',
+);
 await writeFile(
   join(DATA, 'seasonBoundaries.json'),
   JSON.stringify(SEASONS, null, 2) + '\n',
@@ -762,6 +806,32 @@ const report = [
   '',
   `Pending review: ${reviewQueue.length} (data/review-queue.json)`,
   '',
+  `Player identity: ${mergeReport.merged.size} identity(s) resolved from more than one spelling` +
+    `${collisions.length ? ` · ⚠ ${collisions.length} UNDECLARED collision(s)` : ''}`,
+  '',
+  ...(mergeReport.merged.size
+    ? [
+        'Retired ids are 301-redirected from vercel.json — run `npm run data:redirects`',
+        'after changing scripts/players.ts, or the old URLs 404.',
+        '',
+        ...[...mergeReport.merged]
+          .sort((a, b) => a[0].localeCompare(b[0]))
+          .slice(0, 40)
+          .map(([c, abs]) => `- \`${c}\` ← ${abs.map((a) => `\`${a}\``).join(' · ')}`),
+        ...(mergeReport.merged.size > 40 ? [`- …and ${mergeReport.merged.size - 40} more`] : []),
+        '',
+      ]
+    : []),
+  ...(collisions.length
+    ? [
+        'UNDECLARED COLLISIONS — either one person (add a HANDLE_ALIASES entry in',
+        'scripts/players.ts) or two (add the key to DISTINCT_KEYS). Undecided means',
+        'one player reads as two, or two read as one, and the page looks right either way:',
+        '',
+        ...collisions.map((c) => `- \`${c.key}\` — ${c.handles.join(' · ')}`),
+        '',
+      ]
+    : []),
   '## Sample misses (first 30 that are not shorts/live)',
   '',
   ...reportedMisses

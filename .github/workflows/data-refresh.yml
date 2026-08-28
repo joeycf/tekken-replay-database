@@ -45,7 +45,7 @@ jobs:
           # content-derived (newest replay date, not build time), so a
           # no-new-video day leaves it byte-identical and the guard below still
           # skips the commit.
-          git add data/videos.json data/replays.json data/stats.json data/players.json data/summary.json data/seasonBoundaries.json data/report.md
+          git add data/videos.json data/replays.json data/stats.json data/players.json data/summary.json data/seasonBoundaries.json data/player-redirects.json data/report.md
           # report.md's "_Generated <timestamp>_" line changes every run; a diff
           # that is ONLY that line is not a data change — drop it so a no-change
           # day produces no commit (and no deploy). report.md still ships
