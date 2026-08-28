@@ -585,6 +585,22 @@ async function main(): Promise<void> {
     'PRERENDERED title carries data-derived count (registries provided at build)',
   );
 
+  // ComboForge cross-link (engine v0.11.0). Both branches: Law needs the id
+  // override ('tekken8-marshall-law' — they file Tekken by full name), and Anna
+  // is not on ComboForge at all, so her band must fall back to the game hub
+  // rather than emit a deep link to nothing.
+  expect(
+    readFileSync(join(OUT, BASE, 'characters/law/index.html'), 'utf8').includes(
+      'characterId=tekken8-marshall-law',
+    ),
+    'ComboForge band uses the Marshall Law id override',
+  );
+  const annaHtml = readFileSync(join(OUT, BASE, 'characters/anna/index.html'), 'utf8');
+  expect(
+    annaHtml.includes('comboforge.gg/browse?gameId=tekken8') && !annaHtml.includes('characterId='),
+    'ComboForge band falls back to the hub for a character they do not carry (Anna)',
+  );
+
   // ── 6. Player page ─────────────────────────────────────────────────────────
   console.log('\n— /players/knee');
   await gotoIdle(page, at('/players/knee'));

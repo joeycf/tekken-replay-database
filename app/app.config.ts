@@ -142,5 +142,46 @@ export default defineAppConfig({
     // headroom, nobody floats. X stays 70% to hold the subject right of the
     // name/stat overlay.
     heroFocus: '70% 4%',
+    // ComboForge cross-link on character pages (engine v0.11.0). ComboForge
+    // files Tekken by FULL name, so most of the roster needs an explicit
+    // suffix; the twelve mononyms (Azucena, Devil Jin, King, …) derive. The six
+    // nulls are characters ComboForge does not carry — the band falls back to
+    // their Tekken 8 hub rather than emitting a deep link to nothing. Built and
+    // gated with the engine's `npm run verify:comboforge`.
+    comboforge: {
+      gameId: 'tekken8',
+      characters: {
+        alisa: 'alisa-bosconovitch',
+        asuka: 'asuka-kazama',
+        bryan: 'bryan-fury',
+        claudio: 'claudio-serafino',
+        clive: 'clive-rosfield',
+        dragunov: 'sergei-dragunov',
+        eddy: 'eddy-gordo',
+        feng: 'feng-wei',
+        heihachi: 'heihachi-mishima',
+        jack8: 'jack-8',
+        jin: 'jin-kazama',
+        jun: 'jun-kazama',
+        kazuya: 'kazuya-mishima',
+        lars: 'lars-alexandersson',
+        law: 'marshall-law',
+        lee: 'lee-chaolan',
+        leo: 'leo-kliesen',
+        leroy: 'leroy-smith',
+        lidia: 'lidia-sobieska',
+        nina: 'nina-williams',
+        paul: 'paul-phoenix',
+        steve: 'steve-fox',
+        victor: 'victor-chevalier',
+        xiaoyu: 'ling-xiaoyu',
+        anna: null,
+        armor_king: null,
+        bob: null,
+        fahkumram: null,
+        kunimitsu: null,
+        miary_zo: null,
+      },
+    },
   } satisfies GameConfig,
 });
