@@ -12,6 +12,8 @@
 //
 // Run: npm run data:parse   (pure: no network, no API key)
 
+import { execFileSync } from 'node:child_process';
+import { statSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -274,10 +276,12 @@ const CHANNEL_OF = new Map(CHANNELS.map((c) => [c.id, c]));
 
 const readJson = async <T>(p: string): Promise<T> => JSON.parse(await readFile(p, 'utf8')) as T;
 const raws: RawVideoRecord[] = [];
+const rawPaths: string[] = [];
 for (const ch of CHANNELS) {
   const path = join(ROOT, 'raw', `${ch.id}.json`);
   try {
     raws.push(...(await readJson<RawVideoRecord[]>(path)));
+    rawPaths.push(path);
   } catch {
     console.error(`✖ ${path} missing/unreadable — run \`npm run data:fetch\` first.`);
     process.exit(1);
@@ -286,6 +290,77 @@ for (const ch of CHANNELS) {
 const overrides = await readJson<Record<string, VideoOverride>>(join(DATA, 'overrides.json')).catch(
   () => ({}) as Record<string, VideoOverride>,
 );
+
+// ── stale-raw guard ──────────────────────────────────────────────────────────
+// `raw/` is gitignored, so it is local-only and the daily cron never writes it.
+// A local dump is therefore routinely OLDER than the committed data/ the cron
+// produced in CI, and a bare parse silently deletes every record the stale dump
+// cannot reproduce.
+//
+// Observed here 2026-08-27: a routine parse against three-week-old dumps wrote
+// 14,686 records over a committed 15,059 and reported success. The 373 missing
+// were recovered from git only because someone compared the counts by hand.
+//
+// THE COLLAPSE GUARD BELOW CANNOT CATCH THIS, and tuning it is not the answer.
+// It needs >20 records AND >10% from ONE channel; staleness arrives as a handful
+// spread across all five and slips under both thresholds by construction. Two
+// different failures, two guards.
+//
+// TWO CONDITIONS, BOTH REQUIRED — that is what separates staleness from a
+// legitimate prune. Fresh dumps missing ids is how deleted videos are SUPPOSED
+// to leave the corpus, so the id difference alone would refuse the very thing
+// the pipeline exists to do. The mtime test is what makes it decidable: dumps
+// older than the data cannot have observed a deletion.
+//
+// An equal id set — a re-parse after an overrides change — never trips either.
+//
+// Ported from 2xko-replay-database, which has carried this since 2026-07-06 and
+// whose version fired correctly on the same day this repo's absence cost 373
+// records. Simpler here: no frozen channels and no manual-videos.json, so the
+// exclusion sets that version needs collapse to nothing. Also SAFER here — this
+// repo gates game-membership at parse rather than fetch, so `raws` holds every
+// upload a channel ever made (telly is 12,427 raw against 7,516 committed) and
+// the raw id set is a strict superset of the committed one.
+if (!process.argv.includes('--allow-stale')) {
+  const committed = await readJson<MatchVideo[]>(join(DATA, 'videos.json')).catch(
+    () => [] as MatchVideo[],
+  );
+  const rawIds = new Set(raws.map((r) => r.id));
+  const missing = committed.filter((v) => !rawIds.has(v.id));
+  if (missing.length > 0) {
+    let lastCommitMs: number | null = null;
+    try {
+      const out = execFileSync('git', ['log', '-1', '--format=%ct', '--', 'data/videos.json'], {
+        cwd: ROOT,
+        stdio: ['ignore', 'pipe', 'ignore'],
+      })
+        .toString()
+        .trim();
+      if (out) lastCommitMs = Number(out) * 1000;
+    } catch {
+      // No usable git history (shallow CI clone, tarball) — staleness cannot be
+      // PROVEN, and refusing on a guess would block the cron. Those environments
+      // fetch before parsing anyway. Fall through.
+    }
+    const rawMtimeMs = Math.max(...rawPaths.map((p) => statSync(p).mtimeMs));
+    if (lastCommitMs !== null && rawMtimeMs < lastCommitMs) {
+      const day = (ms: number) => new Date(ms).toISOString().slice(0, 10);
+      console.error(
+        [
+          `✖ Stale raw/ dumps: data/videos.json (last committed ${day(lastCommitMs)}) contains`,
+          `  ${missing.length} video(s) missing from raw/*.json (fetched ${day(rawMtimeMs)}),`,
+          `  e.g. ${missing[0]!.id}. The daily cron refreshes remotely, so local raw/ lags —`,
+          `  parsing now would silently drop those videos and the next run would treat the`,
+          `  smaller number as the new normal.`,
+          ``,
+          `  Refresh first:   npm run data:build`,
+          `  Or override:     npm run data:parse -- --allow-stale`,
+        ].join('\n'),
+      );
+      process.exit(1);
+    }
+  }
+}
 
 // ── the game marker (gameSignal channels only) ───────────────────────────────
 // The four original channels are Tekken-only by construction, so this pipeline
