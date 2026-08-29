@@ -9,6 +9,11 @@
       "permanent": false
     },
     {
+      "source": "/tekken/players/aceunlimited",
+      "destination": "/tekken/players/ace-unlimited",
+      "permanent": true
+    },
+    {
       "source": "/tekken/players/afro-king",
       "destination": "/tekken/players/afroking",
       "permanent": true
@@ -134,6 +139,11 @@
       "permanent": true
     },
     {
+      "source": "/tekken/players/divine-exorcist4",
+      "destination": "/tekken/players/divineexorcist4",
+      "permanent": true
+    },
+    {
       "source": "/tekken/players/divineexorcist",
       "destination": "/tekken/players/divine-exorcist",
       "permanent": true
@@ -256,6 +266,11 @@
     {
       "source": "/tekken/players/kane-and-trench",
       "destination": "/tekken/players/kaneandtrench",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/keebe-omega",
+      "destination": "/tekken/players/keebeomega",
       "permanent": true
     },
     {
@@ -536,6 +551,11 @@
     {
       "source": "/tekken/players/thejakeman",
       "destination": "/tekken/players/the-jakeman",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/triple-aaa",
+      "destination": "/tekken/players/tripleaaa",
       "permanent": true
     },
     {

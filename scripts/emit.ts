@@ -49,6 +49,11 @@ export interface GenericReplay {
   title: string;
   views?: number;
   durationSec?: number;
+  /** The YouTube id, when `id` is not it (engine v0.10.0). A record is not
+   *  required to be a whole video: an index intake publishes many per VOD. */
+  videoId?: string;
+  /** Where this record's footage starts inside `videoId`, in seconds. */
+  startSeconds?: number;
 }
 
 /** The game's identity as it appears in data/summary.json — the shell selector
@@ -88,6 +93,14 @@ function toReplay(v: MatchVideo): GenericReplay {
     title: v.title,
     ...(v.viewCount !== undefined ? { views: v.viewCount } : {}),
     ...(v.durationSec > 0 ? { durationSec: v.durationSec } : {}),
+    // GUARDED INDEPENDENTLY, and here that is not a nicety. startSeconds 0 is
+    // falsy, and 32 of this catalogue's 62 VODs are single-entry at offset 0 —
+    // 10% of the ingest. Under a single combined spread every one of them would
+    // lose `videoId` too, and the engine resolves `videoId ?? id`, so each would
+    // render a thumbnail and an embed for the literal string "abc@0": a 404 and
+    // a dead player, on exactly the records least likely to be spot-checked.
+    ...(v.videoId ? { videoId: v.videoId } : {}),
+    ...(v.startSeconds ? { startSeconds: v.startSeconds } : {}),
   };
 }
 

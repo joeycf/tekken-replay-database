@@ -18,13 +18,14 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { CHANNELS } from './channels';
+import { CHANNELS, stripTheaterSponsor } from './channels';
 import { applyOverrides, emitGeneric } from './emit';
 import { buildPatchTable } from './patches';
 import { buildAliasMatcher, extractRank, loadCharacters } from './roster';
 import { HANDLE_ALIASES, idKey, resolvePlayers, undeclaredCollisions } from './players';
 import type {
   ChannelConfig,
+  ChannelKey,
   MatchSide,
   MatchVideo,
   ReviewQueueItem,
@@ -32,6 +33,8 @@ import type {
   PlayerRecord,
   RawVideoRecord,
   SeasonBoundary,
+  SourcePins,
+  TheaterRawRecord,
   VideoOverride,
 } from '../types/index';
 
@@ -277,19 +280,61 @@ const CHANNEL_OF = new Map(CHANNELS.map((c) => [c.id, c]));
 const readJson = async <T>(p: string): Promise<T> => JSON.parse(await readFile(p, 'utf8')) as T;
 const raws: RawVideoRecord[] = [];
 const rawPaths: string[] = [];
+/** The index intake's dump, when this run has one. Kept OUT of `raws` because
+ *  its records are not built by a title parse — see buildTheaterRecords. */
+let theaterRaw: TheaterRawRecord[] = [];
+/** Local-first intakes with no dump on this run, so their committed records are
+ *  carried instead of rebuilt. On the daily cron this is all of them, every
+ *  time: raw/ is gitignored and the cron never fetches them. */
+const carriedLocalFirst: ChannelKey[] = [];
 for (const ch of CHANNELS) {
   const path = join(ROOT, 'raw', `${ch.id}.json`);
+  let dump: RawVideoRecord[];
   try {
-    raws.push(...(await readJson<RawVideoRecord[]>(path)));
-    rawPaths.push(path);
+    dump = await readJson<RawVideoRecord[]>(path);
   } catch {
+    // A LOCAL-FIRST intake legitimately has no dump here. That is the normal
+    // state on the cron, not an error: carry its committed records. Requiring
+    // the dump would break the daily build; parsing without it would delete
+    // every one of its records.
+    if (ch.localFirst) {
+      carriedLocalFirst.push(ch.id);
+      continue;
+    }
     console.error(`✖ ${path} missing/unreadable — run \`npm run data:fetch\` first.`);
     process.exit(1);
   }
+  rawPaths.push(path);
+  if (ch.index) {
+    // Structured at source: handles, characters, event tag and a start offset
+    // are separate fields, so there is no title to parse.
+    theaterRaw = dump as TheaterRawRecord[];
+    continue;
+  }
+  raws.push(...dump);
 }
 const overrides = await readJson<Record<string, VideoOverride>>(join(DATA, 'overrides.json')).catch(
   () => ({}) as Record<string, VideoOverride>,
 );
+
+/** The committed catalogue, read once. It is the baseline for the stale-raw
+ *  guard, the source of the local-first carry, and one arm of the index
+ *  intake's ignore-if-known set. Absent is a legitimate first run; anything
+ *  else — a truncated file, a bad merge — must NOT be silently read as an empty
+ *  corpus, because that would carry nothing and hand every guard a baseline of
+ *  zero. */
+const committedForKnown: MatchVideo[] = await readJson<MatchVideo[]>(join(DATA, 'videos.json'))
+  .then((v) => {
+    if (!Array.isArray(v)) throw new Error('data/videos.json is not an array');
+    return v;
+  })
+  .catch((e: NodeJS.ErrnoException) => {
+    if (e.code === 'ENOENT') return [] as MatchVideo[];
+    console.error(
+      `✖ data/videos.json is unreadable (${e.message}) — refusing to treat it as empty.`,
+    );
+    process.exit(1);
+  });
 
 // ── stale-raw guard ──────────────────────────────────────────────────────────
 // `raw/` is gitignored, so it is local-only and the daily cron never writes it.
@@ -316,17 +361,24 @@ const overrides = await readJson<Record<string, VideoOverride>>(join(DATA, 'over
 //
 // Ported from 2xko-replay-database, which has carried this since 2026-07-06 and
 // whose version fired correctly on the same day this repo's absence cost 373
-// records. Simpler here: no frozen channels and no manual-videos.json, so the
-// exclusion sets that version needs collapse to nothing. Also SAFER here — this
-// repo gates game-membership at parse rather than fetch, so `raws` holds every
-// upload a channel ever made (telly is 12,427 raw against 7,516 committed) and
-// the raw id set is a strict superset of the committed one.
+// records. SAFER here than there — this repo gates game-membership at parse
+// rather than fetch, so `raws` holds every upload a channel ever made (telly is
+// 12,427 raw against 7,516 committed) and the raw id set is a strict superset
+// of the committed one.
+//
+// THE EXCLUSIONS USED TO COLLAPSE TO NOTHING AND NO LONGER DO. An index intake
+// is read outside `raws` and, on a carrying run, is not read at all — so every
+// one of its committed ids reads as missing and this guard fires on every cron
+// run and every local parse. That is how a guard becomes a flag people learn to
+// pass, which is worse than not having it. Both exclusions are load-bearing:
+// the dump's ids when rebuilding, the carried records' ids when not.
 if (!process.argv.includes('--allow-stale')) {
-  const committed = await readJson<MatchVideo[]>(join(DATA, 'videos.json')).catch(
-    () => [] as MatchVideo[],
+  const committed = committedForKnown;
+  const rawIds = new Set([...raws.map((r) => r.id), ...theaterRaw.map((r) => r.id)]);
+  const carriedIds = new Set(
+    committed.filter((v) => carriedLocalFirst.includes(v.intake)).map((v) => v.id),
   );
-  const rawIds = new Set(raws.map((r) => r.id));
-  const missing = committed.filter((v) => !rawIds.has(v.id));
+  const missing = committed.filter((v) => !rawIds.has(v.id) && !carriedIds.has(v.id));
   if (missing.length > 0) {
     let lastCommitMs: number | null = null;
     try {
@@ -595,6 +647,214 @@ const videos: MatchVideo[] = candidates.map((c) => {
     sides,
   };
 });
+// ── the index intake: rebuild from a dump, or carry ─────────────────────────
+//
+// A THIRD CONSTRUCTION PATH, beside the title parse and the footage verdict.
+// The catalogue arrives structured — handles, characters, event tag and offset
+// are separate fields — so there is no title to parse. The title these records
+// carry was SYNTHESIZED by the fetcher from those same fields.
+//
+// TRUST TIER. Third-party curation is weaker provenance than either of the
+// other two paths, so it takes the STRICTER of their gates: characters resolve
+// on an EXACT alias only — never through `matcher.one()`, whose job is to read
+// prose — and an unresolved token is dropped to residue rather than guessed.
+//
+// LOCAL-FIRST. On a cron run there is no dump and the committed records are
+// CARRIED; on a local run that fetched, they are REBUILT. Both must publish
+// identical bytes from identical inputs, which they do because applyOverrides
+// below is the only curation step and it runs over the assembled array either
+// way.
+const theaterSkippedKnown: { videoId: string; tag: string; where: string }[] = [];
+const theaterResidue: { id: string; raw: string }[] = [];
+
+function buildTheaterRecords(ch: ChannelConfig, dump: TheaterRawRecord[]): MatchVideo[] {
+  // ── ignore-if-known, and it runs FIRST ────────────────────────────────────
+  // If this repo has already ruled on a video IN ANY CAPACITY, the catalogue
+  // entry is ignored. Not merged, not preferred — ignored. The predicate is
+  // known-ANYWHERE rather than merely in-records, because an id excluded as
+  // wrong-game or dropped as a duplicate must not re-enter through a side door;
+  // that verdict is the whole point of overrides.json.
+  //
+  // It keys on the VIDEO id, not the record id. A composite id can never equal
+  // an 11-character YouTube id, so comparing record ids would match nothing and
+  // the rule would silently never fire.
+  //
+  // `raws` is the widest arm and the one that matters: it holds every upload
+  // these channels ever made, pre-gate, so a longform VOD this repo fetched and
+  // could not parse still counts as ruled-on. Measured cost on the first
+  // ingest: 0 of 317 — the catalogue's Tekken VODs belong to eleven organiser
+  // channels none of which this repo tracks. That is a fact about today's data,
+  // not a guarantee, which is why it is reported rather than assumed.
+  const knownAnywhere = new Map<string, string>();
+  const note = (id: string, where: string) => {
+    if (!knownAnywhere.has(id)) knownAnywhere.set(id, where);
+  };
+  for (const r of raws) note(r.id, `raw/${r.channel}.json`);
+  for (const v of committedForKnown) note(v.id, `videos.json (${v.intake})`);
+  for (const [id, ov] of Object.entries(overrides)) {
+    note(id, ov.exclude === true ? 'overrides.json (excluded)' : 'overrides.json');
+  }
+
+  const kept: TheaterRawRecord[] = [];
+  for (const r of dump) {
+    const where = knownAnywhere.get(r.videoId);
+    if (where) theaterSkippedKnown.push({ videoId: r.videoId, tag: r.tag, where });
+    else kept.push(r);
+  }
+
+  // ── duplicate ids across intakes ──────────────────────────────────────────
+  // Structurally impossible today — every index id contains "@" and no other
+  // intake's does — which is exactly why it is worth asserting. Ids are the
+  // primary key of videos.json and overrides.json, so a collision does not
+  // error downstream: one record silently replaces the other.
+  const byId = new Map<string, string>();
+  for (const r of raws) byId.set(r.id, `raw/${r.channel}.json`);
+  for (const v of committedForKnown) if (v.intake !== ch.id) byId.set(v.id, `videos.json`);
+  const collisions: string[] = [];
+  const seenHere = new Set<string>();
+  for (const r of kept) {
+    const other = byId.get(r.id);
+    if (other) collisions.push(`  ${r.id}: ${ch.id} vs ${other}`);
+    if (seenHere.has(r.id)) collisions.push(`  ${r.id}: ${ch.id} vs ${ch.id}`);
+    seenHere.add(r.id);
+  }
+  if (collisions.length > 0) {
+    console.error(
+      [`✖ ${collisions.length} record id(s) claimed by two intakes — nothing written:`]
+        .concat(collisions.slice(0, 20))
+        .join('\n'),
+    );
+    process.exit(1);
+  }
+
+  // Name and every declared alias, lowercased. The character ID is deliberately
+  // not a key: ids are ours and the catalogue writes display names.
+  const byAlias = new Map<string, string>();
+  for (const c of characters) {
+    byAlias.set(c.name.trim().toLowerCase(), c.id);
+    for (const a of (c.extra?.aliases as string[] | undefined) ?? []) {
+      byAlias.set(a.trim().toLowerCase(), c.id);
+    }
+  }
+
+  const out: MatchVideo[] = [];
+  for (const r of kept) {
+    // The same pre-launch floor every fetched channel gets. An index intake
+    // never enters the title-parse path, so without this it would have no floor
+    // at all rather than the global one.
+    if (r.publishedAt.slice(0, 10) < S1_START) continue;
+
+    const sides: MatchSide[] = [];
+    for (let i = 0; i < 2; i++) {
+      // Sponsor prefix STRIPPED, never split: "|" is not a duo delimiter here.
+      // Then the repo's own org-tag rule, so "ATL Nyanko" and "OEG | Slate"
+      // reduce the same way title-parsed handles do.
+      const handle = stripOrgPrefix(stripTheaterSponsor(r.players[i] ?? ''));
+      const ids: string[] = [];
+      const unresolved: string[] = [];
+      for (const tok of r.characters[i] ?? []) {
+        const id = byAlias.get(tok.trim().toLowerCase());
+        if (id === undefined) unresolved.push(tok);
+        else if (!ids.includes(id)) ids.push(id);
+      }
+      if (unresolved.length) theaterResidue.push({ id: r.id, raw: unresolved.join(', ') });
+      sides.push({ player: slug(handle), handle, characters: ids });
+    }
+
+    // A side with no character is the one state emit hard-fails on. Catch it
+    // here so it reads as a countable miss on this intake rather than a crash
+    // three stages later. Same for a handle that slugs to nothing.
+    if (sides.some((s) => s.characters.length === 0 || !s.handle || !s.player)) continue;
+
+    out.push({
+      id: r.id,
+      channel: ch.source,
+      intake: ch.id,
+      title: r.title,
+      publishedAt: r.publishedAt,
+      durationSec: r.durationSec,
+      season: resolveSeason(r.publishedAt.slice(0, 10), null),
+      patchVersion: patchTable.patchForDate(r.publishedAt)?.version ?? null,
+      videoId: r.videoId,
+      startSeconds: r.startSeconds,
+      sides: [sides[0]!, sides[1]!] as [MatchSide, MatchSide],
+    });
+  }
+  return out;
+}
+
+/**
+ * THE INDEX INTAKE VOTES ON HANDLE CASING FROM THE ASSEMBLED RECORD, not from
+ * the catalogue string, and the distinction is what makes the carry sound.
+ *
+ * A vote cast inside the builder cannot be re-cast on a run that has no dump,
+ * so an intake that voted there would resolve players differently depending on
+ * whether raw/ happened to be present — measured: four players, twenty records.
+ * Casting it here, from `s.handle`, is symmetric: a rebuild votes the
+ * catalogue's spelling, a carry votes the spelling that same catalogue's vote
+ * elected last time, and re-electing a winner is a fixpoint.
+ *
+ * Not voting at all was tried and is worse. resolvePlayers merges spelling
+ * variants through this tally, so an intake with no votes cannot merge its own:
+ * the catalogue spells one Claudio player both "Divine Exorcist4" and
+ * "DivineExorcist4", whose alphanumerics are identical but whose slugs are not,
+ * and with no votes they became two player pages — caught by the undeclared
+ * collision gate, which is exactly what that gate is for.
+ */
+const voteLocalFirst = (records: MatchVideo[]) => {
+  for (const v of records) for (const s of v.sides) noteHandle(s.player, s.handle, 1);
+};
+
+for (const ch of CHANNELS.filter((c) => c.localFirst)) {
+  if (carriedLocalFirst.includes(ch.id)) {
+    // Carried, not rebuilt. The records go into the same array by the same
+    // route, so the collapse guard below sees 317 → 317 rather than 317 → 0 —
+    // which is why this repo needs NO local-first exclusion in that guard,
+    // unlike the sibling it is ported from. It tallies PARSED against
+    // COMMITTED, and a carried record is parsed for that purpose.
+    const carried = committedForKnown.filter((v) => v.intake === ch.id);
+    voteLocalFirst(carried);
+    videos.push(...carried);
+  } else {
+    const built = buildTheaterRecords(ch, theaterRaw);
+    voteLocalFirst(built);
+    videos.push(...built);
+  }
+}
+
+// ── the carry pin (data/source-pins.json) ───────────────────────────────────
+// data/videos.json is both the source and the target of the carry, so one bad
+// run would poison the next run's baseline permanently and silently. Asserted
+// on a carry, written on a rebuild: a rebuild has the dump in front of it and
+// is the authority on the count; a carry has only yesterday's file.
+//
+// The assertion is unconditional for a carried intake — NOT guarded on
+// "carried something", which would make total loss the one case that passes.
+const sourcePins: SourcePins = await readJson<SourcePins>(join(DATA, 'source-pins.json')).catch(
+  () => ({}) as SourcePins,
+);
+for (const key of carriedLocalFirst) {
+  const got = videos.filter((v) => v.intake === key).length;
+  const want = sourcePins[key];
+  if (want === undefined) {
+    console.error(
+      `✖ ${key} carried ${got} record(s) but data/source-pins.json has no pin for it.\n` +
+        `  "No expectation" is the exact state the pin exists to prevent.\n` +
+        `  Run \`npm run data:theater\` then \`npm run data:parse\` to rebuild and pin.`,
+    );
+    process.exit(1);
+  }
+  if (got !== want) {
+    console.error(
+      `✖ source pin mismatch on ${key}: carried ${got}, pinned ${want}.\n` +
+        `  data/videos.json is both the source and the target of this carry, so drift\n` +
+        `  compounds: the next run would treat ${got} as the new baseline.\n` +
+        `  If deliberate, rebuild with \`npm run data:theater\` and commit the new pin.`,
+    );
+    process.exit(1);
+  }
+}
+
 // ── character-completion: records built from a footage verdict ───────────────
 // An overrides.json entry with a complete sides pair on a MISSED id is
 // authoritative — the record is built from raw + override with the title gates
@@ -810,6 +1070,21 @@ const redirectLedger = Object.fromEntries(
     .sort(([a], [b]) => a.localeCompare(b)),
 );
 
+// Re-pin every local-first intake REBUILT this run, from the final count —
+// exclusions and all — so the number the next carrying run checks against is
+// the number actually published.
+const rebuiltLocalFirst = CHANNELS.filter((c) => c.localFirst && !carriedLocalFirst.includes(c.id));
+if (rebuiltLocalFirst.length > 0) {
+  const next: SourcePins = { ...sourcePins };
+  for (const ch of rebuiltLocalFirst) {
+    next[ch.id] = records.filter((v) => v.intake === ch.id).length;
+  }
+  const ordered = Object.fromEntries(
+    Object.entries(next).sort(([a], [b]) => a.localeCompare(b)),
+  ) as SourcePins;
+  await writeFile(join(DATA, 'source-pins.json'), JSON.stringify(ordered, null, 2) + '\n', 'utf8');
+}
+
 await writeFile(join(DATA, 'videos.json'), JSON.stringify(records, null, 1) + '\n', 'utf8');
 await writeFile(join(DATA, 'players.json'), JSON.stringify(players, null, 2) + '\n', 'utf8');
 await writeFile(
@@ -824,12 +1099,16 @@ await writeFile(
 );
 
 // ── report ───────────────────────────────────────────────────────────────────
-// records carry the SOURCE, so coverage is counted back through the intake
-// channel each video came from (sources may aggregate several channels).
-const channelOf = new Map(raws.map((r) => [r.id, r.channel]));
+// Records carry the SOURCE, so coverage is counted back through the intake
+// channel (sources may aggregate several channels).
 const byChannel = (id: string) => ({
-  raw: raws.filter((r) => r.channel === id).length,
-  parsed: records.filter((v) => channelOf.get(v.id) === id).length,
+  // An index intake is read outside `raws`, so its dump has to be counted
+  // explicitly or the row reads 0 uploads / 0 parsed on the very run that
+  // rebuilt it. `parsed` reads the record's own `intake` — this used to look
+  // the id up in a map built from `raws`, which knows nothing about a composite
+  // id and so scored every segment record as belonging to no channel.
+  raw: id === 'replayTheater' ? theaterRaw.length : raws.filter((r) => r.channel === id).length,
+  parsed: records.filter((v) => v.intake === id).length,
   missed: reportedMisses.filter((m) => m.channel === id),
 });
 const rankSides = records.reduce((n, v) => n + v.sides.filter((s) => s.rank).length, 0);
@@ -852,9 +1131,50 @@ const report = [
   '| --- | --- | ---: | ---: | ---: |',
   ...CHANNELS.map((ch) => {
     const s = byChannel(ch.id);
-    return `| ${ch.id} | ${ch.source} | ${s.raw} | ${s.parsed} | ${((s.parsed / Math.max(1, s.raw)) * 100).toFixed(1)}% |`;
+    // A CARRIED intake has no uploads at all this run, by design. A bare
+    // "0 | 317 | 0.0%" row would read as a channel that died.
+    const carried = carriedLocalFirst.includes(ch.id);
+    const mark = ch.index ? (carried ? ' _(carried)_' : ' _(index)_') : '';
+    return carried
+      ? `| ${ch.id}${mark} | ${ch.source} | — | ${s.parsed} | — |`
+      : `| ${ch.id}${mark} | ${ch.source} | ${s.raw} | ${s.parsed} | ${((s.parsed / Math.max(1, s.raw)) * 100).toFixed(1)}% |`;
   }),
   '',
+  ...(CHANNELS.some((c) => c.localFirst)
+    ? [
+        '### Local-first intakes',
+        '',
+        '| intake | records | pin | this run |',
+        '| --- | ---: | ---: | --- |',
+        ...CHANNELS.filter((c) => c.localFirst).map((ch) => {
+          const n = records.filter((v) => v.intake === ch.id).length;
+          const mode = carriedLocalFirst.includes(ch.id)
+            ? 'carried (no dump)'
+            : 'rebuilt from a local dump';
+          // On a rebuild the pin was just rewritten from this same count, so
+          // read the count rather than the stale in-memory value we loaded
+          // before writing it.
+          const pin = carriedLocalFirst.includes(ch.id) ? (sourcePins[ch.id] ?? '—') : n;
+          return `| \`${ch.id}\` | ${n} | ${pin} | ${mode} |`;
+        }),
+        '',
+        theaterSkippedKnown.length > 0
+          ? `Entries **skipped as already-known**: **${theaterSkippedKnown.length}** of ${
+              theaterSkippedKnown.length +
+              records.filter((v) => v.intake === 'replayTheater').length
+            }. An id this repo has already ruled on, in any capacity, does not re-enter through a side door.`
+          : '_Entries skipped as already-known: **0**. The catalogue indexes no video this repo has fetched, published or ruled on._',
+        '',
+        ...(theaterResidue.length > 0
+          ? [
+              `⚠ **${theaterResidue.length}** side(s) carried a character string that resolves to no roster id. Dropped to residue, never guessed:`,
+              '',
+              ...theaterResidue.slice(0, 20).map((r) => `- \`${r.id}\` — ${r.raw}`),
+              '',
+            ]
+          : []),
+      ]
+    : []),
   `Seasons: ${Object.entries(seasonDist)
     .sort()
     .map(([k, n]) => `${k} ${n}`)

@@ -45,7 +45,11 @@ jobs:
           # content-derived (newest replay date, not build time), so a
           # no-new-video day leaves it byte-identical and the guard below still
           # skips the commit.
-          git add data/videos.json data/replays.json data/stats.json data/players.json data/summary.json data/seasonBoundaries.json data/player-redirects.json data/report.md
+          # source-pins.json is the local-first carry's pin. The cron never
+          # rewrites it — it carries rather than rebuilds, so the pin is read
+          # and asserted, never written — but staging it costs nothing and an
+          # unstaged file that DOES change is a change discarded in silence.
+          git add data/videos.json data/replays.json data/stats.json data/players.json data/summary.json data/seasonBoundaries.json data/player-redirects.json data/source-pins.json data/report.md
           # report.md's "_Generated <timestamp>_" line changes every run; a diff
           # that is ONLY that line is not a data change — drop it so a no-change
           # day produces no commit (and no deploy). report.md still ships

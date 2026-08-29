@@ -96,7 +96,80 @@ export const CHANNELS: ChannelConfig[] = [
     gameSignal: 'titleOrDescription',
     charactersFromFootage: true,
   },
+  {
+    /**
+     * THE FIRST INDEX SOURCE IN THIS REPO. replaytheater.app is a fan-curated
+     * match catalogue: it hosts no video, it points AT video with a start
+     * offset. An entry is a (videoId, startSeconds) pair plus players,
+     * characters and an event tag, so a record here is a SEGMENT — 317 tagged
+     * Tekken 8 matches cut from 62 longform VODs — which is why these records
+     * are keyed `${videoId}@${start}` and not by video id.
+     *
+     * IT REUSES `tournament` RATHER THAN MINTING A SOURCE, and that is this
+     * repo's model asserting itself over the sibling it is ported from. There,
+     * one field is both the intake key and the public badge, so a catalogue had
+     * to become a new badge. Here they are separate unions and `tournament`
+     * already aggregates every event organiser — the precedent evoEvents set.
+     * app/app.config.ts therefore needs NO edit: a second Tournament badge
+     * would render identically to the first and tell a visitor nothing.
+     *
+     * WHAT IT ADDS. The tournament source is this repo's weakest: bneEsports
+     * parses 8.1% of its uploads and evoEvents 2.3%, because both publish
+     * longform event streams that a title parse cannot segment. This is that
+     * segmentation, already done by hand, for 26 grassroots events across
+     * eleven organiser channels none of which this repo tracks — measured at
+     * zero overlap with anything already fetched, published or ruled on.
+     *
+     * WHAT IT IS NOT. A feed. The catalogue's tagged Tekken data stops at
+     * 2025-03-16 and has had nothing in 2026, so this is a closed historical
+     * import; `data:theater` is worth re-running occasionally, not on a
+     * cadence.
+     *
+     * NO channelId, NO uploadsPlaylist, NO gameSignal: there is no channel and
+     * no title to gate. The game is checked per ENTRY against `gameLabel`.
+     */
+    id: 'replayTheater',
+    source: 'tournament',
+    name: 'Tournament VODs',
+    index: {
+      endpoint: 'https://replaytheater.app/api/matches',
+      slug: 'tkn8',
+      gameLabel: 'Tekken 8',
+      pageSize: 50,
+      pacingMs: 1200,
+    },
+    localFirst: true,
+  },
 ];
+
+/**
+ * Sponsor/team prefix on a catalogue handle: "OEG | Slate", "NP | Senshi".
+ * STRIPPED, never split — "|" is not a duo delimiter here, and treating it as
+ * one would mint a player called "OEG" with a page of its own.
+ *
+ * APPLIED REPEATEDLY, not once. The catalogue carries doubly-prefixed handles,
+ * and a single .replace() leaves the inner one in place — which mints a player
+ * whose name still contains a sponsor tag, a worse outcome than not stripping
+ * at all. Loop until stable.
+ */
+export const THEATER_SPONSOR = /^[^|]{1,12}\s*\|\s*/;
+
+export const stripTheaterSponsor = (handle: string): string => {
+  let out = handle.trim();
+  // Bounded: each pass removes at least one "|", and a handle carries few.
+  for (let i = 0; i < 4; i++) {
+    const next = out.replace(THEATER_SPONSOR, '').trim();
+    if (next === out || next === '') break;
+    out = next;
+  }
+  return out;
+};
+
+/** Channels the daily fetch contacts, and the channels whose records are built
+ *  by a TITLE PARSE — the same set. An INDEX source is skipped by both: it has
+ *  no channel to fetch and no title to parse. It stays in CHANNELS, so the
+ *  collapse guard and the coverage report still see it. */
+export const FETCHED_CHANNELS = CHANNELS.filter((c) => !c.index);
 
 // No other candidate channel is pending. The bar the 2026-07 recon used was:
 // dense uploads of full match VODs, and titles that are either structurally

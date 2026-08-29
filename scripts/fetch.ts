@@ -9,83 +9,14 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { CHANNELS } from './channels';
+import { CHANNELS, FETCHED_CHANNELS } from './channels';
+import { apiGet, parseDuration, requireApiKey } from './youtube';
 import type { ChannelConfig, RawVideoRecord } from '../types/index';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const RAW_DIR = join(ROOT, 'raw');
-const API_BASE = 'https://www.googleapis.com/youtube/v3';
-
-// ── API key (never hardcode; read from env, fail loudly if missing) ──────────
-const rawKey = process.env.YT_API_KEY;
-if (!rawKey) {
-  console.error(
-    [
-      '✖ Missing YT_API_KEY.',
-      '  Create a .env file in the project root containing:',
-      '    YT_API_KEY=your_key_here',
-      '  (see .env.example). data:fetch loads it via `tsx --env-file-if-exists=.env`.',
-    ].join('\n'),
-  );
-  process.exit(1);
-}
-const API_KEY: string = rawKey;
-
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-// ── YouTube API GET with retry on 5xx / 429, fail loudly on other 4xx ────────
-async function apiGet<T>(
-  endpoint: string,
-  params: Record<string, string>,
-  retries = 5,
-): Promise<T> {
-  const url = new URL(`${API_BASE}/${endpoint}`);
-  for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
-  url.searchParams.set('key', API_KEY);
-
-  for (let attempt = 1; attempt <= retries; attempt++) {
-    let res: Response;
-    try {
-      res = await fetch(url);
-    } catch (err) {
-      if (attempt >= retries) throw err;
-      const wait = Math.min(1000 * 2 ** (attempt - 1), 8000);
-      console.warn(
-        `  ⚠ network error on ${endpoint} (attempt ${attempt}/${retries}); retrying in ${wait}ms`,
-      );
-      await sleep(wait);
-      continue;
-    }
-
-    if (res.ok) return (await res.json()) as T;
-
-    const body = await res.text().catch(() => '');
-    const retryable = res.status === 429 || res.status >= 500;
-    if (retryable && attempt < retries) {
-      const wait = Math.min(1000 * 2 ** (attempt - 1), 8000);
-      console.warn(
-        `  ⚠ HTTP ${res.status} on ${endpoint} ${JSON.stringify(params)} (attempt ${attempt}/${retries}); retrying in ${wait}ms`,
-      );
-      await sleep(wait);
-      continue;
-    }
-    // Non-retryable 4xx or out of retries → fail loudly with the API's error
-    // body. (The key is never included: it is only ever set on the URL.)
-    throw new Error(
-      `YouTube API error: HTTP ${res.status} on ${endpoint} ${JSON.stringify(params)}\n${body}`,
-    );
-  }
-  throw new Error('unreachable');
-}
-
-// ── ISO8601 duration (PT#H#M#S) → seconds ────────────────────────────────────
-function parseDuration(iso: string | undefined): number {
-  if (!iso) return 0;
-  const m = /^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/.exec(iso);
-  if (!m) return 0;
-  return Number(m[1] ?? 0) * 3600 + Number(m[2] ?? 0) * 60 + Number(m[3] ?? 0);
-}
+requireApiKey('data:fetch');
 
 // ── typed slices of the API responses (only the fields we read) ──────────────
 interface PlaylistItemsResponse {
@@ -108,6 +39,17 @@ interface VideosResponse {
 }
 
 async function fetchChannel(ch: ChannelConfig): Promise<RawVideoRecord[]> {
+  // An index source has no channel and no playlist; it is pulled by
+  // `npm run data:theater` and skipped by FETCHED_CHANNELS. Asserted rather
+  // than assumed, because reaching here with one would page YouTube for
+  // `playlistId=undefined` and return an empty dump that looks exactly like a
+  // dead channel.
+  if (!ch.uploadsPlaylist) {
+    throw new Error(
+      `${ch.id} has no uploadsPlaylist — an index source must be skipped before fetchChannel.`,
+    );
+  }
+
   // 1) every videoId from the uploads playlist (50/page)
   const ids: string[] = [];
   let pageToken: string | undefined;
@@ -151,8 +93,17 @@ async function fetchChannel(ch: ChannelConfig): Promise<RawVideoRecord[]> {
 
 // ── main ─────────────────────────────────────────────────────────────────────
 await mkdir(RAW_DIR, { recursive: true });
-console.log(`Fetching ${CHANNELS.length} channels…`);
-for (const ch of CHANNELS) {
+const skipped = CHANNELS.filter((c) => c.index);
+console.log(
+  `Fetching ${FETCHED_CHANNELS.length} channel(s)` +
+    (skipped.length
+      ? `; skipping ${skipped.length} index source(s) — pull with \`npm run data:theater\` (${skipped
+          .map((c) => c.id)
+          .join(', ')})`
+      : '') +
+    '…',
+);
+for (const ch of FETCHED_CHANNELS) {
   const t0 = Date.now();
   const records = await fetchChannel(ch);
   records.sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));

@@ -17,6 +17,7 @@ import { fileURLToPath } from 'node:url';
 import { chromium, type Browser, type Page } from 'playwright-core';
 import RANKS from '../data/ranks.json';
 import { DISTINCT_KEYS, idKey } from './players';
+import { CHANNELS } from './channels';
 import type { CharacterRecord, MatchVideo, PlayerRecord, VideoOverride } from '../types/index';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -280,6 +281,90 @@ async function main(): Promise<void> {
     );
   }
 
+  // ── segment records ───────────────────────────────────────────────────────
+  // An INDEX intake publishes many records per VOD, so its ids are composite
+  // and its records are the only ones here whose `id` is not a YouTube id.
+  // Every number is COMPUTED from the committed data — no hardcoded 317 — so
+  // this keeps meaning the same thing as the catalogue grows, and self-skips if
+  // the intake is ever removed.
+  const segments = videos.filter((v) => v.videoId !== undefined);
+  if (segments.length > 0) {
+    const COMPOSITE = /^([A-Za-z0-9_-]{11})@(\d+)$/;
+    const malformed = segments.filter((v) => {
+      const m = COMPOSITE.exec(v.id);
+      return !m || m[1] !== v.videoId || Number(m[2]) !== (v.startSeconds ?? 0);
+    });
+    expect(
+      malformed.length === 0,
+      `every segment id is videoId@startSeconds and agrees with its own fields (${malformed.length} bad)`,
+    );
+
+    // A composite id can never equal an 11-character YouTube id — the property
+    // the ignore-if-known rule's videoId keying rests on. Assert it rather than
+    // trusting the reasoning.
+    const wholeIds = new Set(videos.filter((v) => v.videoId === undefined).map((v) => v.id));
+    expect(
+      segments.filter((v) => wholeIds.has(v.id)).length === 0,
+      'no segment id collides with a whole-video record id',
+    );
+
+    const perVod = new Map<string, number>();
+    for (const v of segments) perVod.set(v.videoId!, (perVod.get(v.videoId!) ?? 0) + 1);
+    expect(
+      [...perVod.values()].some((n) => n > 1),
+      `at least one VOD is shared by several records (max ${Math.max(...perVod.values())})`,
+    );
+    // The whole point of the intake: these VODs are not in the corpus in their
+    // own right. If one ever is, ignore-if-known should have dropped its
+    // segments before they got here.
+    const alsoARecord = [...perVod.keys()].filter((id) => wholeIds.has(id));
+    expect(
+      alsoARecord.length === 0,
+      `no source VOD is also a record in its own right (${alsoARecord.join(', ') || 'clean'})`,
+    );
+
+    // ROUND-TRIP INTO THE EMITTED CONTRACT. videoId must survive independently
+    // of startSeconds: 0 is falsy and 58 of these records sit at offset 0, so a
+    // combined guard would strip videoId from every one of them — and the
+    // engine resolves `videoId ?? id`, which would then be the composite string.
+    const emittedById = new Map(
+      (
+        JSON.parse(readFileSync(join(ROOT, 'data/replays.json'), 'utf8')) as {
+          id: string;
+          videoId?: string;
+          startSeconds?: number;
+        }[]
+      ).map((r) => [r.id, r]),
+    );
+    expect(
+      segments.every((v) => emittedById.get(v.id)?.videoId === v.videoId),
+      'every segment carries videoId into replays.json',
+    );
+    expect(
+      segments.every((v) => {
+        const r = emittedById.get(v.id);
+        return (v.startSeconds ?? 0) > 0
+          ? r?.startSeconds === v.startSeconds
+          : r?.startSeconds === undefined;
+      }),
+      'startSeconds is emitted when non-zero and omitted when zero (the falsy-0 contract)',
+    );
+
+    // The pin is the carry's only check on a cron run, so a pin that has
+    // drifted from the committed corpus is the failure the carry cannot see.
+    const pins = JSON.parse(readFileSync(join(ROOT, 'data/source-pins.json'), 'utf8')) as Record<
+      string,
+      number
+    >;
+    for (const ch of CHANNELS.filter((c) => c.localFirst)) {
+      const n = allVideos.filter((v) => v.intake === ch.id).length;
+      expect(
+        pins[ch.id] === n,
+        `source-pins pins ${ch.id} at its committed count (${pins[ch.id]} vs ${n})`,
+      );
+    }
+  }
+
   // intake survives parse: dedupe precedence needs to tell two channels apart
   // that share one public source ('tournament' aggregates the event organizers).
   const missingIntake = videos.filter((v) => !v.intake);
@@ -482,6 +567,91 @@ async function main(): Promise<void> {
   expect(/S2 · 2\.03/.test(dialogText), 'modal meta line reads "S2 · 2.03 · …"');
   await page.keyboard.press('Escape');
   await page.waitForTimeout(300);
+
+  // ── segment playback ──────────────────────────────────────────────────────
+  // A segment record is the only kind whose id is not a YouTube id, so every
+  // URL the engine builds for it goes through `videoId ?? id`. A SAMPLE, not
+  // one record: one per source VOD plus the two shapes most likely to break —
+  // the offset-0 case, whose startSeconds is omitted as falsy, and the largest
+  // offset. Computed, so it grows with the catalogue.
+  const segRecords = (
+    JSON.parse(readFileSync(join(ROOT, 'data/replays.json'), 'utf8')) as {
+      id: string;
+      videoId?: string;
+      startSeconds?: number;
+    }[]
+  ).filter((r) => r.videoId);
+  if (segRecords.length > 0) {
+    // The MIDDLE record of each VOD, not the first: ids sort with "@0" ahead of
+    // every other offset, so taking the first would make every per-VOD pick a
+    // zero-offset record and the t= assertion below would never run on the
+    // shape it exists for.
+    const byVodList = new Map<string, (typeof segRecords)[number][]>();
+    for (const r of segRecords)
+      byVodList.set(r.videoId!, [...(byVodList.get(r.videoId!) ?? []), r]);
+    const midPerVod = [...byVodList.values()].map((list) => list[Math.floor(list.length / 2)]!);
+    const sample = [
+      ...new Map(
+        [
+          ...midPerVod.slice(0, 6),
+          ...segRecords.filter((r) => (r.startSeconds ?? 0) === 0).slice(0, 1),
+          ...[...segRecords]
+            .sort((a, b) => (b.startSeconds ?? 0) - (a.startSeconds ?? 0))
+            .slice(0, 1),
+        ].map((r) => [r.id, r]),
+      ).values(),
+    ];
+    for (const seg of sample) {
+      const secs = seg.startSeconds ?? 0;
+      await gotoIdle(page, at(`/?v=${encodeURIComponent(seg.id)}`));
+      await page.waitForSelector('[role="dialog"][aria-modal="true"]', { timeout: 8000 });
+      const shown = await page.evaluate(() => {
+        const root = document.querySelector('[role="dialog"][aria-modal="true"]');
+        if (!root) return null;
+        const iframe = root.querySelector('iframe');
+        const watch = [...root.querySelectorAll('a')]
+          .map((a) => a.getAttribute('href') ?? '')
+          .find((h) => h.includes('youtu'));
+        return {
+          iframe: iframe?.getAttribute('src') ?? '',
+          watch: watch ?? '',
+          img: root.querySelector('img')?.getAttribute('src') ?? '',
+        };
+      });
+      expect(shown !== null, `?v=${seg.id} opens the modal for a segment record`);
+      if (!shown) continue;
+      // The embed is lazy (LiteYouTube renders a facade until clicked), so an
+      // absent iframe is not a failure — one pointing at the wrong video is.
+      if (shown.iframe) {
+        expect(
+          shown.iframe.includes(`/embed/${seg.videoId}`) &&
+            (secs === 0 || shown.iframe.includes(`start=${secs}`)),
+          `the embed loads ${seg.videoId} at start=${secs}`,
+        );
+      }
+      expect(
+        shown.watch.includes(seg.videoId!),
+        `the watch link points at the VOD (${seg.videoId})`,
+      );
+      // A zero offset is the whole video and its record omits startSeconds, so
+      // the correct link has NO t= at all. Asserting its absence is the half
+      // that matters: "t=undefineds" still opens the video and still looks
+      // right in a screenshot.
+      expect(
+        secs > 0 ? shown.watch.includes(`t=${secs}s`) : !/[?&]t=/.test(shown.watch),
+        secs > 0
+          ? `the watch link carries the offset (t=${secs}s)`
+          : 'a zero-offset record links to the VOD with no t= at all',
+      );
+      expect(
+        !shown.img.includes('@'),
+        'the derived thumbnail uses videoId, never the composite id',
+      );
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(200);
+    }
+    console.log(`  … ${sample.length} segment record(s) checked, spread across source VODs`);
+  }
 
   // stats stay ERA-keyed; every emitted token is an era or declared version
   const eraRe = /^S\d+$/;
@@ -737,10 +907,7 @@ async function main(): Promise<void> {
     players.every((p) => p.id.length > 0),
     'every player id is non-empty',
   );
-  expect(
-    new Set(players.map((p) => p.id)).size === players.length,
-    'player ids are unique',
-  );
+  expect(new Set(players.map((p) => p.id)).size === players.length, 'player ids are unique');
   {
     const byKey = new Map<string, string[]>();
     for (const p of players) {

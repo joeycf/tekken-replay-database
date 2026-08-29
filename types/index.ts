@@ -14,7 +14,30 @@ export type SourceId = 'highLevel' | 'telly' | 'ranked' | 'tournament';
  *  'evoEvents' is declared ahead of its CHANNELS entry: the review queue is
  *  typed on this union and the Evo corpus is labelled through /dev before the
  *  channel is enrolled. Until enrollment nothing fetches raw/evoEvents.json. */
-export type ChannelKey = 'highLevel' | 'telly' | 'ranked' | 'bneEsports' | 'evoEvents';
+export type ChannelKey =
+  'highLevel' | 'telly' | 'ranked' | 'bneEsports' | 'evoEvents' | 'replayTheater';
+
+/**
+ * An INDEX source: a third-party catalogue that points AT video rather than
+ * hosting it. Its entries are (videoId, startSeconds) pairs plus players,
+ * characters and an event tag, so a record here is a SEGMENT of a longform VOD
+ * and several records share one video. There is no channel, no uploads
+ * playlist, and nothing to resolve.
+ */
+export interface ChannelIndex {
+  /** Catalogue endpoint, paged with &page=N. */
+  endpoint: string;
+  /** The index's own token for this game, used as the ?game= query value. */
+  slug: string;
+  /** The game string each ENTRY states about itself. Checked per entry, because
+   *  ?game= is a filter someone else answers and a mistagged submission arrives
+   *  looking exactly like a real one. */
+  gameLabel: string;
+  /** Entries per page. Theirs, not ours — the API ignores per_page/limit. */
+  pageSize: number;
+  /** ms between requests — politeness, not rate-limit avoidance. */
+  pacingMs: number;
+}
 
 export interface ChannelConfig {
   /** Raw-dump key / report row (unique per YouTube channel). */
@@ -24,10 +47,30 @@ export interface ChannelConfig {
   source: SourceId;
   /** Display name (mirrors app/app.config.ts sourceChannels[].name). */
   name: string;
-  /** YouTube channel id. */
-  channelId: string;
-  /** The channel's uploads playlist (UU + channelId.slice(2), pinned). */
-  uploadsPlaylist: string;
+  /** YouTube channel id. Absent on an `index` source, which has no channel. */
+  channelId?: string;
+  /** The channel's uploads playlist (UU + channelId.slice(2), pinned).
+   *  Absent on an `index` source. */
+  uploadsPlaylist?: string;
+  /** This intake is a third-party INDEX, not a YouTube channel. Its dump is
+   *  built by scripts/fetch-theater.ts, its records are not built by a title
+   *  parse, and data:fetch skips it. Mutually exclusive with channelId. */
+  index?: ChannelIndex;
+  /**
+   * LOCAL-FIRST: deliberately not part of the daily cron.
+   *
+   * raw/ is gitignored and the cron fetches remotely into a fresh checkout, so
+   * a source only ever fetched by hand has no dump there. Without this flag
+   * parse would exit (missing dump) or, worse, drop every one of its records.
+   * So when the dump is ABSENT its committed records are CARRIED; when it is
+   * PRESENT they are rebuilt.
+   *
+   * The carry needs a count pin for the same reason a frozen channel would —
+   * data/videos.json is both source and target — and it lives in
+   * data/source-pins.json rather than a constant here, because a local-first
+   * source GROWS.
+   */
+  localFirst?: boolean;
   /** This channel's titles never name a character, so match-shaped uploads are
    *  queued as 'character-completion' rather than counted as parse misses and
    *  the characters are read from the footage (scripts/hud-read.ts). */
@@ -56,6 +99,37 @@ export interface RawVideoRecord {
   /** 'none' for normal VODs; 'live'/'upcoming' are excluded by parse. */
   liveBroadcastContent: string;
   tags?: string[];
+}
+
+/**
+ * One record in raw/replayTheater.json — an index entry already joined to its
+ * VOD's YouTube metadata. Extends RawVideoRecord so the dump reads like any
+ * other, but the fields below are what the record is actually BUILT from:
+ * nothing here is recovered by parsing the title.
+ */
+export interface TheaterRawRecord extends RawVideoRecord {
+  /** `${videoId}@${startSeconds}` — the record id, not a YouTube id. */
+  id: string;
+  /** The catalogue's own entry id. Provenance, and the fetch resume key. */
+  theaterId: number;
+  /** The YouTube id this segment lives inside. */
+  videoId: string;
+  /** Offset into videoId, in seconds. */
+  startSeconds: number;
+  /** The catalogue's event tag. Non-empty by construction — an untagged entry
+   *  is online ranked play and never reaches the dump. */
+  tag: string;
+  /** The VOD's own uploader, for the report. The source VODs belong to eleven
+   *  different organisers, so this is per record, not per intake. */
+  uploader: string;
+  /** [side0, side1] handles, exactly as the catalogue spells them — sponsor
+   *  prefixes intact, for the parser to strip. */
+  players: [string, string];
+  /** [side0, side1] character names, exactly as the catalogue spells them.
+   *  Tekken is 1v1 so a side is normally one long, but the catalogue carries
+   *  four columns and a set can counter-pick — MatchSide.characters is already
+   *  an ordered union, so a longer side needs no schema change. */
+  characters: [string[], string[]];
 }
 
 /** One parsed side: one pilot, and EVERY character that pilot played.
@@ -110,8 +184,20 @@ export interface MatchVideo {
    *  null = the season (label-grace or override) contradicts the date —
    *  "season known, patch unknown", emitted as the bare era token */
   patchVersion: string | null;
+  /** The YouTube id, when `id` is not it. A record is not required to be a
+   *  whole video: an index intake publishes many records per VOD, so their ids
+   *  are `${videoId}@${startSeconds}` and the YouTube id lives here. Every
+   *  YouTube-shaped URL the engine builds resolves `videoId ?? id`. */
+  videoId?: string;
+  /** Where this record's footage starts inside `videoId`, in seconds. Absent
+   *  (or 0) means the whole video. */
+  startSeconds?: number;
   sides: [MatchSide, MatchSide];
 }
+
+/** data/source-pins.json — the carry pin for every `localFirst` intake, keyed
+ *  by ChannelKey. Written by a rebuild, hard-asserted by every carrying run. */
+export type SourcePins = Partial<Record<ChannelKey, number>>;
 
 /** data/players.json entry (mirrors the engine's Player). */
 export interface PlayerRecord {
