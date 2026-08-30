@@ -464,6 +464,11 @@
       "permanent": true
     },
     {
+      "source": "/tekken/players/prinze-princess",
+      "destination": "/tekken/players/prinzeprincess",
+      "permanent": true
+    },
+    {
       "source": "/tekken/players/r-200won",
       "destination": "/tekken/players/r200won",
       "permanent": true
