@@ -10,8 +10,17 @@
 
 import { execSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 import { createServer } from 'node:http';
+import { tmpdir } from 'node:os';
 import { dirname, extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium, type Browser, type Page } from 'playwright-core';
@@ -251,9 +260,125 @@ function testStaleGuard(): void {
   );
 }
 
+/** THE CRON GUARD — this repo had none, and its workflow is the one that most
+ *  recently gained files.
+ *
+ *  Two things are checked, and they fail differently.
+ *
+ *  (1) THE STAGED LIST, BY NAME. Every file the pipeline writes must be in the
+ *      workflow's `git add`, or the cron regenerates it and throws the change
+ *      away with no error and no red build — `git diff --cached --quiet` only
+ *      ever sees staged paths. That is Tokon's 436ae9f scar. Checked by name
+ *      rather than by count so adding a pipeline output and forgetting the
+ *      workflow fails HERE. It found two live omissions when it was written:
+ *      data/review-queue.json (whose own write comment in parse.ts claimed it
+ *      was "in the cron's git add") and data/patchGroups.json.
+ *
+ *  (2) THE TIMESTAMP-ONLY SUPPRESSION. report.md carries a "_Generated <ts>_"
+ *      line that changes every run, so a diff that is ONLY that line must not
+ *      produce a commit — otherwise the cron deploys daily for nothing.
+ *
+ *  The seed list is READ OUT OF THE WORKFLOW, not restated here. `git add` fails
+ *  on a path that does not exist, which aborts the guard under `set -e` and
+ *  produces no commit — so a hand-maintained copy turns "someone staged a new
+ *  artifact" into "case B" going red with nothing naming the cause.
+ *
+ *  Indentation-driven, not YAML-parsed: keep the run: body at exactly 10 spaces. */
+function testCronGuard(): void {
+  console.log('\n— cron guard');
+  const wf = readFileSync(join(ROOT, '.github/workflows/data-refresh.yml'), 'utf8').split('\n');
+  const start = wf.findIndex((l) => l.includes('git config user.name'));
+  const guard = wf
+    .slice(start)
+    .filter((l) => l.startsWith('          '))
+    .map((l) => l.slice(10))
+    .filter((l) => l.trim() !== 'git push') // scratch repo has no remote
+    .join('\n');
+  expect(
+    guard.includes('git restore --staged --worktree data/report.md'),
+    'workflow drops a timestamp-only report.md',
+  );
+
+  // .md as well as .json: report.md is a pipeline output like any other, and a
+  // .json-only filter silently exempts it from the check below.
+  const staged = (guard.match(/git add ((?:data\/\S+\s*)+)/)?.[1] ?? '')
+    .split(/\s+/)
+    .filter((f) => f.startsWith('data/') && (f.endsWith('.json') || f.endsWith('.md')));
+  expect(staged.length > 0, `workflow's git add names data files (${staged.length})`);
+  // The full write set: scripts/parse.ts writes review-queue, source-pins,
+  // videos, players, player-redirects, seasonBoundaries and report.md;
+  // scripts/emit.ts writes replays, stats, summary and patchGroups.
+  for (const f of [
+    'videos.json',
+    'replays.json',
+    'stats.json',
+    'players.json',
+    'summary.json',
+    'seasonBoundaries.json',
+    'player-redirects.json',
+    'patchGroups.json',
+    'review-queue.json',
+    'source-pins.json',
+    'report.md',
+  ]) {
+    expect(
+      staged.some((pth) => pth.endsWith(f)),
+      `workflow stages data/${f}`,
+    );
+  }
+
+  const dir = mkdtempSync(join(tmpdir(), 'cron-guard-'));
+  const sh = (cmd: string) => execSync(cmd, { cwd: dir, stdio: 'pipe' }).toString();
+  try {
+    sh('git init -q . && git config user.email t@t && git config user.name t');
+    mkdirSync(join(dir, 'data'));
+    // Driven by the parsed list, so the fixture can never fall behind the
+    // workflow. videos/replays carry the count the guard diffs on; report.md
+    // carries the timestamp line; the rest only have to exist and stay
+    // byte-identical between seeds.
+    const seed = (n: number, ts: string) => {
+      for (const f of staged) {
+        if (f.endsWith('videos.json') || f.endsWith('replays.json')) {
+          writeFileSync(
+            join(dir, f),
+            JSON.stringify(Array.from({ length: n }, (_, i) => ({ id: i }))),
+          );
+        } else if (f.endsWith('report.md')) {
+          writeFileSync(join(dir, f), `# R\n\n_Generated ${ts}._\n\ntotal: ${n}\n`);
+        } else if (f.endsWith('summary.json')) {
+          writeFileSync(join(dir, f), `{"replays":${n}}\n`);
+        } else {
+          writeFileSync(join(dir, f), '[]\n');
+        }
+      }
+    };
+    seed(1, '2026-08-01T01:00:00.000Z');
+    sh('git add -A && git commit -qm seed');
+    // Via a FILE, not `bash -c "<json-escaped>"`: -c puts it through /bin/sh
+    // first, which mangles the embedded newlines and $(…) substitutions.
+    writeFileSync(join(dir, 'guard.sh'), `set -e\n${guard}\n`);
+
+    seed(1, '2026-08-01T02:00:00.000Z'); // timestamp-only
+    const a = sh('bash guard.sh');
+    expect(a.includes('No data changes'), 'timestamp-only run skips the commit');
+    expect(sh('git rev-list --count HEAD').trim() === '1', 'timestamp-only run makes no commit');
+
+    seed(2, '2026-08-01T03:00:00.000Z'); // a real change
+    sh('bash guard.sh');
+    expect(sh('git rev-list --count HEAD').trim() === '2', 'a real data change commits');
+    expect(
+      sh('git show --stat --format= HEAD').includes('report.md'),
+      'a real data change ships report.md alongside it',
+    );
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
 async function main(): Promise<void> {
   // Pure, Node-side, no browser: run before anything is served.
   testStaleGuard();
+  testCronGuard();
 
   const { at, close } = await serve();
   const browser: Browser = await chromium.launch({

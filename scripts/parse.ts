@@ -990,6 +990,11 @@ for (const v of records) for (const s of v.sides) s.handle = playerIds.get(s.pla
 // overrides.json, so a resolved item simply stops being generated. Committed
 // (and in the cron's git add) so the pending set is visible history and the
 // /dev/source-review UI reads real substrate.
+//
+// That parenthesis was FALSE from the day it was written until 2026-08-31: the
+// workflow's git add did not name this file, so the cron regenerated it and
+// discarded the result every morning. It is named now, and scripts/e2e.ts
+// asserts the staged list by name so the comment cannot go stale again.
 await writeFile(
   join(DATA, 'review-queue.json'),
   JSON.stringify(reviewQueue, null, 2) + '\n',
