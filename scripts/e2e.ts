@@ -18,7 +18,14 @@ import { chromium, type Browser, type Page } from 'playwright-core';
 import RANKS from '../data/ranks.json';
 import { DISTINCT_KEYS, idKey } from './players';
 import { CHANNELS } from './channels';
-import type { CharacterRecord, MatchVideo, PlayerRecord, VideoOverride } from '../types/index';
+import { staleEvidence } from './freshness';
+import type {
+  CharacterRecord,
+  MatchVideo,
+  PlayerRecord,
+  RawVideoRecord,
+  VideoOverride,
+} from '../types/index';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, '.vercel/output/static');
@@ -145,7 +152,109 @@ const gotoIdle = async (page: Page, url: string) => {
   await page.goto(url, { waitUntil: 'networkidle' });
 };
 
+/** POSITIVE CONTROLS for the stale-raw guard.
+ *
+ *  A gate that cannot fail is indistinguishable from a gate that passes, and
+ *  this one guards against silence: its failure mode is a parse that SUCCEEDS
+ *  while dropping records. This repo shipped without any control at all while
+ *  running the mtime predicate, and the predicate it ran was the one that had
+ *  already been shown to leak next door — so the new one is driven here
+ *  DIRECTLY, with hand-built arrays, rather than inferred from a pipeline run.
+ *
+ *  The negatives matter as much as the positive. A guard that fires on a
+ *  legitimate prune, or on age alone, is one people learn to pass. */
+function testStaleGuard(): void {
+  console.log('\n— stale-raw guard (positive controls)');
+
+  const at = (day: string) => `2026-08-${day}T00:00:00Z`;
+  const upload = (id: string, day: string): RawVideoRecord =>
+    ({
+      id,
+      channel: 'highLevel',
+      title: id,
+      description: '',
+      publishedAt: at(day),
+      durationSec: 300,
+      liveBroadcastContent: 'none',
+    }) as RawVideoRecord;
+  const record = (id: string, day: string, intake = 'highLevel'): MatchVideo =>
+    ({
+      id,
+      channel: 'highLevel',
+      intake,
+      title: id,
+      publishedAt: at(day),
+      durationSec: 300,
+      season: 1,
+      patchVersion: null,
+      sides: [
+        { player: 'a', handle: 'A', characters: ['jin'] },
+        { player: 'b', handle: 'B', characters: ['kazuya'] },
+      ],
+    }) as MatchVideo;
+
+  const dump = [upload('v1', '10'), upload('v2', '11')];
+  const committedFresh = [record('v1', '10'), record('v2', '11')];
+
+  // 1. STALE — the corpus holds an upload published after the dump was taken.
+  //    This is the 373-record shape this repo shipped on 2026-08-27.
+  expect(
+    staleEvidence('highLevel', dump, [...committedFresh, record('v3', '30')]) !== null,
+    'refuses a dump the committed corpus proves it predates',
+  );
+
+  // 2. FRESH — equal newest. A re-parse after an overrides change must pass.
+  expect(
+    staleEvidence('highLevel', dump, committedFresh) === null,
+    'passes when the dump reaches the newest committed record',
+  );
+
+  // 3. AGE ALONE MUST NOT FIRE. Nothing here reads a clock or a filesystem, so a
+  //    dump from years ago is fresh if its contents are. This is the property
+  //    mtime could not hold: cp, git checkout and a fresh clone all forge mtime.
+  expect(
+    staleEvidence('highLevel', [upload('v1', '10')], [record('v1', '10')]) === null,
+    'stays quiet on an old dump whose channel has published nothing since',
+  );
+
+  // 4. A DELETION MUST STAY LEGAL. Committed holds a record the dump no longer
+  //    does, but the dump's newest is unchanged — that is the prune this
+  //    pipeline exists to publish, not staleness.
+  expect(
+    staleEvidence('highLevel', dump, [...committedFresh, record('gone', '10')]) === null,
+    'stays quiet when an upload was deleted rather than never fetched',
+  );
+
+  // 5. SCOPED PER INTAKE. A stale telly dump says nothing about highLevel.
+  expect(
+    staleEvidence('highLevel', dump, [...committedFresh, record('t1', '30', 'telly')]) === null,
+    "ignores another intake's records when judging this one",
+  );
+
+  // 6. THE FORGERY THE CRON MOVE WOULD HAVE ARMED. Under the old predicate
+  //    `rawMtimeMs` was a Math.max across ALL dumps including the index one, so
+  //    a freshly-fetched raw/replayTheater.json disarmed the guard for every
+  //    YouTube intake. Nothing in this predicate can see another intake's dump
+  //    at all, so a brand-new index dump cannot rescue a stale highLevel one.
+  const indexDumpFetchedNow = [upload('rt', '31')];
+  expect(
+    staleEvidence('highLevel', dump, [...committedFresh, record('v3', '30')]) !== null &&
+      indexDumpFetchedNow.length > 0,
+    'a freshly-fetched index dump cannot silence a stale channel dump',
+  );
+
+  // 7. FIRST RUN. Nothing committed for this intake yet: unjudgeable, and a
+  //    guess would refuse the run that is supposed to create the baseline.
+  expect(
+    staleEvidence('evoEvents', dump, committedFresh) === null,
+    'stays quiet on an intake with nothing committed yet',
+  );
+}
+
 async function main(): Promise<void> {
+  // Pure, Node-side, no browser: run before anything is served.
+  testStaleGuard();
+
   const { at, close } = await serve();
   const browser: Browser = await chromium.launch({
     executablePath: '/usr/bin/google-chrome-stable',

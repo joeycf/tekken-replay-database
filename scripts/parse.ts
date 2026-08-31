@@ -12,14 +12,13 @@
 //
 // Run: npm run data:parse   (pure: no network, no API key)
 
-import { execFileSync } from 'node:child_process';
-import { statSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { CHANNELS, stripTheaterSponsor } from './channels';
 import { applyOverrides, emitGeneric } from './emit';
+import { formatStaleRefusal, staleEvidence } from './freshness';
 import { buildPatchTable } from './patches';
 import { buildAliasMatcher, extractRank, loadCharacters } from './roster';
 import { HANDLE_ALIASES, idKey, resolvePlayers, undeclaredCollisions } from './players';
@@ -279,7 +278,10 @@ const CHANNEL_OF = new Map(CHANNELS.map((c) => [c.id, c]));
 
 const readJson = async <T>(p: string): Promise<T> => JSON.parse(await readFile(p, 'utf8')) as T;
 const raws: RawVideoRecord[] = [];
-const rawPaths: string[] = [];
+/** Each intake's OWN dump, kept beside the pooled `raws` for the stale-raw
+ *  guard. The guard is scoped per intake — a stale telly dump says nothing
+ *  about highLevel — so pooling alone cannot drive it. */
+const dumps = new Map<ChannelKey, RawVideoRecord[]>();
 /** The index intake's dump, when this run has one. Kept OUT of `raws` because
  *  its records are not built by a title parse — see buildTheaterRecords. */
 let theaterRaw: TheaterRawRecord[] = [];
@@ -304,13 +306,22 @@ for (const ch of CHANNELS) {
     console.error(`✖ ${path} missing/unreadable — run \`npm run data:fetch\` first.`);
     process.exit(1);
   }
-  rawPaths.push(path);
   if (ch.index) {
     // Structured at source: handles, characters, event tag and a start offset
     // are separate fields, so there is no title to parse.
+    //
+    // AND EXEMPT FROM THE STALE-RAW GUARD, which is load-bearing rather than a
+    // concession — the same call SF6 makes (its parse.ts:338-352). That guard
+    // asks whether a dump could have produced the committed corpus; for an index
+    // intake the answer is governed by a third party's catalogue, not by when we
+    // last fetched. An event withdrawn from the catalogue would read as
+    // staleness and refuse every run thereafter, which is how a guard becomes a
+    // flag people learn to pass. Its protection is the count pin instead, which
+    // is strictly stronger: the pin demands an exact number.
     theaterRaw = dump as TheaterRawRecord[];
     continue;
   }
+  dumps.set(ch.id, dump);
   raws.push(...dump);
 }
 const overrides = await readJson<Record<string, VideoOverride>>(join(DATA, 'overrides.json')).catch(
@@ -337,78 +348,18 @@ const committedForKnown: MatchVideo[] = await readJson<MatchVideo[]>(join(DATA, 
   });
 
 // ── stale-raw guard ──────────────────────────────────────────────────────────
-// `raw/` is gitignored, so it is local-only and the daily cron never writes it.
-// A local dump is therefore routinely OLDER than the committed data/ the cron
-// produced in CI, and a bare parse silently deletes every record the stale dump
-// cannot reproduce.
+// DATA-ONLY, per intake. The predicate and its refusal text live in
+// scripts/freshness.ts so scripts/e2e.ts can drive them directly; the whole
+// argument for the shape — and for why the old mtime arm had to go before the
+// Replay Theater intake could join the cron — is in that file's header.
 //
-// Observed here 2026-08-27: a routine parse against three-week-old dumps wrote
-// 14,686 records over a committed 15,059 and reported success. The 373 missing
-// were recovered from git only because someone compared the counts by hand.
-//
-// THE COLLAPSE GUARD BELOW CANNOT CATCH THIS, and tuning it is not the answer.
-// It needs >20 records AND >10% from ONE channel; staleness arrives as a handful
-// spread across all five and slips under both thresholds by construction. Two
-// different failures, two guards.
-//
-// TWO CONDITIONS, BOTH REQUIRED — that is what separates staleness from a
-// legitimate prune. Fresh dumps missing ids is how deleted videos are SUPPOSED
-// to leave the corpus, so the id difference alone would refuse the very thing
-// the pipeline exists to do. The mtime test is what makes it decidable: dumps
-// older than the data cannot have observed a deletion.
-//
-// An equal id set — a re-parse after an overrides change — never trips either.
-//
-// Ported from 2xko-replay-database, which has carried this since 2026-07-06 and
-// whose version fired correctly on the same day this repo's absence cost 373
-// records. SAFER here than there — this repo gates game-membership at parse
-// rather than fetch, so `raws` holds every upload a channel ever made (telly is
-// 12,427 raw against 7,516 committed) and the raw id set is a strict superset
-// of the committed one.
-//
-// THE EXCLUSIONS USED TO COLLAPSE TO NOTHING AND NO LONGER DO. An index intake
-// is read outside `raws` and, on a carrying run, is not read at all — so every
-// one of its committed ids reads as missing and this guard fires on every cron
-// run and every local parse. That is how a guard becomes a flag people learn to
-// pass, which is worse than not having it. Both exclusions are load-bearing:
-// the dump's ids when rebuilding, the carried records' ids when not.
+// The index intake is not checked here: it is exempted at the `ch.index` branch
+// above and protected by its count pin instead.
 if (!process.argv.includes('--allow-stale')) {
-  const committed = committedForKnown;
-  const rawIds = new Set([...raws.map((r) => r.id), ...theaterRaw.map((r) => r.id)]);
-  const carriedIds = new Set(
-    committed.filter((v) => carriedLocalFirst.includes(v.intake)).map((v) => v.id),
-  );
-  const missing = committed.filter((v) => !rawIds.has(v.id) && !carriedIds.has(v.id));
-  if (missing.length > 0) {
-    let lastCommitMs: number | null = null;
-    try {
-      const out = execFileSync('git', ['log', '-1', '--format=%ct', '--', 'data/videos.json'], {
-        cwd: ROOT,
-        stdio: ['ignore', 'pipe', 'ignore'],
-      })
-        .toString()
-        .trim();
-      if (out) lastCommitMs = Number(out) * 1000;
-    } catch {
-      // No usable git history (shallow CI clone, tarball) — staleness cannot be
-      // PROVEN, and refusing on a guess would block the cron. Those environments
-      // fetch before parsing anyway. Fall through.
-    }
-    const rawMtimeMs = Math.max(...rawPaths.map((p) => statSync(p).mtimeMs));
-    if (lastCommitMs !== null && rawMtimeMs < lastCommitMs) {
-      const day = (ms: number) => new Date(ms).toISOString().slice(0, 10);
-      console.error(
-        [
-          `✖ Stale raw/ dumps: data/videos.json (last committed ${day(lastCommitMs)}) contains`,
-          `  ${missing.length} video(s) missing from raw/*.json (fetched ${day(rawMtimeMs)}),`,
-          `  e.g. ${missing[0]!.id}. The daily cron refreshes remotely, so local raw/ lags —`,
-          `  parsing now would silently drop those videos and the next run would treat the`,
-          `  smaller number as the new normal.`,
-          ``,
-          `  Refresh first:   npm run data:build`,
-          `  Or override:     npm run data:parse -- --allow-stale`,
-        ].join('\n'),
-      );
+  for (const [key, dump] of dumps) {
+    const ev = staleEvidence(key, dump, committedForKnown);
+    if (ev) {
+      console.error(formatStaleRefusal(key, ev));
       process.exit(1);
     }
   }
