@@ -741,7 +741,15 @@ async function main(): Promise<void> {
   console.log(
     `\n  → wrote raw/replayTheater.json (${records.length} record(s)${CURSOR_MODE ? ', a delta' : ''})`,
   );
-  console.log(`  → wrote raw/replayTheater.witness.json (${catalogue.length} catalogue entr(ies))`);
+  // REPORT WHAT WAS WRITTEN, not what was read. The witness sits behind the
+  // per-entry game gate (see the write above), so on the run that gate matters —
+  // a response carrying another game's rows — `catalogue` and `rightGame`
+  // differ, and printing the larger number would say the witness holds rows it
+  // deliberately does not.
+  console.log(
+    `  → wrote raw/replayTheater.witness.json (${rightGame.length} catalogue entr(ies)` +
+      `${rightGame.length !== catalogue.length ? `, ${catalogue.length - rightGame.length} rejected by the game gate` : ''})`,
+  );
 
   // ── reconnaissance ────────────────────────────────────────────────────────
   console.log(`\n${'█'.repeat(72)}`);

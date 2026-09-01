@@ -182,6 +182,50 @@ export interface CrossCheckResult {
   disagreements: Disagreement[];
 }
 
+/**
+ * data/theater-disagreements.json — the committed home of everything the
+ * cross-check knows, written ONLY by a full sweep.
+ *
+ * WHY THE MEASUREMENT IS COMMITTED RATHER THAN RECOMPUTED INTO report.md EVERY
+ * RUN. The witness is rebuilt from scratch on each pull and holds only the pages
+ * that pull read, so a cursor morning's window is a couple of hundred catalogue
+ * rows and its numbers differ from yesterday's — a different WINDOW, not a
+ * different corpus. Rendering those into report.md made the file change every
+ * single morning whether or not any RECORD had, which defeats the cron's
+ * no-change-no-commit rule from the other side and puts a deploy on the calendar
+ * every day forever. It is the same failure the `_Generated` timestamp line
+ * already has a suppression for, arriving through a new door — and here it also
+ * defeats the cursor suppression, because that one only drops the cursor when
+ * NOTHING ELSE changed.
+ *
+ * So: a FULL sweep measures and writes; every run renders report.md from what is
+ * committed; a cursor morning prints its own reading to the console and leaves
+ * the artifact alone. The block says which sweep it came from — by the
+ * catalogue's own high-water entry id, which is content, not a clock.
+ *
+ * THE BLIND SPOTS LIVE HERE TOO, which is why this file was already an object in
+ * this repo while the siblings kept a plain array. Same reason, arrived at
+ * earlier: a fact about the catalogue's VOCABULARY outlives the pull that found
+ * it, and a two-page morning cannot re-derive one.
+ */
+export interface WitnessArtifact {
+  /** The reading, frozen at the last full sweep. */
+  measured?: {
+    /** The catalogue's high-water entry id at that sweep — names the sweep
+     *  without a timestamp, so re-rendering it cannot churn the file. */
+    atEntryId: number;
+    compared: number;
+    unmatched: number;
+    segmented: number;
+    players: CrossCheckResult['players'];
+    characters: CrossCheckResult['characters'];
+  };
+  /** The last full sweep's derivation, and what a cursor run reads back as its
+   *  carried set — see `carriedBlindSpots`. */
+  blindSpots: BlindSpot[];
+  disagreements: Disagreement[];
+}
+
 /** The YouTube id inside a catalogue link. The catalogue's submission form
  *  concatenates rather than builds — `https://youtu.be/<id>&t=554s` is a PATH
  *  with no query string — so this matches the id SHAPE explicitly and refuses
@@ -490,19 +534,23 @@ export function crossCheck(
 const pct = (n: number, total: number) =>
   total === 0 ? '—' : `${((n / total) * 100).toFixed(2)}%`;
 
-/** The report.md block, in the shape of the trust tables already on that page.
- *  Frozen per run: every number is computed from this run's witness and this
- *  run's records, and nothing is carried between runs. */
-export function formatCrossCheck(r: CrossCheckResult, mode: string | undefined): string[] {
-  if (r.compared === 0) return [];
-  const c = r.characters;
+/**
+ * The report.md block, in the shape of the trust tables already on that page —
+ * rendered from the COMMITTED artifact rather than from this run's result. See
+ * WitnessArtifact for why: byte-identical between full sweeps is what keeps a
+ * quiet morning quiet. Returns nothing until a full sweep has measured once.
+ */
+export function formatCrossCheck(art: WitnessArtifact): string[] {
+  const m = art.measured;
+  if (!m || m.compared === 0) return [];
+  const c = m.characters;
   const witnessable = c.agree + c.subset + c.disagree;
-  const a = r.players.handleAffix;
+  const a = m.players.handleAffix;
   const affixTotal = a.ours + a.theirs + a.unrelated;
   return [
     '## Replay Theater cross-check',
     '',
-    `An independent reading of **${r.compared}** of our own records, from the catalogue's`,
+    `An independent reading of **${m.compared}** of our own records, from the catalogue's`,
     'UNTAGGED entries — online replays it indexes that we also parse from a tracked',
     'channel. Neither side saw the other, so this is the only accuracy number here the',
     'pipeline did not produce about itself. It changes nothing: a disagreement is',
@@ -510,15 +558,15 @@ export function formatCrossCheck(r: CrossCheckResult, mode: string | undefined):
     'a record. The catalogue does not outrank a confident parse and never outranks a',
     'human override.',
     '',
-    `_Measured this run against a ${mode ?? 'partial'} pull. ${r.unmatched} catalogue entr(ies) point at videos_`,
-    `_we do not hold; ${r.segmented} are VODs the catalogue segments, which the intake owns._`,
+    `_Measured on the last full sweep, at catalogue entry ${m.atEntryId}. ${m.unmatched} catalogue entr(ies) point at videos_`,
+    `_we do not hold; ${m.segmented} are VODs the catalogue segments, which the intake owns._`,
     '',
     '| field | population | agree | partial | disagree | cannot witness |',
     '| --- | ---: | ---: | ---: | ---: | ---: |',
-    `| players (both handles) | ${r.compared} | ${r.players.both} (${pct(r.players.both, r.compared)}) | ${r.players.one} | ${r.players.neither} | — |`,
+    `| players (both handles) | ${m.compared} | ${m.players.both} (${pct(m.players.both, m.compared)}) | ${m.players.one} | ${m.players.neither} | — |`,
     `| characters (per side) | ${c.sides} | ${c.agree} (${pct(c.agree, c.sides)}) | ${c.subset} | ${c.disagree} (${pct(c.disagree, c.sides)}) | ${c.cannotWitness} |`,
     '',
-    `Side order differed on **${r.players.flipped}** record(s); the comparison realigns on the`,
+    `Side order differed on **${m.players.flipped}** record(s); the comparison realigns on the`,
     'handles before reading characters, so a swapped pair is not counted twice as a',
     'character disagreement.',
     '',
@@ -531,13 +579,13 @@ export function formatCrossCheck(r: CrossCheckResult, mode: string | undefined):
           `**${c.cannotWitness}** side(s) the catalogue COULD NOT HAVE GOT RIGHT are held out of both`,
           `columns above: agreement over the ${witnessable} it can express is **${pct(c.agree, witnessable)}**.`,
           '',
-          ...(r.blindSpots.length
+          ...(art.blindSpots.length
             ? [
-                'Its vocabulary has no word for these, derived from this run rather than declared —',
+                'Its vocabulary has no word for these, derived from that sweep rather than declared —',
                 'no string anywhere in the pull resolves to the id, and where we say it the',
                 'catalogue says one particular other thing almost every time:',
                 '',
-                ...r.blindSpots.map(
+                ...art.blindSpots.map(
                   (b) =>
                     `- \`${b.id}\` → the catalogue writes \`${b.mergedInto}\` instead, on ${b.merged} of the ` +
                     `${b.sides} side(s) where we say it (${pct(b.merged, b.sides)}).`,
@@ -564,28 +612,28 @@ export function formatCrossCheck(r: CrossCheckResult, mode: string | undefined):
     // cannot go stale in a published artifact the day the leak is fixed.
     ...(affixTotal > 0
       ? [
-          `Of the ${affixTotal} side(s) whose handles did not match, **${r.players.handleAffix.ours}** are ours carrying extra text`,
-          `the catalogue does not, **${r.players.handleAffix.theirs}** are theirs carrying a team tag ORG_PREFIXES does not`,
-          `list yet, and **${r.players.handleAffix.unrelated}** are genuinely different names — the only bucket worth reading one`,
+          `Of the ${affixTotal} side(s) whose handles did not match, **${m.players.handleAffix.ours}** are ours carrying extra text`,
+          `the catalogue does not, **${m.players.handleAffix.theirs}** are theirs carrying a team tag ORG_PREFIXES does not`,
+          `list yet, and **${m.players.handleAffix.unrelated}** are genuinely different names — the only bucket worth reading one`,
           'row at a time. Reported, never scored: substring matching on handles is the kind of',
           'guessing this module refuses.',
           '',
         ]
       : []),
-    ...(r.disagreements.length
+    ...(art.disagreements.length
       ? [
-          `**${r.disagreements.length} disagreement(s)** — both claims, ours first:`,
+          `**${art.disagreements.length} disagreement(s)** — both claims, ours first:`,
           '',
-          ...r.disagreements
+          ...art.disagreements
             .slice(0, 25)
             .map(
               (d) =>
                 `- \`${d.videoId}\`${d.side !== undefined ? ` side ${d.side}` : ''} ${d.field}: ` +
                 `**${d.ours.join(', ') || '(none)'}** vs catalogue **${d.theirs.join(', ') || '(none)'}** — ${d.title.slice(0, 70)}`,
             ),
-          ...(r.disagreements.length > 25 ? [`- … ${r.disagreements.length - 25} more`] : []),
+          ...(art.disagreements.length > 25 ? [`- … ${art.disagreements.length - 25} more`] : []),
           '',
         ]
-      : ['No disagreements this run.', '']),
+      : ['No disagreements on that sweep.', '']),
   ];
 }

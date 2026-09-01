@@ -549,6 +549,1231 @@
       "permanent": true
     },
     {
+      "source": "/tekken/players/tekken-8-afroking",
+      "destination": "/tekken/players/afroking",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ayorichie",
+      "destination": "/tekken/players/ayorichie",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-batz",
+      "destination": "/tekken/players/batz",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-breadman",
+      "destination": "/tekken/players/breadman",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-buppamen",
+      "destination": "/tekken/players/buppamen",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-burtania",
+      "destination": "/tekken/players/burtania",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-cbm",
+      "destination": "/tekken/players/cbm",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-chanel",
+      "destination": "/tekken/players/chanel",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-cheeseyoni",
+      "destination": "/tekken/players/cheeseyoni",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-chikurin",
+      "destination": "/tekken/players/chikurin",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-cresent",
+      "destination": "/tekken/players/cresent",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-daddyking",
+      "destination": "/tekken/players/daddyking",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-demarcus",
+      "destination": "/tekken/players/demarcus",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-dengo",
+      "destination": "/tekken/players/dengo",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-dewglider",
+      "destination": "/tekken/players/dewglider",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-dhome50hbk",
+      "destination": "/tekken/players/dhome50hbk",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-double",
+      "destination": "/tekken/players/double",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-edge",
+      "destination": "/tekken/players/edge",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-gken",
+      "destination": "/tekken/players/gken",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ikari",
+      "destination": "/tekken/players/ikari",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-imyourfather",
+      "destination": "/tekken/players/imyourfather",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-jdcr",
+      "destination": "/tekken/players/jdcr",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-jeondding",
+      "destination": "/tekken/players/jeondding",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-jodd",
+      "destination": "/tekken/players/jodd",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-joi",
+      "destination": "/tekken/players/joi",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-joka",
+      "destination": "/tekken/players/joka",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-kaizoku",
+      "destination": "/tekken/players/kaizoku",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-kanda",
+      "destination": "/tekken/players/kanda",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-karas",
+      "destination": "/tekken/players/karas",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-keisuke",
+      "destination": "/tekken/players/keisuke",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ken",
+      "destination": "/tekken/players/ken",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-kimoje",
+      "destination": "/tekken/players/kimoje",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-kkokkoma",
+      "destination": "/tekken/players/kkokkoma",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-knee",
+      "destination": "/tekken/players/knee",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-kuqdand",
+      "destination": "/tekken/players/kuqdand",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-lalo",
+      "destination": "/tekken/players/lalo",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-li-r-li",
+      "destination": "/tekken/players/li-r-li",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-lowhigh",
+      "destination": "/tekken/players/lowhigh",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-mainmanswe",
+      "destination": "/tekken/players/mainmanswe",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-mallard",
+      "destination": "/tekken/players/mallard",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-mangja",
+      "destination": "/tekken/players/mangja",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-megaclinton",
+      "destination": "/tekken/players/mega-clinton",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-memoire",
+      "destination": "/tekken/players/memoire",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-momo",
+      "destination": "/tekken/players/momo",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-mulgold",
+      "destination": "/tekken/players/mulgold",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-pinya",
+      "destination": "/tekken/players/pinya",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-pling",
+      "destination": "/tekken/players/pling",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ptj",
+      "destination": "/tekken/players/ptj",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-qudans",
+      "destination": "/tekken/players/qudans",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-queen-aurora",
+      "destination": "/tekken/players/queen-aurora",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-raigeki",
+      "destination": "/tekken/players/raigeki",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-rangchu",
+      "destination": "/tekken/players/rangchu",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-revenge-match-lowhigh",
+      "destination": "/tekken/players/lowhigh",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-s2-blackheart",
+      "destination": "/tekken/players/s2-blackheart",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-200won",
+      "destination": "/tekken/players/200won",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-50-50-land",
+      "destination": "/tekken/players/50-50-land",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-anakin",
+      "destination": "/tekken/players/anakin",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-ayorichie",
+      "destination": "/tekken/players/ayorichie",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-batz",
+      "destination": "/tekken/players/batz",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-blackheart",
+      "destination": "/tekken/players/blackheart",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-breadman",
+      "destination": "/tekken/players/breadman",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-buppamen",
+      "destination": "/tekken/players/buppamen",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-cbm",
+      "destination": "/tekken/players/cbm",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-chanel",
+      "destination": "/tekken/players/chanel",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-cheeseyoni",
+      "destination": "/tekken/players/cheeseyoni",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-chikurin",
+      "destination": "/tekken/players/chikurin",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-chinoy",
+      "destination": "/tekken/players/chinoy",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-countermachine",
+      "destination": "/tekken/players/countermachine",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-crack",
+      "destination": "/tekken/players/crack",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-crescent",
+      "destination": "/tekken/players/crescent",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-cuddle-core",
+      "destination": "/tekken/players/cuddle-core",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-daddyking",
+      "destination": "/tekken/players/daddyking",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-danger-dogman",
+      "destination": "/tekken/players/danger-dogman",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-defensive-patch",
+      "destination": "/tekken/players/defensive-patch",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-dengo",
+      "destination": "/tekken/players/dengo",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-devko",
+      "destination": "/tekken/players/devko",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-dhome",
+      "destination": "/tekken/players/dhome",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-dhome50",
+      "destination": "/tekken/players/dhome50",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-disciple",
+      "destination": "/tekken/players/disciple",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-discord",
+      "destination": "/tekken/players/discord",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-donte",
+      "destination": "/tekken/players/donte",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-double",
+      "destination": "/tekken/players/double",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-edge",
+      "destination": "/tekken/players/edge",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-eyemusician",
+      "destination": "/tekken/players/eyemusician",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-fergus",
+      "destination": "/tekken/players/fergus",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-gken",
+      "destination": "/tekken/players/gken",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-godpling",
+      "destination": "/tekken/players/godpling",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-goran",
+      "destination": "/tekken/players/goran",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-hakaioh",
+      "destination": "/tekken/players/hakaioh",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-hawg",
+      "destination": "/tekken/players/hawg",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-hdg-noel",
+      "destination": "/tekken/players/hdg-noel",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-higem",
+      "destination": "/tekken/players/higem",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-hosoin",
+      "destination": "/tekken/players/hosoin",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-ikari",
+      "destination": "/tekken/players/ikari",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-ill-regret-this",
+      "destination": "/tekken/players/ill-regret-this",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-inkognito",
+      "destination": "/tekken/players/inkognito",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-ispam",
+      "destination": "/tekken/players/ispam",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-jdcr",
+      "destination": "/tekken/players/jdcr",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-jeune",
+      "destination": "/tekken/players/jeune",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-jodd",
+      "destination": "/tekken/players/jodd",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-joe-crush",
+      "destination": "/tekken/players/joe-crush",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-joka",
+      "destination": "/tekken/players/joka",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-juju",
+      "destination": "/tekken/players/juju",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-k-wiss",
+      "destination": "/tekken/players/k-wiss",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-kaizokulars",
+      "destination": "/tekken/players/kaizokulars",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-kaizur",
+      "destination": "/tekken/players/kaizur",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-keisuke",
+      "destination": "/tekken/players/keisuke",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-kenji",
+      "destination": "/tekken/players/kenji",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-kkokkoma",
+      "destination": "/tekken/players/kkokkoma",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-knee",
+      "destination": "/tekken/players/knee",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-leo-downplayer",
+      "destination": "/tekken/players/leo-downplayer",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-li-r-li",
+      "destination": "/tekken/players/li-r-li",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-mainless-king",
+      "destination": "/tekken/players/mainless-king",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-marduk",
+      "destination": "/tekken/players/marduk",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-marital",
+      "destination": "/tekken/players/marital",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-md-luffy",
+      "destination": "/tekken/players/luffy",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-meo-il",
+      "destination": "/tekken/players/meo-il",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-mr-croft",
+      "destination": "/tekken/players/mr-croft",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-mtx-enjoyer",
+      "destination": "/tekken/players/mtx-enjoyer",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-mulgoat",
+      "destination": "/tekken/players/mulgoat",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-mulgold",
+      "destination": "/tekken/players/mulgold",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-nobi",
+      "destination": "/tekken/players/nobi",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-noobi-san",
+      "destination": "/tekken/players/noobi-san",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-park-tae-jeong",
+      "destination": "/tekken/players/park-tae-jeong",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-pinya",
+      "destination": "/tekken/players/pinya",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-princess-namine",
+      "destination": "/tekken/players/princess-namine",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-ptj",
+      "destination": "/tekken/players/ptj",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-raef",
+      "destination": "/tekken/players/raef",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-raigeki",
+      "destination": "/tekken/players/raigeki",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-rangchu",
+      "destination": "/tekken/players/rangchu",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-rest",
+      "destination": "/tekken/players/rest",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-rheloh",
+      "destination": "/tekken/players/rheloh",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-rskyluck",
+      "destination": "/tekken/players/rskyluck",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-sephiblack",
+      "destination": "/tekken/players/sephiblack",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-shine",
+      "destination": "/tekken/players/shine",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-silv3r",
+      "destination": "/tekken/players/silv3r",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-silver",
+      "destination": "/tekken/players/silver",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-sleipnir",
+      "destination": "/tekken/players/sleipnir",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-tetsu",
+      "destination": "/tekken/players/tetsu",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-tomoriru",
+      "destination": "/tekken/players/tomoriru",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-ulsan",
+      "destination": "/tekken/players/ulsan",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-wasulu",
+      "destination": "/tekken/players/wasulu",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-wecka",
+      "destination": "/tekken/players/wecka",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-xcc",
+      "destination": "/tekken/players/xcc",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-xo",
+      "destination": "/tekken/players/xo",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-yeonarang",
+      "destination": "/tekken/players/yeonarang",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-yoredz",
+      "destination": "/tekken/players/yoredz",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-yoshiden",
+      "destination": "/tekken/players/yoshiden",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-yuyu",
+      "destination": "/tekken/players/yuyu",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-season-2-zechariah-carey",
+      "destination": "/tekken/players/zechariah-carey",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-senpai-relax",
+      "destination": "/tekken/players/senpai-relax",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-shine",
+      "destination": "/tekken/players/shine",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-sidtron",
+      "destination": "/tekken/players/sidtron",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-takataa",
+      "destination": "/tekken/players/takataa",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-takataka",
+      "destination": "/tekken/players/takataka",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-torent",
+      "destination": "/tekken/players/torent",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ulsan",
+      "destination": "/tekken/players/ulsan",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-uno",
+      "destination": "/tekken/players/uno",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-afroking",
+      "destination": "/tekken/players/afroking",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-ayorichie",
+      "destination": "/tekken/players/ayorichie",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-batz",
+      "destination": "/tekken/players/batz",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-befamous",
+      "destination": "/tekken/players/befamous",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-breadman",
+      "destination": "/tekken/players/breadman",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-buppamen",
+      "destination": "/tekken/players/buppamen",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-cbm",
+      "destination": "/tekken/players/cbm",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-chanel",
+      "destination": "/tekken/players/chanel",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-cheeseyoni",
+      "destination": "/tekken/players/cheeseyoni",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-chikurin",
+      "destination": "/tekken/players/chikurin",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-crack",
+      "destination": "/tekken/players/crack",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-crescent",
+      "destination": "/tekken/players/crescent",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-dbp",
+      "destination": "/tekken/players/dbp",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-deeongrey",
+      "destination": "/tekken/players/deeongrey",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-dengo",
+      "destination": "/tekken/players/dengo",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-dewglider",
+      "destination": "/tekken/players/dewglider",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-disciple",
+      "destination": "/tekken/players/disciple",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-double",
+      "destination": "/tekken/players/double",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-dragonite",
+      "destination": "/tekken/players/dragonite",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-evil46",
+      "destination": "/tekken/players/evil46",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-exiszt",
+      "destination": "/tekken/players/exiszt",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-fakepotter",
+      "destination": "/tekken/players/fakepotter",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-falcon-alba",
+      "destination": "/tekken/players/falcon-alba",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-fergus",
+      "destination": "/tekken/players/fergus",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-g-black",
+      "destination": "/tekken/players/g-black",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-galgonge",
+      "destination": "/tekken/players/galgonge",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-gken",
+      "destination": "/tekken/players/gken",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-go-attack",
+      "destination": "/tekken/players/go-attack",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-higem",
+      "destination": "/tekken/players/higem",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-hosoin",
+      "destination": "/tekken/players/hosoin",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-jdcr",
+      "destination": "/tekken/players/jdcr",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-jodd",
+      "destination": "/tekken/players/jodd",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-joe-crush",
+      "destination": "/tekken/players/joe-crush",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-joka",
+      "destination": "/tekken/players/joka",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-juju",
+      "destination": "/tekken/players/juju",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-k-wiss",
+      "destination": "/tekken/players/k-wiss",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-kaizokulars",
+      "destination": "/tekken/players/kaizokulars",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-karma",
+      "destination": "/tekken/players/karma",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-kei",
+      "destination": "/tekken/players/kei",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-kenji",
+      "destination": "/tekken/players/kenji",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-kirakira",
+      "destination": "/tekken/players/kirakira",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-kkazu",
+      "destination": "/tekken/players/kkazu",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-kkokkoma",
+      "destination": "/tekken/players/kkokkoma",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-knee",
+      "destination": "/tekken/players/knee",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-kokoma",
+      "destination": "/tekken/players/kokoma",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-li-r-li",
+      "destination": "/tekken/players/li-r-li",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-malgu",
+      "destination": "/tekken/players/malgu",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-marduk",
+      "destination": "/tekken/players/marduk",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-marvelous",
+      "destination": "/tekken/players/marvelous",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-md-luffy",
+      "destination": "/tekken/players/luffy",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-megaclinton",
+      "destination": "/tekken/players/mega-clinton",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-meo-il",
+      "destination": "/tekken/players/meo-il",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-mulgold",
+      "destination": "/tekken/players/mulgold",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-naarks",
+      "destination": "/tekken/players/naarks",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-nino",
+      "destination": "/tekken/players/nino",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-nobi",
+      "destination": "/tekken/players/nobi",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-patloars",
+      "destination": "/tekken/players/patloars",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-poltan",
+      "destination": "/tekken/players/poltan",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-princess-namine",
+      "destination": "/tekken/players/princess-namine",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-ptj",
+      "destination": "/tekken/players/ptj",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-qudans",
+      "destination": "/tekken/players/qudans",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-raef",
+      "destination": "/tekken/players/raef",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-rangchu",
+      "destination": "/tekken/players/rangchu",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-rbsm",
+      "destination": "/tekken/players/rbsm",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-rest",
+      "destination": "/tekken/players/rest",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-ryuichi",
+      "destination": "/tekken/players/ryuichi",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-sephiblack",
+      "destination": "/tekken/players/sephiblack",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-shine",
+      "destination": "/tekken/players/shine",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-silent",
+      "destination": "/tekken/players/silent",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-sleipnir",
+      "destination": "/tekken/players/sleipnir",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-sodam",
+      "destination": "/tekken/players/sodam",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-tb7even",
+      "destination": "/tekken/players/tb7even",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-trizzy",
+      "destination": "/tekken/players/trizzy",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-ulsan",
+      "destination": "/tekken/players/ulsan",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-wecka",
+      "destination": "/tekken/players/wecka",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-xcc",
+      "destination": "/tekken/players/xcc",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-xo",
+      "destination": "/tekken/players/xo",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-xtramint",
+      "destination": "/tekken/players/xtramint",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-yagami",
+      "destination": "/tekken/players/yagami",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-yoredz",
+      "destination": "/tekken/players/yoredz",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-ver-2-01-zechariah-carey",
+      "destination": "/tekken/players/zechariah-carey",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-warning-ispam",
+      "destination": "/tekken/players/warning-ispam",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-xtramint",
+      "destination": "/tekken/players/xtramint",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-yagami",
+      "destination": "/tekken/players/yagami",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-yoredz",
+      "destination": "/tekken/players/yoredz",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-yoshiden",
+      "destination": "/tekken/players/yoshiden",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tekken-8-yuyu",
+      "destination": "/tekken/players/yuyu",
+      "permanent": true
+    },
+    {
       "source": "/tekken/players/the-main-man",
       "destination": "/tekken/players/themainman",
       "permanent": true

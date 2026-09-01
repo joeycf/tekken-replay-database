@@ -1,4 +1,31 @@
 {
+  "measured": {
+    "atEntryId": 488393,
+    "compared": 7055,
+    "unmatched": 3889,
+    "segmented": 0,
+    "players": {
+      "both": 7040,
+      "one": 13,
+      "neither": 2,
+      "flipped": 0,
+      "handleAffix": {
+        "ours": 6,
+        "theirs": 2,
+        "unrelated": 9
+      }
+    },
+    "characters": {
+      "sides": 14110,
+      "agree": 13774,
+      "subset": 0,
+      "disagree": 3,
+      "cannotWitness": 333,
+      "blindSpot": 333,
+      "unreadable": 0,
+      "overCap": 0
+    }
+  },
   "blindSpots": [
     {
       "id": "armor_king",

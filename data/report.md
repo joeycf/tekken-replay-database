@@ -1,6 +1,6 @@
 # Tekken pipeline report
 
-**15463 matches** parsed from 25447 uploads across 6 channels · 2590 players · ranked sides 13719/30926 (44.4%)
+**15463 matches** parsed from 25447 uploads across 5 channels, plus 317 from 1 index · 2590 players · ranked sides 13719/30926 (44.4%)
 
 | channel | source | uploads | parsed | coverage |
 | --- | --- | ---: | ---: | ---: |
@@ -91,7 +91,7 @@ recorded in data/theater-disagreements.json with both claims, never written into
 a record. The catalogue does not outrank a confident parse and never outranks a
 human override.
 
-_Measured this run against a full pull. 3889 catalogue entr(ies) point at videos_
+_Measured on the last full sweep, at catalogue entry 488393. 3889 catalogue entr(ies) point at videos_
 _we do not hold; 0 are VODs the catalogue segments, which the intake owns._
 
 | field | population | agree | partial | disagree | cannot witness |
@@ -106,7 +106,7 @@ character disagreement.
 **333** side(s) the catalogue COULD NOT HAVE GOT RIGHT are held out of both
 columns above: agreement over the 13777 it can express is **99.98%**.
 
-Its vocabulary has no word for these, derived from this run rather than declared —
+Its vocabulary has no word for these, derived from that sweep rather than declared —
 no string anywhere in the pull resolves to the id, and where we say it the
 catalogue says one particular other thing almost every time:
 
@@ -159,4 +159,4 @@ guessing this module refuses.
 - `4Pf63UozmxA` [highLevel] no-vs-title: T8 🔥 Kkokkoma (Dragunov) 🔥 Tekken 8
 - `RUDWRC5M738` [highLevel] no-vs-title: T8 🔥 Shadow 20z (Zafina) 🔥 Tekken 8
 
-_Generated 2026-09-01T18:46:30.492Z_
+_Generated 2026-09-01T23:23:09.729Z_

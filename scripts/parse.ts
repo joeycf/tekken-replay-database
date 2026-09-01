@@ -17,14 +17,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { CHANNELS, stripTheaterSponsor } from './channels';
-import {
-  crossCheck,
-  formatCrossCheck,
-  type WitnessFile,
-  type BlindSpot,
-  type Disagreement,
-} from './crosscheck';
+import { CHANNELS, FETCHED_CHANNELS, stripTheaterSponsor } from './channels';
+import { crossCheck, formatCrossCheck, type WitnessArtifact, type WitnessFile } from './crosscheck';
 import { applyOverrides, emitGeneric } from './emit';
 import { formatStaleRefusal, staleEvidence } from './freshness';
 import { buildPatchTable } from './patches';
@@ -873,6 +867,7 @@ for (const ch of CHANNELS.filter((c) => c.cronFetchedWithCarry)) {
 //
 // The assertion is unconditional for a carried intake — NOT guarded on
 // "carried something", which would make total loss the one case that passes.
+// It is made below, once `records` exists: the pin counts PUBLISHED records.
 const sourcePins: SourcePins = await readJson<SourcePins>(join(DATA, 'source-pins.json')).catch(
   () => ({}) as SourcePins,
 );
@@ -898,34 +893,6 @@ const theaterStats = await readJson<{
 const theaterCursor = await readJson<Record<string, number>>(
   join(DATA, 'theater-cursor.json'),
 ).catch(() => ({}) as Record<string, number>);
-for (const key of carriedWithFallback) {
-  const got = videos.filter((v) => v.intake === key).length;
-  const want = sourcePins[key];
-  if (want === undefined) {
-    console.error(
-      `✖ ${key} carried ${got} record(s) but data/source-pins.json has no pin for it.\n` +
-        `  "No expectation" is the exact state the pin exists to prevent.\n` +
-        `  Run \`npm run data:theater -- --full\` then \`npm run data:parse\` to rebuild and pin.\n` +
-        `  --full, NOT the bare cursor: the shallowest tagged entry in this catalogue\n` +
-        `  sits on page 97 of 230 and the cursor reads at most 10, so a cursor pull\n` +
-        `  writes an empty dump, parse correctly reads that as another CARRY, and the\n` +
-        `  remedy loops on this same refusal.`,
-    );
-    process.exit(1);
-  }
-  if (got !== want) {
-    console.error(
-      `✖ source pin mismatch on ${key}: carried ${got}, pinned ${want}.\n` +
-        `  data/videos.json is both the source and the target of this carry, so drift\n` +
-        `  compounds: the next run would treat ${got} as the new baseline.\n` +
-        `  If deliberate, rebuild with \`npm run data:theater -- --full\` (a cursor pull\n` +
-        `  cannot reach the tagged entries — they start on page 97 of 230 and the cursor\n` +
-        `  reads at most 10 — so it writes an empty dump and parse carries again), then\n` +
-        `  \`npm run data:parse\` and commit the new pin.`,
-    );
-    process.exit(1);
-  }
-}
 
 // ── character-completion: records built from a footage verdict ───────────────
 // An overrides.json entry with a complete sides pair on a MISSED id is
@@ -971,6 +938,44 @@ const records = applyOverrides(videos, overrides).map((v) =>
     ? { ...v, patchVersion: null }
     : v,
 );
+
+// ── the carry pin, asserted ─────────────────────────────────────────────────
+// COUNTED AFTER CURATION, on both sides. The re-pin below and the
+// data/videos.json write both count `records`, so the pin means "published
+// count" everywhere — and this assertion used to count `videos`, the
+// pre-override array. The two agree only while no override touches a carried
+// intake: the first exclusion on one of the 317 index records would fail this
+// check on every run thereafter with nothing actually wrong, and a carry that
+// lost a record while an override added one back would pass. sf6 and tokon both
+// count it after curation.
+for (const key of carriedWithFallback) {
+  const got = records.filter((v) => v.intake === key).length;
+  const want = sourcePins[key];
+  if (want === undefined) {
+    console.error(
+      `✖ ${key} carried ${got} record(s) but data/source-pins.json has no pin for it.\n` +
+        `  "No expectation" is the exact state the pin exists to prevent.\n` +
+        `  Run \`npm run data:theater -- --full\` then \`npm run data:parse\` to rebuild and pin.\n` +
+        `  --full, NOT the bare cursor: the shallowest tagged entry in this catalogue\n` +
+        `  sits on page 97 of 230 and the cursor reads at most 10, so a cursor pull\n` +
+        `  writes an empty dump, parse correctly reads that as another CARRY, and the\n` +
+        `  remedy loops on this same refusal.`,
+    );
+    process.exit(1);
+  }
+  if (got !== want) {
+    console.error(
+      `✖ source pin mismatch on ${key}: carried ${got}, pinned ${want}.\n` +
+        `  data/videos.json is both the source and the target of this carry, so drift\n` +
+        `  compounds: the next run would treat ${got} as the new baseline.\n` +
+        `  If deliberate, rebuild with \`npm run data:theater -- --full\` (a cursor pull\n` +
+        `  cannot reach the tagged entries — they start on page 97 of 230 and the cursor\n` +
+        `  reads at most 10 — so it writes an empty dump and parse carries again), then\n` +
+        `  \`npm run data:parse\` and commit the new pin.`,
+    );
+    process.exit(1);
+  }
+}
 
 // ── channel-collapse guard ────────────────────────────────────────────────────
 // A tracked channel can vanish between refreshes — deleted, renamed, made
@@ -1299,22 +1304,23 @@ for (const c of characters) {
     byAliasForWitness.set(a.trim().toLowerCase(), c.id);
   }
 }
-// THE ARTIFACT CARRIES THE BLIND SPOTS AS WELL AS THE ROWS, and the shape
-// therefore differs from the sibling repos' plain array. That is deliberate:
-// this is the only game where the catalogue has a vocabulary GAP rather than
-// merely a column ceiling — it has no word for Armor King, writing "King" on 330
-// of the 331 sides where we say `armor_king` — and a gap has to be remembered
-// between runs. The derivation needs ten sides of evidence before it will
-// believe one, which a two-page cursor morning cannot supply, so without this
-// the daily run reports seven correct Armor King records as contested and the
-// artifact stops being worth reading. See crosscheck.ts's `carriedBlindSpots`.
+// THE ARTIFACT CARRIES THE BLIND SPOTS AND THE MEASUREMENT AS WELL AS THE ROWS.
+// The blind spots came first and are this repo's own: this is the only game
+// where the catalogue has a vocabulary GAP rather than merely a column ceiling —
+// it has no word for Armor King, writing "King" on 332 of the 333 sides where we
+// say `armor_king` — and a gap has to be remembered between runs. The derivation
+// needs ten sides of evidence before it will believe one, which a two-page
+// cursor morning cannot supply, so without this the daily run reports seven
+// correct Armor King records as contested and the artifact stops being worth
+// reading. See crosscheck.ts's `carriedBlindSpots`.
+//
+// The measurement is here for the same reason one step further out: report.md
+// renders from what is COMMITTED, so its cross-check block is byte-identical
+// between sweeps instead of moving with whatever window this morning's cursor
+// happened to read. See crosscheck.ts's WitnessArtifact.
 const disagreementsPath = join(DATA, 'theater-disagreements.json');
-interface DisagreementFile {
-  blindSpots?: BlindSpot[];
-  disagreements?: Disagreement[];
-}
-const carriedWitness = await readJson<DisagreementFile>(disagreementsPath).catch(
-  () => ({}) as DisagreementFile,
+let witnessArtifact = await readJson<WitnessArtifact>(disagreementsPath).catch(
+  () => ({ blindSpots: [], disagreements: [] }) as WitnessArtifact,
 );
 const witnessResult = witness
   ? crossCheck(
@@ -1324,31 +1330,58 @@ const witnessResult = witness
       resolveKey,
       (h) => stripOrgPrefix(stripTheaterSponsor(h)),
       4,
-      carriedWitness.blindSpots ?? [],
+      witnessArtifact.blindSpots ?? [],
     )
   : null;
-if (witnessResult) {
-  await writeFile(
-    disagreementsPath,
-    JSON.stringify(
-      { blindSpots: witnessResult.blindSpots, disagreements: witnessResult.disagreements },
-      null,
-      2,
-    ) + '\n',
-    'utf8',
-  );
+// ONLY A FULL SWEEP WRITES, and the measurement is written with the rows. A
+// cursor pull sees whatever is at the front of the feed this morning — a couple
+// of hundred catalogue rows — so its reading is a different WINDOW, not a
+// different corpus. Letting it write threw the last sweep's rows away on the
+// first quiet morning and flapped them back on the next one that happened to
+// contain a disagreement, and rendering its numbers into report.md made that
+// file differ every single day whether or not a record had. See
+// crosscheck.ts's WitnessArtifact.
+if (witnessResult && witness?.mode === 'full') {
+  witnessArtifact = {
+    // The witness's own high-water id, not the stats file's: this measurement
+    // was taken from that file and names the sweep that produced it. The stats
+    // file stands in when a hand-placed witness predates it.
+    measured: {
+      atEntryId: witness.maxEntryId ?? theaterStats?.maxEntryId ?? 0,
+      compared: witnessResult.compared,
+      unmatched: witnessResult.unmatched,
+      segmented: witnessResult.segmented,
+      players: witnessResult.players,
+      characters: witnessResult.characters,
+    },
+    blindSpots: witnessResult.blindSpots,
+    disagreements: witnessResult.disagreements,
+  };
+  await writeFile(disagreementsPath, JSON.stringify(witnessArtifact, null, 2) + '\n', 'utf8');
 } else if (!existsSync(disagreementsPath)) {
-  // A CARRYING RUN DOES NOT REWRITE THIS FILE — there is no witness, so it has
-  // nothing to say, and overwriting it with `[]` would erase the record of what
-  // the last real pull contested. But the cron NAMES this path in its `git add`,
-  // and `git add` on a path that does not exist fails under `set -e`, which
-  // aborts the commit step and produces no commit at all. So: seeded when
-  // absent, never touched when present. The empty artifact is the honest state
-  // of a repository that has never run a cross-check.
+  // A RUN THAT DID NOT SWEEP DOES NOT REWRITE THIS FILE — a carrying run has no
+  // witness at all, and a cursor run has only a window — and overwriting it with
+  // an empty artifact would erase the record of what the last real sweep
+  // contested. But the cron NAMES this path in its `git add`, and `git add` on a
+  // path that does not exist fails under `set -e`, which aborts the commit step
+  // and produces no commit at all. So: seeded when absent, never touched when
+  // present. The empty artifact is the honest state of a repository that has
+  // never run a cross-check.
   await writeFile(
     disagreementsPath,
     JSON.stringify({ blindSpots: [], disagreements: [] }, null, 2) + '\n',
     'utf8',
+  );
+}
+// A CURSOR MORNING'S READING GOES TO THE CONSOLE, where it is useful and costs
+// nothing. It is a real measurement of a real window; it is just not a
+// measurement of the corpus, so it is not committed.
+if (witnessResult && witness?.mode !== 'full') {
+  const c = witnessResult.characters;
+  console.log(
+    `  cross-check (cursor window, not committed): ${witnessResult.compared} record(s), ` +
+      `${witnessResult.players.both} both-handles, ${c.agree}/${c.sides} character sides agree, ` +
+      `${witnessResult.disagreements.length} disagreement(s)`,
   );
 }
 
@@ -1365,6 +1398,10 @@ const byChannel = (id: string) => ({
   parsed: records.filter((v) => v.intake === id).length,
   missed: reportedMisses.filter((m) => m.channel === id),
 });
+/** Records that came from an INDEX intake rather than from a title parse.
+ *  Named in the headline separately because `raws` deliberately excludes the
+ *  index dump — see there. */
+const indexCount = records.filter((v) => CHANNELS.some((c) => c.index && c.id === v.intake)).length;
 const rankSides = records.reduce((n, v) => n + v.sides.filter((s) => s.rank).length, 0);
 const seasonDist = records.reduce<Record<string, number>>((acc, v) => {
   acc[`S${v.season}`] = (acc[`S${v.season}`] ?? 0) + 1;
@@ -1378,8 +1415,16 @@ const reasonCounts = reportedMisses.reduce<Record<string, number>>((acc, m) => {
 const report = [
   '# Tekken pipeline report',
   '',
-  `**${records.length} matches** parsed from ${raws.length} uploads across ${CHANNELS.length} channels · ` +
-    `${players.length} players · ranked sides ${rankSides}/${records.length * 2} (${((rankSides / (records.length * 2)) * 100).toFixed(1)}%)`,
+  // THE THREE NUMBERS HAVE TO BE ABOUT THE SAME THING. `raws` excludes the index
+  // dump by construction (it is read outside `raws`, and it holds catalogue rows
+  // rather than uploads), and the index source is not a fetched channel — so
+  // counting it in the channel total said 317 records came from uploads that
+  // were never counted, across a channel that is never fetched. Both are named.
+  `**${records.length} matches** parsed from ${raws.length} uploads across ` +
+    `${FETCHED_CHANNELS.length} channels` +
+    (indexCount > 0 ? `, plus ${indexCount} from 1 index` : '') +
+    ` · ${players.length} players · ranked sides ${rankSides}/${records.length * 2} ` +
+    `(${((rankSides / (records.length * 2)) * 100).toFixed(1)}%)`,
   '',
   '| channel | source | uploads | parsed | coverage |',
   '| --- | --- | ---: | ---: | ---: |',
@@ -1389,7 +1434,15 @@ const report = [
     // "0 | 317 | 0.0%" row would read as a channel that died.
     const carried = carriedWithFallback.includes(ch.id);
     const mark = ch.index ? (carried ? ' _(carried)_' : ' _(index)_') : '';
-    return carried
+    // AND A COVERAGE SHARE IS ONLY MEANINGFUL WHEN `parsed` CAME OUT OF
+    // `uploads`. On a cursor run the index dump is a delta of a few entries
+    // while `parsed` counts the whole merged intake, so the division reads
+    // several hundred per cent — a number that is not so much wrong as
+    // meaningless. Both cells are withheld rather than dressed up: the delta
+    // size is this morning's window, and a window number in report.md makes the
+    // file differ on days when nothing changed. (tokon's guard, ported.)
+    const windowOnly = ch.index && !carried && theaterStats?.mode === 'cursor';
+    return carried || windowOnly
       ? `| ${ch.id}${mark} | ${ch.source} | — | ${s.parsed} | — |`
       : `| ${ch.id}${mark} | ${ch.source} | ${s.raw} | ${s.parsed} | ${((s.parsed / Math.max(1, s.raw)) * 100).toFixed(1)}% |`;
   }),
@@ -1419,7 +1472,12 @@ const report = [
               !theaterStats
               ? 'rebuilt from a dump with no pull behind it'
               : theaterStats.mode === 'cursor'
-                ? `cursor delta${theaterStats.hitBound ? ' (hit page bound)' : ''}`
+                ? // NO PER-RUN DETAIL IN THE MODE STRING. `hitBound` used to be
+                  // appended here, which made this cell — and therefore
+                  // report.md — differ on the mornings it fired and not on the
+                  // others. It is a real event and it is reported below, as its
+                  // own conditional line.
+                  'rebuilt from a cursor delta'
                 : 'rebuilt from a full sweep';
           // On a rebuild the pin was just rewritten from this same count, so
           // read the count rather than the stale in-memory value we loaded
@@ -1435,9 +1493,29 @@ const report = [
           // 317 of them, and it means nothing. So the full number is reported
           // and the cursor number is withheld rather than dressed up.
           const gone = carried || theaterStats?.mode !== 'full' ? '—' : String(survivors.length);
-          return `| \`${ch.id}\` | ${n} | ${pin} | ${mode} | ${carried ? '—' : (theaterStats?.pagesRead ?? '—')} | ${carried ? '—' : built} | ${gone} |`;
+          // THE PER-RUN COLUMNS ARE WITHHELD ON A CURSOR MORNING, for the same
+          // reason the cross-check block is rendered from the committed
+          // artifact: `pages` and `new` describe this morning's WINDOW, not the
+          // corpus, so printing them made report.md differ every day whether or
+          // not a record had — which retires the cron's no-change-no-commit rule
+          // through a side door and deploys the site daily forever.
+          const swept = !carried && theaterStats?.mode === 'full';
+          return `| \`${ch.id}\` | ${n} | ${pin} | ${mode} | ${swept ? (theaterStats?.pagesRead ?? '—') : '—'} | ${swept ? built : '—'} | ${gone} |`;
         }),
         '',
+        // NOT PER-RUN NOISE: absent on every ordinary morning, present only on
+        // one where the cursor could not go quiet inside its page bound, which
+        // means entries may be unreached. That is a real event and belongs in
+        // the commit, the same way an ACTION REQUIRED block does — the guard's
+        // rule is that a diff which is ONLY the timestamp is not a change, not
+        // that report.md may never change.
+        ...(theaterStats?.hitBound
+          ? [
+              '_⚠ The cursor hit its page bound this run — entries may be unreached._',
+              '_Nothing is lost (the intake is add-only); `npm run data:theater -- --full` reconciles._',
+              '',
+            ]
+          : []),
         // A CARRY measures none of what follows — the dump it would have
         // measured is absent by design. Saying so beats printing 0, which reads
         // as "checked, found nothing" when the truth is "not checked this run".
@@ -1457,11 +1535,15 @@ const report = [
                 '',
               ]
           : [
+              // OF THE PULL, NOT OF THE PUBLISHED CATALOGUE. The denominator was
+              // the record count, which on an add-only intake includes every
+              // survivor carried from earlier pulls — so the ratio compared
+              // this run's skips against a corpus this run never read, and it
+              // shrank as the intake grew. `theaterRaw` is the dump the skips
+              // were taken out of — every one of them is a row of it — which is
+              // what 2xko already uses.
               theaterSkippedKnown.length > 0
-                ? `Entries **skipped as already-known**: **${theaterSkippedKnown.length}** of ${
-                    theaterSkippedKnown.length +
-                    records.filter((v) => v.intake === 'replayTheater').length
-                  }. An id this repo has already ruled on, in any capacity, does not re-enter through a side door.`
+                ? `Entries **skipped as already-known**: **${theaterSkippedKnown.length}** of ${theaterRaw.length} in this pull. An id this repo has already ruled on, in any capacity, does not re-enter through a side door.`
                 : '_Entries skipped as already-known: **0**. The catalogue indexes no video this repo has fetched, published or ruled on._',
               '',
               // STATED, NEVER ABSORBED. The collapsed rows are gone from the
@@ -1545,7 +1627,7 @@ const report = [
         '',
       ]
     : []),
-  ...(witnessResult ? formatCrossCheck(witnessResult, witness?.mode) : []),
+  ...formatCrossCheck(witnessArtifact),
   '## Sample misses (first 30 that are not shorts/live)',
   '',
   ...reportedMisses

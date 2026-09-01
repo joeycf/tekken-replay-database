@@ -552,12 +552,31 @@ async function main(): Promise<void> {
   // witness, so on a fresh clone or a carrying-only history it legitimately
   // does not exist yet, and an empty list is a real answer.
   //
-  // THE SHAPE IS AN OBJECT HERE, not the sibling repos' plain array: this is the
-  // only game whose catalogue has a vocabulary GAP rather than a column ceiling
-  // (it has no word for Armor King), and a gap has to survive between runs or
-  // the daily cursor pull re-contests seven correct records every morning.
+  // THE SHAPE IS AN OBJECT: it carries the last full sweep's MEASUREMENT and the
+  // catalogue's vocabulary gaps as well as the rows. The gaps are this game's own
+  // (it has no word for Armor King) and have to survive between runs or the daily
+  // cursor pull re-contests seven correct records every morning; the measurement
+  // is what report.md renders, so the block stays byte-identical between sweeps
+  // instead of moving with whatever window this morning's cursor read.
   const witnessFile = existsSync(join(ROOT, 'data/theater-disagreements.json'))
     ? (JSON.parse(readFileSync(join(ROOT, 'data/theater-disagreements.json'), 'utf8')) as {
+        measured?: {
+          atEntryId: number;
+          compared: number;
+          unmatched: number;
+          segmented: number;
+          players: { both: number; one: number; neither: number; flipped: number };
+          characters: {
+            sides: number;
+            agree: number;
+            subset: number;
+            disagree: number;
+            cannotWitness: number;
+            blindSpot: number;
+            unreadable: number;
+            overCap: number;
+          };
+        };
         blindSpots?: { id: string; mergedInto: string; merged: number; sides: number }[];
         disagreements?: {
           videoId: string;
@@ -571,6 +590,39 @@ async function main(): Promise<void> {
     : {};
   const contested = witnessFile.disagreements ?? [];
   const blindSpots = witnessFile.blindSpots ?? [];
+  // THE MEASUREMENT HAS TO ADD UP, or the table in report.md is decoration.
+  // Every compared record is exactly one of both / one / neither handles; every
+  // side is exactly one of agree / subset / disagree / cannot-witness; every
+  // cannot-witness side is exactly one of the three reasons; and this game is
+  // 1v1, so a compared record is two sides and no other number.
+  const m = witnessFile.measured;
+  expect(
+    !m ||
+      (m.players.both + m.players.one + m.players.neither === m.compared &&
+        m.characters.agree +
+          m.characters.subset +
+          m.characters.disagree +
+          m.characters.cannotWitness ===
+          m.characters.sides &&
+        m.characters.blindSpot + m.characters.unreadable + m.characters.overCap ===
+          m.characters.cannotWitness &&
+        m.characters.sides === m.compared * 2),
+    `cross-check measurement is internally consistent${m ? ` (${m.compared} compared)` : ' (none yet)'}`,
+  );
+  // Every contested row is one the measurement actually counted: a character
+  // disagreement is a scored side, a player disagreement is a neither-handles
+  // record.
+  expect(
+    !m || contested.length <= m.characters.disagree + m.players.neither,
+    'contested rows are a subset of what was measured',
+  );
+  // The sweep is named by the catalogue's own high-water entry id rather than by
+  // a clock — a timestamp here would churn report.md every morning, which is the
+  // whole defect this artifact exists to close.
+  expect(
+    !m || (Number.isInteger(m.atEntryId) && m.atEntryId > 0),
+    `the measurement names the sweep it came from${m ? ` (entry ${m.atEntryId})` : ''}`,
+  );
   expect(
     blindSpots.every(
       (b) =>
