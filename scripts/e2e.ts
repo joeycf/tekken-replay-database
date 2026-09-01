@@ -446,6 +446,27 @@ async function main(): Promise<void> {
   // charactersFromFootage record would have if one escaped the review queue.
   const emptySides = videos.filter((v) => v.sides.some((s) => s.characters.length === 0));
   expect(emptySides.length === 0, 'no record has a side with zero characters');
+  // NO PLAYER IS THE GAME'S OWN NAME. "Tekken 8 💥 DADDYKING (#1 Ranked Clive)"
+  // used to yield the handle "Tekken 8 💥 Daddyking" and the id
+  // `tekken-8-daddyking`, beside the real `daddyking` — 245 such ids over 623
+  // sides, and 245 live player pages, because 💥 was missing from SEG_RE and 31
+  // titles separated the brand from the handle with nothing but a double space.
+  //
+  // Checked against the PUBLISHED ids rather than against the parser, so it
+  // stays true however the parser is rewritten. `\b8\b` is what keeps the real
+  // handles in this corpus out of it — Tekken Master, TekkenCrashS2, Tekken2024,
+  // TekkenDestroyer all survive and must.
+  const gameNamedPlayers = [
+    ...new Set(
+      allVideos.flatMap((v) =>
+        v.sides.filter((s) => /^(?:tekken-?8|t8)\b/i.test(s.player)).map((s) => s.player),
+      ),
+    ),
+  ];
+  expect(
+    gameNamedPlayers.length === 0,
+    `no player id is the game's own name (${gameNamedPlayers.slice(0, 3).join(', ')})`,
+  );
 
   // POSITIVE CONTROL: prove the emit gate above actually fires. A gate that has
   // never been observed rejecting anything is not known to be a gate.

@@ -28,6 +28,10 @@
     "handle": "2CR"
   },
   {
+    "id": "50-50-land",
+    "handle": "50/50 Land"
+  },
+  {
     "id": "5sol",
     "handle": "5Sol"
   },
@@ -1445,6 +1449,10 @@
     "handle": "Chimta"
   },
   {
+    "id": "chinoy",
+    "handle": "Chinoy"
+  },
+  {
     "id": "chobo",
     "handle": "Chobo"
   },
@@ -1797,6 +1805,10 @@
     "handle": "Dange"
   },
   {
+    "id": "danger-dogman",
+    "handle": "Danger Dogman"
+  },
+  {
     "id": "dangjo",
     "handle": "Dangjo"
   },
@@ -1922,7 +1934,7 @@
   },
   {
     "id": "deeongrey",
-    "handle": "DeeonGrey"
+    "handle": "Deeongrey"
   },
   {
     "id": "defensive-patch",
@@ -2021,6 +2033,10 @@
     "handle": "Devilster"
   },
   {
+    "id": "devko",
+    "handle": "DevKO"
+  },
+  {
     "id": "devko22",
     "handle": "DevKO22"
   },
@@ -2071,6 +2087,10 @@
   {
     "id": "disciple",
     "handle": "Disciple"
+  },
+  {
+    "id": "discord",
+    "handle": "DISCORD"
   },
   {
     "id": "divine",
@@ -3198,6 +3218,10 @@
     "handle": "GoDong"
   },
   {
+    "id": "godpling",
+    "handle": "Godpling"
+  },
+  {
     "id": "godship",
     "handle": "GodShip"
   },
@@ -3580,6 +3604,10 @@
   {
     "id": "hdam",
     "handle": "Hdam"
+  },
+  {
+    "id": "hdg-noel",
+    "handle": "HDG/Noel"
   },
   {
     "id": "heaven",
@@ -4058,6 +4086,10 @@
     "handle": "iShan"
   },
   {
+    "id": "ispam",
+    "handle": "iSpam"
+  },
+  {
     "id": "its-low-flow",
     "handle": "its Low Flow"
   },
@@ -4443,6 +4475,10 @@
   {
     "id": "kaizokulars",
     "handle": "Kaizokulars"
+  },
+  {
+    "id": "kaizur",
+    "handle": "Kaizur"
   },
   {
     "id": "kaizurtv",
@@ -5209,6 +5245,10 @@
     "handle": "Lenda"
   },
   {
+    "id": "leo-downplayer",
+    "handle": "Leo Downplayer"
+  },
+  {
     "id": "leo-yeah",
     "handle": "Leo Yeah"
   },
@@ -5542,6 +5582,10 @@
     "handle": "Maikelu"
   },
   {
+    "id": "mainless-king",
+    "handle": "Mainless King"
+  },
+  {
     "id": "mainmanswe",
     "handle": "MainManSwe"
   },
@@ -5642,12 +5686,20 @@
     "handle": "Marcus"
   },
   {
+    "id": "marduk",
+    "handle": "Marduk"
+  },
+  {
     "id": "marfelus",
     "handle": "Marfelus"
   },
   {
     "id": "marin",
     "handle": "MARIN"
+  },
+  {
+    "id": "marital",
+    "handle": "Marital"
   },
   {
     "id": "marty",
@@ -6170,12 +6222,16 @@
     "handle": "MTKD"
   },
   {
+    "id": "mtx-enjoyer",
+    "handle": "MTX Enjoyer"
+  },
+  {
     "id": "muchhar",
     "handle": "MUCHHAR"
   },
   {
     "id": "mulgoat",
-    "handle": "MULGOAT"
+    "handle": "Mulgoat"
   },
   {
     "id": "mulgold",
@@ -6653,6 +6709,10 @@
     "handle": "Noobi"
   },
   {
+    "id": "noobi-san",
+    "handle": "Noobi San"
+  },
+  {
     "id": "nori",
     "handle": "Nori"
   },
@@ -6979,6 +7039,10 @@
   {
     "id": "park-ducskik",
     "handle": "PARK DUCSKIK"
+  },
+  {
+    "id": "park-tae-jeong",
+    "handle": "Park Tae Jeong"
   },
   {
     "id": "party-wolf",
@@ -7807,7 +7871,7 @@
   },
   {
     "id": "rskyluck",
-    "handle": "RskyLuck"
+    "handle": "RsKyLuck"
   },
   {
     "id": "ruka",
@@ -7896,6 +7960,10 @@
   {
     "id": "s-women",
     "handle": "S.Women"
+  },
+  {
+    "id": "s2-blackheart",
+    "handle": "S2 BLACKHEART"
   },
   {
     "id": "sad",
@@ -8104,6 +8172,10 @@
   {
     "id": "seaking",
     "handle": "Seaking"
+  },
+  {
+    "id": "season-2-joka",
+    "handle": "SEASON 2 JOKA"
   },
   {
     "id": "sebito",
@@ -8535,6 +8607,10 @@
     "handle": "SLEEPY"
   },
   {
+    "id": "sleipnir",
+    "handle": "Sleipnir"
+  },
+  {
     "id": "slowpoke",
     "handle": "Slowpoke"
   },
@@ -8939,6 +9015,10 @@
     "handle": "TakaPochi"
   },
   {
+    "id": "takataa",
+    "handle": "TAKATAA"
+  },
+  {
     "id": "takatak",
     "handle": "TAKATAK"
   },
@@ -9057,986 +9137,6 @@
   {
     "id": "tejj",
     "handle": "Tejj"
-  },
-  {
-    "id": "tekken-8-afroking",
-    "handle": "TEKKEN 8 -AFROKING"
-  },
-  {
-    "id": "tekken-8-ayorichie",
-    "handle": "Tekken 8 💥 AyoRichie"
-  },
-  {
-    "id": "tekken-8-batz",
-    "handle": "Tekken 8 💥 BATZ"
-  },
-  {
-    "id": "tekken-8-breadman",
-    "handle": "Tekken 8 💥 BREADMAN"
-  },
-  {
-    "id": "tekken-8-buppamen",
-    "handle": "Tekken 8 💥 BUPPAMEN"
-  },
-  {
-    "id": "tekken-8-burtania",
-    "handle": "TEKKEN 8 -BURTANIA"
-  },
-  {
-    "id": "tekken-8-cbm",
-    "handle": "Tekken 8 💥 CBM"
-  },
-  {
-    "id": "tekken-8-chanel",
-    "handle": "Tekken 8 💥 Chanel"
-  },
-  {
-    "id": "tekken-8-cheeseyoni",
-    "handle": "TEKKEN 8 CHEESEYONI"
-  },
-  {
-    "id": "tekken-8-chikurin",
-    "handle": "Tekken 8 💥 Chikurin"
-  },
-  {
-    "id": "tekken-8-cresent",
-    "handle": "Tekken 8 💥 CRESENT"
-  },
-  {
-    "id": "tekken-8-daddyking",
-    "handle": "Tekken 8 💥 Daddyking"
-  },
-  {
-    "id": "tekken-8-demarcus",
-    "handle": "TEKKEN 8 DEMARCUS"
-  },
-  {
-    "id": "tekken-8-dengo",
-    "handle": "TEKKEN 8 DENGO"
-  },
-  {
-    "id": "tekken-8-dewglider",
-    "handle": "TEKKEN 8 -DEWGLIDER"
-  },
-  {
-    "id": "tekken-8-dhome50hbk",
-    "handle": "TEKKEN 8 DHOME50HBK"
-  },
-  {
-    "id": "tekken-8-double",
-    "handle": "Tekken 8 💥 DOUBLE"
-  },
-  {
-    "id": "tekken-8-edge",
-    "handle": "Tekken 8 💥 EDGE"
-  },
-  {
-    "id": "tekken-8-gken",
-    "handle": "TEKKEN 8 GKEN"
-  },
-  {
-    "id": "tekken-8-ikari",
-    "handle": "Tekken 8 💥 iKari"
-  },
-  {
-    "id": "tekken-8-imyourfather",
-    "handle": "Tekken 8 💥 ImYourFather"
-  },
-  {
-    "id": "tekken-8-jdcr",
-    "handle": "Tekken 8 💥 JDCR"
-  },
-  {
-    "id": "tekken-8-jeondding",
-    "handle": "Tekken 8 💥 JeonDDing"
-  },
-  {
-    "id": "tekken-8-jodd",
-    "handle": "TEKKEN 8 JODD"
-  },
-  {
-    "id": "tekken-8-joi",
-    "handle": "TEKKEN 8 JOI"
-  },
-  {
-    "id": "tekken-8-joka",
-    "handle": "Tekken 8 💥 JOKA"
-  },
-  {
-    "id": "tekken-8-kaizoku",
-    "handle": "TEKKEN 8 KAIZOKU"
-  },
-  {
-    "id": "tekken-8-kanda",
-    "handle": "TEKKEN 8 KANDA"
-  },
-  {
-    "id": "tekken-8-karas",
-    "handle": "Tekken 8 💥 Karas"
-  },
-  {
-    "id": "tekken-8-keisuke",
-    "handle": "Tekken 8 💥 Keisuke"
-  },
-  {
-    "id": "tekken-8-ken",
-    "handle": "Tekken 8 💥 KEN"
-  },
-  {
-    "id": "tekken-8-kimoje",
-    "handle": "Tekken 8 💥 KIMOJE"
-  },
-  {
-    "id": "tekken-8-kkokkoma",
-    "handle": "Tekken 8 💥 KKOKKOMA"
-  },
-  {
-    "id": "tekken-8-knee",
-    "handle": "Tekken 8 💥 Knee"
-  },
-  {
-    "id": "tekken-8-kuqdand",
-    "handle": "Tekken 8 💥 Kuqdand"
-  },
-  {
-    "id": "tekken-8-lalo",
-    "handle": "TEKKEN 8 LALO"
-  },
-  {
-    "id": "tekken-8-li-r-li",
-    "handle": "Tekken 8 💥 Li R Li"
-  },
-  {
-    "id": "tekken-8-lowhigh",
-    "handle": "Tekken 8 💥 LOWHIGH"
-  },
-  {
-    "id": "tekken-8-mainmanswe",
-    "handle": "Tekken 8 💥 MainManSwe"
-  },
-  {
-    "id": "tekken-8-mallard",
-    "handle": "TEKKEN 8 MALLARD"
-  },
-  {
-    "id": "tekken-8-mangja",
-    "handle": "Tekken 8 💥 MANGJA"
-  },
-  {
-    "id": "tekken-8-megaclinton",
-    "handle": "TEKKEN 8 MEGACLINTON"
-  },
-  {
-    "id": "tekken-8-memoire",
-    "handle": "TEKKEN 8 MEMOIRE"
-  },
-  {
-    "id": "tekken-8-momo",
-    "handle": "Tekken 8 💥 MOMO"
-  },
-  {
-    "id": "tekken-8-mulgold",
-    "handle": "Tekken 8 💥 Mulgold"
-  },
-  {
-    "id": "tekken-8-pinya",
-    "handle": "Tekken 8 💥 Pinya"
-  },
-  {
-    "id": "tekken-8-pling",
-    "handle": "TEKKEN 8 PLING"
-  },
-  {
-    "id": "tekken-8-ptj",
-    "handle": "Tekken 8 💥 PTJ"
-  },
-  {
-    "id": "tekken-8-qudans",
-    "handle": "Tekken 8 💥 Qudans"
-  },
-  {
-    "id": "tekken-8-queen-aurora",
-    "handle": "TEKKEN 8 QUEEN AURORA"
-  },
-  {
-    "id": "tekken-8-raigeki",
-    "handle": "TEKKEN 8 RAIGEKI"
-  },
-  {
-    "id": "tekken-8-rangchu",
-    "handle": "Tekken 8 💥 Rangchu"
-  },
-  {
-    "id": "tekken-8-revenge-match-lowhigh",
-    "handle": "Tekken 8 Revenge Match 💥 Lowhigh"
-  },
-  {
-    "id": "tekken-8-s2-blackheart",
-    "handle": "TEKKEN 8 S2 BLACKHEART"
-  },
-  {
-    "id": "tekken-8-season-2-200won",
-    "handle": "TEKKEN 8 SEASON 2 💥200WON"
-  },
-  {
-    "id": "tekken-8-season-2-50-50-land",
-    "handle": "TEKKEN 8 SEASON 2 💥 50/50 LAND"
-  },
-  {
-    "id": "tekken-8-season-2-anakin",
-    "handle": "TEKKEN 8 SEASON 2 💥ANAKIN"
-  },
-  {
-    "id": "tekken-8-season-2-ayorichie",
-    "handle": "TEKKEN 8 SEASON 2 💥AYORICHIE"
-  },
-  {
-    "id": "tekken-8-season-2-batz",
-    "handle": "TEKKEN 8 SEASON 2 💥BATZ"
-  },
-  {
-    "id": "tekken-8-season-2-blackheart",
-    "handle": "TEKKEN 8 SEASON 2 💥 BLACKHEART"
-  },
-  {
-    "id": "tekken-8-season-2-breadman",
-    "handle": "TEKKEN 8 SEASON 2 💥 BREADMAN"
-  },
-  {
-    "id": "tekken-8-season-2-buppamen",
-    "handle": "TEKKEN 8 SEASON 2 💥BUPPAMEN"
-  },
-  {
-    "id": "tekken-8-season-2-cbm",
-    "handle": "TEKKEN 8 SEASON 2 💥CBM"
-  },
-  {
-    "id": "tekken-8-season-2-chanel",
-    "handle": "TEKKEN 8 SEASON 2 💥CHANEL"
-  },
-  {
-    "id": "tekken-8-season-2-cheeseyoni",
-    "handle": "TEKKEN 8 SEASON 2 💥CHEESEYONI"
-  },
-  {
-    "id": "tekken-8-season-2-chikurin",
-    "handle": "TEKKEN 8 SEASON 2 💥CHIKURIN"
-  },
-  {
-    "id": "tekken-8-season-2-chinoy",
-    "handle": "TEKKEN 8 SEASON 2 💥CHINOY"
-  },
-  {
-    "id": "tekken-8-season-2-countermachine",
-    "handle": "TEKKEN 8 SEASON 2 💥COUNTERMACHINE"
-  },
-  {
-    "id": "tekken-8-season-2-crack",
-    "handle": "TEKKEN 8 SEASON 2 💥CRACK"
-  },
-  {
-    "id": "tekken-8-season-2-crescent",
-    "handle": "TEKKEN 8 SEASON 2 💥CRESCENT"
-  },
-  {
-    "id": "tekken-8-season-2-cuddle-core",
-    "handle": "TEKKEN 8 SEASON 2 💥 CUDDLE CORE"
-  },
-  {
-    "id": "tekken-8-season-2-daddyking",
-    "handle": "TEKKEN 8 SEASON 2 💥DADDYKING"
-  },
-  {
-    "id": "tekken-8-season-2-danger-dogman",
-    "handle": "TEKKEN 8 SEASON 2 💥DANGER DOGMAN"
-  },
-  {
-    "id": "tekken-8-season-2-defensive-patch",
-    "handle": "TEKKEN 8 SEASON 2 💥 DEFENSIVE PATCH"
-  },
-  {
-    "id": "tekken-8-season-2-dengo",
-    "handle": "TEKKEN 8 SEASON 2 💥DENGO"
-  },
-  {
-    "id": "tekken-8-season-2-devko",
-    "handle": "TEKKEN 8 SEASON 2 💥DEVKO"
-  },
-  {
-    "id": "tekken-8-season-2-dhome",
-    "handle": "TEKKEN 8 SEASON 2 💥DHOME"
-  },
-  {
-    "id": "tekken-8-season-2-dhome50",
-    "handle": "TEKKEN 8 SEASON 2 💥 DHOME50"
-  },
-  {
-    "id": "tekken-8-season-2-disciple",
-    "handle": "TEKKEN 8 SEASON 2 💥 DISCIPLE"
-  },
-  {
-    "id": "tekken-8-season-2-discord",
-    "handle": "TEKKEN 8 SEASON 2 💥 DISCORD"
-  },
-  {
-    "id": "tekken-8-season-2-donte",
-    "handle": "TEKKEN 8 SEASON 2 💥DONTE"
-  },
-  {
-    "id": "tekken-8-season-2-double",
-    "handle": "TEKKEN 8 SEASON 2 💥 DOUBLE"
-  },
-  {
-    "id": "tekken-8-season-2-edge",
-    "handle": "TEKKEN 8 SEASON 2 💥 EDGE"
-  },
-  {
-    "id": "tekken-8-season-2-eyemusician",
-    "handle": "TEKKEN 8 SEASON 2 💥 EYEMUSICIAN"
-  },
-  {
-    "id": "tekken-8-season-2-fergus",
-    "handle": "TEKKEN 8 SEASON 2 💥FERGUS"
-  },
-  {
-    "id": "tekken-8-season-2-gken",
-    "handle": "TEKKEN 8 SEASON 2 💥 GKEN"
-  },
-  {
-    "id": "tekken-8-season-2-godpling",
-    "handle": "TEKKEN 8 SEASON 2 💥GODPLING"
-  },
-  {
-    "id": "tekken-8-season-2-goran",
-    "handle": "TEKKEN 8 SEASON 2 💥GORAN"
-  },
-  {
-    "id": "tekken-8-season-2-hakaioh",
-    "handle": "TEKKEN 8 SEASON 2 💥HAKAIOH"
-  },
-  {
-    "id": "tekken-8-season-2-hawg",
-    "handle": "TEKKEN 8 SEASON 2 💥 HAWG"
-  },
-  {
-    "id": "tekken-8-season-2-hdg-noel",
-    "handle": "TEKKEN 8 SEASON 2 💥 HDG/NOEL"
-  },
-  {
-    "id": "tekken-8-season-2-higem",
-    "handle": "TEKKEN 8 SEASON 2 💥 HIGEM"
-  },
-  {
-    "id": "tekken-8-season-2-hosoin",
-    "handle": "TEKKEN 8 SEASON 2 💥HOSOIN"
-  },
-  {
-    "id": "tekken-8-season-2-ikari",
-    "handle": "TEKKEN 8 SEASON 2 💥IKARI"
-  },
-  {
-    "id": "tekken-8-season-2-ill-regret-this",
-    "handle": "TEKKEN 8 SEASON 2 💥 ILL REGRET THIS"
-  },
-  {
-    "id": "tekken-8-season-2-inkognito",
-    "handle": "TEKKEN 8 SEASON 2 💥INKOGNITO"
-  },
-  {
-    "id": "tekken-8-season-2-ispam",
-    "handle": "TEKKEN 8 SEASON 2 💥 iSPAM"
-  },
-  {
-    "id": "tekken-8-season-2-jdcr",
-    "handle": "TEKKEN 8 SEASON 2 💥JDCR"
-  },
-  {
-    "id": "tekken-8-season-2-jeune",
-    "handle": "TEKKEN 8 SEASON 2 💥 JEUNE"
-  },
-  {
-    "id": "tekken-8-season-2-jodd",
-    "handle": "TEKKEN 8 SEASON 2 💥JODD"
-  },
-  {
-    "id": "tekken-8-season-2-joe-crush",
-    "handle": "TEKKEN 8 SEASON 2 💥 JOE CRUSH"
-  },
-  {
-    "id": "tekken-8-season-2-joka",
-    "handle": "TEKKEN 8 SEASON 2 JOKA"
-  },
-  {
-    "id": "tekken-8-season-2-juju",
-    "handle": "TEKKEN 8 SEASON 2 💥JUJU"
-  },
-  {
-    "id": "tekken-8-season-2-k-wiss",
-    "handle": "TEKKEN 8 SEASON 2 💥 K-WISS"
-  },
-  {
-    "id": "tekken-8-season-2-kaizokulars",
-    "handle": "TEKKEN 8 SEASON 2 💥 KAIZOKULARS"
-  },
-  {
-    "id": "tekken-8-season-2-kaizur",
-    "handle": "TEKKEN 8 SEASON 2 💥KAIZUR"
-  },
-  {
-    "id": "tekken-8-season-2-keisuke",
-    "handle": "TEKKEN 8 SEASON 2 💥KEISUKE"
-  },
-  {
-    "id": "tekken-8-season-2-kenji",
-    "handle": "TEKKEN 8 SEASON 2 💥KENJI"
-  },
-  {
-    "id": "tekken-8-season-2-kkokkoma",
-    "handle": "TEKKEN 8 SEASON 2 💥 KKOKKOMA"
-  },
-  {
-    "id": "tekken-8-season-2-knee",
-    "handle": "TEKKEN 8 SEASON 2 💥 KNEE"
-  },
-  {
-    "id": "tekken-8-season-2-leo-downplayer",
-    "handle": "TEKKEN 8 SEASON 2 💥 LEO DOWNPLAYER"
-  },
-  {
-    "id": "tekken-8-season-2-li-r-li",
-    "handle": "TEKKEN 8 SEASON 2 💥Li R Li"
-  },
-  {
-    "id": "tekken-8-season-2-mainless-king",
-    "handle": "TEKKEN 8 SEASON 2 💥MAINLESS KING"
-  },
-  {
-    "id": "tekken-8-season-2-marduk",
-    "handle": "TEKKEN 8 SEASON 2 💥MARDUK"
-  },
-  {
-    "id": "tekken-8-season-2-marital",
-    "handle": "TEKKEN 8 SEASON 2 💥MARITAL"
-  },
-  {
-    "id": "tekken-8-season-2-md-luffy",
-    "handle": "TEKKEN 8 SEASON 2 💥MD LUFFY"
-  },
-  {
-    "id": "tekken-8-season-2-meo-il",
-    "handle": "TEKKEN 8 SEASON 2 💥 MEO-IL"
-  },
-  {
-    "id": "tekken-8-season-2-mr-croft",
-    "handle": "TEKKEN 8 SEASON 2 💥MR CROFT"
-  },
-  {
-    "id": "tekken-8-season-2-mtx-enjoyer",
-    "handle": "TEKKEN 8 SEASON 2 💥 MTX ENJOYER"
-  },
-  {
-    "id": "tekken-8-season-2-mulgoat",
-    "handle": "TEKKEN 8 SEASON 2 💥 MULGOAT"
-  },
-  {
-    "id": "tekken-8-season-2-mulgold",
-    "handle": "TEKKEN 8 SEASON 2 💥 MULGOLD"
-  },
-  {
-    "id": "tekken-8-season-2-nobi",
-    "handle": "TEKKEN 8 SEASON 2 💥NOBI"
-  },
-  {
-    "id": "tekken-8-season-2-noobi-san",
-    "handle": "TEKKEN 8 SEASON 2 💥 NOOBI SAN"
-  },
-  {
-    "id": "tekken-8-season-2-park-tae-jeong",
-    "handle": "TEKKEN 8 SEASON 2 💥 PARK TAE JEONG"
-  },
-  {
-    "id": "tekken-8-season-2-pinya",
-    "handle": "TEKKEN 8 SEASON 2 💥 PINYA"
-  },
-  {
-    "id": "tekken-8-season-2-princess-namine",
-    "handle": "TEKKEN 8 SEASON 2 💥PRINCESS NAMINE"
-  },
-  {
-    "id": "tekken-8-season-2-ptj",
-    "handle": "TEKKEN 8 SEASON 2 💥PTJ"
-  },
-  {
-    "id": "tekken-8-season-2-raef",
-    "handle": "TEKKEN 8 SEASON 2 💥RAEF"
-  },
-  {
-    "id": "tekken-8-season-2-raigeki",
-    "handle": "TEKKEN 8 SEASON 2 💥RAIGEKI"
-  },
-  {
-    "id": "tekken-8-season-2-rangchu",
-    "handle": "TEKKEN 8 SEASON 2 💥RANGCHU"
-  },
-  {
-    "id": "tekken-8-season-2-rest",
-    "handle": "TEKKEN 8 SEASON 2 💥 REST"
-  },
-  {
-    "id": "tekken-8-season-2-rheloh",
-    "handle": "TEKKEN 8 SEASON 2 💥 RHELOH"
-  },
-  {
-    "id": "tekken-8-season-2-rskyluck",
-    "handle": "TEKKEN 8 SEASON 2 💥 RSKYLUCK"
-  },
-  {
-    "id": "tekken-8-season-2-sephiblack",
-    "handle": "TEKKEN 8 SEASON 2 💥SEPHIBLACK"
-  },
-  {
-    "id": "tekken-8-season-2-shine",
-    "handle": "TEKKEN 8 SEASON 2 💥SHINE"
-  },
-  {
-    "id": "tekken-8-season-2-silv3r",
-    "handle": "TEKKEN 8 SEASON 2 💥 SILV3R"
-  },
-  {
-    "id": "tekken-8-season-2-silver",
-    "handle": "TEKKEN 8 SEASON 2 💥SILVER"
-  },
-  {
-    "id": "tekken-8-season-2-sleipnir",
-    "handle": "TEKKEN 8 SEASON 2 💥 SLEIPNIR"
-  },
-  {
-    "id": "tekken-8-season-2-tetsu",
-    "handle": "TEKKEN 8 SEASON 2 💥 TETSU"
-  },
-  {
-    "id": "tekken-8-season-2-tomoriru",
-    "handle": "TEKKEN 8 SEASON 2 💥TOMORIRU"
-  },
-  {
-    "id": "tekken-8-season-2-ulsan",
-    "handle": "TEKKEN 8 SEASON 2 💥 ULSAN"
-  },
-  {
-    "id": "tekken-8-season-2-wasulu",
-    "handle": "TEKKEN 8 SEASON 2 💥WASULU"
-  },
-  {
-    "id": "tekken-8-season-2-wecka",
-    "handle": "TEKKEN 8 SEASON 2 💥WECKA"
-  },
-  {
-    "id": "tekken-8-season-2-xcc",
-    "handle": "TEKKEN 8 SEASON 2 💥 XCC"
-  },
-  {
-    "id": "tekken-8-season-2-xo",
-    "handle": "TEKKEN 8 SEASON 2 💥XO"
-  },
-  {
-    "id": "tekken-8-season-2-yeonarang",
-    "handle": "TEKKEN 8 SEASON 2 💥YEONARANG"
-  },
-  {
-    "id": "tekken-8-season-2-yoredz",
-    "handle": "TEKKEN 8 SEASON 2 💥YOREDZ"
-  },
-  {
-    "id": "tekken-8-season-2-yoshiden",
-    "handle": "TEKKEN 8 SEASON 2 💥YOSHIDEN"
-  },
-  {
-    "id": "tekken-8-season-2-yuyu",
-    "handle": "TEKKEN 8 SEASON 2 💥YUYU"
-  },
-  {
-    "id": "tekken-8-season-2-zechariah-carey",
-    "handle": "TEKKEN 8 SEASON 2 💥 ZECHARIAH CAREY"
-  },
-  {
-    "id": "tekken-8-senpai-relax",
-    "handle": "TEKKEN 8 SENPAI RELAX"
-  },
-  {
-    "id": "tekken-8-shine",
-    "handle": "TEKKEN 8 SHINE"
-  },
-  {
-    "id": "tekken-8-sidtron",
-    "handle": "TEKKEN 8 SIDTRON"
-  },
-  {
-    "id": "tekken-8-takataa",
-    "handle": "Tekken 8 💥 TAKATAA"
-  },
-  {
-    "id": "tekken-8-takataka",
-    "handle": "Tekken 8 💥 TAKATAKA"
-  },
-  {
-    "id": "tekken-8-torent",
-    "handle": "TEKKEN 8 -TORENT"
-  },
-  {
-    "id": "tekken-8-ulsan",
-    "handle": "Tekken 8 💥 ULSAN"
-  },
-  {
-    "id": "tekken-8-uno",
-    "handle": "Tekken 8 💥 UNO"
-  },
-  {
-    "id": "tekken-8-ver-2-01-afroking",
-    "handle": "TEKKEN 8 (ver 2.01) 💥AFROKING"
-  },
-  {
-    "id": "tekken-8-ver-2-01-ayorichie",
-    "handle": "TEKKEN 8 (ver 2.01) 💥AYORICHIE"
-  },
-  {
-    "id": "tekken-8-ver-2-01-batz",
-    "handle": "TEKKEN 8 (ver 2.01) 💥BATZ"
-  },
-  {
-    "id": "tekken-8-ver-2-01-befamous",
-    "handle": "TEKKEN 8 (ver 2.01) 💥BEFAMOUS"
-  },
-  {
-    "id": "tekken-8-ver-2-01-breadman",
-    "handle": "TEKKEN 8 (ver 2.01) 💥BREADMAN"
-  },
-  {
-    "id": "tekken-8-ver-2-01-buppamen",
-    "handle": "TEKKEN 8 (ver 2.01) 💥BUPPAMEN"
-  },
-  {
-    "id": "tekken-8-ver-2-01-cbm",
-    "handle": "TEKKEN 8 (ver 2.01) 💥CBM"
-  },
-  {
-    "id": "tekken-8-ver-2-01-chanel",
-    "handle": "TEKKEN 8 (ver 2.01) 💥CHANEL"
-  },
-  {
-    "id": "tekken-8-ver-2-01-cheeseyoni",
-    "handle": "TEKKEN 8 (ver 2.01) 💥CHEESEYONI"
-  },
-  {
-    "id": "tekken-8-ver-2-01-chikurin",
-    "handle": "TEKKEN 8 (ver 2.01) 💥CHIKURIN"
-  },
-  {
-    "id": "tekken-8-ver-2-01-crack",
-    "handle": "TEKKEN 8 (ver 2.01) 💥CRACK"
-  },
-  {
-    "id": "tekken-8-ver-2-01-crescent",
-    "handle": "TEKKEN 8 (ver 2.01) 💥CRESCENT"
-  },
-  {
-    "id": "tekken-8-ver-2-01-dbp",
-    "handle": "TEKKEN 8 (ver 2.01) 💥DBP"
-  },
-  {
-    "id": "tekken-8-ver-2-01-deeongrey",
-    "handle": "TEKKEN 8 (ver 2.01) 💥DEEONGREY"
-  },
-  {
-    "id": "tekken-8-ver-2-01-dengo",
-    "handle": "TEKKEN 8 (ver 2.01) 💥DENGO"
-  },
-  {
-    "id": "tekken-8-ver-2-01-dewglider",
-    "handle": "TEKKEN 8 (ver 2.01) 💥DEWGLIDER"
-  },
-  {
-    "id": "tekken-8-ver-2-01-disciple",
-    "handle": "TEKKEN 8 (ver 2.01) 💥DISCIPLE"
-  },
-  {
-    "id": "tekken-8-ver-2-01-double",
-    "handle": "TEKKEN 8 (ver 2.01) 💥DOUBLE"
-  },
-  {
-    "id": "tekken-8-ver-2-01-dragonite",
-    "handle": "TEKKEN 8 (ver 2.01) 💥DRAGONITE"
-  },
-  {
-    "id": "tekken-8-ver-2-01-evil46",
-    "handle": "TEKKEN 8 (ver 2.01) 💥EVIL46"
-  },
-  {
-    "id": "tekken-8-ver-2-01-exiszt",
-    "handle": "TEKKEN 8 (ver 2.01) 💥EXISZT"
-  },
-  {
-    "id": "tekken-8-ver-2-01-fakepotter",
-    "handle": "TEKKEN 8 (ver 2.01) 💥FAKEPOTTER"
-  },
-  {
-    "id": "tekken-8-ver-2-01-falcon-alba",
-    "handle": "TEKKEN 8 (ver 2.01) 💥FALCON ALBA"
-  },
-  {
-    "id": "tekken-8-ver-2-01-fergus",
-    "handle": "TEKKEN 8 (ver 2.01) 💥FERGUS"
-  },
-  {
-    "id": "tekken-8-ver-2-01-g-black",
-    "handle": "TEKKEN 8 (ver 2.01) 💥G BLACK"
-  },
-  {
-    "id": "tekken-8-ver-2-01-galgonge",
-    "handle": "TEKKEN 8 (ver 2.01) 💥GALGONGE"
-  },
-  {
-    "id": "tekken-8-ver-2-01-gken",
-    "handle": "TEKKEN 8 (ver 2.01) 💥GKEN"
-  },
-  {
-    "id": "tekken-8-ver-2-01-go-attack",
-    "handle": "TEKKEN 8 (ver 2.01) 💥GO ATTACK"
-  },
-  {
-    "id": "tekken-8-ver-2-01-higem",
-    "handle": "TEKKEN 8 (ver 2.01) 💥HIGEM"
-  },
-  {
-    "id": "tekken-8-ver-2-01-hosoin",
-    "handle": "TEKKEN 8 (ver 2.01) 💥HOSOIN"
-  },
-  {
-    "id": "tekken-8-ver-2-01-jdcr",
-    "handle": "TEKKEN 8 (ver 2.01) 💥JDCR"
-  },
-  {
-    "id": "tekken-8-ver-2-01-jodd",
-    "handle": "TEKKEN 8 (ver 2.01) 💥JODD"
-  },
-  {
-    "id": "tekken-8-ver-2-01-joe-crush",
-    "handle": "TEKKEN 8 (ver 2.01) 💥JOE CRUSH"
-  },
-  {
-    "id": "tekken-8-ver-2-01-joka",
-    "handle": "TEKKEN 8 (ver 2.01) 💥JOKA"
-  },
-  {
-    "id": "tekken-8-ver-2-01-juju",
-    "handle": "TEKKEN 8 (ver 2.01) 💥JUJU"
-  },
-  {
-    "id": "tekken-8-ver-2-01-k-wiss",
-    "handle": "TEKKEN 8 (ver 2.01) 💥K-WISS"
-  },
-  {
-    "id": "tekken-8-ver-2-01-kaizokulars",
-    "handle": "TEKKEN 8 (ver 2.01) 💥KAIZOKULARS"
-  },
-  {
-    "id": "tekken-8-ver-2-01-karma",
-    "handle": "TEKKEN 8 (ver 2.01) 💥KARMA"
-  },
-  {
-    "id": "tekken-8-ver-2-01-kei",
-    "handle": "TEKKEN 8 (ver 2.01) 💥KEI"
-  },
-  {
-    "id": "tekken-8-ver-2-01-kenji",
-    "handle": "TEKKEN 8 (ver 2.01) 💥KENJI"
-  },
-  {
-    "id": "tekken-8-ver-2-01-kirakira",
-    "handle": "TEKKEN 8 (ver 2.01) 💥KIRAKIRA"
-  },
-  {
-    "id": "tekken-8-ver-2-01-kkazu",
-    "handle": "TEKKEN 8 (ver 2.01) 💥KKAZU"
-  },
-  {
-    "id": "tekken-8-ver-2-01-kkokkoma",
-    "handle": "TEKKEN 8 (ver 2.01) 💥KKOKKOMA"
-  },
-  {
-    "id": "tekken-8-ver-2-01-knee",
-    "handle": "TEKKEN 8 (ver 2.01) 💥KNEE"
-  },
-  {
-    "id": "tekken-8-ver-2-01-kokoma",
-    "handle": "TEKKEN 8 (ver 2.01) 💥KOKOMA"
-  },
-  {
-    "id": "tekken-8-ver-2-01-li-r-li",
-    "handle": "TEKKEN 8 (ver 2.01) 💥Li R Li"
-  },
-  {
-    "id": "tekken-8-ver-2-01-malgu",
-    "handle": "TEKKEN 8 (ver 2.01) 💥MALGU"
-  },
-  {
-    "id": "tekken-8-ver-2-01-marduk",
-    "handle": "TEKKEN 8 (ver 2.01) 💥MARDUK"
-  },
-  {
-    "id": "tekken-8-ver-2-01-marvelous",
-    "handle": "TEKKEN 8 (ver 2.01) 💥MARVELOUS"
-  },
-  {
-    "id": "tekken-8-ver-2-01-md-luffy",
-    "handle": "TEKKEN 8 (ver 2.01) 💥MD LUFFY"
-  },
-  {
-    "id": "tekken-8-ver-2-01-megaclinton",
-    "handle": "TEKKEN 8 (ver 2.01) 💥MEGACLINTON"
-  },
-  {
-    "id": "tekken-8-ver-2-01-meo-il",
-    "handle": "TEKKEN 8 (ver 2.01) 💥MEO-IL"
-  },
-  {
-    "id": "tekken-8-ver-2-01-mulgold",
-    "handle": "TEKKEN 8 (ver 2.01) 💥MULGOLD"
-  },
-  {
-    "id": "tekken-8-ver-2-01-naarks",
-    "handle": "TEKKEN 8 (ver 2.01) 💥NAARKS"
-  },
-  {
-    "id": "tekken-8-ver-2-01-nino",
-    "handle": "TEKKEN 8 (ver 2.01) 💥NINO"
-  },
-  {
-    "id": "tekken-8-ver-2-01-nobi",
-    "handle": "TEKKEN 8 (ver 2.01) 💥NOBI"
-  },
-  {
-    "id": "tekken-8-ver-2-01-patloars",
-    "handle": "TEKKEN 8 (ver 2.01) 💥PATLOARS"
-  },
-  {
-    "id": "tekken-8-ver-2-01-poltan",
-    "handle": "TEKKEN 8 (ver 2.01) 💥POLTAN"
-  },
-  {
-    "id": "tekken-8-ver-2-01-princess-namine",
-    "handle": "TEKKEN 8 (ver 2.01) 💥PRINCESS NAMINE"
-  },
-  {
-    "id": "tekken-8-ver-2-01-ptj",
-    "handle": "TEKKEN 8 (ver 2.01) 💥PTJ"
-  },
-  {
-    "id": "tekken-8-ver-2-01-qudans",
-    "handle": "TEKKEN 8 (ver 2.01) 💥QUDANS"
-  },
-  {
-    "id": "tekken-8-ver-2-01-raef",
-    "handle": "TEKKEN 8 (ver 2.01) 💥RAEF"
-  },
-  {
-    "id": "tekken-8-ver-2-01-rangchu",
-    "handle": "TEKKEN 8 (ver 2.01) 💥RANGCHU"
-  },
-  {
-    "id": "tekken-8-ver-2-01-rbsm",
-    "handle": "TEKKEN 8 (ver 2.01) 💥RBSM"
-  },
-  {
-    "id": "tekken-8-ver-2-01-rest",
-    "handle": "TEKKEN 8 (ver 2.01) 💥REST"
-  },
-  {
-    "id": "tekken-8-ver-2-01-ryuichi",
-    "handle": "TEKKEN 8 (ver 2.01) 💥RYUICHI"
-  },
-  {
-    "id": "tekken-8-ver-2-01-sephiblack",
-    "handle": "TEKKEN 8 (ver 2.01) 💥SEPHIBLACK"
-  },
-  {
-    "id": "tekken-8-ver-2-01-shine",
-    "handle": "TEKKEN 8 (ver 2.01) 💥SHINE"
-  },
-  {
-    "id": "tekken-8-ver-2-01-silent",
-    "handle": "TEKKEN 8 (ver 2.01) 💥SILENT"
-  },
-  {
-    "id": "tekken-8-ver-2-01-sleipnir",
-    "handle": "TEKKEN 8 (ver 2.01) 💥SLEIPNIR"
-  },
-  {
-    "id": "tekken-8-ver-2-01-sodam",
-    "handle": "TEKKEN 8 (ver 2.01) 💥SODAM"
-  },
-  {
-    "id": "tekken-8-ver-2-01-tb7even",
-    "handle": "TEKKEN 8 (ver 2.01) 💥TB7EVEN"
-  },
-  {
-    "id": "tekken-8-ver-2-01-trizzy",
-    "handle": "TEKKEN 8 (ver 2.01) 💥TRIZZY"
-  },
-  {
-    "id": "tekken-8-ver-2-01-ulsan",
-    "handle": "TEKKEN 8 (ver 2.01) 💥ULSAN"
-  },
-  {
-    "id": "tekken-8-ver-2-01-wecka",
-    "handle": "TEKKEN 8 (ver 2.01) 💥WECKA"
-  },
-  {
-    "id": "tekken-8-ver-2-01-xcc",
-    "handle": "TEKKEN 8 (ver 2.01) 💥XCC"
-  },
-  {
-    "id": "tekken-8-ver-2-01-xo",
-    "handle": "TEKKEN 8 (ver 2.01) 💥XO"
-  },
-  {
-    "id": "tekken-8-ver-2-01-xtramint",
-    "handle": "TEKKEN 8 (ver 2.01) 💥XTRAMINT"
-  },
-  {
-    "id": "tekken-8-ver-2-01-yagami",
-    "handle": "TEKKEN 8 (ver 2.01) 💥YAGAMI"
-  },
-  {
-    "id": "tekken-8-ver-2-01-yoredz",
-    "handle": "TEKKEN 8 (ver 2.01) 💥YOREDZ"
-  },
-  {
-    "id": "tekken-8-ver-2-01-zechariah-carey",
-    "handle": "TEKKEN 8 (ver 2.01) 💥ZECHARIAH CAREY"
-  },
-  {
-    "id": "tekken-8-warning-ispam",
-    "handle": "TEKKEN 8 WARNING iSPAM"
-  },
-  {
-    "id": "tekken-8-xtramint",
-    "handle": "TEKKEN 8 -XTRAMINT"
-  },
-  {
-    "id": "tekken-8-yagami",
-    "handle": "TEKKEN 8 YAGAMI"
-  },
-  {
-    "id": "tekken-8-yoredz",
-    "handle": "TEKKEN 8 YOREDZ"
-  },
-  {
-    "id": "tekken-8-yoshiden",
-    "handle": "TEKKEN 8 YOSHIDEN"
-  },
-  {
-    "id": "tekken-8-yuyu",
-    "handle": "Tekken 8 💥 YUYU"
   },
   {
     "id": "tekken-master",
@@ -10309,6 +9409,10 @@
   {
     "id": "tore",
     "handle": "TORE"
+  },
+  {
+    "id": "torent",
+    "handle": "Torent"
   },
   {
     "id": "tori",

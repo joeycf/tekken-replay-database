@@ -1,6 +1,6 @@
 # Tekken pipeline report
 
-**15463 matches** parsed from 25447 uploads across 6 channels · 2814 players · ranked sides 13719/30926 (44.4%)
+**15463 matches** parsed from 25447 uploads across 6 channels · 2590 players · ranked sides 13719/30926 (44.4%)
 
 | channel | source | uploads | parsed | coverage |
 | --- | --- | ---: | ---: | ---: |
@@ -96,7 +96,7 @@ _we do not hold; 0 are VODs the catalogue segments, which the intake owns._
 
 | field | population | agree | partial | disagree | cannot witness |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| players (both handles) | 7055 | 6890 (97.66%) | 163 | 2 | — |
+| players (both handles) | 7055 | 7040 (99.79%) | 13 | 2 | — |
 | characters (per side) | 14110 | 13774 (97.62%) | 0 | 3 (0.02%) | 333 |
 
 Side order differed on **0** record(s); the comparison realigns on the
@@ -112,7 +112,7 @@ catalogue says one particular other thing almost every time:
 
 - `armor_king` → the catalogue writes `king` instead, on 332 of the 333 side(s) where we say it (99.70%).
 
-Of the 167 side(s) whose handles did not match, **156** are ours carrying extra text
+Of the 17 side(s) whose handles did not match, **6** are ours carrying extra text
 the catalogue does not, **2** are theirs carrying a team tag ORG_PREFIXES does not
 list yet, and **9** are genuinely different names — the only bucket worth reading one
 row at a time. Reported, never scored: substring matching on handles is the kind of
@@ -159,4 +159,4 @@ guessing this module refuses.
 - `4Pf63UozmxA` [highLevel] no-vs-title: T8 🔥 Kkokkoma (Dragunov) 🔥 Tekken 8
 - `RUDWRC5M738` [highLevel] no-vs-title: T8 🔥 Shadow 20z (Zafina) 🔥 Tekken 8
 
-_Generated 2026-09-01T18:45:36.871Z_
+_Generated 2026-09-01T18:46:30.492Z_

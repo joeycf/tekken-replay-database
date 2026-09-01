@@ -179,12 +179,41 @@ function stripOrgPrefix(handle: string): string {
 
 // ── title parsing ────────────────────────────────────────────────────────────
 const VS_RE = /(.+?)\(([^()]{1,60})\)\s*(?:vs\.?|versus)\s*(.+?)\(([^()]{1,60})\)/iu;
-// channel-brand segment delimiters seen in the tracked channels' titles
-const SEG_RE = /[▰🔥⚡•▶►|]+/u;
+// Channel-brand segment delimiters seen in the tracked channels' titles.
+//
+// 💥 WAS MISSING, and it cost 245 phantom players. telly and ranked brand their
+// titles with it — "Tekken 8 💥 DADDYKING (#1 Ranked Clive) Vs SHINE (…)" — and
+// without it in this class the whole "Tekken 8 💥 DADDYKING" ran through as the
+// handle. That minted `tekken-8-daddyking` beside the real `daddyking`, and 244
+// more like it: `tekken-8-knee` (20 sides) next to `knee` (1,942),
+// `tekken-8-qudans` (21) next to `qudans` (801). 623 sides across telly (160)
+// and ranked (463), and 245 live /players/tekken-8-* pages.
+//
+// Found by the Replay Theater cross-check, which is exactly what a second
+// witness is for: the catalogue said "Knee" where we said "Tekken 8 💥 Knee" on
+// 150 of the sides, and nothing inside this pipeline had any reason to doubt a
+// handle it had parsed cleanly. It is fixed here rather than in the cross-check
+// because the phantom ids are wrong whether or not anyone else indexes the video
+// — the remaining 473 sides are on VODs the catalogue has never seen.
+const SEG_RE = /[▰🔥⚡•▶►|💥]+/u;
+
+/**
+ * A GAME MARKER LEADING THE HANDLE SLOT, where no segment delimiter separated
+ * it. 31 of the 623 came in as "TEKKEN 8  RAIGEKI (#1 Ranked Lili) vs …" — the
+ * brand and the handle divided by nothing but a double space, with one variant
+ * using " - ". SEG_RE cannot reach those; this can.
+ *
+ * NARROW ON PURPOSE. It requires the "8", so the real handles this corpus
+ * carries survive untouched: Tekken Master, TekkenCrashS2, Tekken2024,
+ * TekkenDestroyer. Measured over every side in data/videos.json — 623 phantom
+ * sides cleared, 0 legitimate handles altered.
+ */
+const LEAD_GAME_MARKER = /^\s*(?:TEKKEN\s*8|T8|鉄拳\s*8)\b[^A-Za-z0-9一-鿿]*\s+(?=\S)/iu;
 
 function cleanHandle(raw: string): string | null {
   let t = raw.split(SEG_RE).pop() ?? '';
   t = t.split(/\s[-–—]\s/).pop() ?? '';
+  t = t.replace(LEAD_GAME_MARKER, '');
   t = stripOrgPrefix(
     t
       .replace(/^[\s,.:;–—-]+/u, '')
