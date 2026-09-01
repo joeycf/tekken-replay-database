@@ -90,19 +90,20 @@ Two other env vars matter locally, neither of them secret:
 
 ## Scripts
 
-| script                                           | what it does                                                                                                                                                          |
-| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `npm run dev` / `build` / `generate` / `preview` | Nuxt app (generate = full static build)                                                                                                                               |
-| `npm run data:fetch`                             | Pull every upload from all four YouTube channels → `raw/` (needs `YT_API_KEY`)                                                                                        |
-| `npm run data:parse`                             | Parse titles/descriptions → `data/videos.json`, `players.json`, `report.md`; calls `data:emit` at the end                                                             |
-| `npm run data:emit`                              | Map the rich `videos.json` onto the engine contract → `data/replays.json`, `stats.json`, `summary.json`. Deterministic, no YouTube access — safe to re-run standalone |
-| `npm run data:build`                             | fetch + parse                                                                                                                                                         |
-| `npm run data:characters`                        | Roster scrape (Bandai Namco official site) → portraits + splashes in `public/img/characters/`, `data/characters.json`                                                 |
-| `npm run typecheck`                              | App (`nuxt typecheck`) **and** pipeline (`tsc -p tsconfig.pipeline.json`) — both must pass                                                                            |
-| `npm run lint` / `lint:fix`                      | ESLint over the whole repo                                                                                                                                            |
-| `npm run format` / `format:check`                | Prettier                                                                                                                                                              |
-| `npm run test:e2e`                               | The genericity audit — browser checks against the generated output (run `npm run generate` first)                                                                     |
-| `npx tsx scripts/og.ts`                          | Regenerate the default OG card (`public/og-default.png`)                                                                                                              |
+| script                                           | what it does                                                                                                                                                                                          |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run dev` / `build` / `generate` / `preview` | Nuxt app (generate = full static build)                                                                                                                                                               |
+| `npm run data:fetch`                             | Pull every upload from all four YouTube channels → `raw/` (needs `YT_API_KEY`)                                                                                                                        |
+| `npm run data:parse`                             | Parse titles/descriptions → `data/videos.json`, `players.json`, `report.md`; calls `data:emit` at the end                                                                                             |
+| `npm run data:theater`                           | Pull the Replay Theater tournament index → `raw/replayTheater.json` + the cross-check witness, advancing `data/theater-cursor.json`. Add `-- --full` for a whole-catalogue sweep (needs `YT_API_KEY`) |
+| `npm run data:emit`                              | Map the rich `videos.json` onto the engine contract → `data/replays.json`, `stats.json`, `summary.json`. Deterministic, no YouTube access — safe to re-run standalone                                 |
+| `npm run data:build`                             | fetch + parse                                                                                                                                                                                         |
+| `npm run data:characters`                        | Roster scrape (Bandai Namco official site) → portraits + splashes in `public/img/characters/`, `data/characters.json`                                                                                 |
+| `npm run typecheck`                              | App (`nuxt typecheck`) **and** pipeline (`tsc -p tsconfig.pipeline.json`) — both must pass                                                                                                            |
+| `npm run lint` / `lint:fix`                      | ESLint over the whole repo                                                                                                                                                                            |
+| `npm run format` / `format:check`                | Prettier                                                                                                                                                                                              |
+| `npm run test:e2e`                               | The genericity audit — browser checks against the generated output (run `npm run generate` first)                                                                                                     |
+| `npx tsx scripts/og.ts`                          | Regenerate the default OG card (`public/og-default.png`)                                                                                                                                              |
 
 ## Vercel
 
@@ -162,15 +163,30 @@ not misattributed. `npm run test:e2e` now gates the wiring, and the shell's
 ## Daily data refresh
 
 `.github/workflows/data-refresh.yml` runs daily at 06:47 UTC (and via
-_Run workflow_) on Node 24: `npm run data:build` with `YT_API_KEY` from repo
-**Actions secrets**, then commits
-`data/{videos,replays,stats,players,seasonBoundaries}.json` + `report.md`
-**only if changed** ("data: refresh YYYY-MM-DD — N replays"). The push triggers
-the Vercel deploy. A run whose only diff is `report.md`'s `_Generated <timestamp>_`
-line counts as unchanged — no commit, no deploy — so a `report.md` diff in history
-always means real data changed. The 06:47 slot is offset from the 2XKO app's 06:17
-so the two refreshes never contend. Character art is deliberately not part of the
-daily run.
+_Run workflow_) on Node 24, in three steps rather than one `data:build`:
+`npm run data:fetch` (the four YouTube channels), then `npm run data:theater`
+(the Replay Theater tournament index), then `npm run data:parse`. Both fetches
+take `YT_API_KEY` from repo **Actions secrets** — `env:` is per step, so the key
+is repeated.
+
+**The theater pull is allowed to fail.** It carries `continue-on-error: true`
+and runs last, so a bad morning upstream cannot cost the channel dumps already
+fetched: the run goes yellow, `data:parse` finds no dump, and the committed
+index records are CARRIED unchanged (`cronFetchedWithCarry` in
+`scripts/channels.ts`). An empty dump is treated the same way, which here is the
+ordinary case — the catalogue's tagged Tekken rows stop at 2025-03-16.
+
+The commit stages
+`data/{videos,replays,stats,players,summary,seasonBoundaries,player-redirects,patchGroups,review-queue,source-pins,theater-cursor,theater-disagreements}.json`
+
+- `report.md` **only if changed** ("data: refresh YYYY-MM-DD — N replays"). The
+  push triggers the Vercel deploy. Two files are suppressed when they are the only
+  diff: `report.md`'s `_Generated <timestamp>_` line, and `theater-cursor.json`,
+  which advances whenever the catalogue takes new entries whether or not any of
+  ours changed. So a `report.md` diff in history always means real data changed,
+  and a quiet day still produces no commit and no deploy. The 06:47 slot is offset
+  from the 2XKO app's 06:17 so the two refreshes never contend. Character art is
+  deliberately not part of the daily run.
 
 ## The parser: characters, ranks, and seasons
 
@@ -246,7 +262,7 @@ to them (the nav entry is compiled out of production builds). They read and writ
 the committed JSON directly — there is no database.
 
 | page                 | what it's for                                                                                    |
-| -------------------- | -------------------------------------------------------------------------------------------------- |
+| -------------------- | ------------------------------------------------------------------------------------------------ |
 | `/dev/source-review` | Adjudicate the character-completion review queue from sampled HUD frames → `data/overrides.json` |
 
 ## Tech stack & engineering notes

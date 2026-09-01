@@ -57,20 +57,28 @@ export interface ChannelConfig {
    *  parse, and data:fetch skips it. Mutually exclusive with channelId. */
   index?: ChannelIndex;
   /**
-   * LOCAL-FIRST: deliberately not part of the daily cron.
+   * CRON-FETCHED, WITH A CARRY FALLBACK.
+   *
+   * This flag used to be called `localFirst` and meant the opposite: the intake
+   * was deliberately kept OUT of the daily cron, because a third party's uptime
+   * should not become a cron dependency on day one of an integration. It is in
+   * the cron now (2026-08-31), so the name changed rather than being left to
+   * lie — a flag whose name states a policy the code no longer follows is worse
+   * than no flag.
    *
    * raw/ is gitignored and the cron fetches remotely into a fresh checkout, so
-   * a source only ever fetched by hand has no dump there. Without this flag
-   * parse would exit (missing dump) or, worse, drop every one of its records.
-   * So when the dump is ABSENT its committed records are CARRIED; when it is
-   * PRESENT they are rebuilt.
+   * a run whose fetch failed has no dump there. Without this flag parse would
+   * exit (missing dump) or, worse, drop every one of its records. So when the
+   * dump is ABSENT — or present and empty — its committed records are CARRIED;
+   * when it is present and non-empty they are rebuilt and merged add-only over
+   * the committed set.
    *
    * The carry needs a count pin for the same reason a frozen channel would —
    * data/videos.json is both source and target — and it lives in
-   * data/source-pins.json rather than a constant here, because a local-first
+   * data/source-pins.json rather than a constant here, because a cron-fetched
    * source GROWS.
    */
-  localFirst?: boolean;
+  cronFetchedWithCarry?: boolean;
   /** This channel's titles never name a character, so match-shaped uploads are
    *  queued as 'character-completion' rather than counted as parse misses and
    *  the characters are read from the footage (scripts/hud-read.ts). */
@@ -195,8 +203,9 @@ export interface MatchVideo {
   sides: [MatchSide, MatchSide];
 }
 
-/** data/source-pins.json — the carry pin for every `localFirst` intake, keyed
- *  by ChannelKey. Written by a rebuild, hard-asserted by every carrying run. */
+/** data/source-pins.json — the carry pin for every `cronFetchedWithCarry`
+ *  intake, keyed by ChannelKey. Written by a rebuild, hard-asserted by every
+ *  carrying run, and it only ever grows: see parse.ts's re-pin. */
 export type SourcePins = Partial<Record<ChannelKey, number>>;
 
 /** data/players.json entry (mirrors the engine's Player). */

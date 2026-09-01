@@ -30,10 +30,40 @@ jobs:
 
       # fetch + parse + emit (character art is NOT part of the daily run —
       # scripts/characters.ts only runs when the roster changes)
-      - name: Rebuild data
-        run: npm run data:build
+      - name: Fetch channel uploads
+        run: npm run data:fetch
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
+
+      # THE INDEX PULL, AND IT IS ALLOWED TO FAIL.
+      #
+      # This is the second half of "the cron never depends on Replay Theater
+      # succeeding", and it is deliberately a step of its own rather than a link
+      # in `data:build`'s && chain — a chain would take the whole refresh down
+      # with it, which is exactly the dependency the split exists to avoid.
+      #
+      # continue-on-error marks the run yellow and moves on. scripts/parse.ts
+      # then finds no dump, carries the committed 317 records, and everything
+      # else about the day proceeds normally. The cost of a bad morning upstream
+      # is that morning's new entries; nothing already committed is at risk,
+      # because this intake is add-only.
+      #
+      # LAST OF THE FETCHES, so a failure here cannot cost the channel dumps
+      # that were already fetched above. It reads a bounded cursor (two pages on
+      # a quiet morning, ten at most) rather than the 230-page catalogue — see
+      # scripts/fetch-theater.ts.
+      #
+      # YT_API_KEY is repeated on purpose: `env:` is per step, and
+      # requireApiKey() runs at module load, so without it this exits 1 before
+      # it has read anything.
+      - name: Fetch the tournament index (Replay Theater)
+        continue-on-error: true
+        run: npm run data:theater
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+
+      - name: Parse and emit
+        run: npm run data:parse
 
       - name: Commit if changed
         run: |
@@ -45,17 +75,26 @@ jobs:
           # content-derived (newest replay date, not build time), so a
           # no-new-video day leaves it byte-identical and the guard below still
           # skips the commit.
-          # source-pins.json is the local-first carry's pin. The cron never
-          # rewrites it — it carries rather than rebuilds, so the pin is read
-          # and asserted, never written — but staging it costs nothing and an
-          # unstaged file that DOES change is a change discarded in silence.
+          # source-pins.json is the index carry's pin, and as of 2026-08-31 the
+          # cron DOES rewrite it: a run whose pull returned tagged entries
+          # rebuilds rather than carries, and a rebuild writes the pin instead
+          # of asserting it. Staging it was already the right call when it was
+          # only ever read — an unstaged file that DOES change is a change
+          # discarded in silence — and now it is load-bearing.
+          # theater-cursor.json is where the index pull remembers how far it has
+          # read. raw/ is gitignored and CI starts from a fresh checkout, so if
+          # this is not committed the cursor resets to 0 every morning and every
+          # run becomes a ten-page sweep that never goes quiet. It carries no
+          # timestamp — and it changes ANYWAY, on essentially every run, because
+          # the catalogue takes new entries daily whether or not any of OURS
+          # change and maxEntryId rises with them. See the suppression below.
           # review-queue.json and patchGroups.json are the two that WERE missing.
           # Both are written on every run (parse.ts and emit.ts respectively) and
           # neither was staged, so both were regenerated and discarded daily —
           # and parse.ts's own comment above the review-queue write claimed it was
           # "in the cron's git add" while it was not. Found by giving this repo
           # the by-name staging check it had no test for at all.
-          git add data/videos.json data/replays.json data/stats.json data/players.json data/summary.json data/seasonBoundaries.json data/player-redirects.json data/patchGroups.json data/review-queue.json data/source-pins.json data/report.md
+          git add data/videos.json data/replays.json data/stats.json data/players.json data/summary.json data/seasonBoundaries.json data/player-redirects.json data/patchGroups.json data/review-queue.json data/source-pins.json data/theater-cursor.json data/theater-disagreements.json data/report.md
           # report.md's "_Generated <timestamp>_" line changes every run; a diff
           # that is ONLY that line is not a data change — drop it so a no-change
           # day produces no commit (and no deploy). report.md still ships
@@ -63,6 +102,26 @@ jobs:
           REAL=$(git diff --cached -- data/report.md | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | { grep -vc '^[+-]_Generated ' || true; })
           if [ "$REAL" -eq 0 ]; then
             git restore --staged --worktree data/report.md
+          fi
+          # AND THE SAME FOR THE CURSOR, for the same reason and more sharply.
+          # The catalogue takes new entries every day across all games, so
+          # maxEntryId rises on essentially every run — theater-cursor.json
+          # changes every morning whether or not any of OUR data did. And this
+          # repo is the worst case for it: the catalogue's TAGGED Tekken rows
+          # stop at 2025-03-16, so a quiet day is not the exception here, it is
+          # every day, and the cursor is then the only thing in the index that
+          # moved. Left staged it would retire the no-change-no-commit rule
+          # outright and put a deploy on the calendar every day forever.
+          # Dropped when it is the only thing left, the cursor simply does not
+          # advance on a quiet day and the next run re-reads those pages; the
+          # cost is a page or two, bounded at ten.
+          # (Written as an emptiness test on the remaining names rather than a
+          # `git diff --quiet -- <paths>`: with the cursor filtered out that
+          # path list can be EMPTY, and an empty pathspec means "everything",
+          # which would silently invert the check.)
+          OTHERS=$(git diff --cached --name-only | grep -v '^data/theater-cursor.json$' || true)
+          if [ -z "$OTHERS" ]; then
+            git restore --staged --worktree data/theater-cursor.json
           fi
           if git diff --cached --quiet; then
             echo "No data changes — skipping commit."

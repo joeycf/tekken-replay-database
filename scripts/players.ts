@@ -96,6 +96,17 @@ export const DISTINCT_KEYS = new Set<string>([
   // everybody mains one.
 ]);
 
+/** The identity key a handle resolves to, curated merges applied. The single
+ *  answer to "are these two spellings one person" — `resolvePlayers` votes
+ *  through it, and scripts/crosscheck.ts compares the catalogue's handles
+ *  through it so the second witness uses this repo's identity rule and not a
+ *  second one of its own. */
+export const resolveKey = (handle: string): string => {
+  const k = idKey(handle);
+  const alias = HANDLE_ALIASES.get(k);
+  return alias === undefined ? k : idKey(alias);
+};
+
 export interface MergeReport {
   /** canonical id → the ids it absorbed, for the redirect ledger. */
   merged: Map<string, string[]>;
@@ -143,10 +154,7 @@ export function resolvePlayers(
     }
     return m;
   })();
-  const keyOf = (handle: string): string => {
-    const aliased = HANDLE_ALIASES.get(idKey(handle));
-    return idKey(aliased ?? handle);
-  };
+  const keyOf = resolveKey;
 
   // Re-key parse.ts's per-ID casing table onto identity keys.
   const byKey = new Map<string, Map<string, number>>();

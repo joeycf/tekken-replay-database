@@ -122,8 +122,12 @@ export const CHANNELS: ChannelConfig[] = [
      *
      * WHAT IT IS NOT. A feed. The catalogue's tagged Tekken data stops at
      * 2025-03-16 and has had nothing in 2026, so this is a closed historical
-     * import; `data:theater` is worth re-running occasionally, not on a
-     * cadence.
+     * import — and it is in the daily cron from 2026-08-31 anyway. The reason
+     * is not that the yield changed: it is that the pull now costs two pages a
+     * morning instead of 230, and add-only means a morning that returns
+     * nothing (which is every morning, while the set stays closed) carries the
+     * committed records untouched. The cadence is what removes the human who
+     * has to notice the day it reopens.
      *
      * NO channelId, NO uploadsPlaylist, NO gameSignal: there is no channel and
      * no title to gate. The game is checked per ENTRY against `gameLabel`.
@@ -138,7 +142,7 @@ export const CHANNELS: ChannelConfig[] = [
       pageSize: 50,
       pacingMs: 1200,
     },
-    localFirst: true,
+    cronFetchedWithCarry: true,
   },
 ];
 

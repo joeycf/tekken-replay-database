@@ -306,8 +306,8 @@ function testCronGuard(): void {
     .filter((f) => f.startsWith('data/') && (f.endsWith('.json') || f.endsWith('.md')));
   expect(staged.length > 0, `workflow's git add names data files (${staged.length})`);
   // The full write set: scripts/parse.ts writes review-queue, source-pins,
-  // videos, players, player-redirects, seasonBoundaries and report.md;
-  // scripts/emit.ts writes replays, stats, summary and patchGroups.
+  // theater-cursor, videos, players, player-redirects, seasonBoundaries and
+  // report.md; scripts/emit.ts writes replays, stats, summary and patchGroups.
   for (const f of [
     'videos.json',
     'replays.json',
@@ -319,6 +319,14 @@ function testCronGuard(): void {
     'patchGroups.json',
     'review-queue.json',
     'source-pins.json',
+    // the index cursor. raw/ is gitignored and CI starts from a fresh checkout,
+    // so an unstaged cursor resets to 0 every morning and turns every cron run
+    // into a ten-page sweep that never goes quiet.
+    'theater-cursor.json',
+    // the cross-check's output. Unlike review-queue.json these rows ARE
+    // published — see the gate below — so the file is history, not a holding
+    // pen, and losing it daily would lose the record of what was contested.
+    'theater-disagreements.json',
     'report.md',
   ]) {
     expect(
@@ -369,6 +377,23 @@ function testCronGuard(): void {
     expect(
       sh('git show --stat --format= HEAD').includes('report.md'),
       'a real data change ships report.md alongside it',
+    );
+
+    // THE CURSOR ON ITS OWN, which is the ordinary morning here and not an edge
+    // case: the catalogue takes new entries daily whether or not any of OURS
+    // change, and this repo's tagged Tekken rows stop at 2025-03-16, so
+    // theater-cursor.json is guaranteed to be the only thing that moved. Staged
+    // unconditionally that would retire the no-change-no-commit rule outright
+    // and put a deploy on the calendar every day forever. The worktree file is
+    // checked too — restoring it is what makes the cursor simply not advance on
+    // a quiet day, so the next run re-reads a page or two.
+    writeFileSync(join(dir, 'data/theater-cursor.json'), '{"replayTheater":999}\n');
+    const c = sh('bash guard.sh');
+    expect(c.includes('No data changes'), 'a cursor-only advance skips the commit');
+    expect(sh('git rev-list --count HEAD').trim() === '2', 'a cursor-only advance makes no commit');
+    expect(
+      readFileSync(join(dir, 'data/theater-cursor.json'), 'utf8') === '[]\n',
+      'a cursor-only advance is restored in the worktree too',
     );
   } finally {
     rmSync(dir, { recursive: true, force: true });
@@ -492,6 +517,78 @@ async function main(): Promise<void> {
     emitted.every((r) => !queuedIds.has(r.id)),
     'pending review items never reach replays.json',
   );
+
+  // ── the cross-check's contested rows ──────────────────────────────────────
+  // THE MIRROR OF THE RULE ABOVE, and the reason scripts/crosscheck.ts does not
+  // write into review-queue.json. A queued item is WITHHELD; a cross-check
+  // disagreement is a record we have already published from a tracked channel
+  // and are not proposing to unpublish on a third party's say-so. If one of
+  // these ever failed to appear in videos.json it would mean the catalogue had
+  // been allowed to remove a record, which is the one thing this intake must
+  // never do.
+  //
+  // Read defensively: parse.ts writes this file only on a run that had a
+  // witness, so on a fresh clone or a carrying-only history it legitimately
+  // does not exist yet, and an empty list is a real answer.
+  //
+  // THE SHAPE IS AN OBJECT HERE, not the sibling repos' plain array: this is the
+  // only game whose catalogue has a vocabulary GAP rather than a column ceiling
+  // (it has no word for Armor King), and a gap has to survive between runs or
+  // the daily cursor pull re-contests seven correct records every morning.
+  const witnessFile = existsSync(join(ROOT, 'data/theater-disagreements.json'))
+    ? (JSON.parse(readFileSync(join(ROOT, 'data/theater-disagreements.json'), 'utf8')) as {
+        blindSpots?: { id: string; mergedInto: string; merged: number; sides: number }[];
+        disagreements?: {
+          videoId: string;
+          field: string;
+          side?: number;
+          ours: string[];
+          theirs: string[];
+          title: string;
+        }[];
+      })
+    : {};
+  const contested = witnessFile.disagreements ?? [];
+  const blindSpots = witnessFile.blindSpots ?? [];
+  expect(
+    blindSpots.every(
+      (b) =>
+        typeof b.id === 'string' &&
+        typeof b.mergedInto === 'string' &&
+        b.id !== b.mergedInto &&
+        b.merged > 0 &&
+        b.sides >= b.merged,
+    ),
+    `theater-disagreements.json blind spots validate (${blindSpots.length})`,
+  );
+  // A BLIND SPOT MUST NAME REAL ROSTER IDS ON BOTH SIDES. A typo here would
+  // silently exempt a whole character from the cross-check for good.
+  const knownIds = new Set(characters.map((c) => c.id));
+  expect(
+    blindSpots.every((b) => knownIds.has(b.id) && knownIds.has(b.mergedInto)),
+    'every blind spot names two real roster ids',
+  );
+  expect(
+    contested.every(
+      (d) =>
+        typeof d.videoId === 'string' &&
+        d.videoId.length > 0 &&
+        ['players', 'characters'].includes(d.field) &&
+        (d.side === undefined || d.side === 0 || d.side === 1) &&
+        Array.isArray(d.ours) &&
+        Array.isArray(d.theirs) &&
+        typeof d.title === 'string',
+    ),
+    `theater-disagreements.json schema validates (${contested.length} contested)`,
+  );
+  // Compared against the WHOLE-VIDEO ids, which for this repo's tracked
+  // channels is the record id itself. The cross-check never compares a segment
+  // record (`<videoId>@<startSeconds>`), so a disagreement can never name one.
+  const publishedVideoIds = new Set(allVideos.map((v) => v.id));
+  expect(
+    contested.every((d) => publishedVideoIds.has(d.videoId)),
+    `every cross-check disagreement is still published (${contested.length})`,
+  );
   const reportMd = readFileSync(join(ROOT, 'data/report.md'), 'utf8');
   const pendingLine = /Pending review: (\d+)/.exec(reportMd);
   expect(
@@ -584,13 +681,16 @@ async function main(): Promise<void> {
       'startSeconds is emitted when non-zero and omitted when zero (the falsy-0 contract)',
     );
 
-    // The pin is the carry's only check on a cron run, so a pin that has
+    // The pin is the carry's only check on a carrying run, so a pin that has
     // drifted from the committed corpus is the failure the carry cannot see.
+    // It stopped being asserted DAILY when the pull joined the cron — a run
+    // that rebuilds overwrites the pin instead of checking it — so this is now
+    // the check that actually runs against the committed pair.
     const pins = JSON.parse(readFileSync(join(ROOT, 'data/source-pins.json'), 'utf8')) as Record<
       string,
       number
     >;
-    for (const ch of CHANNELS.filter((c) => c.localFirst)) {
+    for (const ch of CHANNELS.filter((c) => c.cronFetchedWithCarry)) {
       const n = allVideos.filter((v) => v.intake === ch.id).length;
       expect(
         pins[ch.id] === n,

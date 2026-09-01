@@ -1,39 +1,45 @@
 # Tekken pipeline report
 
-**15440 matches** parsed from 25422 uploads across 6 channels · 2811 players · ranked sides 13687/30880 (44.3%)
+**15463 matches** parsed from 25447 uploads across 6 channels · 2814 players · ranked sides 13719/30926 (44.4%)
 
 | channel | source | uploads | parsed | coverage |
 | --- | --- | ---: | ---: | ---: |
-| highLevel | highLevel | 4571 | 4538 | 99.3% |
-| telly | telly | 12613 | 7699 | 61.0% |
-| ranked | ranked | 2610 | 2590 | 99.2% |
+| highLevel | highLevel | 4577 | 4544 | 99.3% |
+| telly | telly | 12623 | 7709 | 61.1% |
+| ranked | ranked | 2617 | 2597 | 99.2% |
 | bneEsports | tournament | 2866 | 233 | 8.1% |
-| evoEvents | tournament | 2762 | 63 | 2.3% |
-| replayTheater _(carried)_ | tournament | — | 317 | — |
+| evoEvents | tournament | 2764 | 63 | 2.3% |
+| replayTheater _(index)_ | tournament | 317 | 317 | 100.0% |
 
-### Local-first intakes
+### Index intakes
 
-| intake | records | pin | this run |
-| --- | ---: | ---: | --- |
-| `replayTheater` | 317 | 317 | carried (no dump) |
+Fetched by the daily cron since 2026-08-31, and ADD-ONLY: a committed record is
+carried whether or not the catalogue still lists it, so this count can only rise.
+The cron does not depend on the pull succeeding — on any failure there is no dump,
+the committed records are carried, and the run stays green.
+
+| intake | records | pin | this run | pages | new | not in this pull |
+| --- | ---: | ---: | --- | ---: | ---: | ---: |
+| `replayTheater` | 317 | 317 | rebuilt from a full sweep | 2 | 317 | 0 |
 
 _Entries skipped as already-known: **0**. The catalogue indexes no video this repo has fetched, published or ruled on._
 
-Seasons: S1 6359 · S2 6058 · S3 3023
+Seasons: S1 6359 · S2 6058 · S3 3046
 
-Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1727 · unknown 10 (unknown = season contradicts the date: label-grace/override)
+Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1750 · unknown 10 (unknown = season contradicts the date: label-grace/override)
 
-Misses by reason: pre-launch 4456 · not-tekken8 2627 · short-duration 1683 · shorts 1125 · no-vs-title 245 · char-unresolved 158 · bad-handle 3 · live-or-upcoming 2
+Misses by reason: pre-launch 4456 · not-tekken8 2629 · short-duration 1683 · shorts 1125 · no-vs-title 245 · char-unresolved 158 · bad-handle 3 · live-or-upcoming 2
 
 Season-label conflicts (channel label ≠ date-derived season, outside the ±14d boundary grace; date wins): 146
 
 Pending review: 0 (data/review-queue.json)
 
-Player identity: 109 identity(s) resolved from more than one spelling
+Player identity: 112 identity(s) resolved from more than one spelling
 
 Retired ids are 301-redirected from vercel.json — run `npm run data:redirects`
 after changing scripts/players.ts, or the old URLs 404.
 
+- `ace-unlimited` ← `aceunlimited`
 - `afroking` ← `afro-king`
 - `aimedtwo` ← `aimed-two`
 - `ayorichie` ← `ayo-richie`
@@ -60,6 +66,7 @@ after changing scripts/players.ts, or the old URLs 404.
 - `dhome50` ← `dhome-50`
 - `dirtystyle` ← `dirty-style`
 - `divine-exorcist` ← `divineexorcist`
+- `divineexorcist4` ← `divine-exorcist4`
 - `drking` ← `dr-king`
 - `dxmusalli` ← `dx-musalli`
 - `el-toro-alba` ← `eltoro-alba`
@@ -72,9 +79,52 @@ after changing scripts/players.ts, or the old URLs 404.
 - `hidetone` ← `hide-tone`
 - `hk-47-tk` ← `hk47tk`
 - `how-foolish` ← `howfoolish`
-- `imyourfather` ← `i-m-your-father` · `im-your-father`
-- `jacobkaas` ← `jacob-kaas`
-- …and 69 more
+- …and 72 more
+
+## Replay Theater cross-check
+
+An independent reading of **7055** of our own records, from the catalogue's
+UNTAGGED entries — online replays it indexes that we also parse from a tracked
+channel. Neither side saw the other, so this is the only accuracy number here the
+pipeline did not produce about itself. It changes nothing: a disagreement is
+recorded in data/theater-disagreements.json with both claims, never written into
+a record. The catalogue does not outrank a confident parse and never outranks a
+human override.
+
+_Measured this run against a full pull. 3889 catalogue entr(ies) point at videos_
+_we do not hold; 0 are VODs the catalogue segments, which the intake owns._
+
+| field | population | agree | partial | disagree | cannot witness |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| players (both handles) | 7055 | 6890 (97.66%) | 163 | 2 | — |
+| characters (per side) | 14110 | 13774 (97.62%) | 0 | 3 (0.02%) | 333 |
+
+Side order differed on **0** record(s); the comparison realigns on the
+handles before reading characters, so a swapped pair is not counted twice as a
+character disagreement.
+
+**333** side(s) the catalogue COULD NOT HAVE GOT RIGHT are held out of both
+columns above: agreement over the 13777 it can express is **99.98%**.
+
+Its vocabulary has no word for these, derived from this run rather than declared —
+no string anywhere in the pull resolves to the id, and where we say it the
+catalogue says one particular other thing almost every time:
+
+- `armor_king` → the catalogue writes `king` instead, on 332 of the 333 side(s) where we say it (99.70%).
+
+Of the 167 side(s) whose handles did not match, **156** are ours carrying extra text
+the catalogue does not, **2** are theirs carrying a team tag ORG_PREFIXES does not
+list yet, and **9** are genuinely different names — the only bucket worth reading one
+row at a time. Reported, never scored: substring matching on handles is the kind of
+guessing this module refuses.
+
+**5 disagreement(s)** — both claims, ours first:
+
+- `S2TWIGBSVm8` players: **lowhigh, doma** vs catalogue **knee, nobi** — T8 ▰ LOWHIGH (#1 Ranked Bryan) Vs DOMA (Armor King) ▰ Tekken 8 High Le
+- `AntIuY2IcIc` side 0 characters: **clive** vs catalogue **bryan** — T8 ▰ CRESCENT (#1 Ranked Clive) Vs NABDO (#5 Ranked Yoshimitsu) ▰ Tekk
+- `NSXnX3i2wqs` side 1 characters: **leo** vs catalogue **lee** — T8 ▰ CHIKURIN (King) Vs DOKUZU (Leo) ▰ Tekken 8 High Level Gameplay
+- `QHm_fVLi9cE` side 1 characters: **heihachi** vs catalogue **kuma** — Tekken 8 ▰ BUPPAMEN (#4 Ranked Steve Fox) Vs NEVER1997 (Akuma Heihachi
+- `ufmR0DPqxFM` players: **speedkicks, tone** vs catalogue **skjr, hidetone** — Tekken 8 ▰ SPEEDKICKS (#1 Ranked Heihachi) Vs TONE (Bryan) ▰ High Leve
 
 ## Sample misses (first 30 that are not shorts/live)
 
@@ -109,4 +159,4 @@ after changing scripts/players.ts, or the old URLs 404.
 - `4Pf63UozmxA` [highLevel] no-vs-title: T8 🔥 Kkokkoma (Dragunov) 🔥 Tekken 8
 - `RUDWRC5M738` [highLevel] no-vs-title: T8 🔥 Shadow 20z (Zafina) 🔥 Tekken 8
 
-_Generated 2026-08-31T14:32:22.163Z_
+_Generated 2026-09-01T18:45:36.871Z_

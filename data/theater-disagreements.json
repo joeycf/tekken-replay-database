@@ -1,0 +1,74 @@
+{
+  "blindSpots": [
+    {
+      "id": "armor_king",
+      "mergedInto": "king",
+      "merged": 332,
+      "sides": 333
+    }
+  ],
+  "disagreements": [
+    {
+      "videoId": "S2TWIGBSVm8",
+      "field": "players",
+      "ours": [
+        "lowhigh",
+        "doma"
+      ],
+      "theirs": [
+        "knee",
+        "nobi"
+      ],
+      "title": "T8 ▰ LOWHIGH (#1 Ranked Bryan) Vs DOMA (Armor King) ▰ Tekken 8 High Level Gameplay"
+    },
+    {
+      "videoId": "AntIuY2IcIc",
+      "field": "characters",
+      "side": 0,
+      "ours": [
+        "clive"
+      ],
+      "theirs": [
+        "bryan"
+      ],
+      "title": "T8 ▰ CRESCENT (#1 Ranked Clive) Vs NABDO (#5 Ranked Yoshimitsu) ▰ Tekken 8 High Level Gameplay"
+    },
+    {
+      "videoId": "NSXnX3i2wqs",
+      "field": "characters",
+      "side": 1,
+      "ours": [
+        "leo"
+      ],
+      "theirs": [
+        "lee"
+      ],
+      "title": "T8 ▰ CHIKURIN (King) Vs DOKUZU (Leo) ▰ Tekken 8 High Level Gameplay"
+    },
+    {
+      "videoId": "QHm_fVLi9cE",
+      "field": "characters",
+      "side": 1,
+      "ours": [
+        "heihachi"
+      ],
+      "theirs": [
+        "kuma"
+      ],
+      "title": "Tekken 8 ▰ BUPPAMEN (#4 Ranked Steve Fox) Vs NEVER1997 (Akuma Heihachi) ▰ Ranked Matches"
+    },
+    {
+      "videoId": "ufmR0DPqxFM",
+      "field": "players",
+      "ours": [
+        "speedkicks",
+        "tone"
+      ],
+      "theirs": [
+        "skjr",
+        "hidetone"
+      ],
+      "title": "Tekken 8 ▰ SPEEDKICKS (#1 Ranked Heihachi) Vs TONE (Bryan) ▰ High Level Gameplay"
+    }
+  ]
+}
