@@ -1,32 +1,32 @@
 {
   "totals": {
-    "replays": 15465,
+    "replays": 15472,
     "characters": 42,
-    "players": 2590,
+    "players": 2591,
     "byPatch": {
       "S1": 6359,
       "S2": 6058,
-      "S3": 3048
+      "S3": 3055
     }
   },
   "characterUsage": {
-    "alisa": 549,
+    "alisa": 550,
     "anna": 658,
-    "armor_king": 628,
+    "armor_king": 629,
     "asuka": 442,
     "azucena": 521,
-    "bob": 151,
+    "bob": 156,
     "bryan": 2334,
     "claudio": 614,
     "clive": 958,
     "devil_jin": 1021,
-    "dragunov": 1775,
+    "dragunov": 1776,
     "eddy": 325,
     "fahkumram": 476,
-    "feng": 1043,
-    "heihachi": 1045,
+    "feng": 1044,
+    "heihachi": 1046,
     "hwoarang": 1187,
-    "jack8": 595,
+    "jack8": 597,
     "jin": 830,
     "jun": 643,
     "kazuya": 1939,
@@ -39,9 +39,9 @@
     "leo": 273,
     "leroy": 410,
     "lidia": 553,
-    "lili": 1611,
+    "lili": 1612,
     "miary_zo": 303,
-    "nina": 903,
+    "nina": 904,
     "panda": 94,
     "paul": 650,
     "raven": 531,
@@ -135,23 +135,23 @@
       "zafina": 227
     },
     "S3": {
-      "alisa": 131,
+      "alisa": 132,
       "anna": 97,
-      "armor_king": 264,
+      "armor_king": 265,
       "asuka": 69,
       "azucena": 83,
-      "bob": 151,
+      "bob": 156,
       "bryan": 464,
       "claudio": 67,
       "clive": 95,
       "devil_jin": 107,
-      "dragunov": 290,
+      "dragunov": 291,
       "eddy": 28,
       "fahkumram": 116,
-      "feng": 162,
-      "heihachi": 152,
+      "feng": 163,
+      "heihachi": 153,
       "hwoarang": 229,
-      "jack8": 141,
+      "jack8": 143,
       "jin": 116,
       "jun": 88,
       "kazuya": 342,
@@ -164,9 +164,9 @@
       "leo": 43,
       "leroy": 81,
       "lidia": 98,
-      "lili": 600,
+      "lili": 601,
       "miary_zo": 70,
-      "nina": 248,
+      "nina": 249,
       "panda": 6,
       "paul": 101,
       "raven": 95,
@@ -1621,7 +1621,7 @@
     },
     "crescent": {
       "armor_king": 128,
-      "bob": 10,
+      "bob": 12,
       "bryan": 3,
       "claudio": 91,
       "clive": 400,
@@ -1931,7 +1931,7 @@
       "miary_zo": 5
     },
     "deoksik": {
-      "jack8": 26
+      "jack8": 27
     },
     "derod": {
       "asuka": 1
@@ -3636,7 +3636,7 @@
       "reina": 1
     },
     "ikari": {
-      "heihachi": 1,
+      "heihachi": 2,
       "kazuya": 268
     },
     "ikari-mishima": {
@@ -3945,7 +3945,7 @@
       "eddy": 1,
       "fahkumram": 24,
       "heihachi": 1,
-      "jack8": 159,
+      "jack8": 160,
       "kazuya": 18,
       "miary_zo": 2
     },
@@ -4998,7 +4998,7 @@
       "azucena": 2,
       "bryan": 538,
       "devil_jin": 18,
-      "dragunov": 141,
+      "dragunov": 142,
       "fahkumram": 1,
       "feng": 5,
       "heihachi": 11,
@@ -5281,7 +5281,7 @@
     "matsuba": {
       "anna": 23,
       "azucena": 1,
-      "bob": 9,
+      "bob": 10,
       "dragunov": 2,
       "feng": 31,
       "kunimitsu": 2,
@@ -5681,7 +5681,7 @@
       "dragunov": 2
     },
     "mulgold": {
-      "alisa": 93,
+      "alisa": 94,
       "anna": 29,
       "armor_king": 9,
       "asuka": 11,
@@ -5783,7 +5783,7 @@
       "alisa": 1
     },
     "nacioss": {
-      "lili": 3
+      "lili": 4
     },
     "nagatostudent": {
       "reina": 1
@@ -6963,6 +6963,9 @@
     "rbsm": {
       "hwoarang": 9
     },
+    "rcl": {
+      "feng": 1
+    },
     "real-zero": {
       "shaheen": 1
     },
@@ -7507,7 +7510,7 @@
       "alisa": 3,
       "anna": 27,
       "armor_king": 8,
-      "bob": 4,
+      "bob": 5,
       "claudio": 33,
       "devil_jin": 13,
       "eddy": 2,
@@ -8115,7 +8118,7 @@
       "hwoarang": 1
     },
     "taiheiyo": {
-      "armor_king": 1,
+      "armor_king": 2,
       "king": 33
     },
     "tails": {
@@ -8635,7 +8638,7 @@
       "anna": 23,
       "armor_king": 32,
       "azucena": 41,
-      "bob": 24,
+      "bob": 25,
       "bryan": 7,
       "claudio": 1,
       "clive": 4,
@@ -8848,7 +8851,7 @@
     },
     "warning-ispam": {
       "jin": 1,
-      "nina": 33,
+      "nina": 34,
       "reina": 7
     },
     "washizu": {
