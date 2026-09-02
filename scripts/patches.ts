@@ -52,6 +52,9 @@ export function buildPatchTable(
   boundaries: PatchBoundary[],
 ): PatchTable {
   const errors: string[] = [];
+  // Read once per call, never at module load: this module outlives midnight in
+  // a long `data:parse`, and a frozen "today" is a guard that quietly loosens.
+  const today = new Date().toISOString().slice(0, 10);
 
   const seasonForDate = (day: string): number | null => {
     for (const b of seasons) {
@@ -64,6 +67,16 @@ export function buildPatchTable(
   const seen = new Set<string>();
   for (const p of boundaries) {
     if (!ISO_DAY.test(p.start)) errors.push(`${p.version}: start "${p.start}" is not YYYY-MM-DD`);
+    // A typo'd year mints an empty future window: it filters to nothing, folds
+    // every real replay into the row above it, and asserts perfectly clean —
+    // the same silence this table exists to break, arriving through the front
+    // door. Ported from Tōkon, which is the only sibling that had it.
+    // UTC, deliberately. Bandai ships a patch at one instant that falls on two
+    // calendar days (3.02.01: [PDT] Aug 19 / [CEST] Aug 20), so a CEST-dated
+    // row authored inside the 22:00–24:00 UTC window would trip this. That is
+    // a two-hour wait, against a class of error that is otherwise invisible.
+    if (p.start > today)
+      errors.push(`${p.version}: starts ${p.start}, which is in the future (today ${today})`);
     if (ERA_TOKEN.test(p.version)) errors.push(`${p.version}: version collides with an era token`);
     if (!FOLDED.test(p.version))
       errors.push(`${p.version}: not a folded X.YY token — fold hotfixes into their parent line`);
