@@ -1,22 +1,22 @@
 {
   "totals": {
-    "replays": 15463,
+    "replays": 15465,
     "characters": 42,
     "players": 2590,
     "byPatch": {
       "S1": 6359,
       "S2": 6058,
-      "S3": 3046
+      "S3": 3048
     }
   },
   "characterUsage": {
     "alisa": 549,
     "anna": 658,
     "armor_king": 628,
-    "asuka": 441,
+    "asuka": 442,
     "azucena": 521,
-    "bob": 150,
-    "bryan": 2333,
+    "bob": 151,
+    "bryan": 2334,
     "claudio": 614,
     "clive": 958,
     "devil_jin": 1021,
@@ -39,7 +39,7 @@
     "leo": 273,
     "leroy": 410,
     "lidia": 553,
-    "lili": 1610,
+    "lili": 1611,
     "miary_zo": 303,
     "nina": 903,
     "panda": 94,
@@ -138,10 +138,10 @@
       "alisa": 131,
       "anna": 97,
       "armor_king": 264,
-      "asuka": 68,
+      "asuka": 69,
       "azucena": 83,
-      "bob": 150,
-      "bryan": 463,
+      "bob": 151,
+      "bryan": 464,
       "claudio": 67,
       "clive": 95,
       "devil_jin": 107,
@@ -164,7 +164,7 @@
       "leo": 43,
       "leroy": 81,
       "lidia": 98,
-      "lili": 599,
+      "lili": 600,
       "miary_zo": 70,
       "nina": 248,
       "panda": 6,
@@ -1621,7 +1621,7 @@
     },
     "crescent": {
       "armor_king": 128,
-      "bob": 9,
+      "bob": 10,
       "bryan": 3,
       "claudio": 91,
       "clive": 400,
@@ -1994,7 +1994,7 @@
       "nina": 1
     },
     "dewglider": {
-      "lili": 285
+      "lili": 286
     },
     "dexter": {
       "hwoarang": 1
@@ -2905,7 +2905,7 @@
       "miary_zo": 1
     },
     "ghafir": {
-      "asuka": 4
+      "asuka": 5
     },
     "ghirlanda": {
       "armor_king": 2,
@@ -4996,7 +4996,7 @@
     "lowhigh": {
       "armor_king": 2,
       "azucena": 2,
-      "bryan": 537,
+      "bryan": 538,
       "devil_jin": 18,
       "dragunov": 141,
       "fahkumram": 1,

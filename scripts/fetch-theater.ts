@@ -348,6 +348,46 @@ async function main(): Promise<void> {
 
   console.log(`\n▶ Pulling the Replay Theater index (${INDEX.endpoint}, game=${INDEX.slug})…`);
   const first = await getPage(1);
+
+  // ── THE CURSOR CANNOT BE AHEAD OF THE CATALOGUE ─────────────────────────────
+  // Page 1 holds the newest entries, so the highest id ON IT is the highest id the
+  // catalogue has. A committed cursor above that is not "nothing new today" — it is
+  // impossible, and it is SILENT: every page reads as clean, the stop rule fires
+  // after two, and this intake never ingests another entry for as long as the file
+  // says so. The cron stays green the whole time.
+  //
+  // Not hypothetical. On 2026-09-01 a verification harness wrote synthetic
+  // maxEntryId values (900002) into data/theater-cursor.json through the real parse
+  // path; it restored raw/ afterwards and not data/. Three repos were committed
+  // with a cursor a quarter-million ids past the end of the catalogue, and nothing
+  // anywhere would have said a word — the pulls would simply have gone quiet
+  // forever. The cursor only ever moves FORWARD, so it could not have healed
+  // itself either.
+  //
+  // Refuse rather than clamp. Clamping would hide which entries were skipped while
+  // the cursor was wrong, and a cursor that is wrong is a question about the
+  // repository's history, not a number to round off.
+  const newestOnPage1 = (first.matches ?? []).reduce((m, e) => Math.max(m, e.id ?? 0), 0);
+  if (cursorAt > 0 && newestOnPage1 > 0 && cursorAt > newestOnPage1) {
+    console.error(
+      [
+        `\n\u2716 The committed cursor is AHEAD of the catalogue.`,
+        ``,
+        `  data/theater-cursor.json  ${cursorAt}`,
+        `  newest id on page 1       ${newestOnPage1}`,
+        ``,
+        `  Page 1 is the newest entries, so nothing in the catalogue can be above it.`,
+        `  Left alone this is silent: every page reads as already-seen, the pull stops`,
+        `  after two, and this intake never ingests again while the file says so.`,
+        ``,
+        `  Set data/theater-cursor.json to the highest id this repo has actually SEEN`,
+        `  \u2014 the maxEntryId of its last full sweep \u2014 and re-run. If in doubt, 0 is`,
+        `  always safe: a full sweep re-reads everything and the intake is add-only.`,
+      ].join('\n'),
+    );
+    process.exit(1);
+  }
+
   const total = Number(first.total_count ?? 0);
   const fullPages = Math.ceil(total / INDEX.pageSize);
   const pages = Math.min(CURSOR_MODE ? CURSOR_MAX_PAGES : fullPages, MAX_PAGES);

@@ -1,15 +1,15 @@
 # Tekken pipeline report
 
-**15463 matches** parsed from 25447 uploads across 5 channels, plus 317 from 1 index · 2590 players · ranked sides 13719/30926 (44.4%)
+**15465 matches** parsed from 25450 uploads across 5 channels, plus 317 from 1 index · 2590 players · ranked sides 13721/30930 (44.4%)
 
 | channel | source | uploads | parsed | coverage |
 | --- | --- | ---: | ---: | ---: |
 | highLevel | highLevel | 4577 | 4544 | 99.3% |
-| telly | telly | 12623 | 7709 | 61.1% |
-| ranked | ranked | 2617 | 2597 | 99.2% |
+| telly | telly | 12624 | 7710 | 61.1% |
+| ranked | ranked | 2619 | 2598 | 99.2% |
 | bneEsports | tournament | 2866 | 233 | 8.1% |
 | evoEvents | tournament | 2764 | 63 | 2.3% |
-| replayTheater _(index)_ | tournament | 317 | 317 | 100.0% |
+| replayTheater _(carried)_ | tournament | — | 317 | — |
 
 ### Index intakes
 
@@ -20,26 +20,28 @@ the committed records are carried, and the run stays green.
 
 | intake | records | pin | this run | pages | new | not in this pull |
 | --- | ---: | ---: | --- | ---: | ---: | ---: |
-| `replayTheater` | 317 | 317 | rebuilt from a full sweep | 2 | 317 | 0 |
+| `replayTheater` | 317 | 317 | carried (pull found no new tournament entries) | — | — | — |
 
-_Entries skipped as already-known: **0**. The catalogue indexes no video this repo has fetched, published or ruled on._
+_The pull ran and found no new tournament entries, so the committed catalogue_
+_was carried unchanged and the counts below were not measured. The cursor still_
+_advanced: a quiet day is the ordinary case here, not a failed one — the_
+_catalogue's tagged Tekken rows stop at 2025-03-16._
 
-Seasons: S1 6359 · S2 6058 · S3 3046
+Seasons: S1 6359 · S2 6058 · S3 3048
 
-Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1750 · unknown 10 (unknown = season contradicts the date: label-grace/override)
+Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1752 · unknown 10 (unknown = season contradicts the date: label-grace/override)
 
-Misses by reason: pre-launch 4456 · not-tekken8 2629 · short-duration 1683 · shorts 1125 · no-vs-title 245 · char-unresolved 158 · bad-handle 3 · live-or-upcoming 2
+Misses by reason: pre-launch 4456 · not-tekken8 2629 · short-duration 1683 · shorts 1125 · no-vs-title 246 · char-unresolved 158 · bad-handle 3 · live-or-upcoming 2
 
 Season-label conflicts (channel label ≠ date-derived season, outside the ±14d boundary grace; date wins): 146
 
 Pending review: 0 (data/review-queue.json)
 
-Player identity: 112 identity(s) resolved from more than one spelling
+Player identity: 109 identity(s) resolved from more than one spelling
 
 Retired ids are 301-redirected from vercel.json — run `npm run data:redirects`
 after changing scripts/players.ts, or the old URLs 404.
 
-- `ace-unlimited` ← `aceunlimited`
 - `afroking` ← `afro-king`
 - `aimedtwo` ← `aimed-two`
 - `ayorichie` ← `ayo-richie`
@@ -66,7 +68,6 @@ after changing scripts/players.ts, or the old URLs 404.
 - `dhome50` ← `dhome-50`
 - `dirtystyle` ← `dirty-style`
 - `divine-exorcist` ← `divineexorcist`
-- `divineexorcist4` ← `divine-exorcist4`
 - `drking` ← `dr-king`
 - `dxmusalli` ← `dx-musalli`
 - `el-toro-alba` ← `eltoro-alba`
@@ -79,7 +80,9 @@ after changing scripts/players.ts, or the old URLs 404.
 - `hidetone` ← `hide-tone`
 - `hk-47-tk` ← `hk47tk`
 - `how-foolish` ← `howfoolish`
-- …and 72 more
+- `imyourfather` ← `i-m-your-father` · `im-your-father`
+- `jacobkaas` ← `jacob-kaas`
+- …and 69 more
 
 ## Replay Theater cross-check
 
@@ -159,4 +162,4 @@ guessing this module refuses.
 - `4Pf63UozmxA` [highLevel] no-vs-title: T8 🔥 Kkokkoma (Dragunov) 🔥 Tekken 8
 - `RUDWRC5M738` [highLevel] no-vs-title: T8 🔥 Shadow 20z (Zafina) 🔥 Tekken 8
 
-_Generated 2026-09-01T23:23:09.729Z_
+_Generated 2026-09-02T02:16:20.904Z_
