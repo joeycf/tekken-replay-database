@@ -7,7 +7,11 @@
     "",
     "Rules:",
     " - Authored from the wavu.wiki Patches (Tekken 8) table, cross-checked against",
-    "   Bandai Namco's patch-notes index. FOLD RULE (mechanical): X.YY.ZZ hotfix",
+    "   Bandai Namco's patch-notes index. The table is at",
+    "   https://wavu.wiki/t/Patches_(Tekken_8) — mind the /t/ prefix: the bare",
+    "   /Patches_(Tekken_8) and /Patches paths both 404 today, so a lookup that",
+    "   drops it reads as 'the page is gone' rather than 'the URL moved'.",
+    "   FOLD RULE (mechanical): X.YY.ZZ hotfix",
     "   releases collapse into X.YY — wavu lists each line's first public release",
     "   (often .01/.04), so a folded patch's start is its line's FIRST release date,",
     "   except a season opener which starts at the season boundary.",
@@ -22,7 +26,13 @@
     "Date notes: 2.00's wavu date is 2025-04-01 (Ver. 2.00.01), but the season",
     "authority opens S2 on 2025-03-31 (deliberate UTC alignment) and the opening",
     "patch starts at the season boundary — recorded here, not a TODO. 2.08.00 =",
-    "2025-12-01 (Miary Zo) confirmed on the full wavu table + Bandai's notes."
+    "2025-12-01 (Miary Zo) confirmed on the full wavu table + Bandai's notes.",
+    "3.02.00 never shipped: the 3.02 line's first public release is Ver. 3.02.01,",
+    "which wavu dates 2026-08-19. Bandai's own notes for it read [PDT] Wed Aug 19",
+    "3:00 PM / [CEST] Thu Aug 20 12:00 AM — one release, two calendar days, and",
+    "wavu took the PDT side here where it took the CEST side for 3.01.01. Follow",
+    "wavu: every row above is its first-release date verbatim, and second-guessing",
+    "it per-row is how a table starts disagreeing with the source it cites."
   ],
   "patches": [
     { "version": "1.01", "start": "2024-01-26", "includes": ["1.01.04"], "note": "launch" },
@@ -47,6 +57,7 @@
     { "version": "2.06", "start": "2025-10-14", "includes": ["2.06.01", "2.06.02"], "note": "Armor King" },
     { "version": "2.08", "start": "2025-12-01", "includes": ["2.08.01"], "note": "Miary Zo" },
     { "version": "3.00", "start": "2026-03-17", "includes": ["3.00.01", "3.00.02"], "note": "Season 3" },
-    { "version": "3.01", "start": "2026-05-28", "includes": ["3.01.01"], "note": "Kunimitsu" }
+    { "version": "3.01", "start": "2026-05-28", "includes": ["3.01.01"], "note": "Kunimitsu" },
+    { "version": "3.02", "start": "2026-08-19", "includes": ["3.02.01"], "note": "Bob" }
   ]
 }

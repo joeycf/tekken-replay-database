@@ -28,6 +28,7 @@ import RANKS from '../data/ranks.json';
 import { DISTINCT_KEYS, idKey } from './players';
 import { CHANNELS } from './channels';
 import { staleEvidence } from './freshness';
+import { loadPatchTable } from './patches';
 import type {
   CharacterRecord,
   MatchVideo,
@@ -922,6 +923,7 @@ async function main(): Promise<void> {
   // patch versions from data/patchBoundaries.json.
   console.log('\n— Grouped patch facet');
   const byVersion = (ver: string) => count((v) => v.patchVersion === ver);
+  const patchTable = loadPatchTable(join(ROOT, 'data'));
   await gotoIdle(page, at('/?patch=2.03'));
   expect(
     (await resultCount(page)) === byVersion('2.03'),
@@ -943,22 +945,33 @@ async function main(): Promise<void> {
     (await page.locator('[data-testid="patch-group-S3"]').getAttribute('aria-pressed')) === 'true',
     'parent aria-pressed=true when fully selected',
   );
+  // Deselect ONE named child; the remainder is COMPUTED from the boundary
+  // table. Naming it instead is a trap this test already fell into — the
+  // assertion read `byVersion('3.01')` when S3 had exactly two children, and
+  // adding 3.02 (Bob) made a correct facet look broken.
+  const dropped = '3.00';
+  const s3Rest = patchTable.patches
+    .filter((p) => p.season === 3 && p.version !== dropped)
+    .map((p) => p.version);
+  const s3RestN = s3Rest.reduce((n, ver) => n + byVersion(ver), 0);
   await page.click('[data-testid="patch-group-S3-expander"]');
-  await page.click('[data-testid="patch-child-3.00"]');
-  await page.waitForFunction(() =>
-    (new URL(location.href).searchParams.get('patch') ?? '')
-      .split(',')
-      .every((t) => t !== 'S3' && t !== '3.00'),
+  await page.click(`[data-testid="patch-child-${dropped}"]`);
+  await page.waitForFunction(
+    (drop) =>
+      (new URL(location.href).searchParams.get('patch') ?? '')
+        .split(',')
+        .every((t) => t !== 'S3' && t !== drop),
+    dropped,
   );
   expect(
     (await page.locator('[data-testid="patch-group-S3"]').getAttribute('aria-pressed')) === 'mixed',
     'partial selection reads aria-pressed=mixed',
   );
   expect(
-    (await resultCount(page)) === byVersion('3.01'),
-    'children-only URL counts only the remaining patch',
+    (await resultCount(page)) === s3RestN,
+    `children-only URL counts the remaining patches (${s3Rest.join(' + ')} → ${fmt(s3RestN)})`,
   );
-  await page.click('[data-testid="patch-child-3.00"]');
+  await page.click(`[data-testid="patch-child-${dropped}"]`);
   await page.waitForFunction(() => new URL(location.href).searchParams.get('patch') === 'S3');
   expect(
     (await resultCount(page)) === count((v) => v.season === 3),
