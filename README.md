@@ -99,6 +99,7 @@ Two other env vars matter locally, neither of them secret:
 | `npm run data:emit`                              | Map the rich `videos.json` onto the engine contract → `data/replays.json`, `stats.json`, `summary.json`. Deterministic, no YouTube access — safe to re-run standalone                                 |
 | `npm run data:build`                             | fetch + parse                                                                                                                                                                                         |
 | `npm run data:characters`                        | Roster scrape (Bandai Namco official site) → portraits + splashes in `public/img/characters/`, `data/characters.json`                                                                                 |
+| `npm run data:patch-check`                       | Diff `data/patchBoundaries.json` against wavu's Patches (Tekken 8) table — network, manual, never in the cron (see the patch-table runbook)                                                           |
 | `npm run typecheck`                              | App (`nuxt typecheck`) **and** pipeline (`tsc -p tsconfig.pipeline.json`) — both must pass                                                                                                            |
 | `npm run lint` / `lint:fix`                      | ESLint over the whole repo                                                                                                                                                                            |
 | `npm run format` / `format:check`                | Prettier                                                                                                                                                                                              |
@@ -230,6 +231,48 @@ vision here — everything comes out of the title and description text.
   corrections, applied by parse and the standalone emit alike. Currently empty;
   it exists so a correction never has to be made by editing `videos.json` in
   place, which the next refresh would erase.
+
+## Patch-table runbook
+
+Fires when `npm run data:patch-check` reports drift, or when a patch ships.
+
+The table is `data/patchBoundaries.json` — one row per folded `X.YY` line, the
+authoring rules in its `"//"` header. Seasons live in `data/seasonBoundaries.json`,
+written by `parse.ts` from its `SEASONS` const. The source is wavu's
+[Patches (Tekken 8)](<https://wavu.wiki/t/Patches_(Tekken_8)>) table, which lists
+every `X.YY.ZZ` release; the checker reads its wikitext through the MediaWiki API
+and prints the revision it checked against.
+
+**The fold.** wavu rows group by `X.YY`. A line's `start` is its first listed
+release (often `.01` or `.04` — a `.00` build is not always public), its
+`includes` are the line's sub-releases other than `.00` (the key is omitted when
+there are none), and a season opener starts at the season boundary rather than
+on wavu's date — the checker prints openers as `ⓘ`, never as drift. Bandai skips
+numbers outright (2.07 never shipped), so a gap in the sequence is never filled
+with an invented row.
+
+`npm run data:patch-check` prints one line per difference and exits 1 on any of
+the four:
+
+- `+ 3.03 (date) — on wavu, missing from patchBoundaries.json` — paste the
+  printed row at the end of `patches`. If the line's major digit has no season
+  yet the checker says so: add the `S<N>` row to `seasonBoundaries.json` first
+  and use its start, or the row nests under the open season.
+- `~ 3.02 — we say X, wavu's first release is Y` — correct `start` to wavu's
+  date (openers excepted; they are keyed to the season boundary).
+- `- 2.07 (date) — in patchBoundaries.json, on no wavu line (invented?)` —
+  remove the row, or the `includes` token wavu does not list.
+- `⚠ 3.02 includes — wavu lists 3.02.02, the row does not` — paste the printed
+  `includes`.
+
+Then `npm run data:parse` — not `data:emit`: this repo stores `patchVersion` on
+every record, so only a re-parse refiles the replays under the corrected window
+(`data:emit` alone leaves them where they were).
+
+A network failure prints `⚠ patch table NOT verified` and exits 0 — cannot-verify
+is not drift. A wavu row the regex cannot read exits 1 with
+`patch-check: UNREADABLE` and reports nothing else; teach `parseWavu()` the new
+shape first. Network, manual, never in the cron.
 
 ## New-character / DLC runbook
 

@@ -24,6 +24,7 @@
     "verify:deployed": "tsx scripts/verify-deployed.ts",
     "data:emit": "tsx scripts/emit.ts",
     "data:migration-report": "tsx scripts/season-migration-report.ts",
+    "data:patch-check": "tsx scripts/patch-check.ts",
     "data:characters": "tsx scripts/characters.ts",
     "data:extract": "tsx scripts/complete-characters.ts",
     "data:evo-overlap": "tsx scripts/evo-overlap.ts",

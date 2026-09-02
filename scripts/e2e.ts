@@ -28,12 +28,15 @@ import RANKS from '../data/ranks.json';
 import { DISTINCT_KEYS, idKey } from './players';
 import { CHANNELS } from './channels';
 import { staleEvidence } from './freshness';
+import { diffTekken, foldWavu, parseWavu, type Finding } from './patch-check';
 import { loadPatchTable } from './patches';
 import type {
   CharacterRecord,
   MatchVideo,
+  PatchBoundary,
   PlayerRecord,
   RawVideoRecord,
+  SeasonBoundary,
   VideoOverride,
 } from '../types/index';
 
@@ -261,6 +264,112 @@ function testStaleGuard(): void {
   );
 }
 
+/** POSITIVE CONTROLS for the patch-table checker (scripts/patch-check.ts).
+ *
+ *  The table sat 96 days stale with every gate green because nothing compared
+ *  it to its source. The checker now does, and these drive its rules on a
+ *  SYNTHETIC six-row fixture — never the live page and never the committed
+ *  table. An 8 KB wikitext asserted equal to the table would break on every
+ *  legitimate patch; what has to stay true is the fold and the four drift
+ *  directions, so those are what is asserted. */
+function testPatchCheck(): void {
+  console.log('\n— patch-table checker (positive controls)');
+
+  const cell = (v: string, day: string, open = '<big>') =>
+    `|-\n| ${open}[[Version ${v}|${v}]]</big> <br> ${day}\n| {{Changelist|columns=1|\n}}`;
+  const rows = [
+    cell('3.02.01', '2026-08-19'), // a .01-first line: nothing shipped as 3.02.00
+    cell('3.01.01', '2026-05-28'), // a non-opener, shifted below for the ~ case
+    cell('3.00.01', '2026-03-25'), // the opener's first LISTED release, a week after S3 opens
+    cell('2.06.02', '2025-10-29', '<big> '), // the stray-space row that breaks a regex written against the others
+    cell('2.05.00', '2025-09-02'), // a .00-only line: no includes key
+  ];
+  // a broken link, used only in the throw case
+  const corrupt =
+    '|-\n| <big>[[Version 2.04.00]</big> <br> 2025-08-05\n| {{Changelist|columns=1|\n}}';
+  const wikitext = (extra: string[] = []) =>
+    ['{| class="col-1-center"', '|-', '! Version', '! Summary', ...rows, ...extra, '|-', '|}'].join(
+      '\n',
+    );
+  const seasons: SeasonBoundary[] = [
+    { season: 2, start: '2025-03-31', end: '2026-03-17' },
+    { season: 3, start: '2026-03-17', end: null },
+  ];
+  const table: PatchBoundary[] = [
+    { version: '2.05', start: '2025-09-02' },
+    { version: '2.06', start: '2025-10-29', includes: ['2.06.02'] },
+    { version: '3.00', start: '2026-03-17', includes: ['3.00.01'] },
+    { version: '3.01', start: '2026-05-28', includes: ['3.01.01'] },
+    { version: '3.02', start: '2026-08-19', includes: ['3.02.01'] },
+  ];
+  // the CLI floor is 28; the fixture is deliberately five rows
+  const floor = rows.length;
+  const parsed = parseWavu(wikitext(), floor);
+  const folded = foldWavu(parsed);
+  const line = (v: string) => folded.find((f) => f.version === v)!;
+  const diff = (t: PatchBoundary[]) => diffTekken(t, seasons, folded).findings;
+  const has = (f: Finding[], glyph: Finding['glyph'], text: string) =>
+    f.some((x) => x.glyph === glyph && x.fatal && x.text.includes(text));
+
+  // 1. THE FOLD. The stray space is the row that silently breaks a regex
+  //    written against the others; .00 is never listed, .01 always is.
+  expect(
+    parsed.length === rows.length && parsed.some((r) => r.version === '2.06.02'),
+    'reads the stray-space <big> row like the others',
+  );
+  expect(
+    line('2.05').includes.length === 0 && line('3.02').includes.join() === '3.02.01',
+    'folds .00 out of includes and keeps .01 in',
+  );
+
+  // 2. THE OPENER RULE, keyed on the table side: 3.00 starts ON the S3
+  //    boundary, so wavu's later first release is ⓘ and the run is clean.
+  const base = diff(table);
+  expect(
+    !base.some((f) => f.fatal) &&
+      base.some((f) => f.glyph === 'ⓘ' && f.text.startsWith('3.00 opener')),
+    'a season opener dated later on wavu is ⓘ, never ~',
+  );
+
+  // 3-6. THE FOUR DRIFT DIRECTIONS, each fatal.
+  const plus = diff(table.filter((p) => p.version !== '3.02'));
+  expect(
+    has(plus, '+', '3.02 (2026-08-19)') &&
+      plus.some((f) =>
+        f.detail?.[0]?.includes(
+          '{ "version": "3.02", "start": "2026-08-19", "includes": ["3.02.01"] }',
+        ),
+      ),
+    'a wavu line missing from the table is + with a paste-ready row',
+  );
+  const shifted = diff(
+    table.map((p) => (p.version === '3.01' ? { ...p, start: '2026-05-29' } : p)),
+  );
+  expect(has(shifted, '~', '3.01 — we say 2026-05-29'), 'a shifted non-opener date is ~');
+  const invented = diff([...table, { version: '2.07', start: '2025-11-15' }]);
+  expect(has(invented, '-', '2.07 (2025-11-15)'), 'a row on no wavu line is - (invented?)');
+  const unlisted = diff(
+    table.map((p) => (p.version === '3.02' ? { version: p.version, start: p.start } : p)),
+  );
+  expect(
+    has(unlisted, '⚠', 'wavu lists 3.02.01'),
+    'a sub-release missing from includes is ⚠, not informational',
+  );
+
+  // 7. UNREADABLE. A Version link the regex does not read is a hard failure
+  //    naming the line — never a skip (Tōkon's lesson).
+  let thrown = '';
+  try {
+    parseWavu(wikitext([corrupt]), floor);
+  } catch (err) {
+    thrown = err instanceof Error ? err.message : String(err);
+  }
+  expect(
+    /^line \d+ /.test(thrown) && thrown.includes('2.04.00'),
+    'a Version link the regex cannot read throws naming the line',
+  );
+}
+
 /** THE CRON GUARD — this repo had none, and its workflow is the one that most
  *  recently gained files.
  *
@@ -404,6 +513,7 @@ function testCronGuard(): void {
 async function main(): Promise<void> {
   // Pure, Node-side, no browser: run before anything is served.
   testStaleGuard();
+  testPatchCheck();
   testCronGuard();
 
   const { at, close } = await serve();
