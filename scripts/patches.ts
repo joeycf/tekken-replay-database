@@ -75,7 +75,8 @@ export function buildPatchTable(
     // calendar days (3.02.01: [PDT] Aug 19 / [CEST] Aug 20), so a CEST-dated
     // row authored inside the 22:00–24:00 UTC window would trip this. That is
     // a two-hour wait, against a class of error that is otherwise invisible.
-    if (p.start > today)
+    // `todo` is the authored-ahead marker (types/index.ts): exempt here, as below.
+    if (p.start > today && !p.todo)
       errors.push(`${p.version}: starts ${p.start}, which is in the future (today ${today})`);
     if (ERA_TOKEN.test(p.version)) errors.push(`${p.version}: version collides with an era token`);
     if (!FOLDED.test(p.version))
