@@ -1231,6 +1231,13 @@ if (rebuiltThisRun.length > 0) {
 // would never move, tomorrow would re-read the same ten pages forever, and the
 // mechanism would look like it worked. The pull happening is what moves the
 // cursor; whether it produced records is a different question.
+// WHETHER THE CURSOR MOVED is a fact the report states, so it is measured
+// rather than assumed: on 2026-09-02 2XKO's cursor stayed at 488405 while its
+// report said it "still advanced".
+const cursorMoved =
+  !!theaterStats &&
+  typeof theaterStats.maxEntryId === 'number' &&
+  theaterStats.maxEntryId > (theaterCursor.replayTheater ?? 0);
 if (theaterStats && typeof theaterStats.maxEntryId === 'number') {
   const nextCursor: Record<string, number> = { ...theaterCursor };
   for (const ch of CHANNELS.filter((c) => c.index && c.cronFetchedWithCarry)) {
@@ -1451,7 +1458,7 @@ const report = [
     ? [
         '### Index intakes',
         '',
-        'Fetched by the daily cron since 2026-08-31, and ADD-ONLY: a committed record is',
+        'Fetched by the daily cron since 2026-09-02, and ADD-ONLY: a committed record is',
         'carried whether or not the catalogue still lists it, so this count can only rise.',
         'The cron does not depend on the pull succeeding — on any failure there is no dump,',
         'the committed records are carried, and the run stays green.',
@@ -1523,9 +1530,17 @@ const report = [
           ? theaterStats
             ? [
                 '_The pull ran and found no new tournament entries, so the committed catalogue_',
-                '_was carried unchanged and the counts below were not measured. The cursor still_',
-                '_advanced: a quiet day is the ordinary case here, not a failed one — the_',
-                "_catalogue's tagged Tekken rows stop at 2025-03-16._",
+                "_was carried unchanged and this pull's intake counts were not measured._",
+                ...(cursorMoved
+                  ? [
+                      '_The cursor still advanced: a quiet day is the ordinary case here, not a_',
+                      "_failed one — the catalogue's tagged Tekken rows stop at 2025-03-16._",
+                    ]
+                  : [
+                      '_The cursor did not move: the catalogue has taken no new Tekken entry since_',
+                      '_the last pull — quieter still, and equally ordinary. Its tagged Tekken rows_',
+                      '_stop at 2025-03-16._',
+                    ]),
                 '',
               ]
             : [
@@ -1544,7 +1559,7 @@ const report = [
               // what 2xko already uses.
               theaterSkippedKnown.length > 0
                 ? `Entries **skipped as already-known**: **${theaterSkippedKnown.length}** of ${theaterRaw.length} in this pull. An id this repo has already ruled on, in any capacity, does not re-enter through a side door.`
-                : '_Entries skipped as already-known: **0**. The catalogue indexes no video this repo has fetched, published or ruled on._',
+                : `_Entries skipped as already-known: **0** of ${theaterRaw.length} in this pull — none was a video this repo has already fetched, published or ruled on. A statement about this pull's tagged rows, not the catalogue: the cross-check below measures the catalogue-wide overlap._`,
               '',
               // STATED, NEVER ABSORBED. The collapsed rows are gone from the
               // dump by the time this file is written, so a collapse that is

@@ -93,9 +93,9 @@ Two other env vars matter locally, neither of them secret:
 | script                                           | what it does                                                                                                                                                                                          |
 | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `npm run dev` / `build` / `generate` / `preview` | Nuxt app (generate = full static build)                                                                                                                                                               |
-| `npm run data:fetch`                             | Pull every upload from all four YouTube channels → `raw/` (needs `YT_API_KEY`)                                                                                                                        |
+| `npm run data:fetch`                             | Pull every upload from all five YouTube channels → `raw/` (needs `YT_API_KEY`)                                                                                                                        |
 | `npm run data:parse`                             | Parse titles/descriptions → `data/videos.json`, `players.json`, `report.md`; calls `data:emit` at the end                                                                                             |
-| `npm run data:theater`                           | Pull the Replay Theater tournament index → `raw/replayTheater.json` + the cross-check witness, advancing `data/theater-cursor.json`. Add `-- --full` for a whole-catalogue sweep (needs `YT_API_KEY`) |
+| `npm run data:theater`                           | Pull the Replay Theater tournament index → `raw/replayTheater.json` + the cross-check witness (`data:parse` then advances `data/theater-cursor.json` from the pull's stats). Add `-- --full` for a whole-catalogue sweep (needs `YT_API_KEY`) |
 | `npm run data:emit`                              | Map the rich `videos.json` onto the engine contract → `data/replays.json`, `stats.json`, `summary.json`. Deterministic, no YouTube access — safe to re-run standalone                                 |
 | `npm run data:build`                             | fetch + parse                                                                                                                                                                                         |
 | `npm run data:characters`                        | Roster scrape (Bandai Namco official site) → portraits + splashes in `public/img/characters/`, `data/characters.json`                                                                                 |
@@ -165,7 +165,7 @@ not misattributed. `npm run test:e2e` now gates the wiring, and the shell's
 
 `.github/workflows/data-refresh.yml` runs daily at 06:47 UTC (and via
 _Run workflow_) on Node 24, in three steps rather than one `data:build`:
-`npm run data:fetch` (the four YouTube channels), then `npm run data:theater`
+`npm run data:fetch` (the five YouTube channels), then `npm run data:theater`
 (the Replay Theater tournament index), then `npm run data:parse`. Both fetches
 take `YT_API_KEY` from repo **Actions secrets** — `env:` is per step, so the key
 is repeated.
