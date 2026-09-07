@@ -384,6 +384,10 @@
     "handle": "Anko"
   },
   {
+    "id": "annanina",
+    "handle": "AnnaNina"
+  },
+  {
     "id": "annaninalilizo",
     "handle": "AnnaNinaLiliZo"
   },
@@ -8156,6 +8160,10 @@
   {
     "id": "scorpion",
     "handle": "Scorpion"
+  },
+  {
+    "id": "scorpionleo",
+    "handle": "ScorpionLeo"
   },
   {
     "id": "scourge",
