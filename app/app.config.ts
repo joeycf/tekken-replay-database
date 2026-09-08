@@ -144,10 +144,18 @@ export default defineAppConfig({
     heroFocus: '70% 4%',
     // ComboForge cross-link on character pages (engine v0.11.0). ComboForge
     // files Tekken by FULL name, so most of the roster needs an explicit
-    // suffix; the twelve mononyms (Azucena, Devil Jin, King, …) derive. The six
-    // nulls are characters ComboForge does not carry — the band falls back to
-    // their Tekken 8 hub rather than emitting a deep link to nothing. Built and
-    // gated with the engine's `npm run verify:comboforge`.
+    // suffix; the twelve mononyms (Azucena, Devil Jin, King, …) derive. Anna is
+    // the one null — a character ComboForge does not carry — and the band falls
+    // back to the Tekken 8 hub rather than emitting a deep link to nothing.
+    // Built and gated with the engine's `npm run verify:comboforge`.
+    //
+    // THE NULL LIST IS PERISHABLE, and that is the point of gating it. It held
+    // six until 2026-09-07, when ComboForge added Armor King, Bob, Fahkumram,
+    // Kunimitsu and Miary Zo; all five derive from our own ids with no map
+    // entry, so the fix was to delete them. `verify:comboforge` fails on a
+    // stale null precisely so a link that could exist does not stay dead —
+    // the check runs in the opposite direction from the one that catches a
+    // broken link, and both directions matter.
     comboforge: {
       gameId: 'tekken8',
       characters: {
@@ -176,11 +184,6 @@ export default defineAppConfig({
         victor: 'victor-chevalier',
         xiaoyu: 'ling-xiaoyu',
         anna: null,
-        armor_king: null,
-        bob: null,
-        fahkumram: null,
-        kunimitsu: null,
-        miary_zo: null,
       },
     },
   } satisfies GameConfig,
