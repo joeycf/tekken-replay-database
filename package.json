@@ -25,7 +25,9 @@
     "data:emit": "tsx scripts/emit.ts",
     "data:migration-report": "tsx scripts/season-migration-report.ts",
     "data:patch-check": "tsx scripts/patch-check.ts",
+    "data:expiries": "tsx scripts/expiries.ts --check",
     "data:characters": "tsx scripts/characters.ts",
+    "data:roster-check": "tsx scripts/roster-check.ts",
     "data:extract": "tsx scripts/complete-characters.ts",
     "data:evo-overlap": "tsx scripts/evo-overlap.ts",
     "test:e2e": "tsx scripts/e2e.ts"

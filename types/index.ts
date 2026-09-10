@@ -304,3 +304,15 @@ export interface PatchBoundary {
   /** unconfirmed-row marker — exempts the row from the opening-patch validation */
   todo?: string;
 }
+
+/** A time-bomb that has gone off: something the data can tell us is due, rather
+ *  than something a human has to remember. See scripts/expiries.ts. */
+export interface Expiry {
+  kind: 'unreleased-character';
+  /** roster id (provisional until the scrape confirms it — see expiries.ts) */
+  id: string;
+  /** the ISO date that has now passed */
+  date: string;
+  /** what a human must do to clear it */
+  action: string;
+}

@@ -19,23 +19,18 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
+// Site discovery lives in tk8-site.ts so this script and scripts/roster-check.ts
+// enumerate ids identically. See that file's header.
+import { SITE, UA, discoverIds, fetchText } from './tk8-site';
 import type { CharacterRecord } from '../types/index';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const IMG_DIR = join(ROOT, 'public', 'img', 'characters');
 const TOKENS = join(ROOT, 'design', 'handoff', 'tokens.css');
-const SITE = 'https://tk8.tekken-official.jp';
-const UA = 'Mozilla/5.0 (X11; Linux x86_64) tekken-replay-database roster scraper (fan project)';
 const FORCE = process.argv.includes('--force');
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url, { headers: { 'user-agent': UA } });
-  if (!res.ok) throw new Error(`HTTP ${res.status} on ${url}`);
-  return res.text();
-}
 async function fetchBuffer(url: string): Promise<Buffer> {
   const res = await fetch(url, { headers: { 'user-agent': UA } });
   if (!res.ok) throw new Error(`HTTP ${res.status} on ${url}`);
@@ -103,11 +98,7 @@ async function discoverRoster(): Promise<RosterEntry[]> {
   // The character index carries the full roster grid (ids + JP alt text);
   // official EN names render only on each character's own page, in the
   // carousel's `current` block: <li class="current"><p><span>EN</span><span>JP</span></p>.
-  const index = await fetchText(`${SITE}/character/`);
-  const ids = [
-    ...new Set([...index.matchAll(/images\/character\/([a-z0-9_]+)\/btn\.png/g)].map((m) => m[1]!)),
-  ].sort();
-  if (ids.length < 30) throw new Error(`roster discovery looks broken: only ${ids.length} ids`);
+  const ids = await discoverIds();
 
   const out: RosterEntry[] = [];
   for (const id of ids) {

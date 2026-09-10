@@ -137,5 +137,25 @@ jobs:
       # serves yesterday's payload, a handful of records behind); a served count
       # outside the collapse guard's own band is a FAILURE. The guard in
       # parse.ts protects the repository; this protects what visitors get.
+      # Deliberately BEFORE "Flag due expiries": that step is designed to go
+      # red, and a red step stops the ones after it.
       - name: Post-deploy smoke check
         run: npm run verify:deployed
+
+      - name: Flag due expiries
+        # Deliberately LAST and deliberately failing (scripts/expiries.ts).
+        # The data has already been committed, pushed and smoke-checked above, so
+        # a red run never costs a refresh — it only makes the pending work
+        # impossible to miss.
+        #
+        # This repo had NO such gate until 2026-09-09, and it is the one that has
+        # already been caught by exactly this failure mode once: the 2026-09-02
+        # sweep found its patch table 96 days stale, 258 replays under the wrong
+        # token. A roster goes stale the same silent way.
+        #
+        # Two Season 3 pass characters can trip it: Roger Jr. (window opens
+        # 2026-10-01) and Yujiro Hanma (window opens 2027-01-01). The pass is four
+        # characters and two have shipped, so after those two this gate is done
+        # unless Bandai Namco announces a Season 4.
+        # Clear it by doing the work, NOT by deleting this step.
+        run: npx tsx scripts/expiries.ts --check
