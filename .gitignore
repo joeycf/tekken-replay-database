@@ -1,4 +1,13 @@
-.env
+# Every .env variant, not just .env. The Vercel CLI writes an OIDC token into
+# .env.local (`vercel env pull`, `vercel dev`, `vercel link`), and a bare `.env`
+# pattern does not match it — so the token was one `git add -A` away from being
+# committed. Nuxt, Vite and npm each read further variants (.env.development,
+# .env.production, .env.*.local), and any of them can hold a real key.
+# .env.example is the exception and stays tracked: it is documentation, and its
+# values are placeholders. It is tracked today so .gitignore does not apply to
+# it, but the negation keeps that true if it is ever removed and re-added.
+.env*
+!.env.example
 node_modules
 raw/
 
