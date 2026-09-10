@@ -143,7 +143,7 @@ jobs:
         run: npm run verify:deployed
 
       - name: Flag due expiries
-        # Deliberately LAST and deliberately failing (scripts/expiries.ts).
+        # Deliberately failing (scripts/expiries.ts).
         # The data has already been committed, pushed and smoke-checked above, so
         # a red run never costs a refresh — it only makes the pending work
         # impossible to miss.
@@ -159,3 +159,30 @@ jobs:
         # unless Bandai Namco announces a Season 4.
         # Clear it by doing the work, NOT by deleting this step.
         run: npx tsx scripts/expiries.ts --check
+
+      - name: Flag stale redirects
+        # `if: always()` because the step above is DESIGNED to go red, and a red
+        # step stops the ones after it. These two gates are independent, and both
+        # have to be able to report on the same run.
+        #
+        # WHY THIS CHECKS RATHER THAN REGENERATES. vercel.json is build
+        # configuration, and scripts/redirects.ts is emphatic that the daily data
+        # commit has no business writing it: a data refresh that quietly changes
+        # routing is a different and worse thing than one that changes data. So
+        # the cron does not fix this. It refuses to stay quiet about it.
+        #
+        # IT DRIFTS WITH NOBODY TOUCHING THE REPO, which is why leaving the check
+        # in `npm run typecheck` was not enough — the cron does not run typecheck.
+        # parse.ts grows data/player-redirects.json from its own automatic player
+        # merges and the cron commits that ledger nightly; vercel.json, the
+        # routing DERIVED from it, is left behind every time. Every row in the
+        # ledger and not in vercel.json is a live 404 on an indexed, prerendered
+        # player URL, and there is no other redirect layer on this platform.
+        #
+        # This is not hypothetical: the sibling Tokon repo had accumulated
+        # SEVENTEEN of them by 2026-09-10, silently, and was found by accident.
+        # This repo is clean today and has the identical gap.
+        #
+        # Clear it with `npm run data:redirects` and commit vercel.json.
+        if: always()
+        run: npx tsx scripts/redirects.ts --check

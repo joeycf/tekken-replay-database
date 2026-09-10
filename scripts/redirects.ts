@@ -16,9 +16,23 @@
  * leading-slash destination resolves against whatever origin the browser is on,
  * which is the shell's.
  *
- * MANUAL, not part of the cron. The retired set only changes when a person edits
- * scripts/players.ts, and vercel.json is build configuration — the daily data
- * commit has no business touching it.
+ * MANUAL, not part of the cron — vercel.json is build configuration, and the
+ * daily data commit has no business touching it. That half still holds.
+ *
+ * THE OTHER HALF OF THIS PARAGRAPH USED TO BE WRONG AND IS WHY SEVENTEEN
+ * REDIRECTS WENT MISSING. It said the retired set only changes when a person
+ * edits scripts/players.ts. It does not: parse.ts grows
+ * data/player-redirects.json from its OWN automatic player merges (see the
+ * ledger comment there — "the ledger MERGES with what is already committed and
+ * never shrinks"), and the cron commits that file nightly. So the SOURCE moves
+ * on its own while vercel.json, the routing DERIVED from it, waits for a human.
+ * Every row in one and not the other is a live 404 on an indexed, prerendered
+ * player URL, and this is the only redirect layer on the platform.
+ *
+ * Nothing watched that gap: `--check` ran only inside `npm run typecheck`, which
+ * the cron does not run. The cron now has a "Flag stale redirects" step that
+ * runs this check and goes red — it deliberately does NOT regenerate, because a
+ * data refresh that quietly changes routing is worse than one that changes data.
  *
  * Run: npm run data:redirects        (--check to verify without writing)
  */
