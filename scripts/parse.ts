@@ -781,6 +781,14 @@ function buildTheaterRecords(ch: ChannelConfig, dump: TheaterRawRecord[]): Match
       patchVersion: patchTable.patchForDate(r.publishedAt)?.version ?? null,
       videoId: r.videoId,
       startSeconds: r.startSeconds,
+      // What the badge prints (engine v0.13.0). `tournament` is shared with two
+      // YouTube channels, so without this a set from "The Streets #16" and a
+      // Bandai broadcast render the same word. `uploader` is the fallback for a
+      // future untagged entry — this intake admits none today.
+      ...((tag, up) => (tag ? { event: tag } : up ? { channelName: up } : {}))(
+        (r.tag ?? '').trim(),
+        (r.uploader ?? '').trim(),
+      ),
       sides: [sides[0]!, sides[1]!] as [MatchSide, MatchSide],
     });
   }

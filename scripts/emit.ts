@@ -54,6 +54,10 @@ export interface GenericReplay {
   videoId?: string;
   /** Where this record's footage starts inside `videoId`, in seconds. */
   startSeconds?: number;
+  /** What the badge prints instead of the source's configured name (engine
+   *  v0.13.0): the event first, then the uploader, then neither. */
+  event?: string;
+  channelName?: string;
 }
 
 /** The game's identity as it appears in data/summary.json — the shell selector
@@ -101,6 +105,11 @@ function toReplay(v: MatchVideo): GenericReplay {
     // a dead player, on exactly the records least likely to be spot-checked.
     ...(v.videoId ? { videoId: v.videoId } : {}),
     ...(v.startSeconds ? { startSeconds: v.startSeconds } : {}),
+    // Pass-through, not a decision. Whether a label is meaningful is a question
+    // only the builder that read it can answer, and the theater builder is the
+    // only one that sets either field.
+    ...(v.event ? { event: v.event } : {}),
+    ...(v.channelName ? { channelName: v.channelName } : {}),
   };
 }
 

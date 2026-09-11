@@ -200,6 +200,15 @@ export interface MatchVideo {
   /** Where this record's footage starts inside `videoId`, in seconds. Absent
    *  (or 0) means the whole video. */
   startSeconds?: number;
+  /** THE BADGE LABEL (engine v0.13.0). `event` is the catalogue's event tag;
+   *  `channelName` is the VOD's uploader, set only where it differs from the
+   *  source's configured name. Both matter more here than anywhere else on the
+   *  platform: `tournament` is an AGGREGATE source — replayTheater, bneEsports
+   *  and evoEvents all emit under it — so its configured name is the only one
+   *  honest enough to cover all three, and it says nothing about any of them.
+   *  A record that knows its own event says so. */
+  event?: string;
+  channelName?: string;
   sides: [MatchSide, MatchSide];
 }
 
