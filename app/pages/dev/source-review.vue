@@ -284,6 +284,7 @@ definePageMeta({
     category: 'Curation',
     description: 'Adjudicate the character-completion review queue from sampled HUD frames.',
     writes: 'data/overrides.json',
+    queue: '/api/dev/source-review',
   },
 });
 
@@ -325,9 +326,12 @@ const api = (p: string) => `${baseURL.replace(/\/$/, '')}${p}`;
 const { data, error } = useAsyncData(
   'source-review',
   () =>
-    $fetch<{ roster: { id: string; name: string }[]; items: QueueItem[] }>(
-      api('/api/dev/source-review'),
-    ),
+    $fetch<{
+      roster: { id: string; name: string }[];
+      counts: { total: number; pending: number; done: number; unreadable: number };
+      items: QueueItem[];
+      resolved: QueueItem[];
+    }>(api('/api/dev/source-review')),
   { server: false },
 );
 

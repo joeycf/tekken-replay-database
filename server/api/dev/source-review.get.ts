@@ -1,3 +1,4 @@
+import { partitionReviewQueue } from '@engine/server/utils/reviewQueue';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -92,25 +93,41 @@ export default defineEventHandler(() => {
     );
   };
 
+  const items = queue.map((q) => {
+    const ov = overrides[q.id];
+    const saved = ov
+      ? ov.exclude === true
+        ? { verdict: 'exclude' as const }
+        : ov.sides
+          ? { verdict: 'sides' as const, sides: ov.sides }
+          : ov.channel
+            ? { verdict: 'channel' as const, channel: ov.channel }
+            : null
+      : null;
+    return {
+      ...q,
+      saved,
+      frames: framesFor(q.id),
+      disputed: saved?.verdict === 'sides' && disputedBy(q.id, ov?.sides),
+    };
+  });
+
+  // The engine's review-queue contract (v0.14.0), so the /dev index can print how
+  // much of this queue is actually open.
+  //
+  // THE ARTIFACT IS ALREADY CLEAN HERE, and that is worth stating rather than
+  // relying on. data/review-queue.json is regenerated wholesale by every parse
+  // and "a resolved item simply stops being generated", so `resolved` is normally
+  // empty and `pending` is the whole queue. The partition is the belt to that
+  // braces: sibling games whose queues are written by a separate CV pass instead
+  // of the parse accumulated hundreds of rows of finished work exactly because
+  // nothing re-checked the verdict at serve time. If the regeneration is ever
+  // skipped or a verdict lands between runs, this catches it instead of handing a
+  // reviewer work they already did.
   return {
     roster,
-    items: queue.map((q) => {
-      const ov = overrides[q.id];
-      const saved = ov
-        ? ov.exclude === true
-          ? { verdict: 'exclude' as const }
-          : ov.sides
-            ? { verdict: 'sides' as const, sides: ov.sides }
-            : ov.channel
-              ? { verdict: 'channel' as const, channel: ov.channel }
-              : null
-        : null;
-      return {
-        ...q,
-        saved,
-        frames: framesFor(q.id),
-        disputed: saved?.verdict === 'sides' && disputedBy(q.id, ov?.sides),
-      };
+    ...partitionReviewQueue(items, (it) => (it.saved ? 'resolved' : 'pending'), {
+      generatedAt: new Date().toISOString(),
     }),
   };
 });
