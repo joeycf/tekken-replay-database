@@ -955,6 +955,10 @@
     "handle": "BlazerPurr"
   },
   {
+    "id": "bleed",
+    "handle": "Bleed"
+  },
+  {
     "id": "bleedin-p",
     "handle": "Bleedin P"
   },
@@ -5318,7 +5322,7 @@
   },
   {
     "id": "lighscrap",
-    "handle": "Lighscrap"
+    "handle": "LighScrap"
   },
   {
     "id": "light",
@@ -8517,6 +8521,10 @@
   {
     "id": "shounen",
     "handle": "Shounen"
+  },
+  {
+    "id": "show",
+    "handle": "Show"
   },
   {
     "id": "shrike",
