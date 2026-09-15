@@ -2982,6 +2982,10 @@
     "handle": "G Black"
   },
   {
+    "id": "g-bob",
+    "handle": "G Bob"
+  },
+  {
     "id": "gabi-liukin",
     "handle": "Gabi Liukin"
   },
@@ -3072,10 +3076,6 @@
   {
     "id": "gauzaaa",
     "handle": "Gauzaaa"
-  },
-  {
-    "id": "gbob",
-    "handle": "Gbob"
   },
   {
     "id": "gear-panda",
@@ -7089,6 +7089,10 @@
     "handle": "Party Wolf"
   },
   {
+    "id": "paru-ducksik",
+    "handle": "PARU DUCKSIK"
+  },
+  {
     "id": "pastel",
     "handle": "Pastel"
   },
@@ -9505,6 +9509,10 @@
   {
     "id": "toshix2",
     "handle": "Toshix2"
+  },
+  {
+    "id": "touchme",
+    "handle": "TouchMe"
   },
   {
     "id": "touchmybody",
