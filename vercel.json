@@ -174,8 +174,8 @@
       "permanent": true
     },
     {
-      "source": "/tekken/players/g-bob",
-      "destination": "/tekken/players/gbob",
+      "source": "/tekken/players/gbob",
+      "destination": "/tekken/players/g-bob",
       "permanent": true
     },
     {
