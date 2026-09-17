@@ -4645,6 +4645,10 @@
     "handle": "Katsudon"
   },
   {
+    "id": "katsuo",
+    "handle": "Katsuo"
+  },
+  {
     "id": "katsuoya",
     "handle": "KatsuOya"
   },
@@ -6687,6 +6691,10 @@
   {
     "id": "nobi-aoyama",
     "handle": "Nobi, Aoyama"
+  },
+  {
+    "id": "nobi-toshi",
+    "handle": "NOBI & TOSHI"
   },
   {
     "id": "noctis",
