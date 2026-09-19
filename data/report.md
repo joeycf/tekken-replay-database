@@ -1,13 +1,13 @@
 # Tekken pipeline report
 
-**15745 matches** parsed from 25738 uploads across 5 channels, plus 317 from 1 index · 2614 players · ranked sides 14126/31490 (44.9%)
+**15759 matches** parsed from 25754 uploads across 5 channels, plus 317 from 1 index · 2616 players · ranked sides 14146/31518 (44.9%)
 
 | channel | source | uploads | parsed | coverage |
 | --- | --- | ---: | ---: | ---: |
-| highLevel | highLevel | 4660 | 4627 | 99.3% |
-| telly | telly | 12747 | 7831 | 61.4% |
-| ranked | ranked | 2695 | 2674 | 99.2% |
-| bneEsports | tournament | 2866 | 233 | 8.1% |
+| highLevel | highLevel | 4666 | 4633 | 99.3% |
+| telly | telly | 12751 | 7835 | 61.4% |
+| ranked | ranked | 2699 | 2678 | 99.2% |
+| bneEsports | tournament | 2868 | 233 | 8.1% |
 | evoEvents | tournament | 2770 | 63 | 2.3% |
 | replayTheater _(carried)_ | tournament | — | 317 | — |
 
@@ -27,11 +27,11 @@ _was carried unchanged and this pull's intake counts were not measured._
 _The cursor still advanced: a quiet day is the ordinary case here, not a_
 _failed one — the catalogue's tagged Tekken rows stop at 2025-03-16._
 
-Seasons: S1 6359 · S2 6058 · S3 3328
+Seasons: S1 6359 · S2 6058 · S3 3342
 
-Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1494 · 3.02 538 · unknown 10 (unknown = season contradicts the date: label-grace/override)
+Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1494 · 3.02 552 · unknown 10 (unknown = season contradicts the date: label-grace/override)
 
-Misses by reason: pre-launch 4456 · not-tekken8 2634 · short-duration 1684 · shorts 1127 · no-vs-title 246 · char-unresolved 158 · bad-handle 3 · live-or-upcoming 2
+Misses by reason: pre-launch 4456 · not-tekken8 2634 · short-duration 1684 · shorts 1127 · no-vs-title 246 · char-unresolved 158 · live-or-upcoming 4 · bad-handle 3
 
 Season-label conflicts (channel label ≠ date-derived season, outside the ±14d boundary grace; date wins): 147
 
@@ -162,4 +162,4 @@ guessing this module refuses.
 - `4Pf63UozmxA` [highLevel] no-vs-title: T8 🔥 Kkokkoma (Dragunov) 🔥 Tekken 8
 - `RUDWRC5M738` [highLevel] no-vs-title: T8 🔥 Shadow 20z (Zafina) 🔥 Tekken 8
 
-_Generated 2026-09-18T11:52:58.948Z_
+_Generated 2026-09-19T11:36:11.335Z_

@@ -380,6 +380,10 @@
     "handle": "AngelFS"
   },
   {
+    "id": "angoh",
+    "handle": "Angoh"
+  },
+  {
     "id": "anifaz",
     "handle": "Anifaz"
   },
@@ -8747,6 +8751,10 @@
     "handle": "SoGood"
   },
   {
+    "id": "soichi",
+    "handle": "Soichi"
+  },
+  {
     "id": "sol-bbak",
     "handle": "SOL BBAK"
   },
@@ -10478,6 +10486,6 @@
   },
   {
     "id": "zulu",
-    "handle": "ZULU"
+    "handle": "Zulu"
   }
 ]
