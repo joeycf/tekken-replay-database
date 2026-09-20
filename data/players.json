@@ -8707,6 +8707,10 @@
     "handle": "Smoothie"
   },
   {
+    "id": "snake",
+    "handle": "Snake"
+  },
+  {
     "id": "snake-fury",
     "handle": "Snake Fury"
   },
@@ -9209,6 +9213,10 @@
   {
     "id": "teamyms-nobi",
     "handle": "TeamYMS NOBI"
+  },
+  {
+    "id": "tear-gas",
+    "handle": "Tear Gas"
   },
   {
     "id": "tedd",
