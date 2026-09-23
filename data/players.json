@@ -1673,6 +1673,10 @@
     "handle": "Crescent"
   },
   {
+    "id": "crescent-fgc",
+    "handle": "Crescent FGC"
+  },
+  {
     "id": "crescnt",
     "handle": "CRESCNT"
   },
@@ -1715,6 +1719,10 @@
   {
     "id": "cuteha",
     "handle": "CUTEHA"
+  },
+  {
+    "id": "cyan",
+    "handle": "Cyan"
   },
   {
     "id": "cyberdemon",
@@ -8290,6 +8298,10 @@
     "handle": "SEHWA"
   },
   {
+    "id": "seifer",
+    "handle": "Seifer"
+  },
+  {
     "id": "seiji",
     "handle": "Seiji"
   },
@@ -8304,6 +8316,10 @@
   {
     "id": "senshi-realk",
     "handle": "Senshi RealK"
+  },
+  {
+    "id": "seo",
+    "handle": "SEO"
   },
   {
     "id": "seo213",
