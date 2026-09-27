@@ -1597,6 +1597,10 @@
     "handle": "Colocho"
   },
   {
+    "id": "com-r",
+    "handle": "Com R"
+  },
+  {
     "id": "combo-breaker-champion-mulgold",
     "handle": "Combo Breaker Champion MulGold"
   },
@@ -9940,8 +9944,8 @@
     "handle": "Voila"
   },
   {
-    "id": "voila-99",
-    "handle": "Voila 99"
+    "id": "voila99",
+    "handle": "Voila99"
   },
   {
     "id": "volleboid",

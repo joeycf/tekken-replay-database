@@ -1,57 +1,57 @@
 {
   "totals": {
-    "replays": 15888,
+    "replays": 15906,
     "characters": 42,
-    "players": 2630,
+    "players": 2631,
     "byPatch": {
       "S1": 6359,
       "S2": 6058,
-      "S3": 3471
+      "S3": 3489
     }
   },
   "characterUsage": {
     "alisa": 562,
-    "anna": 673,
-    "armor_king": 651,
+    "anna": 674,
+    "armor_king": 655,
     "asuka": 453,
-    "azucena": 531,
+    "azucena": 532,
     "bob": 176,
-    "bryan": 2386,
+    "bryan": 2387,
     "claudio": 627,
     "clive": 972,
-    "devil_jin": 1041,
-    "dragunov": 1834,
+    "devil_jin": 1042,
+    "dragunov": 1835,
     "eddy": 326,
-    "fahkumram": 509,
+    "fahkumram": 510,
     "feng": 1068,
     "heihachi": 1074,
     "hwoarang": 1210,
     "jack8": 610,
     "jin": 847,
     "jun": 660,
-    "kazuya": 1986,
-    "king": 648,
+    "kazuya": 1989,
+    "king": 649,
     "kuma": 219,
-    "kunimitsu": 416,
+    "kunimitsu": 418,
     "lars": 504,
     "law": 765,
-    "lee": 645,
+    "lee": 647,
     "leo": 277,
     "leroy": 416,
-    "lidia": 562,
-    "lili": 1688,
+    "lidia": 563,
+    "lili": 1690,
     "miary_zo": 319,
-    "nina": 951,
-    "panda": 94,
-    "paul": 668,
-    "raven": 538,
-    "reina": 691,
+    "nina": 954,
+    "panda": 95,
+    "paul": 670,
+    "raven": 540,
+    "reina": 692,
     "shaheen": 634,
-    "steve": 1116,
-    "victor": 419,
-    "xiaoyu": 958,
-    "yoshimitsu": 565,
-    "zafina": 511
+    "steve": 1117,
+    "victor": 420,
+    "xiaoyu": 959,
+    "yoshimitsu": 567,
+    "zafina": 512
   },
   "byPatchUsage": {
     "S1": {
@@ -136,47 +136,47 @@
     },
     "S3": {
       "alisa": 144,
-      "anna": 112,
-      "armor_king": 287,
+      "anna": 113,
+      "armor_king": 291,
       "asuka": 80,
-      "azucena": 93,
+      "azucena": 94,
       "bob": 176,
-      "bryan": 516,
+      "bryan": 517,
       "claudio": 80,
       "clive": 109,
-      "devil_jin": 127,
-      "dragunov": 349,
+      "devil_jin": 128,
+      "dragunov": 350,
       "eddy": 29,
-      "fahkumram": 149,
+      "fahkumram": 150,
       "feng": 187,
       "heihachi": 181,
       "hwoarang": 252,
       "jack8": 156,
       "jin": 133,
       "jun": 105,
-      "kazuya": 389,
-      "king": 67,
+      "kazuya": 392,
+      "king": 68,
       "kuma": 27,
-      "kunimitsu": 416,
+      "kunimitsu": 418,
       "lars": 80,
       "law": 130,
-      "lee": 141,
+      "lee": 143,
       "leo": 47,
       "leroy": 87,
-      "lidia": 107,
-      "lili": 677,
+      "lidia": 108,
+      "lili": 679,
       "miary_zo": 86,
-      "nina": 296,
-      "panda": 6,
-      "paul": 119,
-      "raven": 102,
-      "reina": 165,
+      "nina": 299,
+      "panda": 7,
+      "paul": 121,
+      "raven": 104,
+      "reina": 166,
       "shaheen": 88,
-      "steve": 162,
-      "victor": 77,
-      "xiaoyu": 233,
-      "yoshimitsu": 70,
-      "zafina": 112
+      "steve": 163,
+      "victor": 78,
+      "xiaoyu": 234,
+      "yoshimitsu": 72,
+      "zafina": 113
     }
   },
   "playerCharacters": {
@@ -296,7 +296,7 @@
       "paul": 3
     },
     "adelante": {
-      "paul": 11
+      "paul": 13
     },
     "adelloon": {
       "leo": 1
@@ -875,7 +875,7 @@
       "xiaoyu": 1
     },
     "beme": {
-      "lili": 30
+      "lili": 31
     },
     "bengal": {
       "bryan": 1
@@ -1575,6 +1575,9 @@
     "colocho": {
       "devil_jin": 2
     },
+    "com-r": {
+      "panda": 1
+    },
     "combo-breaker-champion-mulgold": {
       "feng": 1
     },
@@ -2111,6 +2114,7 @@
     "dog9": {
       "azucena": 3,
       "dragunov": 1,
+      "fahkumram": 1,
       "feng": 1
     },
     "dogma": {
@@ -2139,7 +2143,7 @@
       "heihachi": 1
     },
     "doma": {
-      "armor_king": 106,
+      "armor_king": 108,
       "bob": 2,
       "bryan": 2,
       "claudio": 1,
@@ -2150,7 +2154,7 @@
       "jin": 10,
       "kazuya": 5,
       "king": 3,
-      "kunimitsu": 33,
+      "kunimitsu": 34,
       "leroy": 1,
       "lidia": 1,
       "miary_zo": 2,
@@ -2858,7 +2862,7 @@
     },
     "galgonge": {
       "anna": 2,
-      "azucena": 74
+      "azucena": 75
     },
     "galliard": {
       "clive": 1
@@ -3637,7 +3641,7 @@
       "hwoarang": 2
     },
     "hyuii": {
-      "zafina": 2
+      "zafina": 3
     },
     "hyuns": {
       "hwoarang": 1
@@ -3856,7 +3860,7 @@
       "steve": 1
     },
     "jdcr": {
-      "armor_king": 50,
+      "armor_king": 52,
       "bryan": 12,
       "clive": 1,
       "dragunov": 258,
@@ -3980,7 +3984,7 @@
     },
     "jodd": {
       "anna": 3,
-      "nina": 263,
+      "nina": 265,
       "paul": 14,
       "zafina": 2
     },
@@ -4237,7 +4241,7 @@
       "yoshimitsu": 5
     },
     "kaneandtrench": {
-      "yoshimitsu": 43
+      "yoshimitsu": 44
     },
     "kang-jae-seong": {
       "kazuya": 1
@@ -4364,7 +4368,7 @@
       "dragunov": 2,
       "heihachi": 51,
       "jin": 2,
-      "kazuya": 1011,
+      "kazuya": 1012,
       "kunimitsu": 1,
       "reina": 87
     },
@@ -4818,8 +4822,8 @@
       "steve": 1
     },
     "lancelot": {
-      "kunimitsu": 1,
-      "lili": 15
+      "kunimitsu": 2,
+      "lili": 16
     },
     "landon": {
       "fahkumram": 1,
@@ -5067,7 +5071,7 @@
       "azucena": 2,
       "bryan": 569,
       "devil_jin": 18,
-      "dragunov": 162,
+      "dragunov": 163,
       "fahkumram": 1,
       "feng": 6,
       "heihachi": 12,
@@ -5301,7 +5305,7 @@
     },
     "marcus": {
       "dragunov": 1,
-      "kazuya": 4
+      "kazuya": 5
     },
     "marduk": {
       "feng": 2
@@ -5617,7 +5621,7 @@
       "kazuya": 3
     },
     "momo-dog": {
-      "devil_jin": 140,
+      "devil_jin": 141,
       "kazuya": 1
     },
     "momochanz": {
@@ -5629,13 +5633,14 @@
     "mongkol": {
       "claudio": 1,
       "heihachi": 2,
-      "lee": 80
+      "lee": 81
     },
     "monja": {
       "alisa": 1
     },
     "monster": {
-      "heihachi": 1
+      "heihachi": 1,
+      "kazuya": 1
     },
     "monte": {
       "devil_jin": 1,
@@ -5852,7 +5857,7 @@
       "leroy": 6
     },
     "nabdo": {
-      "yoshimitsu": 71
+      "yoshimitsu": 72
     },
     "nacho": {
       "alisa": 1
@@ -6156,7 +6161,7 @@
       "panda": 1,
       "raven": 1,
       "shaheen": 2,
-      "steve": 94,
+      "steve": 95,
       "victor": 1,
       "zafina": 12
     },
@@ -6693,7 +6698,7 @@
       "lili": 1
     },
     "poktan": {
-      "king": 6
+      "king": 7
     },
     "polaris": {
       "jack8": 1
@@ -7012,7 +7017,7 @@
       "reina": 5,
       "shaheen": 13,
       "steve": 2,
-      "victor": 20,
+      "victor": 21,
       "xiaoyu": 1,
       "yoshimitsu": 13,
       "zafina": 1
@@ -7610,7 +7615,7 @@
     },
     "shadoe": {
       "bob": 1,
-      "raven": 22
+      "raven": 24
     },
     "shadoeshka": {
       "raven": 4
@@ -7768,7 +7773,7 @@
     },
     "shiro": {
       "dragunov": 1,
-      "reina": 6
+      "reina": 7
     },
     "shiru-qudans": {
       "kazuya": 1
@@ -8069,7 +8074,7 @@
       "paul": 1
     },
     "starbreaker": {
-      "bryan": 91,
+      "bryan": 92,
       "dragunov": 7,
       "feng": 3,
       "kazuya": 2,
@@ -8105,7 +8110,7 @@
     },
     "stevepi": {
       "kunimitsu": 1,
-      "lidia": 6
+      "lidia": 7
     },
     "stj": {
       "dragunov": 1
@@ -8950,7 +8955,8 @@
     "voila": {
       "lili": 1
     },
-    "voila-99": {
+    "voila99": {
+      "anna": 1,
       "lili": 1
     },
     "volleboid": {
@@ -8992,7 +8998,7 @@
     },
     "warning-ispam": {
       "jin": 1,
-      "nina": 35,
+      "nina": 36,
       "reina": 7
     },
     "washizu": {
@@ -9026,7 +9032,7 @@
     "wecka": {
       "devil_jin": 1,
       "feng": 1,
-      "xiaoyu": 215
+      "xiaoyu": 216
     },
     "weeb": {
       "dragunov": 1
@@ -9383,7 +9389,7 @@
       "azucena": 1
     },
     "zaka": {
-      "lee": 14
+      "lee": 15
     },
     "zakogari": {
       "jun": 8
