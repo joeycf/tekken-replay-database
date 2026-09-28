@@ -3294,6 +3294,10 @@
     "handle": "GoldenBoko"
   },
   {
+    "id": "goliathkho",
+    "handle": "GoliathKho"
+  },
+  {
     "id": "gongboy",
     "handle": "GongBoy"
   },
@@ -6978,7 +6982,7 @@
   },
   {
     "id": "oracle",
-    "handle": "ORACLE"
+    "handle": "Oracle"
   },
   {
     "id": "oracle-99",
