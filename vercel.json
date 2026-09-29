@@ -1804,6 +1804,11 @@
       "permanent": true
     },
     {
+      "source": "/tekken/players/voila-99",
+      "destination": "/tekken/players/voila99",
+      "permanent": true
+    },
+    {
       "source": "/tekken/players/warning-i-spam",
       "destination": "/tekken/players/warning-ispam",
       "permanent": true
