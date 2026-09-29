@@ -447,11 +447,19 @@ function testCronGuard(): void {
   );
 
   // .md as well as .json: report.md is a pipeline output like any other, and a
-  // .json-only filter silently exempts it from the check below.
-  const staged = (guard.match(/git add ((?:data\/\S+\s*)+)/)?.[1] ?? '')
+  // .json-only filter silently exempts it from the check below. vercel.json too:
+  // since 2026-09-28 the cron's "Regenerate player redirects" step writes it, so
+  // it is a cron output with the same failure mode — unstaged, a new redirect
+  // is regenerated and thrown away every morning, and the merged URL 404s.
+  const staged = (guard.match(/git add ((?:(?:data\/\S+|vercel\.json)\s*)+)/)?.[1] ?? '')
     .split(/\s+/)
-    .filter((f) => f.startsWith('data/') && (f.endsWith('.json') || f.endsWith('.md')));
+    .filter(
+      (f) =>
+        (f.startsWith('data/') && (f.endsWith('.json') || f.endsWith('.md'))) ||
+        f === 'vercel.json',
+    );
   expect(staged.length > 0, `workflow's git add names data files (${staged.length})`);
+  expect(staged.includes('vercel.json'), 'workflow stages vercel.json (the regenerated redirects)');
   // The full write set: scripts/parse.ts writes review-queue, source-pins,
   // theater-cursor, videos, players, player-redirects, seasonBoundaries and
   // report.md; scripts/emit.ts writes replays, stats, summary and patchGroups.

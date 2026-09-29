@@ -179,8 +179,19 @@ index records are CARRIED unchanged (`cronFetchedWithCarry` in
 `scripts/channels.ts`). An empty dump is treated the same way, which here is the
 ordinary case — the catalogue's tagged Tekken rows stop at 2025-03-16.
 
+**Redirects are regenerated before the commit, and can hold it.** After the
+parse, `npm run data:redirects` rewrites `vercel.json` from
+`data/player-redirects.json`, which `parse.ts` grows from its own automatic
+player merges. Then `redirects.ts --drift` refuses to commit, holding the whole
+day's data, if a row cannot ship: a redirect into a 404, a redirect away from a
+live profile, or a redirect the ledger lost. The refusal names the row and its
+fix. The retirement guard (an id leaving the registry with no ledger row) stays
+in the post-deploy "Flag stale redirects" step, because an upstream deletion
+must not hold a refresh.
+
 The commit stages
-`data/{videos,replays,stats,players,summary,seasonBoundaries,player-redirects,patchGroups,review-queue,source-pins,theater-cursor,theater-disagreements}.json`
+`data/{videos,replays,stats,players,summary,seasonBoundaries,player-redirects,patchGroups,review-queue,source-pins,theater-cursor,theater-disagreements}.json`,
+`vercel.json`
 
 - `report.md` **only if changed** ("data: refresh YYYY-MM-DD — N replays"). The
   push triggers the Vercel deploy. Two files are suppressed when they are the only
