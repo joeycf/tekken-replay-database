@@ -643,6 +643,10 @@
     "featured": true
   },
   {
+    "id": "azamad",
+    "handle": "Azamad"
+  },
+  {
     "id": "azeemx",
     "handle": "Azeemx"
   },
@@ -2920,6 +2924,10 @@
   {
     "id": "fran",
     "handle": "Fran"
+  },
+  {
+    "id": "france-mania",
+    "handle": "France Mania"
   },
   {
     "id": "franklin-saint",
