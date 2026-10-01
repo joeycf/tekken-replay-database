@@ -2009,6 +2009,10 @@
     "handle": "Dengo"
   },
   {
+    "id": "denialation",
+    "handle": "Denialation"
+  },
+  {
     "id": "deoksik",
     "handle": "Deoksik"
   },
@@ -2103,6 +2107,10 @@
   {
     "id": "diety",
     "handle": "Diety"
+  },
+  {
+    "id": "diga",
+    "handle": "Diga"
   },
   {
     "id": "dilemma",
@@ -6507,6 +6515,10 @@
     "handle": "Nasty ixtab"
   },
   {
+    "id": "natter",
+    "handle": "Natter"
+  },
+  {
     "id": "navit",
     "handle": "NAVIT"
   },
@@ -10267,6 +10279,10 @@
   {
     "id": "yasuo",
     "handle": "YASUO"
+  },
+  {
+    "id": "yayacroft",
+    "handle": "YayaCroft"
   },
   {
     "id": "yayal12345",
