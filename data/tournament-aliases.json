@@ -1,0 +1,4 @@
+{
+  "//": "Liquipedia entrant name or page (as it appears in data/tournaments.json) → id in data/players.json, or null to ignore that name. Only for names scripts/tournaments.ts will not decide on its own: a fighter's name, under three alphanumerics, or two registry candidates. Validated by `tsx scripts/tournaments.ts --check` (inside npm run typecheck); the worklist is `npm run data:tournaments -- --match`.",
+  "aliases": {}
+}

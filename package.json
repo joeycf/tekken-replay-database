@@ -10,7 +10,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "typecheck": "nuxt prepare && nuxt typecheck && tsc --noEmit -p tsconfig.pipeline.json && tsx scripts/redirects.ts --check",
+    "typecheck": "nuxt prepare && nuxt typecheck && tsc --noEmit -p tsconfig.pipeline.json && tsx scripts/redirects.ts --check && tsx scripts/tournaments.ts --check",
     "lint": "nuxt prepare && eslint .",
     "lint:fix": "nuxt prepare && eslint . --fix",
     "format": "prettier --write .",
@@ -28,6 +28,7 @@
     "data:expiries": "tsx scripts/expiries.ts --check",
     "data:characters": "tsx scripts/characters.ts",
     "data:roster-check": "tsx scripts/roster-check.ts",
+    "data:tournaments": "tsx scripts/tournaments.ts",
     "data:extract": "tsx scripts/complete-characters.ts",
     "data:evo-overlap": "tsx scripts/evo-overlap.ts",
     "test:e2e": "tsx scripts/e2e.ts"

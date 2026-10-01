@@ -101,12 +101,42 @@ Two other env vars matter locally, neither of them secret:
 | `npm run data:characters`                        | Roster scrape (Bandai Namco official site) → portraits + splashes in `public/img/characters/`, `data/characters.json`                                                                                                                         |
 | `npm run data:patch-check`                       | Diff `data/patchBoundaries.json` against wavu's Patches (Tekken 8) table — network, manual, never in the cron (see the patch-table runbook)                                                                                                   |
 | `npm run data:roster-check`                      | Diff `data/characters.json` against Bandai Namco's own character index — network, manual, never in the cron. Ends `roster-check: CURRENT / DRIFT / UNVERIFIED / UNREADABLE`                                                                   |
+| `npm run data:tournaments`                       | Liquipedia's Tier 1–2 winners/runners-up → `data/tournaments.json` — network, manual, never in the cron. Ends `tournaments: CURRENT / UPDATED / UNVERIFIED / UNREADABLE / UNSUPPORTED`; `-- --match` and `--check` are offline                |
 | `npm run data:expiries`                          | `--check` the self-expiring gates (announced characters coming due). Runs last in the cron and is **designed to go red**                                                                                                                      |
 | `npm run typecheck`                              | App (`nuxt typecheck`) **and** pipeline (`tsc -p tsconfig.pipeline.json`) — both must pass                                                                                                                                                    |
 | `npm run lint` / `lint:fix`                      | ESLint over the whole repo                                                                                                                                                                                                                    |
 | `npm run format` / `format:check`                | Prettier                                                                                                                                                                                                                                      |
 | `npm run test:e2e`                               | The genericity audit — browser checks against the generated output (run `npm run generate` first)                                                                                                                                             |
 | `npx tsx scripts/og.ts`                          | Regenerate the default OG card (`public/og-default.png`)                                                                                                                                                                                      |
+
+## Featured players come from tournament results
+
+A player is **featured** when they won or placed second at a Liquipedia Tier 1 or
+Tier 2 Tekken 8 event, when they are in parse.ts's curated `FEATURED` set, or
+when they rank in the top 2% of the unflagged players by appearances (engine
+v0.17.0; the old rule, "25+ replays", had no relation to anything a Tekken
+player would call a result). The placements are `data/tournaments.json`, pulled
+by `npm run data:tournaments` — **manual, network, never in the cron** — through
+Liquipedia's MediaWiki API (its HTML pages are bot-walled and off limits by its
+terms; the API wants gzip, a contact User-Agent and one `parse` call per 30 s,
+which is why two tiers take 35 s). The daily parse re-matches the file against
+the registry it just built and stamps `featured: true` + `extra.titles` on every
+hit — a union with `FEATURED`, never a replacement — so a champion with no
+replay yet costs nothing today and is featured the morning their first video is
+ingested.
+
+The matcher never guesses between people. Names are compared through
+`scripts/players.ts`'s `resolveKey` (the same identity rule the registry merges
+by), and a name that is also a fighter (`King`, `Lee`), has under three
+alphanumerics, or resolves to two registry ids is reported in `data/report.md`
+and `npm run data:tournaments -- --match`, and a human closes it in
+`data/tournament-aliases.json` (an id, or `null` to ignore).
+`tsx scripts/tournaments.ts --check` validates both files inside
+`npm run typecheck`.
+
+Liquipedia's content is **CC BY-SA 3.0**: the credit is in the file's `source`
+block and the engine renders it beside every title on the player page.
+Pacing across all eight games is `../sync-tournaments.sh`.
 
 ## Vercel
 

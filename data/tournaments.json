@@ -1,0 +1,3738 @@
+{
+  "source": {
+    "name": "Liquipedia Fighting Games Wiki",
+    "url": "https://liquipedia.net/fighters/Tekken_8/Tournaments",
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "game": "t8",
+    "tiers": [
+      1,
+      2
+    ]
+  },
+  "generatedAt": "2026-10-01",
+  "events": [
+    {
+      "name": "Tekken World Tour Finals 2026",
+      "page": "Tekken_World_Tour_Finals/2026",
+      "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2026",
+      "date": "2027-01-27",
+      "tier": 1,
+      "entrants": null,
+      "prize": null,
+      "location": "Singapore",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "Headstomper 2026",
+      "page": "Headstomper/2026/T8",
+      "url": "https://liquipedia.net/fighters/Headstomper/2026/T8",
+      "date": "2026-11-26",
+      "tier": 2,
+      "entrants": null,
+      "prize": null,
+      "location": "Malmö",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "Punishment 5",
+      "page": "Punishment/2026",
+      "url": "https://liquipedia.net/fighters/Punishment/2026",
+      "date": "2026-11-26",
+      "tier": 1,
+      "entrants": null,
+      "prize": null,
+      "location": "Bolivia",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "Thaiger Uppercut 2026",
+      "page": "Thaiger_Uppercut/2026/T8",
+      "url": "https://liquipedia.net/fighters/Thaiger_Uppercut/2026/T8",
+      "date": "2026-11-26",
+      "tier": 1,
+      "entrants": null,
+      "prize": null,
+      "location": "Thailand",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "Big Bang Fist 2026",
+      "page": "Big_Bang_Fist/2026",
+      "url": "https://liquipedia.net/fighters/Big_Bang_Fist/2026",
+      "date": "2026-10-26",
+      "tier": 2,
+      "entrants": null,
+      "prize": null,
+      "location": "Tokyo",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "Electric Clash 2026",
+      "page": "Electric_Clash/2026/T8",
+      "url": "https://liquipedia.net/fighters/Electric_Clash/2026/T8",
+      "date": "2026-10-26",
+      "tier": 2,
+      "entrants": null,
+      "prize": null,
+      "location": "Ontario",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "Evolution Championship Series: France 2026",
+      "page": "Evolution_Championship_Series/2026/France/T8",
+      "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2026/France/T8",
+      "date": "2026-10-26",
+      "tier": 1,
+      "entrants": 963,
+      "prize": "$43,480.24",
+      "location": "Nice",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "First Attack 2026",
+      "page": "First_Attack/2026/T8",
+      "url": "https://liquipedia.net/fighters/First_Attack/2026/T8",
+      "date": "2026-10-26",
+      "tier": 2,
+      "entrants": 78,
+      "prize": "$2,780",
+      "location": "San Juan",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "Paradise Game Battle 2026",
+      "page": "Paradise_Game_Battle/2026",
+      "url": "https://liquipedia.net/fighters/Paradise_Game_Battle/2026",
+      "date": "2026-10-26",
+      "tier": 1,
+      "entrants": null,
+      "prize": null,
+      "location": "Abidjan",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "BRICS Tournament 2026",
+      "page": "BRICS_Tournament/2026",
+      "url": "https://liquipedia.net/fighters/BRICS_Tournament/2026",
+      "date": "2026-09-26",
+      "tier": 2,
+      "entrants": 29,
+      "prize": "$17,824.70",
+      "location": "Moscow",
+      "winner": {
+        "name": "Strog",
+        "page": "Strog",
+        "flag": "Russia",
+        "character": null
+      },
+      "runnerUp": {
+        "name": "HowFoolish",
+        "page": null,
+        "flag": "Russia",
+        "character": null
+      }
+    },
+    {
+      "name": "Manila Madness 5",
+      "page": "Manila_Madness/5/T8",
+      "url": "https://liquipedia.net/fighters/Manila_Madness/5/T8",
+      "date": "2026-09-26",
+      "tier": 1,
+      "entrants": 348,
+      "prize": "$6,000",
+      "location": "Manila",
+      "winner": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Feng"
+      },
+      "runnerUp": {
+        "name": "CBM",
+        "page": "CherryBerryMango",
+        "flag": "South Korea",
+        "character": "Jin"
+      }
+    },
+    {
+      "name": "OzHadou Nationals 20",
+      "page": "OzHadou_Nationals/20/T8",
+      "url": "https://liquipedia.net/fighters/OzHadou_Nationals/20/T8",
+      "date": "2026-09-26",
+      "tier": 2,
+      "entrants": 107,
+      "prize": "$2,000",
+      "location": "Sydney",
+      "winner": {
+        "name": "EDGE",
+        "page": "EDGE",
+        "flag": "South Korea",
+        "character": "Hwoarang"
+      },
+      "runnerUp": {
+        "name": "Yagami",
+        "page": "Yagami_(Australian_Player)",
+        "flag": "Australia",
+        "character": "Reina"
+      }
+    },
+    {
+      "name": "Saudi eLeague Fighting: TWT 2026 Challenger",
+      "page": "Saudi_eLeague/TWT_Challenger/2026",
+      "url": "https://liquipedia.net/fighters/Saudi_eLeague/TWT_Challenger/2026",
+      "date": "2026-09-26",
+      "tier": 2,
+      "entrants": 256,
+      "prize": "$5,000",
+      "location": "Riyadh",
+      "winner": {
+        "name": "Farzeen",
+        "page": "Farzeen",
+        "flag": "Pakistan",
+        "character": "Victor"
+      },
+      "runnerUp": {
+        "name": "Jin Ksa",
+        "page": null,
+        "flag": "Saudi Arabia",
+        "character": "Jin"
+      }
+    },
+    {
+      "name": "Takedown 2026",
+      "page": "Takedown/2026/T8",
+      "url": "https://liquipedia.net/fighters/Takedown/2026/T8",
+      "date": "2026-09-26",
+      "tier": 1,
+      "entrants": 672,
+      "prize": "$9,015.27",
+      "location": "Lahore",
+      "winner": {
+        "name": "Rangchu",
+        "page": "Rangchu",
+        "flag": "South Korea",
+        "character": "Fahkumram"
+      },
+      "runnerUp": {
+        "name": "Farzeen",
+        "page": "Farzeen",
+        "flag": "Pakistan",
+        "character": "Victor"
+      }
+    },
+    {
+      "name": "Ultimate Fighting Arena 2026",
+      "page": "Ultimate_Fighting_Arena/2026/T8",
+      "url": "https://liquipedia.net/fighters/Ultimate_Fighting_Arena/2026/T8",
+      "date": "2026-09-26",
+      "tier": 2,
+      "entrants": 155,
+      "prize": "$2,111.85",
+      "location": "Paris",
+      "winner": {
+        "name": "ILIAS",
+        "page": "ILIAS",
+        "flag": "Morocco",
+        "character": "Lili"
+      },
+      "runnerUp": {
+        "name": "Nigno",
+        "page": null,
+        "flag": "France",
+        "character": "King"
+      }
+    },
+    {
+      "name": "CEO 2026",
+      "page": "Community_Effort_Orlando/2026/T8",
+      "url": "https://liquipedia.net/fighters/Community_Effort_Orlando/2026/T8",
+      "date": "2026-08-26",
+      "tier": 1,
+      "entrants": 784,
+      "prize": "$13,840",
+      "location": "Orlando, FL",
+      "winner": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "JoeCrush",
+        "page": "JoeCrush",
+        "flag": "United States",
+        "character": "Jack-8"
+      }
+    },
+    {
+      "name": "Esports World Cup 2026",
+      "page": "Esports_World_Cup/2026/T8",
+      "url": "https://liquipedia.net/fighters/Esports_World_Cup/2026/T8",
+      "date": "2026-08-26",
+      "tier": 1,
+      "entrants": 32,
+      "prize": "$1,000,000",
+      "location": "Paris",
+      "winner": {
+        "name": "M. Zubair",
+        "page": "M._Zubair",
+        "flag": "Pakistan",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "LowHigh",
+        "page": "LowHigh",
+        "flag": "South Korea",
+        "character": "Bryan"
+      }
+    },
+    {
+      "name": "Esports World Cup 2026 Last Chance Qualifier",
+      "page": "Esports_World_Cup/2026/T8/Last_Chance_Qualifier",
+      "url": "https://liquipedia.net/fighters/Esports_World_Cup/2026/T8/Last_Chance_Qualifier",
+      "date": "2026-08-26",
+      "tier": 1,
+      "entrants": 444,
+      "prize": "$50,000",
+      "location": "Paris",
+      "winner": {
+        "name": "M. Zubair",
+        "page": "M._Zubair",
+        "flag": "Pakistan",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "Numan Ch",
+        "page": "Numan_Ch",
+        "flag": "Pakistan",
+        "character": "Steve"
+      }
+    },
+    {
+      "name": "MOOR1NG 2026",
+      "page": "MOOR1NG/2026/T8",
+      "url": "https://liquipedia.net/fighters/MOOR1NG/2026/T8",
+      "date": "2026-08-26",
+      "tier": 2,
+      "entrants": 297,
+      "prize": "$2,000",
+      "location": "Antananarivo",
+      "winner": {
+        "name": "Yondaime",
+        "page": "Yondaime",
+        "flag": "Madagascar",
+        "character": null
+      },
+      "runnerUp": {
+        "name": "Lian",
+        "page": null,
+        "flag": "Madagascar",
+        "character": null
+      }
+    },
+    {
+      "name": "Battle Arena Melbourne 16",
+      "page": "Battle_Arena_Melbourne/16/T8",
+      "url": "https://liquipedia.net/fighters/Battle_Arena_Melbourne/16/T8",
+      "date": "2026-07-26",
+      "tier": 2,
+      "entrants": 177,
+      "prize": "$3,214.23",
+      "location": "Melbourne",
+      "winner": {
+        "name": "Yagami",
+        "page": "Yagami_(Australian_Player)",
+        "flag": "Australia",
+        "character": "Reina"
+      },
+      "runnerUp": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      }
+    },
+    {
+      "name": "NEXUS E-Sports Series 2026",
+      "page": "Nexus_E-Sports_Series/2026/T8",
+      "url": "https://liquipedia.net/fighters/Nexus_E-Sports_Series/2026/T8",
+      "date": "2026-07-26",
+      "tier": 2,
+      "entrants": 207,
+      "prize": "$2,300",
+      "location": "Noida",
+      "winner": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": null
+      },
+      "runnerUp": {
+        "name": "Rangchu",
+        "page": "Rangchu",
+        "flag": "South Korea",
+        "character": null
+      }
+    },
+    {
+      "name": "Only The Best 2026 TWT Challenger",
+      "page": "Only_The_Best/8/T8/TWT_Challenger",
+      "url": "https://liquipedia.net/fighters/Only_The_Best/8/T8/TWT_Challenger",
+      "date": "2026-07-26",
+      "tier": 2,
+      "entrants": 140,
+      "prize": "$2,000",
+      "location": "Naples",
+      "winner": {
+        "name": "Kaneandtrench",
+        "page": "KaneAndTrench",
+        "flag": "United Kingdom",
+        "character": "Yoshimitsu"
+      },
+      "runnerUp": {
+        "name": "Sin",
+        "page": "Sin_(Dutch_Player)",
+        "flag": "Netherlands",
+        "character": "Yoshimitsu"
+      }
+    },
+    {
+      "name": "STARS CUP 2026",
+      "page": "Stars_Cup/2026",
+      "url": "https://liquipedia.net/fighters/Stars_Cup/2026",
+      "date": "2026-07-26",
+      "tier": 2,
+      "entrants": 119,
+      "prize": "$2,000",
+      "location": "Seoul",
+      "winner": {
+        "name": "Meo-IL",
+        "page": "Meo-IL",
+        "flag": "South Korea",
+        "character": "Jack-8"
+      },
+      "runnerUp": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      }
+    },
+    {
+      "name": "VSFighting XIV",
+      "page": "VSFighting/2026/T8",
+      "url": "https://liquipedia.net/fighters/VSFighting/2026/T8",
+      "date": "2026-07-26",
+      "tier": 1,
+      "entrants": 338,
+      "prize": "$10,539.56",
+      "location": "Birmingham",
+      "winner": {
+        "name": "Knee",
+        "page": "Knee",
+        "flag": "South Korea",
+        "character": "Bryan"
+      },
+      "runnerUp": {
+        "name": "LowHigh",
+        "page": "LowHigh",
+        "flag": "South Korea",
+        "character": "Bryan"
+      }
+    },
+    {
+      "name": "CHAIN SHIFT 2026",
+      "page": "Chain_Shift/2026/T8",
+      "url": "https://liquipedia.net/fighters/Chain_Shift/2026/T8",
+      "date": "2026-06-26",
+      "tier": 2,
+      "entrants": 241,
+      "prize": "$4,410",
+      "location": "La Mirada, CA",
+      "winner": {
+        "name": "AK",
+        "page": "AK",
+        "flag": "Philippines",
+        "character": "Shaheen"
+      },
+      "runnerUp": {
+        "name": "LowHigh",
+        "page": "LowHigh",
+        "flag": "South Korea",
+        "character": "Bryan"
+      }
+    },
+    {
+      "name": "Evolution Championship Series 2026",
+      "page": "Evolution_Championship_Series/2026/T8",
+      "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2026/T8",
+      "date": "2026-06-26",
+      "tier": 1,
+      "entrants": 1355,
+      "prize": "$70,000",
+      "location": "Las Vegas, NV",
+      "winner": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "Rangchu",
+        "page": "Rangchu",
+        "flag": "South Korea",
+        "character": "Fahkumram"
+      }
+    },
+    {
+      "name": "SOOP Super Tournament 2026",
+      "page": "Super_Tournament/2026/T8",
+      "url": "https://liquipedia.net/fighters/Super_Tournament/2026/T8",
+      "date": "2026-06-26",
+      "tier": 1,
+      "entrants": 232,
+      "prize": "$6,000",
+      "location": "Seoul",
+      "winner": {
+        "name": "Mangja",
+        "page": "Malgu",
+        "flag": "South Korea",
+        "character": "Law"
+      },
+      "runnerUp": {
+        "name": "KEISUKE",
+        "page": "Keisuke_(Tekken_Player)",
+        "flag": "Japan",
+        "character": "Kazuya"
+      }
+    },
+    {
+      "name": "The MIXUP 2026",
+      "page": "The_MIXUP/2026/T8",
+      "url": "https://liquipedia.net/fighters/The_MIXUP/2026/T8",
+      "date": "2026-06-26",
+      "tier": 1,
+      "entrants": 286,
+      "prize": "$9,310.55",
+      "location": "Lyon",
+      "winner": {
+        "name": "Farzeen",
+        "page": "Farzeen",
+        "flag": "Pakistan",
+        "character": "Victor"
+      },
+      "runnerUp": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Claudio"
+      }
+    },
+    {
+      "name": "3F - Fight For the Future 2026",
+      "page": "Fight_For_the_Future/2026/T8",
+      "url": "https://liquipedia.net/fighters/Fight_For_the_Future/2026/T8",
+      "date": "2026-05-26",
+      "tier": 2,
+      "entrants": 31,
+      "prize": "$2,183.91",
+      "location": "São Paulo, SP",
+      "winner": {
+        "name": "leemishima",
+        "page": "Leemishima",
+        "flag": "Argentina",
+        "character": "Lidia"
+      },
+      "runnerUp": {
+        "name": "Sergie Mazter",
+        "page": "Sergie_Mazter",
+        "flag": "Peru",
+        "character": "Reina"
+      }
+    },
+    {
+      "name": "Brussels Challenge Major Edition 2026",
+      "page": "Brussels_Challenge/2026/Major_Edition/T8",
+      "url": "https://liquipedia.net/fighters/Brussels_Challenge/2026/Major_Edition/T8",
+      "date": "2026-05-26",
+      "tier": 2,
+      "entrants": 86,
+      "prize": "$3,014.10",
+      "location": "Brussels",
+      "winner": {
+        "name": "Tetsu",
+        "page": "Tetsu",
+        "flag": "Germany",
+        "character": "Lidia"
+      },
+      "runnerUp": {
+        "name": "ILIAS",
+        "page": "ILIAS",
+        "flag": "Morocco",
+        "character": "Lili"
+      }
+    },
+    {
+      "name": "Combo Breaker 2026",
+      "page": "Combo_Breaker/2026/T8",
+      "url": "https://liquipedia.net/fighters/Combo_Breaker/2026/T8",
+      "date": "2026-05-26",
+      "tier": 1,
+      "entrants": 1218,
+      "prize": "$18,180",
+      "location": "Schaumburg, IL",
+      "winner": {
+        "name": "Farzeen",
+        "page": "Farzeen",
+        "flag": "Pakistan",
+        "character": "Lidia"
+      },
+      "runnerUp": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Bryan"
+      }
+    },
+    {
+      "name": "DreamHack Atlanta 2026",
+      "page": "DreamHack/2026/Atlanta/T8",
+      "url": "https://liquipedia.net/fighters/DreamHack/2026/Atlanta/T8",
+      "date": "2026-05-26",
+      "tier": 1,
+      "entrants": 137,
+      "prize": "$50,000",
+      "location": "Atlanta, GA",
+      "winner": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Feng"
+      },
+      "runnerUp": {
+        "name": "KEISUKE",
+        "page": "Keisuke_(Tekken_Player)",
+        "flag": "Japan",
+        "character": "Kazuya"
+      }
+    },
+    {
+      "name": "Evolution Championship Series: Japan 2026",
+      "page": "Evolution_Championship_Series/2026/Japan/T8",
+      "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2026/Japan/T8",
+      "date": "2026-05-26",
+      "tier": 1,
+      "entrants": 882,
+      "prize": "$31,832.32",
+      "location": "Tokyo",
+      "winner": {
+        "name": "iKARi",
+        "page": "IKARi",
+        "flag": "South Korea",
+        "character": "Kazuya"
+      },
+      "runnerUp": {
+        "name": "Knee",
+        "page": "Knee",
+        "flag": "South Korea",
+        "character": "Bryan"
+      }
+    },
+    {
+      "name": "Saudi eLeague Fighting: Season 5 Championship",
+      "page": "Saudi_eLeague/Season_5/Championship/T8",
+      "url": "https://liquipedia.net/fighters/Saudi_eLeague/Season_5/Championship/T8",
+      "date": "2026-05-26",
+      "tier": 2,
+      "entrants": 33,
+      "prize": "$16,040.54",
+      "location": "Riyadh",
+      "winner": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": null
+      },
+      "runnerUp": {
+        "name": "Raef",
+        "page": "Raef",
+        "flag": "Saudi Arabia",
+        "character": null
+      }
+    },
+    {
+      "name": "EMEA TEKKEN Cup 4 Finals",
+      "page": "EMEA_Tekken_Cup/4/Finals",
+      "url": "https://liquipedia.net/fighters/EMEA_Tekken_Cup/4/Finals",
+      "date": "2026-04-26",
+      "tier": 1,
+      "entrants": 16,
+      "prize": "$29,541.40",
+      "location": "Paris",
+      "winner": {
+        "name": "KaneAndTrench",
+        "page": "KaneAndTrench",
+        "flag": "United Kingdom",
+        "character": "Yoshimitsu"
+      },
+      "runnerUp": {
+        "name": "AQEEL9",
+        "page": "Aqeel9",
+        "flag": "Saudi Arabia",
+        "character": "Victor"
+      }
+    },
+    {
+      "name": "EMEA TEKKEN Cup 4 Last Chance Qualifier",
+      "page": "EMEA_Tekken_Cup/4/Last_Chance_Qualifier",
+      "url": "https://liquipedia.net/fighters/EMEA_Tekken_Cup/4/Last_Chance_Qualifier",
+      "date": "2026-04-26",
+      "tier": 2,
+      "entrants": 45,
+      "prize": null,
+      "location": "Paris",
+      "winner": {
+        "name": "NeonKay64",
+        "page": "NeonKay64",
+        "flag": "United Kingdom",
+        "character": null
+      },
+      "runnerUp": {
+        "name": "Kwstakis",
+        "page": "Kwstakis",
+        "flag": "Greece",
+        "character": null
+      }
+    },
+    {
+      "name": "LVL UP EXPO 2026",
+      "page": "LVL_UP_EXPO/2026/T8",
+      "url": "https://liquipedia.net/fighters/LVL_UP_EXPO/2026/T8",
+      "date": "2026-04-26",
+      "tier": 2,
+      "entrants": 137,
+      "prize": "$5,000",
+      "location": "Las Vegas, NV",
+      "winner": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "kkokkoma",
+        "page": "Kkokkoma",
+        "flag": "South Korea",
+        "character": "Feng"
+      }
+    },
+    {
+      "name": "SOOP TEKKEN League 2026: Season 1 Finals",
+      "page": "SOOP_TEKKEN_League/2026/Season_1/Finals",
+      "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2026/Season_1/Finals",
+      "date": "2026-04-26",
+      "tier": 2,
+      "entrants": 8,
+      "prize": "$13,632.89",
+      "location": "Seoul",
+      "winner": {
+        "name": "Meo-IL",
+        "page": "Meo-IL",
+        "flag": "South Korea",
+        "character": "Jack-8"
+      },
+      "runnerUp": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Feng"
+      }
+    },
+    {
+      "name": "Texas Showdown 2026",
+      "page": "Texas_Showdown/2026/T8",
+      "url": "https://liquipedia.net/fighters/Texas_Showdown/2026/T8",
+      "date": "2026-03-26",
+      "tier": 2,
+      "entrants": 243,
+      "prize": "$3,645",
+      "location": "Houston, TX",
+      "winner": {
+        "name": "JoeCrush",
+        "page": "JoeCrush",
+        "flag": "United States",
+        "character": "Jack-8"
+      },
+      "runnerUp": {
+        "name": "Saint",
+        "page": "Saint",
+        "flag": "South Korea",
+        "character": "Jack-8"
+      }
+    },
+    {
+      "name": "Enders Zone Evolution 5",
+      "page": "Enders_Zone_Evolution/5",
+      "url": "https://liquipedia.net/fighters/Enders_Zone_Evolution/5",
+      "date": "2026-02-26",
+      "tier": 2,
+      "entrants": 58,
+      "prize": "$3,536.69",
+      "location": "Barcelona",
+      "winner": {
+        "name": "bode",
+        "page": "Bode",
+        "flag": "Italy",
+        "character": "Leo"
+      },
+      "runnerUp": {
+        "name": "AQEEL9",
+        "page": "Aqeel9",
+        "flag": "Saudi Arabia",
+        "character": "Anna"
+      }
+    },
+    {
+      "name": "Galaxian Explosion: Dark Resurrection III",
+      "page": "Galaxian_Explosion/Dark_Resurrection/3/T8",
+      "url": "https://liquipedia.net/fighters/Galaxian_Explosion/Dark_Resurrection/3/T8",
+      "date": "2026-02-26",
+      "tier": 2,
+      "entrants": 137,
+      "prize": "$3,536.69",
+      "location": "Paris",
+      "winner": {
+        "name": "Jodd",
+        "page": "Jodd",
+        "flag": "France",
+        "character": null
+      },
+      "runnerUp": {
+        "name": "Tetsu",
+        "page": "Tetsu",
+        "flag": "Germany",
+        "character": null
+      }
+    },
+    {
+      "name": "Komba Overcome",
+      "page": "Komba_Overcome/2026/T8",
+      "url": "https://liquipedia.net/fighters/Komba_Overcome/2026/T8",
+      "date": "2026-02-26",
+      "tier": 2,
+      "entrants": 201,
+      "prize": "$2,357.80",
+      "location": "Soarano",
+      "winner": {
+        "name": "Manounou",
+        "page": "Manounou",
+        "flag": "Madagascar",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "fabien",
+        "page": null,
+        "flag": "Madagascar",
+        "character": "Lili"
+      }
+    },
+    {
+      "name": "MASTERCUP TRY TOKYO 2026",
+      "page": "MASTERCUP/14/TRY",
+      "url": "https://liquipedia.net/fighters/MASTERCUP/14/TRY",
+      "date": "2026-02-26",
+      "tier": 2,
+      "entrants": 364,
+      "prize": null,
+      "location": "Tokyo",
+      "winner": {
+        "name": "KEI",
+        "page": null,
+        "flag": "Japan",
+        "character": "Lee"
+      },
+      "runnerUp": {
+        "name": "Haru91",
+        "page": "Haru91",
+        "flag": "Japan",
+        "character": "Jack-8"
+      }
+    },
+    {
+      "name": "MASTERCUP.14",
+      "page": "MASTERCUP/14/5vs5",
+      "url": "https://liquipedia.net/fighters/MASTERCUP/14/5vs5",
+      "date": "2026-02-26",
+      "tier": 1,
+      "entrants": 1250,
+      "prize": null,
+      "location": "Tokyo",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "Road To Olympus 2026",
+      "page": "Road_To_Olympus/2026/T8",
+      "url": "https://liquipedia.net/fighters/Road_To_Olympus/2026/T8",
+      "date": "2026-02-26",
+      "tier": 2,
+      "entrants": 51,
+      "prize": "$2,363.50",
+      "location": "Athens",
+      "winner": {
+        "name": "ILIAS",
+        "page": "ILIAS",
+        "flag": "Morocco",
+        "character": null
+      },
+      "runnerUp": {
+        "name": "Kwstakis",
+        "page": "Kwstakis",
+        "flag": "Greece",
+        "character": null
+      }
+    },
+    {
+      "name": "Tekken World Tour Finals 2025",
+      "page": "Tekken_World_Tour_Finals/2025",
+      "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2025",
+      "date": "2026-02-26",
+      "tier": 1,
+      "entrants": 35,
+      "prize": "$300,000",
+      "location": "Malmö",
+      "winner": {
+        "name": "LowHigh",
+        "page": "LowHigh",
+        "flag": "South Korea",
+        "character": "Bryan"
+      },
+      "runnerUp": {
+        "name": "Mangja",
+        "page": "Malgu",
+        "flag": "South Korea",
+        "character": "Law"
+      }
+    },
+    {
+      "name": "TEKKENMANIA",
+      "page": "TEKKENMANIA/2026",
+      "url": "https://liquipedia.net/fighters/TEKKENMANIA/2026",
+      "date": "2026-02-26",
+      "tier": 2,
+      "entrants": 63,
+      "prize": "$2,374.16",
+      "location": "Köln",
+      "winner": {
+        "name": "Tibetano",
+        "page": "Tibetano",
+        "flag": "Spain",
+        "character": "Asuka"
+      },
+      "runnerUp": {
+        "name": "ILIAS",
+        "page": "ILIAS",
+        "flag": "Morocco",
+        "character": "Eddy"
+      }
+    },
+    {
+      "name": "Frosty Faustings XVIII",
+      "page": "Frosty_Faustings/2026/T8",
+      "url": "https://liquipedia.net/fighters/Frosty_Faustings/2026/T8",
+      "date": "2026-01-26",
+      "tier": 2,
+      "entrants": 384,
+      "prize": "$3,880",
+      "location": "Lombard, IL",
+      "winner": {
+        "name": "Shadow 20z",
+        "page": "Shadow",
+        "flag": "United States",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "NOMAR",
+        "page": "NOMAR",
+        "flag": "United States",
+        "character": "Eddy"
+      }
+    },
+    {
+      "name": "Invictus 2026",
+      "page": "Invictus/2026/T8",
+      "url": "https://liquipedia.net/fighters/Invictus/2026/T8",
+      "date": "2026-01-26",
+      "tier": 2,
+      "entrants": 113,
+      "prize": "$5,817.31",
+      "location": "Torines",
+      "winner": {
+        "name": "Jodd",
+        "page": "Jodd",
+        "flag": "France",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "Kaneandtrench",
+        "page": "KaneAndTrench",
+        "flag": "United Kingdom",
+        "character": "Yoshimitsu"
+      }
+    },
+    {
+      "name": "SOOP TEKKEN League 2025: Season 2 Finals",
+      "page": "SOOP_TEKKEN_League/2025/Season_2/Finals",
+      "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2025/Season_2/Finals",
+      "date": "2026-01-26",
+      "tier": 2,
+      "entrants": 16,
+      "prize": "$13,864.14",
+      "location": "Seoul",
+      "winner": {
+        "name": "LowHigh",
+        "page": "LowHigh",
+        "flag": "South Korea",
+        "character": "Bryan"
+      },
+      "runnerUp": {
+        "name": "Knee",
+        "page": "Knee",
+        "flag": "South Korea",
+        "character": "Bryan"
+      }
+    },
+    {
+      "name": "STAMPED",
+      "page": "STAMPED/2026",
+      "url": "https://liquipedia.net/fighters/STAMPED/2026",
+      "date": "2026-01-26",
+      "tier": 2,
+      "entrants": 128,
+      "prize": "$2,677.10",
+      "location": "London",
+      "winner": {
+        "name": "Kaneandtrench",
+        "page": "KaneAndTrench",
+        "flag": "United Kingdom",
+        "character": "Yoshimitsu"
+      },
+      "runnerUp": {
+        "name": "NRC",
+        "page": "NRC",
+        "flag": "Pakistan",
+        "character": "Dragunov"
+      }
+    },
+    {
+      "name": "Tekken World Tour Finals 2025 Last Chance Qualifier",
+      "page": "Tekken_World_Tour_Finals/2025/Last_Chance_Qualifier",
+      "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2025/Last_Chance_Qualifier",
+      "date": "2026-01-26",
+      "tier": 1,
+      "entrants": 511,
+      "prize": null,
+      "location": "Malmö",
+      "winner": {
+        "name": "THE JON",
+        "page": "THE_JON",
+        "flag": "Pakistan",
+        "character": "King"
+      },
+      "runnerUp": {
+        "name": "eyemusician",
+        "page": "Eyemusician",
+        "flag": "South Korea",
+        "character": "Yoshimitsu"
+      }
+    },
+    {
+      "name": "Saudi eLeague Fighting: ETC Major 2025",
+      "page": "Saudi_eLeague/ETC_Major/2025",
+      "url": "https://liquipedia.net/fighters/Saudi_eLeague/ETC_Major/2025",
+      "date": "2025-12-25",
+      "tier": 2,
+      "entrants": 44,
+      "prize": "$5,000",
+      "location": "Riyadh",
+      "winner": {
+        "name": "Aqeel9",
+        "page": "Aqeel9",
+        "flag": "Saudi Arabia",
+        "character": "Anna"
+      },
+      "runnerUp": {
+        "name": "Exodia",
+        "page": "Exodia",
+        "flag": "Saudi Arabia",
+        "character": "Feng"
+      }
+    },
+    {
+      "name": "Tekken National Championship 2025",
+      "page": "Tekken_National_Championship/2025",
+      "url": "https://liquipedia.net/fighters/Tekken_National_Championship/2025",
+      "date": "2025-12-25",
+      "tier": 2,
+      "entrants": 68,
+      "prize": "$2,329.09",
+      "location": "Purmerend",
+      "winner": {
+        "name": "Raef",
+        "page": "Raef",
+        "flag": "Saudi Arabia",
+        "character": "Jin"
+      },
+      "runnerUp": {
+        "name": "Nino",
+        "page": "Nino2003",
+        "flag": "Germany",
+        "character": "Kuma"
+      }
+    },
+    {
+      "name": "Yomi Gate",
+      "page": "Yomi_Gate/2025",
+      "url": "https://liquipedia.net/fighters/Yomi_Gate/2025",
+      "date": "2025-12-25",
+      "tier": 2,
+      "entrants": 82,
+      "prize": "$2,349.06",
+      "location": "Poznan",
+      "winner": {
+        "name": "Sin",
+        "page": "Sin_(Dutch_Player)",
+        "flag": "Netherlands",
+        "character": "Fahkumram"
+      },
+      "runnerUp": {
+        "name": "Tibetano",
+        "page": "Tibetano",
+        "flag": "Spain",
+        "character": "Asuka"
+      }
+    },
+    {
+      "name": "Battle Coliseum 2025",
+      "page": "Battle_Coliseum/2025/T8",
+      "url": "https://liquipedia.net/fighters/Battle_Coliseum/2025/T8",
+      "date": "2025-11-25",
+      "tier": 2,
+      "entrants": 102,
+      "prize": "$2,000",
+      "location": "São Paulo, SP",
+      "winner": {
+        "name": "qudans",
+        "page": "Qudans",
+        "flag": "South Korea",
+        "character": "Heihachi"
+      },
+      "runnerUp": {
+        "name": "Saint",
+        "page": "Saint",
+        "flag": "South Korea",
+        "character": "Jack-8"
+      }
+    },
+    {
+      "name": "BeePro Cup 2025",
+      "page": "BeePro_Cup/2025/T8",
+      "url": "https://liquipedia.net/fighters/BeePro_Cup/2025/T8",
+      "date": "2025-11-25",
+      "tier": 2,
+      "entrants": 84,
+      "prize": "$1,913.66",
+      "location": "Taipei City",
+      "winner": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Anna"
+      }
+    },
+    {
+      "name": "Clash of the Olympians 2025",
+      "page": "Clash_of_the_Olympians/2025/T8",
+      "url": "https://liquipedia.net/fighters/Clash_of_the_Olympians/2025/T8",
+      "date": "2025-11-25",
+      "tier": 1,
+      "entrants": 222,
+      "prize": "$6,069.41",
+      "location": "Athens",
+      "winner": {
+        "name": "Farzeen",
+        "page": "Farzeen",
+        "flag": "Pakistan",
+        "character": "Victor"
+      },
+      "runnerUp": {
+        "name": "Qasim Meer",
+        "page": "Qasim_Meer",
+        "flag": "Pakistan",
+        "character": "Zafina"
+      }
+    },
+    {
+      "name": "DreamHack Atlanta 2025",
+      "page": "DreamHack/2025/Atlanta/T8",
+      "url": "https://liquipedia.net/fighters/DreamHack/2025/Atlanta/T8",
+      "date": "2025-11-25",
+      "tier": 2,
+      "entrants": 238,
+      "prize": "$8,000",
+      "location": "Atlanta, GA",
+      "winner": {
+        "name": "Ninjakilla_212",
+        "page": "NinjaKilla212",
+        "flag": "United States",
+        "character": "Law"
+      },
+      "runnerUp": {
+        "name": "Dr.theJAKEMAN, M.D",
+        "page": "Dr.theJAKEMAN,_M.D",
+        "flag": "United States",
+        "character": "King"
+      }
+    },
+    {
+      "name": "Electric Clash 2025",
+      "page": "Electric_Clash/2025/T8",
+      "url": "https://liquipedia.net/fighters/Electric_Clash/2025/T8",
+      "date": "2025-11-25",
+      "tier": 2,
+      "entrants": 120,
+      "prize": "$2,000",
+      "location": "Toronto, ON",
+      "winner": {
+        "name": "JDCR",
+        "page": "JDCR",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "Saint",
+        "page": "Saint",
+        "flag": "South Korea",
+        "character": "Jack-8"
+      }
+    },
+    {
+      "name": "Emirates Showdown 2025",
+      "page": "Emirates_Showdown/2025/T8",
+      "url": "https://liquipedia.net/fighters/Emirates_Showdown/2025/T8",
+      "date": "2025-11-25",
+      "tier": 2,
+      "entrants": 250,
+      "prize": "$5,037.43",
+      "location": "Abu Dhabi",
+      "winner": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Anna"
+      },
+      "runnerUp": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Nina"
+      }
+    },
+    {
+      "name": "Manila Madness 4",
+      "page": "Manila_Madness/4",
+      "url": "https://liquipedia.net/fighters/Manila_Madness/4",
+      "date": "2025-11-25",
+      "tier": 2,
+      "entrants": 275,
+      "prize": "$2,000",
+      "location": "Manila",
+      "winner": {
+        "name": "kkokkoma",
+        "page": "Kkokkoma",
+        "flag": "South Korea",
+        "character": "Feng"
+      },
+      "runnerUp": {
+        "name": "KIMO",
+        "page": null,
+        "flag": "Philippines",
+        "character": "King"
+      }
+    },
+    {
+      "name": "Saudi eLeague Fighting: Season 4 Championship",
+      "page": "Saudi_eLeague/Season_4/Championship/T8",
+      "url": "https://liquipedia.net/fighters/Saudi_eLeague/Season_4/Championship/T8",
+      "date": "2025-11-25",
+      "tier": 2,
+      "entrants": 35,
+      "prize": "$7,999.19",
+      "location": "Riyadh",
+      "winner": {
+        "name": "Qasim Meer",
+        "page": "Qasim_Meer",
+        "flag": "Pakistan",
+        "character": null
+      },
+      "runnerUp": {
+        "name": "Shaman",
+        "page": "Shaman",
+        "flag": "Saudi Arabia",
+        "character": null
+      }
+    },
+    {
+      "name": "SOOP Super Tournament 2025",
+      "page": "Super_Tournament/2025/T8",
+      "url": "https://liquipedia.net/fighters/Super_Tournament/2025/T8",
+      "date": "2025-11-25",
+      "tier": 1,
+      "entrants": 212,
+      "prize": "$7,698.93",
+      "location": "Seoul",
+      "winner": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "LowHigh",
+        "page": "LowHigh",
+        "flag": "South Korea",
+        "character": "Bryan"
+      }
+    },
+    {
+      "name": "Thaiger Uppercut 2025",
+      "page": "Thaiger_Uppercut/2025/T8",
+      "url": "https://liquipedia.net/fighters/Thaiger_Uppercut/2025/T8",
+      "date": "2025-11-25",
+      "tier": 1,
+      "entrants": 208,
+      "prize": "$6,072.80",
+      "location": "Pak Kret",
+      "winner": {
+        "name": "Numan Ch",
+        "page": "Numan_Ch",
+        "flag": "Pakistan",
+        "character": "Steve"
+      },
+      "runnerUp": {
+        "name": "Hafiz Tanveer",
+        "page": "Hafiz_Tanveer",
+        "flag": "Pakistan",
+        "character": "Claudio"
+      }
+    },
+    {
+      "name": "Evolution Championship Series: France 2025",
+      "page": "Evolution_Championship_Series/2025/France/T8",
+      "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2025/France/T8",
+      "date": "2025-10-25",
+      "tier": 1,
+      "entrants": 1169,
+      "prize": "$21,471.96",
+      "location": "Nice",
+      "winner": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "JeonDDing",
+        "page": "Jeondding",
+        "flag": "South Korea",
+        "character": "Eddy"
+      }
+    },
+    {
+      "name": "First Attack 2025",
+      "page": "First_Attack/2025/T8",
+      "url": "https://liquipedia.net/fighters/First_Attack/2025/T8",
+      "date": "2025-10-25",
+      "tier": 2,
+      "entrants": 74,
+      "prize": "$2,740",
+      "location": "San Juan",
+      "winner": {
+        "name": "JDCR",
+        "page": "JDCR",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "EDGE",
+        "page": "EDGE",
+        "flag": "South Korea",
+        "character": "Hwoarang"
+      }
+    },
+    {
+      "name": "Paradise Game Battle 2025",
+      "page": "Paradise_Game_Battle/2025",
+      "url": "https://liquipedia.net/fighters/Paradise_Game_Battle/2025",
+      "date": "2025-10-25",
+      "tier": 1,
+      "entrants": 114,
+      "prize": "$6,000",
+      "location": "Abidjan",
+      "winner": {
+        "name": "THE JON",
+        "page": "THE_JON",
+        "flag": "Pakistan",
+        "character": "King"
+      },
+      "runnerUp": {
+        "name": "Gosain",
+        "page": "Gosain",
+        "flag": "United Kingdom",
+        "character": "Law"
+      }
+    },
+    {
+      "name": "SEA Major 2025",
+      "page": "South_East_Asia_Major/2025/T8",
+      "url": "https://liquipedia.net/fighters/South_East_Asia_Major/2025/T8",
+      "date": "2025-10-25",
+      "tier": 2,
+      "entrants": 67,
+      "prize": "$2,000",
+      "location": "Singapore",
+      "winner": {
+        "name": "Farzeen",
+        "page": "Farzeen",
+        "flag": "Pakistan",
+        "character": "Victor"
+      },
+      "runnerUp": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Nina"
+      }
+    },
+    {
+      "name": "Takedown 2025",
+      "page": "Takedown/2025/T8",
+      "url": "https://liquipedia.net/fighters/Takedown/2025/T8",
+      "date": "2025-10-25",
+      "tier": 1,
+      "entrants": 554,
+      "prize": "$8,896.79",
+      "location": "Lahore",
+      "winner": {
+        "name": "Usama Abbasi",
+        "page": "Usama_Abbasi",
+        "flag": "Pakistan",
+        "character": "Eddy"
+      },
+      "runnerUp": {
+        "name": "Farzeen",
+        "page": "Farzeen",
+        "flag": "Pakistan",
+        "character": "Lidia"
+      }
+    },
+    {
+      "name": "Thunderstruck 2025",
+      "page": "Thunderstruck/2025/T8",
+      "url": "https://liquipedia.net/fighters/Thunderstruck/2025/T8",
+      "date": "2025-10-25",
+      "tier": 2,
+      "entrants": 41,
+      "prize": "$2,445.68",
+      "location": "Monterrey",
+      "winner": {
+        "name": "RV Cris",
+        "page": "RV_Cris",
+        "flag": "Mexico",
+        "character": "Clive"
+      },
+      "runnerUp": {
+        "name": "DivineExorcist4",
+        "page": "Divine_Exorcist4",
+        "flag": "Mexico",
+        "character": "Claudio"
+      }
+    },
+    {
+      "name": "Cape Town Showdown 2025",
+      "page": "Cape_Town_Showdown/2025",
+      "url": "https://liquipedia.net/fighters/Cape_Town_Showdown/2025",
+      "date": "2025-09-25",
+      "tier": 2,
+      "entrants": 104,
+      "prize": "$2,000",
+      "location": "Cape Town",
+      "winner": {
+        "name": "Farzeen",
+        "page": "Farzeen",
+        "flag": "Pakistan",
+        "character": "Victor"
+      },
+      "runnerUp": {
+        "name": "JoKa",
+        "page": "JoKa",
+        "flag": "United Kingdom",
+        "character": "Heihachi"
+      }
+    },
+    {
+      "name": "Punishment 4",
+      "page": "Punishment/2025",
+      "url": "https://liquipedia.net/fighters/Punishment/2025",
+      "date": "2025-09-25",
+      "tier": 1,
+      "entrants": 156,
+      "prize": "$6,000",
+      "location": "La Paz",
+      "winner": {
+        "name": "Saint",
+        "page": "Saint",
+        "flag": "South Korea",
+        "character": "Jack-8"
+      },
+      "runnerUp": {
+        "name": "Roynichi",
+        "page": "Roynichi",
+        "flag": "Peru",
+        "character": "Hwoarang"
+      }
+    },
+    {
+      "name": "TEKKEN Nexus 2025",
+      "page": "TEKKEN_Nexus/2025/T8",
+      "url": "https://liquipedia.net/fighters/TEKKEN_Nexus/2025/T8",
+      "date": "2025-09-25",
+      "tier": 2,
+      "entrants": 216,
+      "prize": "$2,300",
+      "location": "New Delhi",
+      "winner": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "Rangchu",
+        "page": "Rangchu",
+        "flag": "South Korea",
+        "character": "Fahkumram"
+      }
+    },
+    {
+      "name": "Ultimate Fighting Arena 2025",
+      "page": "Ultimate_Fighting_Arena/2025/T8",
+      "url": "https://liquipedia.net/fighters/Ultimate_Fighting_Arena/2025/T8",
+      "date": "2025-09-25",
+      "tier": 2,
+      "entrants": 128,
+      "prize": "$3,520.70",
+      "location": "Paris",
+      "winner": {
+        "name": "LowHigh",
+        "page": "LowHigh",
+        "flag": "South Korea",
+        "character": "Bryan"
+      },
+      "runnerUp": {
+        "name": "JeonDDing",
+        "page": "Jeondding",
+        "flag": "South Korea",
+        "character": "Eddy"
+      }
+    },
+    {
+      "name": "CROSSOVER 2025",
+      "page": "CROSSOVER/2025/T8",
+      "url": "https://liquipedia.net/fighters/CROSSOVER/2025/T8",
+      "date": "2025-08-25",
+      "tier": 2,
+      "entrants": 129,
+      "prize": "$3,502.61",
+      "location": "Oberhausen",
+      "winner": {
+        "name": "Edddyy",
+        "page": "Edddyy",
+        "flag": "United Kingdom",
+        "character": "Feng"
+      },
+      "runnerUp": {
+        "name": "Sin",
+        "page": "Sin_(Dutch_Player)",
+        "flag": "Netherlands",
+        "character": "Yoshimitsu"
+      }
+    },
+    {
+      "name": "Esports World Cup 2025",
+      "page": "Esports_World_Cup/2025/T8",
+      "url": "https://liquipedia.net/fighters/Esports_World_Cup/2025/T8",
+      "date": "2025-08-25",
+      "tier": 1,
+      "entrants": 32,
+      "prize": "$1,000,000",
+      "location": "Riyadh",
+      "winner": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "LowHigh",
+        "page": "LowHigh",
+        "flag": "South Korea",
+        "character": "Bryan"
+      }
+    },
+    {
+      "name": "Esports World Cup 2025 Last Chance Qualifier",
+      "page": "Esports_World_Cup/2025/T8/Last_Chance_Qualifier",
+      "url": "https://liquipedia.net/fighters/Esports_World_Cup/2025/T8/Last_Chance_Qualifier",
+      "date": "2025-08-25",
+      "tier": 1,
+      "entrants": 415,
+      "prize": "$50,000",
+      "location": "Riyadh",
+      "winner": {
+        "name": "Numan Ch",
+        "page": "Numan_Ch",
+        "flag": "Pakistan",
+        "character": "Steve"
+      },
+      "runnerUp": {
+        "name": "qudans",
+        "page": "Qudans",
+        "flag": "South Korea",
+        "character": "Heihachi"
+      }
+    },
+    {
+      "name": "Evolution Championship Series 2025",
+      "page": "Evolution_Championship_Series/2025/T8",
+      "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2025/T8",
+      "date": "2025-08-25",
+      "tier": 1,
+      "entrants": 2555,
+      "prize": "$30,300",
+      "location": "Las Vegas, NV",
+      "winner": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Anna"
+      },
+      "runnerUp": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Anna"
+      }
+    },
+    {
+      "name": "Saudi eLeague Fighting: Season 3 Championship",
+      "page": "Saudi_eLeague/Season_3/Championship/T8",
+      "url": "https://liquipedia.net/fighters/Saudi_eLeague/Season_3/Championship/T8",
+      "date": "2025-08-25",
+      "tier": 2,
+      "entrants": 34,
+      "prize": "$7,993.88",
+      "location": "Riyadh",
+      "winner": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Anna"
+      },
+      "runnerUp": {
+        "name": "Aqeel9",
+        "page": "Aqeel9",
+        "flag": "Saudi Arabia",
+        "character": "Anna"
+      }
+    },
+    {
+      "name": "VSFighting XIII",
+      "page": "VSFighting/2025/T8",
+      "url": "https://liquipedia.net/fighters/VSFighting/2025/T8",
+      "date": "2025-08-25",
+      "tier": 2,
+      "entrants": 242,
+      "prize": "$5,287.58",
+      "location": "Birmingham",
+      "winner": {
+        "name": "Gosain",
+        "page": "Gosain",
+        "flag": "United Kingdom",
+        "character": "Law"
+      },
+      "runnerUp": {
+        "name": "RsKyLuck",
+        "page": "RsKyLuck",
+        "flag": "United Kingdom",
+        "character": "Claudio"
+      }
+    },
+    {
+      "name": "MOOR1NG 2025",
+      "page": "MOOR1NG/2025/T8",
+      "url": "https://liquipedia.net/fighters/MOOR1NG/2025/T8",
+      "date": "2025-07-25",
+      "tier": 2,
+      "entrants": 237,
+      "prize": "$2,300",
+      "location": "Antananarivo",
+      "winner": {
+        "name": "Raef",
+        "page": "Raef",
+        "flag": "Saudi Arabia",
+        "character": "Jin"
+      },
+      "runnerUp": {
+        "name": "Shadow 20z",
+        "page": "Shadow",
+        "flag": "United States",
+        "character": "Zafina"
+      }
+    },
+    {
+      "name": "Only The Best 2025 TWT Challenger",
+      "page": "Only_The_Best/7/T8/TWT_Challenger",
+      "url": "https://liquipedia.net/fighters/Only_The_Best/7/T8/TWT_Challenger",
+      "date": "2025-07-25",
+      "tier": 2,
+      "entrants": 134,
+      "prize": "$3,507.11",
+      "location": "Naples",
+      "winner": {
+        "name": "EDGE",
+        "page": "EDGE",
+        "flag": "South Korea",
+        "character": "Hwoarang"
+      },
+      "runnerUp": {
+        "name": "Kaneandtrench",
+        "page": "KaneAndTrench",
+        "flag": "United Kingdom",
+        "character": "Yoshimitsu"
+      }
+    },
+    {
+      "name": "Second Wind 2025",
+      "page": "Second_Wind/2025/T8",
+      "url": "https://liquipedia.net/fighters/Second_Wind/2025/T8",
+      "date": "2025-07-25",
+      "tier": 2,
+      "entrants": 60,
+      "prize": "$2,000",
+      "location": "Wellington",
+      "winner": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "Rangchu",
+        "page": "Rangchu",
+        "flag": "South Korea",
+        "character": "Panda"
+      }
+    },
+    {
+      "name": "SOOP TEKKEN League 2025: Season 1 Finals",
+      "page": "SOOP_TEKKEN_League/2025/Season_1/Finals",
+      "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2025/Season_1/Finals",
+      "date": "2025-07-25",
+      "tier": 2,
+      "entrants": 16,
+      "prize": "$14,454.62",
+      "location": "Seoul",
+      "winner": {
+        "name": "Qudans",
+        "page": "Qudans",
+        "flag": "South Korea",
+        "character": "Heihachi"
+      },
+      "runnerUp": {
+        "name": "Breadman",
+        "page": "Breadman",
+        "flag": "South Korea",
+        "character": "Leroy"
+      }
+    },
+    {
+      "name": "The MIXUP 2025",
+      "page": "The_MIXUP/2025/T8",
+      "url": "https://liquipedia.net/fighters/The_MIXUP/2025/T8",
+      "date": "2025-07-25",
+      "tier": 1,
+      "entrants": 240,
+      "prize": "$7,656.27",
+      "location": "Lyon",
+      "winner": {
+        "name": "Tibetano",
+        "page": "Tibetano",
+        "flag": "Spain",
+        "character": "Asuka"
+      },
+      "runnerUp": {
+        "name": "JeonDDing",
+        "page": "Jeondding",
+        "flag": "South Korea",
+        "character": "Eddy"
+      }
+    },
+    {
+      "name": "Battle Arena Melbourne 15",
+      "page": "Battle_Arena_Melbourne/15/T8",
+      "url": "https://liquipedia.net/fighters/Battle_Arena_Melbourne/15/T8",
+      "date": "2025-06-25",
+      "tier": 1,
+      "entrants": 229,
+      "prize": "$7,472.70",
+      "location": "Melbourne",
+      "winner": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "Farzeen",
+        "page": "Farzeen",
+        "flag": "Pakistan",
+        "character": "Victor"
+      }
+    },
+    {
+      "name": "BRICS Tournament 2025",
+      "page": "BRICS_Tournament/2025",
+      "url": "https://liquipedia.net/fighters/BRICS_Tournament/2025",
+      "date": "2025-06-25",
+      "tier": 2,
+      "entrants": 44,
+      "prize": "$45,348.09",
+      "location": "Moscow",
+      "winner": {
+        "name": "XCC",
+        "page": "XCC",
+        "flag": "China",
+        "character": "Shaheen"
+      },
+      "runnerUp": {
+        "name": "KaizokuLars",
+        "page": "KaizokuLars",
+        "flag": "Turkey",
+        "character": "Lars"
+      }
+    },
+    {
+      "name": "CEO 2025",
+      "page": "Community_Effort_Orlando/2025/T8",
+      "url": "https://liquipedia.net/fighters/Community_Effort_Orlando/2025/T8",
+      "date": "2025-06-25",
+      "tier": 1,
+      "entrants": 643,
+      "prize": "$12,430",
+      "location": "Orlando, FL",
+      "winner": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Anna"
+      },
+      "runnerUp": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Lars"
+      }
+    },
+    {
+      "name": "CHAIN SHIFT 2025",
+      "page": "Chain_Shift/2025/T8",
+      "url": "https://liquipedia.net/fighters/Chain_Shift/2025/T8",
+      "date": "2025-06-25",
+      "tier": 2,
+      "entrants": 169,
+      "prize": "$3,690",
+      "location": "La Mirada, CA",
+      "winner": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "LowHigh",
+        "page": "LowHigh",
+        "flag": "South Korea",
+        "character": "Bryan"
+      }
+    },
+    {
+      "name": "Headstomper 2025",
+      "page": "Headstomper/2025/T8",
+      "url": "https://liquipedia.net/fighters/Headstomper/2025/T8",
+      "date": "2025-06-25",
+      "tier": 2,
+      "entrants": 161,
+      "prize": "$3,826.96",
+      "location": "Malmö",
+      "winner": {
+        "name": "ILIAS",
+        "page": "ILIAS",
+        "flag": "Morocco",
+        "character": "Eddy"
+      },
+      "runnerUp": {
+        "name": "Exodia",
+        "page": "Exodia",
+        "flag": "Saudi Arabia",
+        "character": "Feng"
+      }
+    },
+    {
+      "name": "RAGNAROK 2025",
+      "page": "Ragnarok/2025/T8",
+      "url": "https://liquipedia.net/fighters/Ragnarok/2025/T8",
+      "date": "2025-06-25",
+      "tier": 2,
+      "entrants": 67,
+      "prize": "$2,000",
+      "location": "Córdoba",
+      "winner": {
+        "name": "Noel",
+        "page": "Noel",
+        "flag": "Bolivia",
+        "character": "Steve"
+      },
+      "runnerUp": {
+        "name": "leemishima",
+        "page": "Leemishima",
+        "flag": "Argentina",
+        "character": "Lee"
+      }
+    },
+    {
+      "name": "Brussels Challenge Major Edition 2025",
+      "page": "Brussels_Challenge/2025/Major_Edition/T8",
+      "url": "https://liquipedia.net/fighters/Brussels_Challenge/2025/Major_Edition/T8",
+      "date": "2025-05-25",
+      "tier": 2,
+      "entrants": 102,
+      "prize": "$3,138.67",
+      "location": "Brussels",
+      "winner": {
+        "name": "KingReyJr",
+        "page": "KingReyJr",
+        "flag": "United States",
+        "character": "Asuka"
+      },
+      "runnerUp": {
+        "name": "Shadow 20z",
+        "page": "Shadow",
+        "flag": "United States",
+        "character": "Claudio"
+      }
+    },
+    {
+      "name": "Combo Breaker 2025",
+      "page": "Combo_Breaker/2025/T8",
+      "url": "https://liquipedia.net/fighters/Combo_Breaker/2025/T8",
+      "date": "2025-05-25",
+      "tier": 1,
+      "entrants": 1108,
+      "prize": "$17,080",
+      "location": "Schaumburg, IL",
+      "winner": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Anna"
+      }
+    },
+    {
+      "name": "Evolution Championship Series: Japan 2025",
+      "page": "Evolution_Championship_Series/2025/Japan/T8",
+      "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2025/Japan/T8",
+      "date": "2025-05-25",
+      "tier": 1,
+      "entrants": 982,
+      "prize": "$18,916.27",
+      "location": "Tokyo",
+      "winner": {
+        "name": "Knee",
+        "page": "Knee",
+        "flag": "South Korea",
+        "character": "Bryan"
+      },
+      "runnerUp": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Claudio"
+      }
+    },
+    {
+      "name": "LVL UP EXPO 2025",
+      "page": "LVL_UP_EXPO/2025/T8",
+      "url": "https://liquipedia.net/fighters/LVL_UP_EXPO/2025/T8",
+      "date": "2025-04-25",
+      "tier": 2,
+      "entrants": 162,
+      "prize": "$5,000",
+      "location": "Las Vegas, NV",
+      "winner": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "Rangchu",
+        "page": "Rangchu",
+        "flag": "South Korea",
+        "character": "Kuma"
+      }
+    },
+    {
+      "name": "Riyadh Clash 2",
+      "page": "Riyadh_Clash/2/T8",
+      "url": "https://liquipedia.net/fighters/Riyadh_Clash/2/T8",
+      "date": "2025-04-25",
+      "tier": 2,
+      "entrants": 107,
+      "prize": "$1,332.96",
+      "location": "Riyadh",
+      "winner": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "M-D-LUFFY-19",
+        "page": "M-D-LUFFY-19",
+        "flag": "Saudi Arabia",
+        "character": "Paul"
+      }
+    },
+    {
+      "name": "SOOP TEKKEN League 2025: Club Battle",
+      "page": "SOOP_TEKKEN_League/2025/Club_Battle",
+      "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2025/Club_Battle",
+      "date": "2025-04-25",
+      "tier": 2,
+      "entrants": 18,
+      "prize": "$12,549.44",
+      "location": "Seoul",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "Tekken Nations Cup",
+      "page": "Tekken_Nations_Cup/2025",
+      "url": "https://liquipedia.net/fighters/Tekken_Nations_Cup/2025",
+      "date": "2025-04-25",
+      "tier": 2,
+      "entrants": 12,
+      "prize": "$20,000",
+      "location": "Abu Dhabi",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "Pakistan vs Korea",
+      "page": "Pakistan_vs_Korea/2025",
+      "url": "https://liquipedia.net/fighters/Pakistan_vs_Korea/2025",
+      "date": "2025-03-25",
+      "tier": 2,
+      "entrants": 15,
+      "prize": null,
+      "location": "Seoul",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "Texas Showdown 2025",
+      "page": "Texas_Showdown/2025/T8",
+      "url": "https://liquipedia.net/fighters/Texas_Showdown/2025/T8",
+      "date": "2025-03-25",
+      "tier": 2,
+      "entrants": 277,
+      "prize": "$4,155",
+      "location": "Houston, TX",
+      "winner": {
+        "name": "Genghis D0n",
+        "page": "Genghis_D0n",
+        "flag": "United States",
+        "character": "Clive"
+      },
+      "runnerUp": {
+        "name": "Sicoby",
+        "page": "Sicoby",
+        "flag": "United States",
+        "character": "King"
+      }
+    },
+    {
+      "name": "European TEKKEN Cup 3 Finals",
+      "page": "European_Tekken_Cup/2024/Finals",
+      "url": "https://liquipedia.net/fighters/European_Tekken_Cup/2024/Finals",
+      "date": "2025-02-25",
+      "tier": 1,
+      "entrants": 20,
+      "prize": "$33,486.67",
+      "location": "Cologne",
+      "winner": {
+        "name": "Nino",
+        "page": "Nino2003",
+        "flag": "Germany",
+        "character": "Kuma"
+      },
+      "runnerUp": {
+        "name": "JoKa",
+        "page": "JoKa",
+        "flag": "United Kingdom",
+        "character": "Feng"
+      }
+    },
+    {
+      "name": "European TEKKEN Cup 3 Last Chance Qualifier",
+      "page": "European_Tekken_Cup/2024/Finals/Last_Chance_Qualifier",
+      "url": "https://liquipedia.net/fighters/European_Tekken_Cup/2024/Finals/Last_Chance_Qualifier",
+      "date": "2025-02-25",
+      "tier": 2,
+      "entrants": 124,
+      "prize": null,
+      "location": "Cologne",
+      "winner": {
+        "name": "KaneAndTrench",
+        "page": "KaneAndTrench",
+        "flag": "United Kingdom",
+        "character": "Yoshimitsu"
+      },
+      "runnerUp": {
+        "name": "Kirakira",
+        "page": "Kirakira",
+        "flag": "Switzerland",
+        "character": "Jun"
+      }
+    },
+    {
+      "name": "MASTERCUP TRY TOKYO 2025",
+      "page": "MASTERCUP/13/TRY",
+      "url": "https://liquipedia.net/fighters/MASTERCUP/13/TRY",
+      "date": "2025-02-25",
+      "tier": 2,
+      "entrants": 292,
+      "prize": null,
+      "location": "Tokyo",
+      "winner": {
+        "name": "haisha",
+        "page": null,
+        "flag": "Japan",
+        "character": "Bryan"
+      },
+      "runnerUp": {
+        "name": "TaiHeiYo",
+        "page": "TaiHeiYo",
+        "flag": "Japan",
+        "character": "King"
+      }
+    },
+    {
+      "name": "MASTERCUP.13",
+      "page": "MASTERCUP/13/5vs5",
+      "url": "https://liquipedia.net/fighters/MASTERCUP/13/5vs5",
+      "date": "2025-02-25",
+      "tier": 1,
+      "entrants": 980,
+      "prize": null,
+      "location": "Tokyo",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "Virtuocity Battleground Qatar",
+      "page": "Virtuocity_Battleground_Qatar/2025",
+      "url": "https://liquipedia.net/fighters/Virtuocity_Battleground_Qatar/2025",
+      "date": "2025-02-25",
+      "tier": 2,
+      "entrants": 174,
+      "prize": "$10,000",
+      "location": "Doha",
+      "winner": {
+        "name": "Farzeen",
+        "page": "Farzeen",
+        "flag": "Pakistan",
+        "character": "Victor"
+      },
+      "runnerUp": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Dragunov"
+      }
+    },
+    {
+      "name": "Frosty Faustings XVII",
+      "page": "Frosty_Faustings/2025/T8",
+      "url": "https://liquipedia.net/fighters/Frosty_Faustings/2025/T8",
+      "date": "2025-01-25",
+      "tier": 2,
+      "entrants": 506,
+      "prize": "$5,060",
+      "location": "Lombard, IL",
+      "winner": {
+        "name": "Shadow 20z",
+        "page": "Shadow",
+        "flag": "United States",
+        "character": "Zafina"
+      },
+      "runnerUp": {
+        "name": "BoosterBlast",
+        "page": "BoosterBlast",
+        "flag": "Canada",
+        "character": "Xiaoyu"
+      }
+    },
+    {
+      "name": "Galaxian Explosion: Dark Resurrection II",
+      "page": "Galaxian_Explosion/Dark_Resurrection/2/T8",
+      "url": "https://liquipedia.net/fighters/Galaxian_Explosion/Dark_Resurrection/2/T8",
+      "date": "2025-01-25",
+      "tier": 2,
+      "entrants": 160,
+      "prize": "$4,435.50",
+      "location": "Paris",
+      "winner": {
+        "name": "PiKaH",
+        "page": "PiKaH",
+        "flag": "Belgium",
+        "character": "Yoshimitsu"
+      },
+      "runnerUp": {
+        "name": "Tibetano",
+        "page": "Tibetano",
+        "flag": "Spain",
+        "character": "Asuka"
+      }
+    },
+    {
+      "name": "Invictus",
+      "page": "Invictus/2025/T8",
+      "url": "https://liquipedia.net/fighters/Invictus/2025/T8",
+      "date": "2025-01-25",
+      "tier": 2,
+      "entrants": 145,
+      "prize": "$5,127.42",
+      "location": "Verona",
+      "winner": {
+        "name": "JoKa",
+        "page": "JoKa",
+        "flag": "United Kingdom",
+        "character": "Feng"
+      },
+      "runnerUp": {
+        "name": "PiKaH",
+        "page": "PiKaH",
+        "flag": "Belgium",
+        "character": "Yoshimitsu"
+      }
+    },
+    {
+      "name": "SOOP TEKKEN League 2024: Champions",
+      "page": "SOOP_TEKKEN_League/2024/Champions",
+      "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2024/Champions",
+      "date": "2025-01-25",
+      "tier": 1,
+      "entrants": 16,
+      "prize": "$20,451.70",
+      "location": "Seoul",
+      "winner": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "Mangja",
+        "page": "Malgu",
+        "flag": "South Korea",
+        "character": "Law"
+      }
+    },
+    {
+      "name": "Busan TEKKEN Match-up Finals",
+      "page": "Busan_TEKKEN_Match-up/2024/Finals",
+      "url": "https://liquipedia.net/fighters/Busan_TEKKEN_Match-up/2024/Finals",
+      "date": "2024-12-24",
+      "tier": 2,
+      "entrants": 8,
+      "prize": "$8,000",
+      "location": "Busan",
+      "winner": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "Kagemaru",
+        "page": "Kagemaru",
+        "flag": "Japan",
+        "character": "Zafina"
+      }
+    },
+    {
+      "name": "CEOtaku 2024",
+      "page": "CEOtaku/2024/T8",
+      "url": "https://liquipedia.net/fighters/CEOtaku/2024/T8",
+      "date": "2024-12-24",
+      "tier": 2,
+      "entrants": 181,
+      "prize": "$1,810",
+      "location": "Orlando, FL",
+      "winner": {
+        "name": "JoeCrush",
+        "page": "JoeCrush",
+        "flag": "United States",
+        "character": "Jack-8"
+      },
+      "runnerUp": {
+        "name": "KingReyJr",
+        "page": "KingReyJr",
+        "flag": "United States",
+        "character": "Asuka"
+      }
+    },
+    {
+      "name": "Enders Zone Evolution 4",
+      "page": "Enders_Zone_Evolution/4",
+      "url": "https://liquipedia.net/fighters/Enders_Zone_Evolution/4",
+      "date": "2024-12-24",
+      "tier": 2,
+      "entrants": 116,
+      "prize": "$3,151.43",
+      "location": "Madrid",
+      "winner": {
+        "name": "PiKaH",
+        "page": "PiKaH",
+        "flag": "Belgium",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "Sin",
+        "page": "Sin_(Dutch_Player)",
+        "flag": "Netherlands",
+        "character": "Yoshimitsu"
+      }
+    },
+    {
+      "name": "Hidden Retreat",
+      "page": "Hidden_Retreat/2024",
+      "url": "https://liquipedia.net/fighters/Hidden_Retreat/2024",
+      "date": "2024-12-24",
+      "tier": 2,
+      "entrants": 65,
+      "prize": "$4,030.13",
+      "location": "Winterthur",
+      "winner": {
+        "name": "Danielmado",
+        "page": "DanielMado",
+        "flag": "Italy",
+        "character": "Jin"
+      },
+      "runnerUp": {
+        "name": "Tetsu",
+        "page": "Tetsu",
+        "flag": "Germany",
+        "character": "Claudio"
+      }
+    },
+    {
+      "name": "Tekken World Tour Finals 2024",
+      "page": "Tekken_World_Tour_Finals/2024",
+      "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2024",
+      "date": "2024-12-24",
+      "tier": 1,
+      "entrants": 37,
+      "prize": "$300,000",
+      "location": "Shibuya, Tokyo",
+      "winner": {
+        "name": "Rangchu",
+        "page": "Rangchu",
+        "flag": "South Korea",
+        "character": "Kuma"
+      },
+      "runnerUp": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Dragunov"
+      }
+    },
+    {
+      "name": "Tekken World Tour Finals 2024 Last Chance Qualifier",
+      "page": "Tekken_World_Tour_Finals/2024/Last_Chance_Qualifier",
+      "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2024/Last_Chance_Qualifier",
+      "date": "2024-12-24",
+      "tier": 1,
+      "entrants": 576,
+      "prize": null,
+      "location": "Shibuya, Tokyo",
+      "winner": {
+        "name": "EDGE",
+        "page": "EDGE",
+        "flag": "South Korea",
+        "character": "Hwoarang"
+      },
+      "runnerUp": {
+        "name": "KEISUKE",
+        "page": "Keisuke_(Tekken_Player)",
+        "flag": "Japan",
+        "character": "Kazuya"
+      }
+    },
+    {
+      "name": "2Game Pro Tour LATAM Finals",
+      "page": "2Game_Pro_Tour_LATAM/Finals/T8",
+      "url": "https://liquipedia.net/fighters/2Game_Pro_Tour_LATAM/Finals/T8",
+      "date": "2024-11-24",
+      "tier": 2,
+      "entrants": 8,
+      "prize": "$2,000",
+      "location": "Santiago",
+      "winner": {
+        "name": "Doomorelha",
+        "page": "Doomorelha",
+        "flag": "Brazil",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "Dante",
+        "page": "Dante_(Bolivian_Player)",
+        "flag": "Bolivia",
+        "character": "Bryan"
+      }
+    },
+    {
+      "name": "Across The North",
+      "page": "Across_The_North/2024",
+      "url": "https://liquipedia.net/fighters/Across_The_North/2024",
+      "date": "2024-11-24",
+      "tier": 2,
+      "entrants": 88,
+      "prize": "$3,163.39",
+      "location": "Oslo",
+      "winner": {
+        "name": "Tetsu",
+        "page": "Tetsu",
+        "flag": "Germany",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "Gosain",
+        "page": "Gosain",
+        "flag": "United Kingdom",
+        "character": "Law"
+      }
+    },
+    {
+      "name": "BRICS Tournament 2024",
+      "page": "BRICS_Tournament/2024",
+      "url": "https://liquipedia.net/fighters/BRICS_Tournament/2024",
+      "date": "2024-11-24",
+      "tier": 2,
+      "entrants": 10,
+      "prize": "$15,000",
+      "location": "Moscow",
+      "winner": {
+        "name": "XCC",
+        "page": "XCC",
+        "flag": "China",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "Yoshikiller",
+        "page": null,
+        "flag": "India",
+        "character": "Yoshimitsu"
+      }
+    },
+    {
+      "name": "Manila Madness 3",
+      "page": "Manila_Madness/3",
+      "url": "https://liquipedia.net/fighters/Manila_Madness/3",
+      "date": "2024-11-24",
+      "tier": 2,
+      "entrants": 198,
+      "prize": "$1,391.27",
+      "location": "Manila",
+      "winner": {
+        "name": "Rangchu",
+        "page": "Rangchu",
+        "flag": "South Korea",
+        "character": "Kuma"
+      },
+      "runnerUp": {
+        "name": "Yagami",
+        "page": "Yagami_(Australian_Player)",
+        "flag": "Australia",
+        "character": "Reina"
+      }
+    },
+    {
+      "name": "Road To Olympus 2024",
+      "page": "Road_To_Olympus/2024/T8",
+      "url": "https://liquipedia.net/fighters/Road_To_Olympus/2024/T8",
+      "date": "2024-11-24",
+      "tier": 2,
+      "entrants": 97,
+      "prize": "$3,125.49",
+      "location": "Athens",
+      "winner": {
+        "name": "Raef",
+        "page": "Raef",
+        "flag": "Saudi Arabia",
+        "character": "Jin"
+      },
+      "runnerUp": {
+        "name": "JoKa",
+        "page": "JoKa",
+        "flag": "United Kingdom",
+        "character": "Feng"
+      }
+    },
+    {
+      "name": "SOOP TEKKEN League 2024: Season 2 Finals",
+      "page": "SOOP_TEKKEN_League/2024/Season_2/Finals",
+      "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2024/Season_2/Finals",
+      "date": "2024-11-24",
+      "tier": 2,
+      "entrants": 8,
+      "prize": "$7,606.82",
+      "location": "South Korea",
+      "winner": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "Knee",
+        "page": "Knee",
+        "flag": "South Korea",
+        "character": "Bryan"
+      }
+    },
+    {
+      "name": "DreamHack Atlanta 2024",
+      "page": "DreamHack/2024/Atlanta/T8",
+      "url": "https://liquipedia.net/fighters/DreamHack/2024/Atlanta/T8",
+      "date": "2024-10-24",
+      "tier": 2,
+      "entrants": 210,
+      "prize": "$10,000",
+      "location": "Atlanta, GA",
+      "winner": {
+        "name": "Ninjakilla_212",
+        "page": "NinjaKilla212",
+        "flag": "United States",
+        "character": "Law"
+      },
+      "runnerUp": {
+        "name": "JoeCrush",
+        "page": "JoeCrush",
+        "flag": "United States",
+        "character": "Jack-8"
+      }
+    },
+    {
+      "name": "East Coast Throwdown 2024",
+      "page": "East_Coast_Throwdown/2024/T8",
+      "url": "https://liquipedia.net/fighters/East_Coast_Throwdown/2024/T8",
+      "date": "2024-10-24",
+      "tier": 2,
+      "entrants": 297,
+      "prize": "$2,970",
+      "location": "Hartford, CT",
+      "winner": {
+        "name": "Cuddle_core",
+        "page": "Cuddle_Core",
+        "flag": "United States",
+        "character": "Alisa"
+      },
+      "runnerUp": {
+        "name": "Befamous",
+        "page": null,
+        "flag": "United States",
+        "character": "Jun"
+      }
+    },
+    {
+      "name": "EGX Arena 2024",
+      "page": "EGX/2024",
+      "url": "https://liquipedia.net/fighters/EGX/2024",
+      "date": "2024-10-24",
+      "tier": 2,
+      "entrants": 128,
+      "prize": "$6,479.83",
+      "location": "London",
+      "winner": {
+        "name": "Gosain",
+        "page": "Gosain",
+        "flag": "United Kingdom",
+        "character": "Law"
+      },
+      "runnerUp": {
+        "name": "Jodd",
+        "page": "Jodd",
+        "flag": "France",
+        "character": "Nina"
+      }
+    },
+    {
+      "name": "Fighting Games Challenge 2024",
+      "page": "Fighting_Games_Challenge/2024",
+      "url": "https://liquipedia.net/fighters/Fighting_Games_Challenge/2024",
+      "date": "2024-10-24",
+      "tier": 2,
+      "entrants": 89,
+      "prize": "$3,246.39",
+      "location": "Poznań",
+      "winner": {
+        "name": "Nino",
+        "page": "Nino2003",
+        "flag": "Germany",
+        "character": "Kuma"
+      },
+      "runnerUp": {
+        "name": "DBP",
+        "page": "DBP",
+        "flag": "Germany",
+        "character": "Law"
+      }
+    },
+    {
+      "name": "JEMPUTAN: Tekken 8 International Championship 2024",
+      "page": "JEMPUTAN/2024",
+      "url": "https://liquipedia.net/fighters/JEMPUTAN/2024",
+      "date": "2024-10-24",
+      "tier": 2,
+      "entrants": 110,
+      "prize": "$4,646.30",
+      "location": "Sepang",
+      "winner": {
+        "name": "Mohsin Shooter",
+        "page": "Mohsin_Shooter",
+        "flag": "Pakistan",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "KrissW",
+        "page": null,
+        "flag": "Thailand",
+        "character": "Victor"
+      }
+    },
+    {
+      "name": "Tekken National Championship 2024",
+      "page": "Tekken_National_Championship/2024",
+      "url": "https://liquipedia.net/fighters/Tekken_National_Championship/2024",
+      "date": "2024-10-24",
+      "tier": 2,
+      "entrants": 100,
+      "prize": "$3,284.61",
+      "location": "Purmerend",
+      "winner": {
+        "name": "Tetsu",
+        "page": "Tetsu",
+        "flag": "Germany",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "Sin",
+        "page": "Sin_(Dutch_Player)",
+        "flag": "Netherlands",
+        "character": "Yoshimitsu"
+      }
+    },
+    {
+      "name": "Thaiger Uppercut 2024",
+      "page": "Thaiger_Uppercut/2024/T8",
+      "url": "https://liquipedia.net/fighters/Thaiger_Uppercut/2024/T8",
+      "date": "2024-10-24",
+      "tier": 1,
+      "entrants": 234,
+      "prize": "$6,000",
+      "location": "Bangkok",
+      "winner": {
+        "name": "THE JON",
+        "page": "THE_JON",
+        "flag": "Pakistan",
+        "character": "King"
+      },
+      "runnerUp": {
+        "name": "Shadow 20z",
+        "page": "Shadow",
+        "flag": "United States",
+        "character": "Zafina"
+      }
+    },
+    {
+      "name": "Cape Town Showdown 2024",
+      "page": "Cape_Town_Showdown/2024",
+      "url": "https://liquipedia.net/fighters/Cape_Town_Showdown/2024",
+      "date": "2024-09-24",
+      "tier": 2,
+      "entrants": 130,
+      "prize": "$2,000",
+      "location": "Cape Town",
+      "winner": {
+        "name": "CBM",
+        "page": "CherryBerryMango",
+        "flag": "South Korea",
+        "character": "Jin"
+      },
+      "runnerUp": {
+        "name": "THE JON",
+        "page": "THE_JON",
+        "flag": "Pakistan",
+        "character": "King"
+      }
+    },
+    {
+      "name": "Clash of the Olympians 2K24",
+      "page": "Clash_of_the_Olympians/2024/T8",
+      "url": "https://liquipedia.net/fighters/Clash_of_the_Olympians/2024/T8",
+      "date": "2024-09-24",
+      "tier": 2,
+      "entrants": 160,
+      "prize": "$2,234.88",
+      "location": "Athens",
+      "winner": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "JeonDDing",
+        "page": "Jeondding",
+        "flag": "South Korea",
+        "character": "Eddy"
+      }
+    },
+    {
+      "name": "Emirates Showdown 2024",
+      "page": "Emirates_Showdown/2024/T8",
+      "url": "https://liquipedia.net/fighters/Emirates_Showdown/2024/T8",
+      "date": "2024-09-24",
+      "tier": 1,
+      "entrants": 116,
+      "prize": "$6,000",
+      "location": "Dubai",
+      "winner": {
+        "name": "kkokkoma",
+        "page": "Kkokkoma",
+        "flag": "South Korea",
+        "character": "Feng"
+      },
+      "runnerUp": {
+        "name": "Tekken Master",
+        "page": "Tekken_Master",
+        "flag": "Bahrain",
+        "character": "Eddy"
+      }
+    },
+    {
+      "name": "Punishment 3",
+      "page": "Punishment/2024",
+      "url": "https://liquipedia.net/fighters/Punishment/2024",
+      "date": "2024-09-24",
+      "tier": 1,
+      "entrants": 147,
+      "prize": "$6,000",
+      "location": "La Paz",
+      "winner": {
+        "name": "leemishima",
+        "page": "Leemishima",
+        "flag": "Argentina",
+        "character": "Lidia"
+      },
+      "runnerUp": {
+        "name": "Abel Del Maestro",
+        "page": "Abel_del_Maestro",
+        "flag": "Peru",
+        "character": "Eddy"
+      }
+    },
+    {
+      "name": "Red Bull Golden Letters 2024",
+      "page": "Red_Bull_Golden_Letters/2024",
+      "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024",
+      "date": "2024-09-24",
+      "tier": 1,
+      "entrants": 20,
+      "prize": null,
+      "location": "London",
+      "winner": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "AK",
+        "page": "AK",
+        "flag": "Philippines",
+        "character": "Shaheen"
+      }
+    },
+    {
+      "name": "Red Bull Golden Letters 2024 - London Qualifier",
+      "page": "Red_Bull_Golden_Letters/2024/Qualifier/London",
+      "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024/Qualifier/London",
+      "date": "2024-09-24",
+      "tier": 2,
+      "entrants": 121,
+      "prize": null,
+      "location": "London",
+      "winner": {
+        "name": "Tetsu",
+        "page": "Tetsu",
+        "flag": "Germany",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "Gosain",
+        "page": "Gosain",
+        "flag": "United Kingdom",
+        "character": "Law"
+      }
+    },
+    {
+      "name": "SOOP TEKKEN League 2024: Autumn Super Tournament",
+      "page": "SOOP_TEKKEN_League/2024/Autumn_Super_Tournament",
+      "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2024/Autumn_Super_Tournament",
+      "date": "2024-09-24",
+      "tier": 2,
+      "entrants": 131,
+      "prize": "$8,216.50",
+      "location": "Seoul",
+      "winner": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Feng"
+      },
+      "runnerUp": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      }
+    },
+    {
+      "name": "Thunderstruck 2024",
+      "page": "Thunderstruck/2024/T8",
+      "url": "https://liquipedia.net/fighters/Thunderstruck/2024/T8",
+      "date": "2024-09-24",
+      "tier": 2,
+      "entrants": 63,
+      "prize": "$492.08",
+      "location": "Monterrey",
+      "winner": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "Farzeen",
+        "page": "Farzeen",
+        "flag": "Pakistan",
+        "character": "Victor"
+      }
+    },
+    {
+      "name": "Ultimate Fighting Arena 2024",
+      "page": "Ultimate_Fighting_Arena/2024/T8",
+      "url": "https://liquipedia.net/fighters/Ultimate_Fighting_Arena/2024/T8",
+      "date": "2024-09-24",
+      "tier": 2,
+      "entrants": 260,
+      "prize": "$4,433.85",
+      "location": "Aubervilliers",
+      "winner": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "AK",
+        "page": "AK",
+        "flag": "Philippines",
+        "character": "Shaheen"
+      }
+    },
+    {
+      "name": "AfreecaTV TEKKEN League 2024: Season 1 Team Battle",
+      "page": "Afreeca_TEKKEN_League/2024/Season_1/Team_Battle",
+      "url": "https://liquipedia.net/fighters/Afreeca_TEKKEN_League/2024/Season_1/Team_Battle",
+      "date": "2024-08-24",
+      "tier": 2,
+      "entrants": 18,
+      "prize": "$8,792.34",
+      "location": "Ilsan",
+      "winner": null,
+      "runnerUp": null
+    },
+    {
+      "name": "CNE Master Clash Finals",
+      "page": "CNE_Master_Clash/2024/Finals",
+      "url": "https://liquipedia.net/fighters/CNE_Master_Clash/2024/Finals",
+      "date": "2024-08-24",
+      "tier": 2,
+      "entrants": 36,
+      "prize": "$8,881.98",
+      "location": "Toronto, ON",
+      "winner": {
+        "name": "Fear Of Silence",
+        "page": "Fear",
+        "flag": "United States",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "BoosterBlast",
+        "page": "BoosterBlast",
+        "flag": "Canada",
+        "character": "Xiaoyu"
+      }
+    },
+    {
+      "name": "CROSSOVER 2024",
+      "page": "CROSSOVER/2024/T8",
+      "url": "https://liquipedia.net/fighters/CROSSOVER/2024/T8",
+      "date": "2024-08-24",
+      "tier": 2,
+      "entrants": 204,
+      "prize": "$4,407.79",
+      "location": "Oberhausen",
+      "winner": {
+        "name": "Sin",
+        "page": "Sin_(Dutch_Player)",
+        "flag": "Netherlands",
+        "character": "Yoshimitsu"
+      },
+      "runnerUp": {
+        "name": "kkokkoma",
+        "page": "Kkokkoma",
+        "flag": "South Korea",
+        "character": "Feng"
+      }
+    },
+    {
+      "name": "Esports World Cup 2024",
+      "page": "Esports_World_Cup/2024/T8",
+      "url": "https://liquipedia.net/fighters/Esports_World_Cup/2024/T8",
+      "date": "2024-08-24",
+      "tier": 1,
+      "entrants": 32,
+      "prize": "$1,000,000",
+      "location": "Riyadh",
+      "winner": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Dragunov"
+      }
+    },
+    {
+      "name": "Esports World Cup 2024 Last Chance Qualifier",
+      "page": "Esports_World_Cup/2024/T8/Last_Chance_Qualifier",
+      "url": "https://liquipedia.net/fighters/Esports_World_Cup/2024/T8/Last_Chance_Qualifier",
+      "date": "2024-08-24",
+      "tier": 1,
+      "entrants": 234,
+      "prize": null,
+      "location": "Riyadh",
+      "winner": {
+        "name": "Usama Abbasi",
+        "page": "Usama_Abbasi",
+        "flag": "Pakistan",
+        "character": "Jun"
+      },
+      "runnerUp": {
+        "name": "AO",
+        "page": "Ao",
+        "flag": "Japan",
+        "character": "Alisa"
+      }
+    },
+    {
+      "name": "MOOR1NG 2024",
+      "page": "MOOR1NG/2024/T8",
+      "url": "https://liquipedia.net/fighters/MOOR1NG/2024/T8",
+      "date": "2024-08-24",
+      "tier": 2,
+      "entrants": 214,
+      "prize": "$2,000",
+      "location": "Antananarivo",
+      "winner": {
+        "name": "Dawood Sikandar",
+        "page": "Dawood_Sikandar",
+        "flag": "Pakistan",
+        "character": "Alisa"
+      },
+      "runnerUp": {
+        "name": "Raef",
+        "page": "Raef",
+        "flag": "Saudi Arabia",
+        "character": "Jin"
+      }
+    },
+    {
+      "name": "Red Bull Golden Letters 2024 - Europe Qualifier",
+      "page": "Red_Bull_Golden_Letters/2024/Qualifier/Europe",
+      "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024/Qualifier/Europe",
+      "date": "2024-08-24",
+      "tier": 2,
+      "entrants": 110,
+      "prize": null,
+      "location": "Online",
+      "winner": {
+        "name": "Nino",
+        "page": "Nino2003",
+        "flag": "Germany",
+        "character": "Kuma"
+      },
+      "runnerUp": {
+        "name": "DombiliMaymun",
+        "page": "DombiliMaymun",
+        "flag": "Germany",
+        "character": "Dragunov"
+      }
+    },
+    {
+      "name": "Red Bull Golden Letters 2024 - Tokyo Qualifier",
+      "page": "Red_Bull_Golden_Letters/2024/Qualifier/Tokyo",
+      "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024/Qualifier/Tokyo",
+      "date": "2024-08-24",
+      "tier": 2,
+      "entrants": 53,
+      "prize": null,
+      "location": "Tokyo",
+      "winner": {
+        "name": "Shounen",
+        "page": "Shounen_(Tekken_Player)",
+        "flag": "Japan",
+        "character": "Jun"
+      },
+      "runnerUp": {
+        "name": "KAGEMARU",
+        "page": "Kagemaru",
+        "flag": "Japan",
+        "character": "Zafina"
+      }
+    },
+    {
+      "name": "The Pit Tournaments: Tekken 8",
+      "page": "The_Pit_Tournaments/2024/T8",
+      "url": "https://liquipedia.net/fighters/The_Pit_Tournaments/2024/T8",
+      "date": "2024-08-24",
+      "tier": 2,
+      "entrants": 85,
+      "prize": "$5,770.53",
+      "location": "Granges-Paccot",
+      "winner": {
+        "name": "Tetsu",
+        "page": "Tetsu",
+        "flag": "Germany",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "Jodd",
+        "page": "Jodd",
+        "flag": "France",
+        "character": "Nina"
+      }
+    },
+    {
+      "name": "VSFighting XII",
+      "page": "VSFighting/2024/T8",
+      "url": "https://liquipedia.net/fighters/VSFighting/2024/T8",
+      "date": "2024-08-24",
+      "tier": 1,
+      "entrants": 443,
+      "prize": "$11,734.66",
+      "location": "Birmingham",
+      "winner": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Feng"
+      },
+      "runnerUp": {
+        "name": "KingReyJr",
+        "page": "KingReyJr",
+        "flag": "United States",
+        "character": "Asuka"
+      }
+    },
+    {
+      "name": "Evolution Championship Series 2024",
+      "page": "Evolution_Championship_Series/2024/T8",
+      "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2024/T8",
+      "date": "2024-07-24",
+      "tier": 1,
+      "entrants": 4651,
+      "prize": "$46,510",
+      "location": "Las Vegas, NV",
+      "winner": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Dragunov"
+      }
+    },
+    {
+      "name": "FV Major 2024",
+      "page": "FV_Major/2024/T8",
+      "url": "https://liquipedia.net/fighters/FV_Major/2024/T8",
+      "date": "2024-07-24",
+      "tier": 2,
+      "entrants": 272,
+      "prize": "$2,000",
+      "location": "Kuala Lumpur",
+      "winner": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "THE JON",
+        "page": "THE_JON",
+        "flag": "Pakistan",
+        "character": "King"
+      }
+    },
+    {
+      "name": "Red Bull Golden Letters 2024 - North America Qualifier",
+      "page": "Red_Bull_Golden_Letters/2024/Qualifier/North_America",
+      "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024/Qualifier/North_America",
+      "date": "2024-07-24",
+      "tier": 2,
+      "entrants": 132,
+      "prize": null,
+      "location": "Online",
+      "winner": {
+        "name": "SourPiggy",
+        "page": "SourPiggy",
+        "flag": "United States",
+        "character": "Kuma"
+      },
+      "runnerUp": {
+        "name": "Victeemo",
+        "page": "Victim_of_Ritual",
+        "flag": "United States",
+        "character": "Nina"
+      }
+    },
+    {
+      "name": "Second Wind 2024",
+      "page": "Second_Wind/2024/T8",
+      "url": "https://liquipedia.net/fighters/Second_Wind/2024/T8",
+      "date": "2024-07-24",
+      "tier": 2,
+      "entrants": 90,
+      "prize": "$2,000",
+      "location": "Wellington",
+      "winner": {
+        "name": "Rangchu",
+        "page": "Rangchu",
+        "flag": "South Korea",
+        "character": "Shaheen"
+      },
+      "runnerUp": {
+        "name": "Yagami",
+        "page": "Yagami_(Australian_Player)",
+        "flag": "Australia",
+        "character": "Reina"
+      }
+    },
+    {
+      "name": "The MIXUP 2024",
+      "page": "The_MIXUP/2024/T8",
+      "url": "https://liquipedia.net/fighters/The_MIXUP/2024/T8",
+      "date": "2024-07-24",
+      "tier": 1,
+      "entrants": 281,
+      "prize": "$6,982.29",
+      "location": "Lyon",
+      "winner": {
+        "name": "Double",
+        "page": "Double",
+        "flag": "Japan",
+        "character": "Law"
+      },
+      "runnerUp": {
+        "name": "JeonDDing",
+        "page": "Jeondding",
+        "flag": "South Korea",
+        "character": "Eddy"
+      }
+    },
+    {
+      "name": "Battle Arena Melbourne 14",
+      "page": "Battle_Arena_Melbourne/14/T8",
+      "url": "https://liquipedia.net/fighters/Battle_Arena_Melbourne/14/T8",
+      "date": "2024-06-24",
+      "tier": 1,
+      "entrants": 262,
+      "prize": "$6,000",
+      "location": "Melbourne",
+      "winner": {
+        "name": "CHANEL",
+        "page": "Chanel",
+        "flag": "South Korea",
+        "character": "Alisa"
+      },
+      "runnerUp": {
+        "name": "LowHigh",
+        "page": "LowHigh",
+        "flag": "South Korea",
+        "character": "Steve"
+      }
+    },
+    {
+      "name": "CEO 2024",
+      "page": "Community_Effort_Orlando/2024/T8",
+      "url": "https://liquipedia.net/fighters/Community_Effort_Orlando/2024/T8",
+      "date": "2024-06-24",
+      "tier": 1,
+      "entrants": 639,
+      "prize": "$12,390",
+      "location": "Daytona Beach, FL",
+      "winner": {
+        "name": "ATIF",
+        "page": "Atif_Butt",
+        "flag": "Pakistan",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "KEISUKE",
+        "page": "Keisuke_(Tekken_Player)",
+        "flag": "Japan",
+        "character": "Kazuya"
+      }
+    },
+    {
+      "name": "DreamHack Dallas 2024",
+      "page": "DreamHack/2024/Dallas/T8",
+      "url": "https://liquipedia.net/fighters/DreamHack/2024/Dallas/T8",
+      "date": "2024-06-24",
+      "tier": 1,
+      "entrants": 486,
+      "prize": "$52,000",
+      "location": "Dallas, TX",
+      "winner": {
+        "name": "Nobi",
+        "page": "Nobi",
+        "flag": "Japan",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "Rangchu",
+        "page": "Rangchu",
+        "flag": "South Korea",
+        "character": "Kuma"
+      }
+    },
+    {
+      "name": "DreamHack Summer 2024",
+      "page": "DreamHack/2024/Summer/T8",
+      "url": "https://liquipedia.net/fighters/DreamHack/2024/Summer/T8",
+      "date": "2024-06-24",
+      "tier": 1,
+      "entrants": 155,
+      "prize": "$50,000",
+      "location": "Jönköping",
+      "winner": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Claudio"
+      }
+    },
+    {
+      "name": "Hadouken Fight Festival",
+      "page": "Hadouken_Fight_Festival/2024/T8",
+      "url": "https://liquipedia.net/fighters/Hadouken_Fight_Festival/2024/T8",
+      "date": "2024-06-24",
+      "tier": 2,
+      "entrants": 69,
+      "prize": "$2,000",
+      "location": "Las Condes",
+      "winner": {
+        "name": "leemishima",
+        "page": "Leemishima",
+        "flag": "Argentina",
+        "character": "Lee"
+      },
+      "runnerUp": {
+        "name": "Jackson Five",
+        "page": "Jackson_Five",
+        "flag": "Venezuela",
+        "character": "Jack-8"
+      }
+    },
+    {
+      "name": "Only The Best 2024 TWT Challenger",
+      "page": "Only_The_Best/6/T8/TWT_Challenger",
+      "url": "https://liquipedia.net/fighters/Only_The_Best/6/T8/TWT_Challenger",
+      "date": "2024-06-24",
+      "tier": 2,
+      "entrants": 169,
+      "prize": "$3,211.13",
+      "location": "Turin",
+      "winner": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Claudio"
+      }
+    },
+    {
+      "name": "Super Tournament 2024",
+      "page": "Super_Tournament/2024/T8",
+      "url": "https://liquipedia.net/fighters/Super_Tournament/2024/T8",
+      "date": "2024-06-24",
+      "tier": 1,
+      "entrants": 186,
+      "prize": "$7,970.78",
+      "location": "Seoul",
+      "winner": {
+        "name": "Mulgold",
+        "page": "Mulgold",
+        "flag": "South Korea",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Reina"
+      }
+    },
+    {
+      "name": "3F - Fight For the Future",
+      "page": "Fight_For_the_Future/2024/T8",
+      "url": "https://liquipedia.net/fighters/Fight_For_the_Future/2024/T8",
+      "date": "2024-05-24",
+      "tier": 2,
+      "entrants": 58,
+      "prize": "$2,000",
+      "location": "São Paulo",
+      "winner": {
+        "name": "Shadow 20z",
+        "page": "Shadow",
+        "flag": "United States",
+        "character": "Claudio"
+      },
+      "runnerUp": {
+        "name": "Doomorelha",
+        "page": "Doomorelha",
+        "flag": "Brazil",
+        "character": "Nina"
+      }
+    },
+    {
+      "name": "AfreecaTV TEKKEN League 2024: Season 1 Finals",
+      "page": "Afreeca_TEKKEN_League/2024/Season_1/Finals",
+      "url": "https://liquipedia.net/fighters/Afreeca_TEKKEN_League/2024/Season_1/Finals",
+      "date": "2024-05-24",
+      "tier": 2,
+      "entrants": 8,
+      "prize": "$8,048.56",
+      "location": "Ilsan",
+      "winner": {
+        "name": "Meo-IL",
+        "page": "Meo-IL",
+        "flag": "South Korea",
+        "character": "Victor"
+      },
+      "runnerUp": {
+        "name": "eyemusician",
+        "page": "Eyemusician",
+        "flag": "South Korea",
+        "character": "Yoshimitsu"
+      }
+    },
+    {
+      "name": "Brussels Challenge Major Edition 2024",
+      "page": "Brussels_Challenge/2024/Major_Edition/T8",
+      "url": "https://liquipedia.net/fighters/Brussels_Challenge/2024/Major_Edition/T8",
+      "date": "2024-05-24",
+      "tier": 2,
+      "entrants": 117,
+      "prize": "$1,262.08",
+      "location": "Brussels",
+      "winner": {
+        "name": "Raef",
+        "page": "Raef",
+        "flag": "Saudi Arabia",
+        "character": "Jin"
+      },
+      "runnerUp": {
+        "name": "Shadow 20z",
+        "page": "Shadow",
+        "flag": "United States",
+        "character": "Claudio"
+      }
+    },
+    {
+      "name": "Combo Breaker 2024",
+      "page": "Combo_Breaker/2024/T8",
+      "url": "https://liquipedia.net/fighters/Combo_Breaker/2024/T8",
+      "date": "2024-05-24",
+      "tier": 1,
+      "entrants": 1634,
+      "prize": "$22,340",
+      "location": "Schaumburg, IL",
+      "winner": {
+        "name": "AK",
+        "page": "AK",
+        "flag": "Philippines",
+        "character": "Shaheen"
+      },
+      "runnerUp": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Nina"
+      }
+    },
+    {
+      "name": "Paradise Game Battle 2024",
+      "page": "Paradise_Game_Battle/2024/T8",
+      "url": "https://liquipedia.net/fighters/Paradise_Game_Battle/2024/T8",
+      "date": "2024-05-24",
+      "tier": 1,
+      "entrants": 101,
+      "prize": "$6,500",
+      "location": "Abidjan",
+      "winner": {
+        "name": "Jodd",
+        "page": "Jodd",
+        "flag": "France",
+        "character": "Nina"
+      },
+      "runnerUp": {
+        "name": "JoKa",
+        "page": "JoKa",
+        "flag": "United Kingdom",
+        "character": "Feng"
+      }
+    },
+    {
+      "name": "THE BAAZ GAUNTLET",
+      "page": "THE_BAAZ_GAUNTLET/2024",
+      "url": "https://liquipedia.net/fighters/THE_BAAZ_GAUNTLET/2024",
+      "date": "2024-05-24",
+      "tier": 1,
+      "entrants": 16,
+      "prize": "$3,761.76",
+      "location": "Lahore",
+      "winner": {
+        "name": "JoKa",
+        "page": "JoKa",
+        "flag": "United Kingdom",
+        "character": "Feng"
+      },
+      "runnerUp": {
+        "name": "Ahsan Ali",
+        "page": "Ahsan_Ali",
+        "flag": "Pakistan",
+        "character": "Shaheen"
+      }
+    },
+    {
+      "name": "Electric Clash 2024",
+      "page": "Electric_Clash/2024",
+      "url": "https://liquipedia.net/fighters/Electric_Clash/2024",
+      "date": "2024-04-24",
+      "tier": 2,
+      "entrants": 205,
+      "prize": "$3,478.82",
+      "location": "Toronto, ON",
+      "winner": {
+        "name": "kkokkoma",
+        "page": "Kkokkoma",
+        "flag": "South Korea",
+        "character": "Feng"
+      },
+      "runnerUp": {
+        "name": "Fear of Silence",
+        "page": "Fear",
+        "flag": "United States",
+        "character": "Dragunov"
+      }
+    },
+    {
+      "name": "Evolution Championship Series: Japan 2024",
+      "page": "Evolution_Championship_Series/2024/Japan/T8",
+      "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2024/Japan/T8",
+      "date": "2024-04-24",
+      "tier": 1,
+      "entrants": 1219,
+      "prize": "$12,642.70",
+      "location": "Tokyo",
+      "winner": {
+        "name": "Chikurin",
+        "page": "Chikurin",
+        "flag": "Japan",
+        "character": "Lili"
+      },
+      "runnerUp": {
+        "name": "LowHigh",
+        "page": "LowHigh",
+        "flag": "South Korea",
+        "character": "Dragunov"
+      }
+    },
+    {
+      "name": "Gamers Galaxy Pakistan 2024",
+      "page": "Gamers_Galaxy_Pakistan/2024",
+      "url": "https://liquipedia.net/fighters/Gamers_Galaxy_Pakistan/2024",
+      "date": "2024-04-24",
+      "tier": 2,
+      "entrants": 482,
+      "prize": "$5,381.65",
+      "location": "Lahore",
+      "winner": {
+        "name": "Numan Ch",
+        "page": "Numan_Ch",
+        "flag": "Pakistan",
+        "character": "Steve"
+      },
+      "runnerUp": {
+        "name": "Arslan Ash",
+        "page": "Arslan_Ash",
+        "flag": "Pakistan",
+        "character": "Azucena"
+      }
+    },
+    {
+      "name": "LVL UP EXPO 2024",
+      "page": "LVL_UP_EXPO/2024/T8",
+      "url": "https://liquipedia.net/fighters/LVL_UP_EXPO/2024/T8",
+      "date": "2024-04-24",
+      "tier": 2,
+      "entrants": 145,
+      "prize": "$5,000",
+      "location": "Las Vegas, NV",
+      "winner": {
+        "name": "Fear Of Silence",
+        "page": "Fear",
+        "flag": "United States",
+        "character": "Dragunov"
+      },
+      "runnerUp": {
+        "name": "Hendo",
+        "page": "Hendo",
+        "flag": "United States",
+        "character": "Jin"
+      }
+    },
+    {
+      "name": "Texas Showdown 2024",
+      "page": "Texas_Showdown/2024/T8",
+      "url": "https://liquipedia.net/fighters/Texas_Showdown/2024/T8",
+      "date": "2024-04-24",
+      "tier": 2,
+      "entrants": 312,
+      "prize": "$4,680",
+      "location": "Houston, TX",
+      "winner": {
+        "name": "NG-Obscure",
+        "page": "Obscure",
+        "flag": "United States",
+        "character": "Alisa"
+      },
+      "runnerUp": {
+        "name": "JoeCrush",
+        "page": "JoeCrush",
+        "flag": "United States",
+        "character": "Jack-8"
+      }
+    },
+    {
+      "name": "AfreecaTV TEKKEN League 2024 Open Tournament",
+      "page": "Afreeca_TEKKEN_League/2024/Open_Tournament",
+      "url": "https://liquipedia.net/fighters/Afreeca_TEKKEN_League/2024/Open_Tournament",
+      "date": "2024-03-24",
+      "tier": 2,
+      "entrants": 81,
+      "prize": "$7,593.30",
+      "location": "Seoul",
+      "winner": {
+        "name": "ULSAN",
+        "page": "Ulsan",
+        "flag": "South Korea",
+        "character": "Azucena"
+      },
+      "runnerUp": {
+        "name": "JeonDDing",
+        "page": "Jeondding",
+        "flag": "South Korea",
+        "character": "Azucena"
+      }
+    },
+    {
+      "name": "Galaxian Explosion: Dark Resurrection",
+      "page": "Galaxian_Explosion/Dark_Resurrection",
+      "url": "https://liquipedia.net/fighters/Galaxian_Explosion/Dark_Resurrection",
+      "date": "2024-03-24",
+      "tier": 2,
+      "entrants": 160,
+      "prize": "$4,706.12",
+      "location": "Paris",
+      "winner": {
+        "name": "Kirakira",
+        "page": "Kirakira",
+        "flag": "Switzerland",
+        "character": "Jun"
+      },
+      "runnerUp": {
+        "name": "Jodd",
+        "page": "Jodd",
+        "flag": "France",
+        "character": "Nina"
+      }
+    },
+    {
+      "name": "Saudi Fighting League Season 2 Major",
+      "page": "Saudi_Fighting_League/Season_2/Major",
+      "url": "https://liquipedia.net/fighters/Saudi_Fighting_League/Season_2/Major",
+      "date": "2024-03-24",
+      "tier": 2,
+      "entrants": 161,
+      "prize": "$13,331.70",
+      "location": "Riyadh",
+      "winner": {
+        "name": "Exodia",
+        "page": "Exodia",
+        "flag": "Saudi Arabia",
+        "character": "Feng"
+      },
+      "runnerUp": {
+        "name": "Qasim Meer",
+        "page": "Qasim_Meer",
+        "flag": "Pakistan",
+        "character": "Azucena"
+      }
+    },
+    {
+      "name": "TNS 9: CEO Never Sleeps",
+      "page": "Tampa_Never_Sleeps/9/T8",
+      "url": "https://liquipedia.net/fighters/Tampa_Never_Sleeps/9/T8",
+      "date": "2024-03-24",
+      "tier": 2,
+      "entrants": 197,
+      "prize": "$1,970",
+      "location": "Orlando, FL",
+      "winner": {
+        "name": "Shadow 20z",
+        "page": "Shadow",
+        "flag": "United States",
+        "character": "Zafina"
+      },
+      "runnerUp": {
+        "name": "Joonya 20z",
+        "page": "Joonya",
+        "flag": "United States",
+        "character": "Reina"
+      }
+    },
+    {
+      "name": "Twitch Rivals - TEKKEN 8 Juggle Gym",
+      "page": "Twitch_Rivals/Tekken_8_Juggle_Gym",
+      "url": "https://liquipedia.net/fighters/Twitch_Rivals/Tekken_8_Juggle_Gym",
+      "date": "2024-02-24",
+      "tier": 2,
+      "entrants": 16,
+      "prize": "$25,000",
+      "location": "Online",
+      "winner": {
+        "name": "jesandy",
+        "page": "Jesandy",
+        "flag": "United States",
+        "character": "King"
+      },
+      "runnerUp": {
+        "name": "Ty",
+        "page": "Ty",
+        "flag": "United States",
+        "character": "Bryan"
+      }
+    }
+  ]
+}

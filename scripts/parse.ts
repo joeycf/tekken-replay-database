@@ -24,6 +24,13 @@ import { formatStaleRefusal, staleEvidence } from './freshness';
 import { buildPatchTable } from './patches';
 import { buildAliasMatcher, extractRank, loadCharacters } from './roster';
 import { HANDLE_ALIASES, idKey, resolveKey, resolvePlayers, undeclaredCollisions } from './players';
+import {
+  applyTournamentTitles,
+  describeOutcome,
+  matchTournaments,
+  readAliases,
+  readTournaments,
+} from './tournaments';
 import type {
   ChannelConfig,
   ChannelKey,
@@ -1082,6 +1089,28 @@ const players: PlayerRecord[] = [...seen].sort().map((id) => ({
   handle: playerIds.get(id) ?? id,
   ...(FEATURED.has(id) ? { featured: true } : {}),
 }));
+
+// ── tournament placements → featured + extra.titles ─────────────────────────
+// data/tournaments.json is Liquipedia's Tier 1–2 winners and runners-up,
+// fetched by hand (scripts/tournaments.ts — NETWORK, MANUAL, NEVER IN THE
+// CRON). The match runs HERE, against the registry this run just built and
+// before anything is written, so a champion with no replay yet costs nothing
+// today and is featured the morning their first video is ingested. Keys are
+// compared through resolveKey — the identity rule resolvePlayers merged by, so
+// "Arslan Ash" and `arslan-ash` are one key — and a title sets `featured` as a
+// UNION with the curated FEATURED set above, never in its place. Names the
+// matcher will not decide on its own (a fighter's name, under three
+// alphanumerics, two candidates) are reported for data/tournament-aliases.json,
+// never guessed: a wrong person featured is worse than a right one missed.
+const tournaments = matchTournaments(
+  players,
+  readTournaments(),
+  readAliases().aliases,
+  resolveKey,
+  (h) => matcher.find(h).length > 0,
+);
+const titled = applyTournamentTitles(new Map(players.map((p) => [p.id, p])), tournaments);
+
 const collisions = undeclaredCollisions(players);
 
 // ── the review queue ─────────────────────────────────────────────────────────
@@ -1650,6 +1679,16 @@ const report = [
         '',
       ]
     : []),
+  // ── tournament placements (Liquipedia, CC BY-SA 3.0) ───────────────────────
+  '## Tournament placements — Liquipedia Tier 1–2, CC BY-SA 3.0',
+  '',
+  ...(tournaments.events
+    ? describeOutcome(tournaments, players.length)
+    : [
+        'No data/tournaments.json — run `npm run data:tournaments` (manual, network) to pull ' +
+          "Liquipedia's winner and runner-up tables.",
+        '',
+      ]),
   ...formatCrossCheck(witnessArtifact),
   '## Sample misses (first 30 that are not shorts/live)',
   '',
@@ -1665,7 +1704,7 @@ await writeFile(join(DATA, 'report.md'), report, 'utf8');
 
 console.log(
   `✔ Parsed ${records.length}/${raws.length} uploads → data/videos.json ` +
-    `(misses: ${reportedMisses.length}; pending review: ${reviewQueue.length}; see data/report.md)`,
+    `(misses: ${reportedMisses.length}; pending review: ${reviewQueue.length}; ${titled} titled; see data/report.md)`,
 );
 console.log(
   `  seasons ${Object.entries(seasonDist)

@@ -1452,6 +1452,35 @@ async function main(): Promise<void> {
     'player match list renders',
   );
 
+  // ── tournament placements (engine v0.17.0; scripts/tournaments.ts) ────────
+  // A title makes a player featured, and the page that shows it must carry the
+  // Liquipedia credit — CC BY-SA 3.0 is a condition of using the table at all.
+  // Skips VISIBLY until data/tournaments.json exists and somebody is titled.
+  const titled = players.filter((x) => (x.extra?.titles?.length ?? 0) > 0);
+  if (existsSync(join(ROOT, 'data/tournaments.json')) && titled.length) {
+    const unfeatured = titled.filter((x) => x.featured !== true);
+    expect(
+      unfeatured.length === 0,
+      `every tournament-placed player is featured (${titled.length})` +
+        (unfeatured.length ? ` — not: ${unfeatured.map((x) => x.id).join(', ')}` : ''),
+    );
+    const t = titled[0]!;
+    const titledPage = join(OUT, BASE, `players/${t.id}/index.html`);
+    if (existsSync(titledPage)) {
+      const html = readFileSync(titledPage, 'utf8');
+      expect(
+        html.includes('data-testid="player-titles"') && html.includes('Liquipedia'),
+        `/players/${t.id} renders its placements with the Liquipedia credit`,
+      );
+    } else {
+      expect(false, `/players/${t.id} prerendered (missing from the build)`);
+    }
+  } else {
+    console.log(
+      '  – skipped: tournament placement assertions (no data/tournaments.json or nobody titled yet)',
+    );
+  }
+
   // ── 7. The re-skin — Tekken tokens, engine styles untouched ───────────────
   console.log('\n— Theme (re-skin check)');
   await gotoIdle(page, at('/'));
