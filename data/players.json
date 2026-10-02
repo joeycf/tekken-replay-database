@@ -85,7 +85,18 @@
   },
   {
     "id": "abel-del-maestro",
-    "handle": "Abel Del Maestro"
+    "handle": "Abel Del Maestro",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Punishment 3",
+          "place": 2,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Punishment/2024"
+        }
+      ]
+    }
   },
   {
     "id": "aberin",
@@ -482,7 +493,89 @@
   {
     "id": "arslan-ash",
     "handle": "Arslan Ash",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Evolution Championship Series 2026",
+          "place": 1,
+          "date": "2026-06-26",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2026/T8"
+        },
+        {
+          "event": "LVL UP EXPO 2026",
+          "place": 1,
+          "date": "2026-04-26",
+          "url": "https://liquipedia.net/fighters/LVL_UP_EXPO/2026/T8"
+        },
+        {
+          "event": "Emirates Showdown 2025",
+          "place": 2,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Emirates_Showdown/2025/T8"
+        },
+        {
+          "event": "Evolution Championship Series: France 2025",
+          "place": 1,
+          "date": "2025-10-25",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2025/France/T8"
+        },
+        {
+          "event": "SEA Major 2025",
+          "place": 2,
+          "date": "2025-10-25",
+          "url": "https://liquipedia.net/fighters/South_East_Asia_Major/2025/T8"
+        },
+        {
+          "event": "Evolution Championship Series 2025",
+          "place": 1,
+          "date": "2025-08-25",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2025/T8"
+        },
+        {
+          "event": "Battle Arena Melbourne 15",
+          "place": 1,
+          "date": "2025-06-25",
+          "url": "https://liquipedia.net/fighters/Battle_Arena_Melbourne/15/T8"
+        },
+        {
+          "event": "LVL UP EXPO 2025",
+          "place": 1,
+          "date": "2025-04-25",
+          "url": "https://liquipedia.net/fighters/LVL_UP_EXPO/2025/T8"
+        },
+        {
+          "event": "Thunderstruck 2024",
+          "place": 1,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Thunderstruck/2024/T8"
+        },
+        {
+          "event": "Evolution Championship Series 2024",
+          "place": 1,
+          "date": "2024-07-24",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2024/T8"
+        },
+        {
+          "event": "Only The Best 2024 TWT Challenger",
+          "place": 1,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/Only_The_Best/6/T8/TWT_Challenger"
+        },
+        {
+          "event": "Combo Breaker 2024",
+          "place": 2,
+          "date": "2024-05-24",
+          "url": "https://liquipedia.net/fighters/Combo_Breaker/2024/T8"
+        },
+        {
+          "event": "Gamers Galaxy Pakistan 2024",
+          "place": 2,
+          "date": "2024-04-24",
+          "url": "https://liquipedia.net/fighters/Gamers_Galaxy_Pakistan/2024"
+        }
+      ]
+    }
   },
   {
     "id": "arslan-ash-anakin-world-no-1-player",
@@ -579,7 +672,101 @@
   {
     "id": "atif-butt",
     "handle": "Atif Butt",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "CEO 2026",
+          "place": 1,
+          "date": "2026-08-26",
+          "url": "https://liquipedia.net/fighters/Community_Effort_Orlando/2026/T8"
+        },
+        {
+          "event": "Saudi eLeague Fighting: Season 5 Championship",
+          "place": 1,
+          "date": "2026-05-26",
+          "url": "https://liquipedia.net/fighters/Saudi_eLeague/Season_5/Championship/T8"
+        },
+        {
+          "event": "Combo Breaker 2026",
+          "place": 2,
+          "date": "2026-05-26",
+          "url": "https://liquipedia.net/fighters/Combo_Breaker/2026/T8"
+        },
+        {
+          "event": "Emirates Showdown 2025",
+          "place": 1,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Emirates_Showdown/2025/T8"
+        },
+        {
+          "event": "Saudi eLeague Fighting: Season 3 Championship",
+          "place": 1,
+          "date": "2025-08-25",
+          "url": "https://liquipedia.net/fighters/Saudi_eLeague/Season_3/Championship/T8"
+        },
+        {
+          "event": "Evolution Championship Series 2025",
+          "place": 2,
+          "date": "2025-08-25",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2025/T8"
+        },
+        {
+          "event": "CEO 2025",
+          "place": 1,
+          "date": "2025-06-25",
+          "url": "https://liquipedia.net/fighters/Community_Effort_Orlando/2025/T8"
+        },
+        {
+          "event": "Combo Breaker 2025",
+          "place": 2,
+          "date": "2025-05-25",
+          "url": "https://liquipedia.net/fighters/Combo_Breaker/2025/T8"
+        },
+        {
+          "event": "Riyadh Clash 2",
+          "place": 1,
+          "date": "2025-04-25",
+          "url": "https://liquipedia.net/fighters/Riyadh_Clash/2/T8"
+        },
+        {
+          "event": "Virtuocity Battleground Qatar",
+          "place": 2,
+          "date": "2025-02-25",
+          "url": "https://liquipedia.net/fighters/Virtuocity_Battleground_Qatar/2025"
+        },
+        {
+          "event": "Tekken World Tour Finals 2024",
+          "place": 2,
+          "date": "2024-12-24",
+          "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2024"
+        },
+        {
+          "event": "Esports World Cup 2024",
+          "place": 2,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/Esports_World_Cup/2024/T8"
+        },
+        {
+          "event": "FV Major 2024",
+          "place": 1,
+          "date": "2024-07-24",
+          "url": "https://liquipedia.net/fighters/FV_Major/2024/T8"
+        },
+        {
+          "event": "Evolution Championship Series 2024",
+          "place": 2,
+          "date": "2024-07-24",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2024/T8"
+        },
+        {
+          "event": "CEO 2024",
+          "place": 1,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/Community_Effort_Orlando/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "atlanta",
@@ -796,7 +983,18 @@
   },
   {
     "id": "befamous",
-    "handle": "Befamous"
+    "handle": "Befamous",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "East Coast Throwdown 2024",
+          "place": 2,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/East_Coast_Throwdown/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "behemoth",
@@ -1020,7 +1218,18 @@
   },
   {
     "id": "bode",
-    "handle": "Bode"
+    "handle": "Bode",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Enders Zone Evolution 5",
+          "place": 1,
+          "date": "2026-02-26",
+          "url": "https://liquipedia.net/fighters/Enders_Zone_Evolution/5"
+        }
+      ]
+    }
   },
   {
     "id": "bodeotb",
@@ -1057,7 +1266,24 @@
   },
   {
     "id": "boosterblast",
-    "handle": "BoosterBlast"
+    "handle": "BoosterBlast",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Frosty Faustings XVII",
+          "place": 2,
+          "date": "2025-01-25",
+          "url": "https://liquipedia.net/fighters/Frosty_Faustings/2025/T8"
+        },
+        {
+          "event": "CNE Master Clash Finals",
+          "place": 2,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/CNE_Master_Clash/2024/Finals"
+        }
+      ]
+    }
   },
   {
     "id": "boots",
@@ -1105,7 +1331,18 @@
   },
   {
     "id": "breadman",
-    "handle": "Breadman"
+    "handle": "Breadman",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "SOOP TEKKEN League 2025: Season 1 Finals",
+          "place": 2,
+          "date": "2025-07-25",
+          "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2025/Season_1/Finals"
+        }
+      ]
+    }
   },
   {
     "id": "breaker",
@@ -1349,7 +1586,18 @@
   },
   {
     "id": "chanel",
-    "handle": "Chanel"
+    "handle": "Chanel",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Battle Arena Melbourne 14",
+          "place": 1,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/Battle_Arena_Melbourne/14/T8"
+        }
+      ]
+    }
   },
   {
     "id": "changbang",
@@ -1441,7 +1689,24 @@
   },
   {
     "id": "cherry-berry-mango",
-    "handle": "Cherry Berry Mango"
+    "handle": "Cherry Berry Mango",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Manila Madness 5",
+          "place": 2,
+          "date": "2026-09-26",
+          "url": "https://liquipedia.net/fighters/Manila_Madness/5/T8"
+        },
+        {
+          "event": "Cape Town Showdown 2024",
+          "place": 1,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Cape_Town_Showdown/2024"
+        }
+      ]
+    }
   },
   {
     "id": "chicken-killer",
@@ -1458,7 +1723,17 @@
   {
     "id": "chikurin",
     "handle": "Chikurin",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Evolution Championship Series: Japan 2024",
+          "place": 1,
+          "date": "2024-04-24",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2024/Japan/T8"
+        }
+      ]
+    }
   },
   {
     "id": "chikuzin",
@@ -1718,7 +1993,18 @@
   },
   {
     "id": "cuddle-core",
-    "handle": "Cuddle Core"
+    "handle": "Cuddle Core",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "East Coast Throwdown 2024",
+          "place": 1,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/East_Coast_Throwdown/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "custom",
@@ -1850,7 +2136,18 @@
   },
   {
     "id": "danielmado",
-    "handle": "Danielmado"
+    "handle": "Danielmado",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Hidden Retreat",
+          "place": 1,
+          "date": "2024-12-24",
+          "url": "https://liquipedia.net/fighters/Hidden_Retreat/2024"
+        }
+      ]
+    }
   },
   {
     "id": "daniemado",
@@ -1858,7 +2155,18 @@
   },
   {
     "id": "dante",
-    "handle": "Dante"
+    "handle": "Dante",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "2Game Pro Tour LATAM Finals",
+          "place": 2,
+          "date": "2024-11-24",
+          "url": "https://liquipedia.net/fighters/2Game_Pro_Tour_LATAM/Finals/T8"
+        }
+      ]
+    }
   },
   {
     "id": "daora",
@@ -1906,7 +2214,18 @@
   },
   {
     "id": "dawood-sikandar",
-    "handle": "Dawood Sikandar"
+    "handle": "Dawood Sikandar",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "MOOR1NG 2024",
+          "place": 1,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/MOOR1NG/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "dazz",
@@ -1914,7 +2233,18 @@
   },
   {
     "id": "dbp",
-    "handle": "Dbp"
+    "handle": "Dbp",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Fighting Games Challenge 2024",
+          "place": 2,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/Fighting_Games_Challenge/2024"
+        }
+      ]
+    }
   },
   {
     "id": "dbwod",
@@ -2150,7 +2480,18 @@
   },
   {
     "id": "divineexorcist4",
-    "handle": "DivineExorcist4"
+    "handle": "DivineExorcist4",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Thunderstruck 2025",
+          "place": 2,
+          "date": "2025-10-25",
+          "url": "https://liquipedia.net/fighters/Thunderstruck/2025/T8"
+        }
+      ]
+    }
   },
   {
     "id": "dndb",
@@ -2210,7 +2551,18 @@
   },
   {
     "id": "dombilimaymun",
-    "handle": "DOMBILIMAYMUN"
+    "handle": "DOMBILIMAYMUN",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Red Bull Golden Letters 2024 - Europe Qualifier",
+          "place": 2,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024/Qualifier/Europe"
+        }
+      ]
+    }
   },
   {
     "id": "dominic",
@@ -2270,7 +2622,18 @@
   },
   {
     "id": "double",
-    "handle": "Double"
+    "handle": "Double",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "The MIXUP 2024",
+          "place": 1,
+          "date": "2024-07-24",
+          "url": "https://liquipedia.net/fighters/The_MIXUP/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "doublr",
@@ -2482,7 +2845,18 @@
   },
   {
     "id": "edddyy",
-    "handle": "Edddyy"
+    "handle": "Edddyy",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "CROSSOVER 2025",
+          "place": 1,
+          "date": "2025-08-25",
+          "url": "https://liquipedia.net/fighters/CROSSOVER/2025/T8"
+        }
+      ]
+    }
   },
   {
     "id": "eddie",
@@ -2494,7 +2868,36 @@
   },
   {
     "id": "edge",
-    "handle": "Edge"
+    "handle": "Edge",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "OzHadou Nationals 20",
+          "place": 1,
+          "date": "2026-09-26",
+          "url": "https://liquipedia.net/fighters/OzHadou_Nationals/20/T8"
+        },
+        {
+          "event": "First Attack 2025",
+          "place": 2,
+          "date": "2025-10-25",
+          "url": "https://liquipedia.net/fighters/First_Attack/2025/T8"
+        },
+        {
+          "event": "Only The Best 2025 TWT Challenger",
+          "place": 1,
+          "date": "2025-07-25",
+          "url": "https://liquipedia.net/fighters/Only_The_Best/7/T8/TWT_Challenger"
+        },
+        {
+          "event": "Tekken World Tour Finals 2024 Last Chance Qualifier",
+          "place": 1,
+          "date": "2024-12-24",
+          "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2024/Last_Chance_Qualifier"
+        }
+      ]
+    }
   },
   {
     "id": "edo321",
@@ -2678,7 +3081,30 @@
   },
   {
     "id": "exodia",
-    "handle": "Exodia"
+    "handle": "Exodia",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Saudi eLeague Fighting: ETC Major 2025",
+          "place": 2,
+          "date": "2025-12-25",
+          "url": "https://liquipedia.net/fighters/Saudi_eLeague/ETC_Major/2025"
+        },
+        {
+          "event": "Headstomper 2025",
+          "place": 2,
+          "date": "2025-06-25",
+          "url": "https://liquipedia.net/fighters/Headstomper/2025/T8"
+        },
+        {
+          "event": "Saudi Fighting League Season 2 Major",
+          "place": 1,
+          "date": "2024-03-24",
+          "url": "https://liquipedia.net/fighters/Saudi_Fighting_League/Season_2/Major"
+        }
+      ]
+    }
   },
   {
     "id": "exploit",
@@ -2699,7 +3125,23 @@
   {
     "id": "eyemusician",
     "handle": "Eyemusician",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Tekken World Tour Finals 2025 Last Chance Qualifier",
+          "place": 2,
+          "date": "2026-01-26",
+          "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2025/Last_Chance_Qualifier"
+        },
+        {
+          "event": "AfreecaTV TEKKEN League 2024: Season 1 Finals",
+          "place": 2,
+          "date": "2024-05-24",
+          "url": "https://liquipedia.net/fighters/Afreeca_TEKKEN_League/2024/Season_1/Finals"
+        }
+      ]
+    }
   },
   {
     "id": "eywat",
@@ -2771,7 +3213,78 @@
   },
   {
     "id": "farzeen",
-    "handle": "Farzeen 🇵🇰"
+    "handle": "Farzeen 🇵🇰",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Saudi eLeague Fighting: TWT 2026 Challenger",
+          "place": 1,
+          "date": "2026-09-26",
+          "url": "https://liquipedia.net/fighters/Saudi_eLeague/TWT_Challenger/2026"
+        },
+        {
+          "event": "Takedown 2026",
+          "place": 2,
+          "date": "2026-09-26",
+          "url": "https://liquipedia.net/fighters/Takedown/2026/T8"
+        },
+        {
+          "event": "The MIXUP 2026",
+          "place": 1,
+          "date": "2026-06-26",
+          "url": "https://liquipedia.net/fighters/The_MIXUP/2026/T8"
+        },
+        {
+          "event": "Combo Breaker 2026",
+          "place": 1,
+          "date": "2026-05-26",
+          "url": "https://liquipedia.net/fighters/Combo_Breaker/2026/T8"
+        },
+        {
+          "event": "Clash of the Olympians 2025",
+          "place": 1,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Clash_of_the_Olympians/2025/T8"
+        },
+        {
+          "event": "SEA Major 2025",
+          "place": 1,
+          "date": "2025-10-25",
+          "url": "https://liquipedia.net/fighters/South_East_Asia_Major/2025/T8"
+        },
+        {
+          "event": "Takedown 2025",
+          "place": 2,
+          "date": "2025-10-25",
+          "url": "https://liquipedia.net/fighters/Takedown/2025/T8"
+        },
+        {
+          "event": "Cape Town Showdown 2025",
+          "place": 1,
+          "date": "2025-09-25",
+          "url": "https://liquipedia.net/fighters/Cape_Town_Showdown/2025"
+        },
+        {
+          "event": "Battle Arena Melbourne 15",
+          "place": 2,
+          "date": "2025-06-25",
+          "url": "https://liquipedia.net/fighters/Battle_Arena_Melbourne/15/T8"
+        },
+        {
+          "event": "Virtuocity Battleground Qatar",
+          "place": 1,
+          "date": "2025-02-25",
+          "url": "https://liquipedia.net/fighters/Virtuocity_Battleground_Qatar/2025"
+        },
+        {
+          "event": "Thunderstruck 2024",
+          "place": 2,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Thunderstruck/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "fastgame",
@@ -2791,7 +3304,30 @@
   },
   {
     "id": "fear-of-silence",
-    "handle": "Fear of Silence"
+    "handle": "Fear of Silence",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "CNE Master Clash Finals",
+          "place": 1,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/CNE_Master_Clash/2024/Finals"
+        },
+        {
+          "event": "LVL UP EXPO 2024",
+          "place": 1,
+          "date": "2024-04-24",
+          "url": "https://liquipedia.net/fighters/LVL_UP_EXPO/2024/T8"
+        },
+        {
+          "event": "Electric Clash 2024",
+          "place": 2,
+          "date": "2024-04-24",
+          "url": "https://liquipedia.net/fighters/Electric_Clash/2024"
+        }
+      ]
+    }
   },
   {
     "id": "federer",
@@ -3127,7 +3663,18 @@
   },
   {
     "id": "genghis-d0n",
-    "handle": "Genghis D0N"
+    "handle": "Genghis D0N",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Texas Showdown 2025",
+          "place": 1,
+          "date": "2025-03-25",
+          "url": "https://liquipedia.net/fighters/Texas_Showdown/2025/T8"
+        }
+      ]
+    }
   },
   {
     "id": "genghis-don",
@@ -3359,7 +3906,42 @@
   },
   {
     "id": "gosain",
-    "handle": "Gosain"
+    "handle": "Gosain",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Paradise Game Battle 2025",
+          "place": 2,
+          "date": "2025-10-25",
+          "url": "https://liquipedia.net/fighters/Paradise_Game_Battle/2025"
+        },
+        {
+          "event": "VSFighting XIII",
+          "place": 1,
+          "date": "2025-08-25",
+          "url": "https://liquipedia.net/fighters/VSFighting/2025/T8"
+        },
+        {
+          "event": "Across The North",
+          "place": 2,
+          "date": "2024-11-24",
+          "url": "https://liquipedia.net/fighters/Across_The_North/2024"
+        },
+        {
+          "event": "EGX Arena 2024",
+          "place": 1,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/EGX/2024"
+        },
+        {
+          "event": "Red Bull Golden Letters 2024 - London Qualifier",
+          "place": 2,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024/Qualifier/London"
+        }
+      ]
+    }
   },
   {
     "id": "gotirou",
@@ -3495,7 +4077,18 @@
   },
   {
     "id": "hafiz-tanveer",
-    "handle": "Hafiz Tanveer"
+    "handle": "Hafiz Tanveer",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Thaiger Uppercut 2025",
+          "place": 2,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Thaiger_Uppercut/2025/T8"
+        }
+      ]
+    }
   },
   {
     "id": "haider",
@@ -3515,7 +4108,18 @@
   },
   {
     "id": "haisha",
-    "handle": "HAISHA"
+    "handle": "HAISHA",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "MASTERCUP TRY TOKYO 2025",
+          "place": 1,
+          "date": "2025-02-25",
+          "url": "https://liquipedia.net/fighters/MASTERCUP/13/TRY"
+        }
+      ]
+    }
   },
   {
     "id": "haisha-takataka",
@@ -3731,7 +4335,18 @@
   },
   {
     "id": "hendo",
-    "handle": "Hendo"
+    "handle": "Hendo",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "LVL UP EXPO 2024",
+          "place": 2,
+          "date": "2024-04-24",
+          "url": "https://liquipedia.net/fighters/LVL_UP_EXPO/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "hero",
@@ -3943,7 +4558,18 @@
   },
   {
     "id": "how-foolish",
-    "handle": "How Foolish"
+    "handle": "How Foolish",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "BRICS Tournament 2026",
+          "place": 2,
+          "date": "2026-09-26",
+          "url": "https://liquipedia.net/fighters/BRICS_Tournament/2026"
+        }
+      ]
+    }
   },
   {
     "id": "hoya",
@@ -4047,7 +4673,18 @@
   },
   {
     "id": "ikari",
-    "handle": "iKari"
+    "handle": "iKari",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Evolution Championship Series: Japan 2026",
+          "place": 1,
+          "date": "2026-05-26",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2026/Japan/T8"
+        }
+      ]
+    }
   },
   {
     "id": "ikari-mishima",
@@ -4063,7 +4700,42 @@
   },
   {
     "id": "ilias",
-    "handle": "Ilias"
+    "handle": "Ilias",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Ultimate Fighting Arena 2026",
+          "place": 1,
+          "date": "2026-09-26",
+          "url": "https://liquipedia.net/fighters/Ultimate_Fighting_Arena/2026/T8"
+        },
+        {
+          "event": "Brussels Challenge Major Edition 2026",
+          "place": 2,
+          "date": "2026-05-26",
+          "url": "https://liquipedia.net/fighters/Brussels_Challenge/2026/Major_Edition/T8"
+        },
+        {
+          "event": "Road To Olympus 2026",
+          "place": 1,
+          "date": "2026-02-26",
+          "url": "https://liquipedia.net/fighters/Road_To_Olympus/2026/T8"
+        },
+        {
+          "event": "TEKKENMANIA",
+          "place": 2,
+          "date": "2026-02-26",
+          "url": "https://liquipedia.net/fighters/TEKKENMANIA/2026"
+        },
+        {
+          "event": "Headstomper 2025",
+          "place": 1,
+          "date": "2025-06-25",
+          "url": "https://liquipedia.net/fighters/Headstomper/2025/T8"
+        }
+      ]
+    }
   },
   {
     "id": "ill-regret-this",
@@ -4248,7 +4920,23 @@
   {
     "id": "jdcr",
     "handle": "Jdcr",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Electric Clash 2025",
+          "place": 1,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Electric_Clash/2025/T8"
+        },
+        {
+          "event": "First Attack 2025",
+          "place": 1,
+          "date": "2025-10-25",
+          "url": "https://liquipedia.net/fighters/First_Attack/2025/T8"
+        }
+      ]
+    }
   },
   {
     "id": "jdxr",
@@ -4268,7 +4956,48 @@
   },
   {
     "id": "jeondding",
-    "handle": "JeonDDing"
+    "handle": "JeonDDing",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Evolution Championship Series: France 2025",
+          "place": 2,
+          "date": "2025-10-25",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2025/France/T8"
+        },
+        {
+          "event": "Ultimate Fighting Arena 2025",
+          "place": 2,
+          "date": "2025-09-25",
+          "url": "https://liquipedia.net/fighters/Ultimate_Fighting_Arena/2025/T8"
+        },
+        {
+          "event": "The MIXUP 2025",
+          "place": 2,
+          "date": "2025-07-25",
+          "url": "https://liquipedia.net/fighters/The_MIXUP/2025/T8"
+        },
+        {
+          "event": "Clash of the Olympians 2K24",
+          "place": 2,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Clash_of_the_Olympians/2024/T8"
+        },
+        {
+          "event": "The MIXUP 2024",
+          "place": 2,
+          "date": "2024-07-24",
+          "url": "https://liquipedia.net/fighters/The_MIXUP/2024/T8"
+        },
+        {
+          "event": "AfreecaTV TEKKEN League 2024 Open Tournament",
+          "place": 2,
+          "date": "2024-03-24",
+          "url": "https://liquipedia.net/fighters/Afreeca_TEKKEN_League/2024/Open_Tournament"
+        }
+      ]
+    }
   },
   {
     "id": "jeonding",
@@ -4284,7 +5013,18 @@
   },
   {
     "id": "jesandy",
-    "handle": "Jesandy"
+    "handle": "Jesandy",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Twitch Rivals - TEKKEN 8 Juggle Gym",
+          "place": 1,
+          "date": "2024-02-24",
+          "url": "https://liquipedia.net/fighters/Twitch_Rivals/Tekken_8_Juggle_Gym"
+        }
+      ]
+    }
   },
   {
     "id": "jestj",
@@ -4365,7 +5105,47 @@
   {
     "id": "jodd",
     "handle": "Jodd",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Galaxian Explosion: Dark Resurrection III",
+          "place": 1,
+          "date": "2026-02-26",
+          "url": "https://liquipedia.net/fighters/Galaxian_Explosion/Dark_Resurrection/3/T8"
+        },
+        {
+          "event": "Invictus 2026",
+          "place": 1,
+          "date": "2026-01-26",
+          "url": "https://liquipedia.net/fighters/Invictus/2026/T8"
+        },
+        {
+          "event": "EGX Arena 2024",
+          "place": 2,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/EGX/2024"
+        },
+        {
+          "event": "The Pit Tournaments: Tekken 8",
+          "place": 2,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/The_Pit_Tournaments/2024/T8"
+        },
+        {
+          "event": "Paradise Game Battle 2024",
+          "place": 1,
+          "date": "2024-05-24",
+          "url": "https://liquipedia.net/fighters/Paradise_Game_Battle/2024/T8"
+        },
+        {
+          "event": "Galaxian Explosion: Dark Resurrection",
+          "place": 2,
+          "date": "2024-03-24",
+          "url": "https://liquipedia.net/fighters/Galaxian_Explosion/Dark_Resurrection"
+        }
+      ]
+    }
   },
   {
     "id": "jode",
@@ -4377,7 +5157,42 @@
   },
   {
     "id": "joe-crush",
-    "handle": "Joe Crush"
+    "handle": "Joe Crush",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "CEO 2026",
+          "place": 2,
+          "date": "2026-08-26",
+          "url": "https://liquipedia.net/fighters/Community_Effort_Orlando/2026/T8"
+        },
+        {
+          "event": "Texas Showdown 2026",
+          "place": 1,
+          "date": "2026-03-26",
+          "url": "https://liquipedia.net/fighters/Texas_Showdown/2026/T8"
+        },
+        {
+          "event": "CEOtaku 2024",
+          "place": 1,
+          "date": "2024-12-24",
+          "url": "https://liquipedia.net/fighters/CEOtaku/2024/T8"
+        },
+        {
+          "event": "DreamHack Atlanta 2024",
+          "place": 2,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/DreamHack/2024/Atlanta/T8"
+        },
+        {
+          "event": "Texas Showdown 2024",
+          "place": 2,
+          "date": "2024-04-24",
+          "url": "https://liquipedia.net/fighters/Texas_Showdown/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "joehyeon",
@@ -4406,7 +5221,47 @@
   {
     "id": "joka",
     "handle": "Joka",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Cape Town Showdown 2025",
+          "place": 2,
+          "date": "2025-09-25",
+          "url": "https://liquipedia.net/fighters/Cape_Town_Showdown/2025"
+        },
+        {
+          "event": "European TEKKEN Cup 3 Finals",
+          "place": 2,
+          "date": "2025-02-25",
+          "url": "https://liquipedia.net/fighters/European_Tekken_Cup/2024/Finals"
+        },
+        {
+          "event": "Invictus",
+          "place": 1,
+          "date": "2025-01-25",
+          "url": "https://liquipedia.net/fighters/Invictus/2025/T8"
+        },
+        {
+          "event": "Road To Olympus 2024",
+          "place": 2,
+          "date": "2024-11-24",
+          "url": "https://liquipedia.net/fighters/Road_To_Olympus/2024/T8"
+        },
+        {
+          "event": "THE BAAZ GAUNTLET",
+          "place": 1,
+          "date": "2024-05-24",
+          "url": "https://liquipedia.net/fighters/THE_BAAZ_GAUNTLET/2024"
+        },
+        {
+          "event": "Paradise Game Battle 2024",
+          "place": 2,
+          "date": "2024-05-24",
+          "url": "https://liquipedia.net/fighters/Paradise_Game_Battle/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "jona",
@@ -4426,7 +5281,18 @@
   },
   {
     "id": "joonya",
-    "handle": "Joonya"
+    "handle": "Joonya",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "TNS 9: CEO Never Sleeps",
+          "place": 2,
+          "date": "2024-03-24",
+          "url": "https://liquipedia.net/fighters/Tampa_Never_Sleeps/9/T8"
+        }
+      ]
+    }
   },
   {
     "id": "joonya-20z",
@@ -4534,7 +5400,24 @@
   },
   {
     "id": "kagemaru",
-    "handle": "Kagemaru"
+    "handle": "Kagemaru",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Busan TEKKEN Match-up Finals",
+          "place": 2,
+          "date": "2024-12-24",
+          "url": "https://liquipedia.net/fighters/Busan_TEKKEN_Match-up/2024/Finals"
+        },
+        {
+          "event": "Red Bull Golden Letters 2024 - Tokyo Qualifier",
+          "place": 2,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024/Qualifier/Tokyo"
+        }
+      ]
+    }
   },
   {
     "id": "kagemaru-rank-4",
@@ -4550,7 +5433,18 @@
   },
   {
     "id": "kaizokulars",
-    "handle": "Kaizokulars"
+    "handle": "Kaizokulars",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "BRICS Tournament 2025",
+          "place": 2,
+          "date": "2025-06-25",
+          "url": "https://liquipedia.net/fighters/BRICS_Tournament/2025"
+        }
+      ]
+    }
   },
   {
     "id": "kaizur",
@@ -4626,7 +5520,48 @@
   },
   {
     "id": "kaneandtrench",
-    "handle": "Kaneandtrench"
+    "handle": "Kaneandtrench",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Only The Best 2026 TWT Challenger",
+          "place": 1,
+          "date": "2026-07-26",
+          "url": "https://liquipedia.net/fighters/Only_The_Best/8/T8/TWT_Challenger"
+        },
+        {
+          "event": "EMEA TEKKEN Cup 4 Finals",
+          "place": 1,
+          "date": "2026-04-26",
+          "url": "https://liquipedia.net/fighters/EMEA_Tekken_Cup/4/Finals"
+        },
+        {
+          "event": "STAMPED",
+          "place": 1,
+          "date": "2026-01-26",
+          "url": "https://liquipedia.net/fighters/STAMPED/2026"
+        },
+        {
+          "event": "Invictus 2026",
+          "place": 2,
+          "date": "2026-01-26",
+          "url": "https://liquipedia.net/fighters/Invictus/2026/T8"
+        },
+        {
+          "event": "Only The Best 2025 TWT Challenger",
+          "place": 2,
+          "date": "2025-07-25",
+          "url": "https://liquipedia.net/fighters/Only_The_Best/7/T8/TWT_Challenger"
+        },
+        {
+          "event": "European TEKKEN Cup 3 Last Chance Qualifier",
+          "place": 1,
+          "date": "2025-02-25",
+          "url": "https://liquipedia.net/fighters/European_Tekken_Cup/2024/Finals/Last_Chance_Qualifier"
+        }
+      ]
+    }
   },
   {
     "id": "kang-jae-seong",
@@ -4766,7 +5701,18 @@
   },
   {
     "id": "kei",
-    "handle": "Kei"
+    "handle": "Kei",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "MASTERCUP TRY TOKYO 2026",
+          "place": 1,
+          "date": "2026-02-26",
+          "url": "https://liquipedia.net/fighters/MASTERCUP/14/TRY"
+        }
+      ]
+    }
   },
   {
     "id": "keikun",
@@ -4779,7 +5725,35 @@
   {
     "id": "keisuke",
     "handle": "Keisuke",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "SOOP Super Tournament 2026",
+          "place": 2,
+          "date": "2026-06-26",
+          "url": "https://liquipedia.net/fighters/Super_Tournament/2026/T8"
+        },
+        {
+          "event": "DreamHack Atlanta 2026",
+          "place": 2,
+          "date": "2026-05-26",
+          "url": "https://liquipedia.net/fighters/DreamHack/2026/Atlanta/T8"
+        },
+        {
+          "event": "Tekken World Tour Finals 2024 Last Chance Qualifier",
+          "place": 2,
+          "date": "2024-12-24",
+          "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2024/Last_Chance_Qualifier"
+        },
+        {
+          "event": "CEO 2024",
+          "place": 2,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/Community_Effort_Orlando/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "keitw",
@@ -4896,7 +5870,30 @@
   },
   {
     "id": "king-rey-jr",
-    "handle": "King Rey Jr"
+    "handle": "King Rey Jr",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Brussels Challenge Major Edition 2025",
+          "place": 1,
+          "date": "2025-05-25",
+          "url": "https://liquipedia.net/fighters/Brussels_Challenge/2025/Major_Edition/T8"
+        },
+        {
+          "event": "CEOtaku 2024",
+          "place": 2,
+          "date": "2024-12-24",
+          "url": "https://liquipedia.net/fighters/CEOtaku/2024/T8"
+        },
+        {
+          "event": "VSFighting XII",
+          "place": 2,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/VSFighting/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "kingbully",
@@ -4920,7 +5917,24 @@
   },
   {
     "id": "kirakira",
-    "handle": "KiraKira"
+    "handle": "KiraKira",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "European TEKKEN Cup 3 Last Chance Qualifier",
+          "place": 2,
+          "date": "2025-02-25",
+          "url": "https://liquipedia.net/fighters/European_Tekken_Cup/2024/Finals/Last_Chance_Qualifier"
+        },
+        {
+          "event": "Galaxian Explosion: Dark Resurrection",
+          "place": 1,
+          "date": "2024-03-24",
+          "url": "https://liquipedia.net/fighters/Galaxian_Explosion/Dark_Resurrection"
+        }
+      ]
+    }
   },
   {
     "id": "kirito",
@@ -4957,7 +5971,41 @@
   {
     "id": "kkokkoma",
     "handle": "Kkokkoma",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "LVL UP EXPO 2026",
+          "place": 2,
+          "date": "2026-04-26",
+          "url": "https://liquipedia.net/fighters/LVL_UP_EXPO/2026/T8"
+        },
+        {
+          "event": "Manila Madness 4",
+          "place": 1,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Manila_Madness/4"
+        },
+        {
+          "event": "Emirates Showdown 2024",
+          "place": 1,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Emirates_Showdown/2024/T8"
+        },
+        {
+          "event": "CROSSOVER 2024",
+          "place": 2,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/CROSSOVER/2024/T8"
+        },
+        {
+          "event": "Electric Clash 2024",
+          "place": 1,
+          "date": "2024-04-24",
+          "url": "https://liquipedia.net/fighters/Electric_Clash/2024"
+        }
+      ]
+    }
   },
   {
     "id": "kkrnjack",
@@ -4978,7 +6026,41 @@
   {
     "id": "knee",
     "handle": "Knee",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "VSFighting XIV",
+          "place": 1,
+          "date": "2026-07-26",
+          "url": "https://liquipedia.net/fighters/VSFighting/2026/T8"
+        },
+        {
+          "event": "Evolution Championship Series: Japan 2026",
+          "place": 2,
+          "date": "2026-05-26",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2026/Japan/T8"
+        },
+        {
+          "event": "SOOP TEKKEN League 2025: Season 2 Finals",
+          "place": 2,
+          "date": "2026-01-26",
+          "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2025/Season_2/Finals"
+        },
+        {
+          "event": "Evolution Championship Series: Japan 2025",
+          "place": 1,
+          "date": "2025-05-25",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2025/Japan/T8"
+        },
+        {
+          "event": "SOOP TEKKEN League 2024: Season 2 Finals",
+          "place": 2,
+          "date": "2024-11-24",
+          "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2024/Season_2/Finals"
+        }
+      ]
+    }
   },
   {
     "id": "knee-lee3",
@@ -5074,7 +6156,18 @@
   },
   {
     "id": "krissw",
-    "handle": "KrissW"
+    "handle": "KrissW",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "JEMPUTAN: Tekken 8 International Championship 2024",
+          "place": 2,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/JEMPUTAN/2024"
+        }
+      ]
+    }
   },
   {
     "id": "kristian",
@@ -5322,7 +6415,36 @@
   },
   {
     "id": "leemishima",
-    "handle": "LeeMishima"
+    "handle": "LeeMishima",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "3F - Fight For the Future 2026",
+          "place": 1,
+          "date": "2026-05-26",
+          "url": "https://liquipedia.net/fighters/Fight_For_the_Future/2026/T8"
+        },
+        {
+          "event": "RAGNAROK 2025",
+          "place": 2,
+          "date": "2025-06-25",
+          "url": "https://liquipedia.net/fighters/Ragnarok/2025/T8"
+        },
+        {
+          "event": "Punishment 3",
+          "place": 1,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Punishment/2024"
+        },
+        {
+          "event": "Hadouken Fight Festival",
+          "place": 1,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/Hadouken_Fight_Festival/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "legend",
@@ -5519,7 +6641,77 @@
   {
     "id": "lowhigh",
     "handle": "LowHigh",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Esports World Cup 2026",
+          "place": 2,
+          "date": "2026-08-26",
+          "url": "https://liquipedia.net/fighters/Esports_World_Cup/2026/T8"
+        },
+        {
+          "event": "VSFighting XIV",
+          "place": 2,
+          "date": "2026-07-26",
+          "url": "https://liquipedia.net/fighters/VSFighting/2026/T8"
+        },
+        {
+          "event": "CHAIN SHIFT 2026",
+          "place": 2,
+          "date": "2026-06-26",
+          "url": "https://liquipedia.net/fighters/Chain_Shift/2026/T8"
+        },
+        {
+          "event": "Tekken World Tour Finals 2025",
+          "place": 1,
+          "date": "2026-02-26",
+          "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2025"
+        },
+        {
+          "event": "SOOP TEKKEN League 2025: Season 2 Finals",
+          "place": 1,
+          "date": "2026-01-26",
+          "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2025/Season_2/Finals"
+        },
+        {
+          "event": "SOOP Super Tournament 2025",
+          "place": 2,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Super_Tournament/2025/T8"
+        },
+        {
+          "event": "Ultimate Fighting Arena 2025",
+          "place": 1,
+          "date": "2025-09-25",
+          "url": "https://liquipedia.net/fighters/Ultimate_Fighting_Arena/2025/T8"
+        },
+        {
+          "event": "Esports World Cup 2025",
+          "place": 2,
+          "date": "2025-08-25",
+          "url": "https://liquipedia.net/fighters/Esports_World_Cup/2025/T8"
+        },
+        {
+          "event": "CHAIN SHIFT 2025",
+          "place": 2,
+          "date": "2025-06-25",
+          "url": "https://liquipedia.net/fighters/Chain_Shift/2025/T8"
+        },
+        {
+          "event": "Battle Arena Melbourne 14",
+          "place": 2,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/Battle_Arena_Melbourne/14/T8"
+        },
+        {
+          "event": "Evolution Championship Series: Japan 2024",
+          "place": 2,
+          "date": "2024-04-24",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2024/Japan/T8"
+        }
+      ]
+    }
   },
   {
     "id": "lowihgh",
@@ -5611,7 +6803,18 @@
   },
   {
     "id": "m-d-luffy-19",
-    "handle": "M-D-Luffy-19"
+    "handle": "M-D-Luffy-19",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Riyadh Clash 2",
+          "place": 2,
+          "date": "2025-04-25",
+          "url": "https://liquipedia.net/fighters/Riyadh_Clash/2/T8"
+        }
+      ]
+    }
   },
   {
     "id": "m-m-p",
@@ -5727,7 +6930,30 @@
   },
   {
     "id": "malgu",
-    "handle": "Malgu"
+    "handle": "Malgu",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "SOOP Super Tournament 2026",
+          "place": 1,
+          "date": "2026-06-26",
+          "url": "https://liquipedia.net/fighters/Super_Tournament/2026/T8"
+        },
+        {
+          "event": "Tekken World Tour Finals 2025",
+          "place": 2,
+          "date": "2026-02-26",
+          "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2025"
+        },
+        {
+          "event": "SOOP TEKKEN League 2024: Champions",
+          "place": 2,
+          "date": "2025-01-25",
+          "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2024/Champions"
+        }
+      ]
+    }
   },
   {
     "id": "malibu-fox",
@@ -5955,7 +7181,30 @@
   },
   {
     "id": "meo-il",
-    "handle": "Meo-Il"
+    "handle": "Meo-Il",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "STARS CUP 2026",
+          "place": 1,
+          "date": "2026-07-26",
+          "url": "https://liquipedia.net/fighters/Stars_Cup/2026"
+        },
+        {
+          "event": "SOOP TEKKEN League 2026: Season 1 Finals",
+          "place": 1,
+          "date": "2026-04-26",
+          "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2026/Season_1/Finals"
+        },
+        {
+          "event": "AfreecaTV TEKKEN League 2024: Season 1 Finals",
+          "place": 1,
+          "date": "2024-05-24",
+          "url": "https://liquipedia.net/fighters/Afreeca_TEKKEN_League/2024/Season_1/Finals"
+        }
+      ]
+    }
   },
   {
     "id": "merciless",
@@ -6139,7 +7388,18 @@
   },
   {
     "id": "mohsin-shooter",
-    "handle": "Mohsin Shooter 🇵🇰"
+    "handle": "Mohsin Shooter 🇵🇰",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "JEMPUTAN: Tekken 8 International Championship 2024",
+          "place": 1,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/JEMPUTAN/2024"
+        }
+      ]
+    }
   },
   {
     "id": "mokdong",
@@ -6336,7 +7596,113 @@
   {
     "id": "mulgold",
     "handle": "Mulgold",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Manila Madness 5",
+          "place": 1,
+          "date": "2026-09-26",
+          "url": "https://liquipedia.net/fighters/Manila_Madness/5/T8"
+        },
+        {
+          "event": "NEXUS E-Sports Series 2026",
+          "place": 1,
+          "date": "2026-07-26",
+          "url": "https://liquipedia.net/fighters/Nexus_E-Sports_Series/2026/T8"
+        },
+        {
+          "event": "The MIXUP 2026",
+          "place": 2,
+          "date": "2026-06-26",
+          "url": "https://liquipedia.net/fighters/The_MIXUP/2026/T8"
+        },
+        {
+          "event": "DreamHack Atlanta 2026",
+          "place": 1,
+          "date": "2026-05-26",
+          "url": "https://liquipedia.net/fighters/DreamHack/2026/Atlanta/T8"
+        },
+        {
+          "event": "SOOP TEKKEN League 2026: Season 1 Finals",
+          "place": 2,
+          "date": "2026-04-26",
+          "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2026/Season_1/Finals"
+        },
+        {
+          "event": "BeePro Cup 2025",
+          "place": 1,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/BeePro_Cup/2025/T8"
+        },
+        {
+          "event": "SOOP Super Tournament 2025",
+          "place": 1,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Super_Tournament/2025/T8"
+        },
+        {
+          "event": "TEKKEN Nexus 2025",
+          "place": 1,
+          "date": "2025-09-25",
+          "url": "https://liquipedia.net/fighters/TEKKEN_Nexus/2025/T8"
+        },
+        {
+          "event": "Second Wind 2025",
+          "place": 1,
+          "date": "2025-07-25",
+          "url": "https://liquipedia.net/fighters/Second_Wind/2025/T8"
+        },
+        {
+          "event": "Combo Breaker 2025",
+          "place": 1,
+          "date": "2025-05-25",
+          "url": "https://liquipedia.net/fighters/Combo_Breaker/2025/T8"
+        },
+        {
+          "event": "Evolution Championship Series: Japan 2025",
+          "place": 2,
+          "date": "2025-05-25",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2025/Japan/T8"
+        },
+        {
+          "event": "Busan TEKKEN Match-up Finals",
+          "place": 1,
+          "date": "2024-12-24",
+          "url": "https://liquipedia.net/fighters/Busan_TEKKEN_Match-up/2024/Finals"
+        },
+        {
+          "event": "SOOP TEKKEN League 2024: Autumn Super Tournament",
+          "place": 1,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2024/Autumn_Super_Tournament"
+        },
+        {
+          "event": "VSFighting XII",
+          "place": 1,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/VSFighting/2024/T8"
+        },
+        {
+          "event": "Super Tournament 2024",
+          "place": 1,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/Super_Tournament/2024/T8"
+        },
+        {
+          "event": "DreamHack Summer 2024",
+          "place": 2,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/DreamHack/2024/Summer/T8"
+        },
+        {
+          "event": "Only The Best 2024 TWT Challenger",
+          "place": 2,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/Only_The_Best/6/T8/TWT_Challenger"
+        }
+      ]
+    }
   },
   {
     "id": "mulgold98",
@@ -6572,7 +7938,18 @@
   },
   {
     "id": "neonkay64",
-    "handle": "NeonKay64"
+    "handle": "NeonKay64",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "EMEA TEKKEN Cup 4 Last Chance Qualifier",
+          "place": 1,
+          "date": "2026-04-26",
+          "url": "https://liquipedia.net/fighters/EMEA_Tekken_Cup/4/Last_Chance_Qualifier"
+        }
+      ]
+    }
   },
   {
     "id": "neonkayfujiwa",
@@ -6640,7 +8017,18 @@
   },
   {
     "id": "ng-obscure",
-    "handle": "NG-Obscure"
+    "handle": "NG-Obscure",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Texas Showdown 2024",
+          "place": 1,
+          "date": "2024-04-24",
+          "url": "https://liquipedia.net/fighters/Texas_Showdown/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "nhelv",
@@ -6660,7 +8048,18 @@
   },
   {
     "id": "nigno",
-    "handle": "Nigno"
+    "handle": "Nigno",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Ultimate Fighting Arena 2026",
+          "place": 2,
+          "date": "2026-09-26",
+          "url": "https://liquipedia.net/fighters/Ultimate_Fighting_Arena/2026/T8"
+        }
+      ]
+    }
   },
   {
     "id": "nimo",
@@ -6697,7 +8096,23 @@
   {
     "id": "ninjakilla",
     "handle": "Ninjakilla",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "DreamHack Atlanta 2025",
+          "place": 1,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/DreamHack/2025/Atlanta/T8"
+        },
+        {
+          "event": "DreamHack Atlanta 2024",
+          "place": 1,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/DreamHack/2024/Atlanta/T8"
+        }
+      ]
+    }
   },
   {
     "id": "ninju",
@@ -6709,7 +8124,36 @@
   },
   {
     "id": "nino",
-    "handle": "Nino"
+    "handle": "Nino",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Tekken National Championship 2025",
+          "place": 2,
+          "date": "2025-12-25",
+          "url": "https://liquipedia.net/fighters/Tekken_National_Championship/2025"
+        },
+        {
+          "event": "European TEKKEN Cup 3 Finals",
+          "place": 1,
+          "date": "2025-02-25",
+          "url": "https://liquipedia.net/fighters/European_Tekken_Cup/2024/Finals"
+        },
+        {
+          "event": "Fighting Games Challenge 2024",
+          "place": 1,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/Fighting_Games_Challenge/2024"
+        },
+        {
+          "event": "Red Bull Golden Letters 2024 - Europe Qualifier",
+          "place": 1,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024/Qualifier/Europe"
+        }
+      ]
+    }
   },
   {
     "id": "nippati",
@@ -6742,7 +8186,17 @@
   {
     "id": "nobi",
     "handle": "Nobi",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "DreamHack Dallas 2024",
+          "place": 1,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/DreamHack/2024/Dallas/T8"
+        }
+      ]
+    }
   },
   {
     "id": "nobi-aoyama",
@@ -6762,7 +8216,18 @@
   },
   {
     "id": "noel",
-    "handle": "Noel"
+    "handle": "Noel",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "RAGNAROK 2025",
+          "place": 1,
+          "date": "2025-06-25",
+          "url": "https://liquipedia.net/fighters/Ragnarok/2025/T8"
+        }
+      ]
+    }
   },
   {
     "id": "noface",
@@ -6790,7 +8255,18 @@
   },
   {
     "id": "nomar",
-    "handle": "Nomar"
+    "handle": "Nomar",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Frosty Faustings XVIII",
+          "place": 2,
+          "date": "2026-01-26",
+          "url": "https://liquipedia.net/fighters/Frosty_Faustings/2026/T8"
+        }
+      ]
+    }
   },
   {
     "id": "nomji",
@@ -6854,7 +8330,18 @@
   },
   {
     "id": "nrc",
-    "handle": "NRC"
+    "handle": "NRC",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "STAMPED",
+          "place": 2,
+          "date": "2026-01-26",
+          "url": "https://liquipedia.net/fighters/STAMPED/2026"
+        }
+      ]
+    }
   },
   {
     "id": "nrc2000",
@@ -6878,7 +8365,36 @@
   },
   {
     "id": "numan-ch",
-    "handle": "Numan CH"
+    "handle": "Numan CH",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Esports World Cup 2026 Last Chance Qualifier",
+          "place": 2,
+          "date": "2026-08-26",
+          "url": "https://liquipedia.net/fighters/Esports_World_Cup/2026/T8/Last_Chance_Qualifier"
+        },
+        {
+          "event": "Thaiger Uppercut 2025",
+          "place": 1,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Thaiger_Uppercut/2025/T8"
+        },
+        {
+          "event": "Esports World Cup 2025 Last Chance Qualifier",
+          "place": 1,
+          "date": "2025-08-25",
+          "url": "https://liquipedia.net/fighters/Esports_World_Cup/2025/T8/Last_Chance_Qualifier"
+        },
+        {
+          "event": "Gamers Galaxy Pakistan 2024",
+          "place": 1,
+          "date": "2024-04-24",
+          "url": "https://liquipedia.net/fighters/Gamers_Galaxy_Pakistan/2024"
+        }
+      ]
+    }
   },
   {
     "id": "nycfab",
@@ -7286,7 +8802,30 @@
   },
   {
     "id": "pikah",
-    "handle": "Pikah"
+    "handle": "Pikah",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Galaxian Explosion: Dark Resurrection II",
+          "place": 1,
+          "date": "2025-01-25",
+          "url": "https://liquipedia.net/fighters/Galaxian_Explosion/Dark_Resurrection/2/T8"
+        },
+        {
+          "event": "Invictus",
+          "place": 2,
+          "date": "2025-01-25",
+          "url": "https://liquipedia.net/fighters/Invictus/2025/T8"
+        },
+        {
+          "event": "Enders Zone Evolution 4",
+          "place": 1,
+          "date": "2024-12-24",
+          "url": "https://liquipedia.net/fighters/Enders_Zone_Evolution/4"
+        }
+      ]
+    }
   },
   {
     "id": "pikohan",
@@ -7535,7 +9074,30 @@
   },
   {
     "id": "qasim-meer",
-    "handle": "Qasim Meer"
+    "handle": "Qasim Meer",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Saudi eLeague Fighting: Season 4 Championship",
+          "place": 1,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Saudi_eLeague/Season_4/Championship/T8"
+        },
+        {
+          "event": "Clash of the Olympians 2025",
+          "place": 2,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Clash_of_the_Olympians/2025/T8"
+        },
+        {
+          "event": "Saudi Fighting League Season 2 Major",
+          "place": 2,
+          "date": "2024-03-24",
+          "url": "https://liquipedia.net/fighters/Saudi_Fighting_League/Season_2/Major"
+        }
+      ]
+    }
   },
   {
     "id": "qhstm",
@@ -7552,7 +9114,29 @@
   {
     "id": "qudans",
     "handle": "Qudans",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Battle Coliseum 2025",
+          "place": 1,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Battle_Coliseum/2025/T8"
+        },
+        {
+          "event": "Esports World Cup 2025 Last Chance Qualifier",
+          "place": 2,
+          "date": "2025-08-25",
+          "url": "https://liquipedia.net/fighters/Esports_World_Cup/2025/T8/Last_Chance_Qualifier"
+        },
+        {
+          "event": "SOOP TEKKEN League 2025: Season 1 Finals",
+          "place": 1,
+          "date": "2025-07-25",
+          "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2025/Season_1/Finals"
+        }
+      ]
+    }
   },
   {
     "id": "qudtls",
@@ -7629,7 +9213,47 @@
   {
     "id": "raef",
     "handle": "Raef",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Saudi eLeague Fighting: Season 5 Championship",
+          "place": 2,
+          "date": "2026-05-26",
+          "url": "https://liquipedia.net/fighters/Saudi_eLeague/Season_5/Championship/T8"
+        },
+        {
+          "event": "Tekken National Championship 2025",
+          "place": 1,
+          "date": "2025-12-25",
+          "url": "https://liquipedia.net/fighters/Tekken_National_Championship/2025"
+        },
+        {
+          "event": "MOOR1NG 2025",
+          "place": 1,
+          "date": "2025-07-25",
+          "url": "https://liquipedia.net/fighters/MOOR1NG/2025/T8"
+        },
+        {
+          "event": "Road To Olympus 2024",
+          "place": 1,
+          "date": "2024-11-24",
+          "url": "https://liquipedia.net/fighters/Road_To_Olympus/2024/T8"
+        },
+        {
+          "event": "MOOR1NG 2024",
+          "place": 2,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/MOOR1NG/2024/T8"
+        },
+        {
+          "event": "Brussels Challenge Major Edition 2024",
+          "place": 1,
+          "date": "2024-05-24",
+          "url": "https://liquipedia.net/fighters/Brussels_Challenge/2024/Major_Edition/T8"
+        }
+      ]
+    }
   },
   {
     "id": "raef-2-0",
@@ -7714,7 +9338,71 @@
   {
     "id": "rangchu",
     "handle": "Rangchu",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Takedown 2026",
+          "place": 1,
+          "date": "2026-09-26",
+          "url": "https://liquipedia.net/fighters/Takedown/2026/T8"
+        },
+        {
+          "event": "NEXUS E-Sports Series 2026",
+          "place": 2,
+          "date": "2026-07-26",
+          "url": "https://liquipedia.net/fighters/Nexus_E-Sports_Series/2026/T8"
+        },
+        {
+          "event": "Evolution Championship Series 2026",
+          "place": 2,
+          "date": "2026-06-26",
+          "url": "https://liquipedia.net/fighters/Evolution_Championship_Series/2026/T8"
+        },
+        {
+          "event": "TEKKEN Nexus 2025",
+          "place": 2,
+          "date": "2025-09-25",
+          "url": "https://liquipedia.net/fighters/TEKKEN_Nexus/2025/T8"
+        },
+        {
+          "event": "Second Wind 2025",
+          "place": 2,
+          "date": "2025-07-25",
+          "url": "https://liquipedia.net/fighters/Second_Wind/2025/T8"
+        },
+        {
+          "event": "LVL UP EXPO 2025",
+          "place": 2,
+          "date": "2025-04-25",
+          "url": "https://liquipedia.net/fighters/LVL_UP_EXPO/2025/T8"
+        },
+        {
+          "event": "Tekken World Tour Finals 2024",
+          "place": 1,
+          "date": "2024-12-24",
+          "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2024"
+        },
+        {
+          "event": "Manila Madness 3",
+          "place": 1,
+          "date": "2024-11-24",
+          "url": "https://liquipedia.net/fighters/Manila_Madness/3"
+        },
+        {
+          "event": "Second Wind 2024",
+          "place": 1,
+          "date": "2024-07-24",
+          "url": "https://liquipedia.net/fighters/Second_Wind/2024/T8"
+        },
+        {
+          "event": "DreamHack Dallas 2024",
+          "place": 2,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/DreamHack/2024/Dallas/T8"
+        }
+      ]
+    }
   },
   {
     "id": "rangchu-g-bob",
@@ -7991,7 +9679,18 @@
   },
   {
     "id": "roynichi",
-    "handle": "Roynichi"
+    "handle": "Roynichi",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Punishment 4",
+          "place": 2,
+          "date": "2025-09-25",
+          "url": "https://liquipedia.net/fighters/Punishment/2025"
+        }
+      ]
+    }
   },
   {
     "id": "royoon",
@@ -8003,7 +9702,18 @@
   },
   {
     "id": "rskyluck",
-    "handle": "RsKyLuck"
+    "handle": "RsKyLuck",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "VSFighting XIII",
+          "place": 2,
+          "date": "2025-08-25",
+          "url": "https://liquipedia.net/fighters/VSFighting/2025/T8"
+        }
+      ]
+    }
   },
   {
     "id": "ruka",
@@ -8055,7 +9765,18 @@
   },
   {
     "id": "rv-cris",
-    "handle": "RV Cris"
+    "handle": "RV Cris",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Thunderstruck 2025",
+          "place": 1,
+          "date": "2025-10-25",
+          "url": "https://liquipedia.net/fighters/Thunderstruck/2025/T8"
+        }
+      ]
+    }
   },
   {
     "id": "rvbot",
@@ -8127,7 +9848,36 @@
   },
   {
     "id": "saint",
-    "handle": "Saint"
+    "handle": "Saint",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Texas Showdown 2026",
+          "place": 2,
+          "date": "2026-03-26",
+          "url": "https://liquipedia.net/fighters/Texas_Showdown/2026/T8"
+        },
+        {
+          "event": "Battle Coliseum 2025",
+          "place": 2,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Battle_Coliseum/2025/T8"
+        },
+        {
+          "event": "Electric Clash 2025",
+          "place": 2,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/Electric_Clash/2025/T8"
+        },
+        {
+          "event": "Punishment 4",
+          "place": 1,
+          "date": "2025-09-25",
+          "url": "https://liquipedia.net/fighters/Punishment/2025"
+        }
+      ]
+    }
   },
   {
     "id": "saintloran",
@@ -8400,7 +10150,18 @@
   },
   {
     "id": "sergie-mazter",
-    "handle": "Sergie Mazter"
+    "handle": "Sergie Mazter",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "3F - Fight For the Future 2026",
+          "place": 2,
+          "date": "2026-05-26",
+          "url": "https://liquipedia.net/fighters/Fight_For_the_Future/2026/T8"
+        }
+      ]
+    }
   },
   {
     "id": "service",
@@ -8428,7 +10189,60 @@
   },
   {
     "id": "shadow",
-    "handle": "Shadow"
+    "handle": "Shadow",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Frosty Faustings XVIII",
+          "place": 1,
+          "date": "2026-01-26",
+          "url": "https://liquipedia.net/fighters/Frosty_Faustings/2026/T8"
+        },
+        {
+          "event": "MOOR1NG 2025",
+          "place": 2,
+          "date": "2025-07-25",
+          "url": "https://liquipedia.net/fighters/MOOR1NG/2025/T8"
+        },
+        {
+          "event": "Brussels Challenge Major Edition 2025",
+          "place": 2,
+          "date": "2025-05-25",
+          "url": "https://liquipedia.net/fighters/Brussels_Challenge/2025/Major_Edition/T8"
+        },
+        {
+          "event": "Frosty Faustings XVII",
+          "place": 1,
+          "date": "2025-01-25",
+          "url": "https://liquipedia.net/fighters/Frosty_Faustings/2025/T8"
+        },
+        {
+          "event": "Thaiger Uppercut 2024",
+          "place": 2,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/Thaiger_Uppercut/2024/T8"
+        },
+        {
+          "event": "3F - Fight For the Future",
+          "place": 1,
+          "date": "2024-05-24",
+          "url": "https://liquipedia.net/fighters/Fight_For_the_Future/2024/T8"
+        },
+        {
+          "event": "Brussels Challenge Major Edition 2024",
+          "place": 2,
+          "date": "2024-05-24",
+          "url": "https://liquipedia.net/fighters/Brussels_Challenge/2024/Major_Edition/T8"
+        },
+        {
+          "event": "TNS 9: CEO Never Sleeps",
+          "place": 1,
+          "date": "2024-03-24",
+          "url": "https://liquipedia.net/fighters/Tampa_Never_Sleeps/9/T8"
+        }
+      ]
+    }
   },
   {
     "id": "shadow-20z",
@@ -8624,7 +10438,18 @@
   },
   {
     "id": "shounen",
-    "handle": "Shounen"
+    "handle": "Shounen",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Red Bull Golden Letters 2024 - Tokyo Qualifier",
+          "place": 1,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024/Qualifier/Tokyo"
+        }
+      ]
+    }
   },
   {
     "id": "show",
@@ -8688,7 +10513,48 @@
   },
   {
     "id": "sin",
-    "handle": "Sin"
+    "handle": "Sin",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Only The Best 2026 TWT Challenger",
+          "place": 2,
+          "date": "2026-07-26",
+          "url": "https://liquipedia.net/fighters/Only_The_Best/8/T8/TWT_Challenger"
+        },
+        {
+          "event": "Yomi Gate",
+          "place": 1,
+          "date": "2025-12-25",
+          "url": "https://liquipedia.net/fighters/Yomi_Gate/2025"
+        },
+        {
+          "event": "CROSSOVER 2025",
+          "place": 2,
+          "date": "2025-08-25",
+          "url": "https://liquipedia.net/fighters/CROSSOVER/2025/T8"
+        },
+        {
+          "event": "Enders Zone Evolution 4",
+          "place": 2,
+          "date": "2024-12-24",
+          "url": "https://liquipedia.net/fighters/Enders_Zone_Evolution/4"
+        },
+        {
+          "event": "Tekken National Championship 2024",
+          "place": 2,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/Tekken_National_Championship/2024"
+        },
+        {
+          "event": "CROSSOVER 2024",
+          "place": 1,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/CROSSOVER/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "sinnn",
@@ -8888,7 +10754,18 @@
   },
   {
     "id": "sourpiggy",
-    "handle": "SourPiggy"
+    "handle": "SourPiggy",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Red Bull Golden Letters 2024 - North America Qualifier",
+          "place": 1,
+          "date": "2024-07-24",
+          "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024/Qualifier/North_America"
+        }
+      ]
+    }
   },
   {
     "id": "sowol",
@@ -9028,7 +10905,18 @@
   },
   {
     "id": "strog",
-    "handle": "Strog"
+    "handle": "Strog",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "BRICS Tournament 2026",
+          "place": 1,
+          "date": "2026-09-26",
+          "url": "https://liquipedia.net/fighters/BRICS_Tournament/2026"
+        }
+      ]
+    }
   },
   {
     "id": "stroke-icu",
@@ -9164,7 +11052,18 @@
   },
   {
     "id": "taiheiyo",
-    "handle": "Taiheiyo"
+    "handle": "Taiheiyo",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "MASTERCUP TRY TOKYO 2025",
+          "place": 2,
+          "date": "2025-02-25",
+          "url": "https://liquipedia.net/fighters/MASTERCUP/13/TRY"
+        }
+      ]
+    }
   },
   {
     "id": "tails",
@@ -9312,7 +11211,18 @@
   },
   {
     "id": "tekken-master",
-    "handle": "Tekken Master"
+    "handle": "Tekken Master",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Emirates Showdown 2024",
+          "place": 2,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Emirates_Showdown/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "tekken2024",
@@ -9356,7 +11266,54 @@
   },
   {
     "id": "tetsu",
-    "handle": "Tetsu"
+    "handle": "Tetsu",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Brussels Challenge Major Edition 2026",
+          "place": 1,
+          "date": "2026-05-26",
+          "url": "https://liquipedia.net/fighters/Brussels_Challenge/2026/Major_Edition/T8"
+        },
+        {
+          "event": "Galaxian Explosion: Dark Resurrection III",
+          "place": 2,
+          "date": "2026-02-26",
+          "url": "https://liquipedia.net/fighters/Galaxian_Explosion/Dark_Resurrection/3/T8"
+        },
+        {
+          "event": "Hidden Retreat",
+          "place": 2,
+          "date": "2024-12-24",
+          "url": "https://liquipedia.net/fighters/Hidden_Retreat/2024"
+        },
+        {
+          "event": "Across The North",
+          "place": 1,
+          "date": "2024-11-24",
+          "url": "https://liquipedia.net/fighters/Across_The_North/2024"
+        },
+        {
+          "event": "Tekken National Championship 2024",
+          "place": 1,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/Tekken_National_Championship/2024"
+        },
+        {
+          "event": "Red Bull Golden Letters 2024 - London Qualifier",
+          "place": 1,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024/Qualifier/London"
+        },
+        {
+          "event": "The Pit Tournaments: Tekken 8",
+          "place": 1,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/The_Pit_Tournaments/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "tetyuzon",
@@ -9384,7 +11341,42 @@
   },
   {
     "id": "the-jon",
-    "handle": "The Jon"
+    "handle": "The Jon",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Tekken World Tour Finals 2025 Last Chance Qualifier",
+          "place": 1,
+          "date": "2026-01-26",
+          "url": "https://liquipedia.net/fighters/Tekken_World_Tour_Finals/2025/Last_Chance_Qualifier"
+        },
+        {
+          "event": "Paradise Game Battle 2025",
+          "place": 1,
+          "date": "2025-10-25",
+          "url": "https://liquipedia.net/fighters/Paradise_Game_Battle/2025"
+        },
+        {
+          "event": "Thaiger Uppercut 2024",
+          "place": 1,
+          "date": "2024-10-24",
+          "url": "https://liquipedia.net/fighters/Thaiger_Uppercut/2024/T8"
+        },
+        {
+          "event": "Cape Town Showdown 2024",
+          "place": 2,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Cape_Town_Showdown/2024"
+        },
+        {
+          "event": "FV Major 2024",
+          "place": 2,
+          "date": "2024-07-24",
+          "url": "https://liquipedia.net/fighters/FV_Major/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "the-jot",
@@ -9456,7 +11448,36 @@
   },
   {
     "id": "tibetano",
-    "handle": "Tibetano"
+    "handle": "Tibetano",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "TEKKENMANIA",
+          "place": 1,
+          "date": "2026-02-26",
+          "url": "https://liquipedia.net/fighters/TEKKENMANIA/2026"
+        },
+        {
+          "event": "Yomi Gate",
+          "place": 2,
+          "date": "2025-12-25",
+          "url": "https://liquipedia.net/fighters/Yomi_Gate/2025"
+        },
+        {
+          "event": "The MIXUP 2025",
+          "place": 1,
+          "date": "2025-07-25",
+          "url": "https://liquipedia.net/fighters/The_MIXUP/2025/T8"
+        },
+        {
+          "event": "Galaxian Explosion: Dark Resurrection II",
+          "place": 2,
+          "date": "2025-01-25",
+          "url": "https://liquipedia.net/fighters/Galaxian_Explosion/Dark_Resurrection/2/T8"
+        }
+      ]
+    }
   },
   {
     "id": "tidusekyo",
@@ -9789,7 +11810,107 @@
   {
     "id": "ulsan",
     "handle": "Ulsan",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Battle Arena Melbourne 16",
+          "place": 2,
+          "date": "2026-07-26",
+          "url": "https://liquipedia.net/fighters/Battle_Arena_Melbourne/16/T8"
+        },
+        {
+          "event": "STARS CUP 2026",
+          "place": 2,
+          "date": "2026-07-26",
+          "url": "https://liquipedia.net/fighters/Stars_Cup/2026"
+        },
+        {
+          "event": "BeePro Cup 2025",
+          "place": 2,
+          "date": "2025-11-25",
+          "url": "https://liquipedia.net/fighters/BeePro_Cup/2025/T8"
+        },
+        {
+          "event": "Esports World Cup 2025",
+          "place": 1,
+          "date": "2025-08-25",
+          "url": "https://liquipedia.net/fighters/Esports_World_Cup/2025/T8"
+        },
+        {
+          "event": "CHAIN SHIFT 2025",
+          "place": 1,
+          "date": "2025-06-25",
+          "url": "https://liquipedia.net/fighters/Chain_Shift/2025/T8"
+        },
+        {
+          "event": "CEO 2025",
+          "place": 2,
+          "date": "2025-06-25",
+          "url": "https://liquipedia.net/fighters/Community_Effort_Orlando/2025/T8"
+        },
+        {
+          "event": "SOOP TEKKEN League 2024: Champions",
+          "place": 1,
+          "date": "2025-01-25",
+          "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2024/Champions"
+        },
+        {
+          "event": "SOOP TEKKEN League 2024: Season 2 Finals",
+          "place": 1,
+          "date": "2024-11-24",
+          "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2024/Season_2/Finals"
+        },
+        {
+          "event": "Clash of the Olympians 2K24",
+          "place": 1,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Clash_of_the_Olympians/2024/T8"
+        },
+        {
+          "event": "Red Bull Golden Letters 2024",
+          "place": 1,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Red_Bull_Golden_Letters/2024"
+        },
+        {
+          "event": "Ultimate Fighting Arena 2024",
+          "place": 1,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/Ultimate_Fighting_Arena/2024/T8"
+        },
+        {
+          "event": "SOOP TEKKEN League 2024: Autumn Super Tournament",
+          "place": 2,
+          "date": "2024-09-24",
+          "url": "https://liquipedia.net/fighters/SOOP_TEKKEN_League/2024/Autumn_Super_Tournament"
+        },
+        {
+          "event": "Esports World Cup 2024",
+          "place": 1,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/Esports_World_Cup/2024/T8"
+        },
+        {
+          "event": "DreamHack Summer 2024",
+          "place": 1,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/DreamHack/2024/Summer/T8"
+        },
+        {
+          "event": "Super Tournament 2024",
+          "place": 2,
+          "date": "2024-06-24",
+          "url": "https://liquipedia.net/fighters/Super_Tournament/2024/T8"
+        },
+        {
+          "event": "AfreecaTV TEKKEN League 2024 Open Tournament",
+          "place": 1,
+          "date": "2024-03-24",
+          "url": "https://liquipedia.net/fighters/Afreeca_TEKKEN_League/2024/Open_Tournament"
+        }
+      ]
+    }
   },
   {
     "id": "ulsan-dreamtree",
@@ -9869,7 +11990,24 @@
   },
   {
     "id": "usama-abbasi",
-    "handle": "Usama Abbasi"
+    "handle": "Usama Abbasi",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Takedown 2025",
+          "place": 1,
+          "date": "2025-10-25",
+          "url": "https://liquipedia.net/fighters/Takedown/2025/T8"
+        },
+        {
+          "event": "Esports World Cup 2024 Last Chance Qualifier",
+          "place": 1,
+          "date": "2024-08-24",
+          "url": "https://liquipedia.net/fighters/Esports_World_Cup/2024/T8/Last_Chance_Qualifier"
+        }
+      ]
+    }
   },
   {
     "id": "uslan",
@@ -10165,7 +12303,24 @@
   },
   {
     "id": "xcc",
-    "handle": "Xcc"
+    "handle": "Xcc",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "BRICS Tournament 2025",
+          "place": 1,
+          "date": "2025-06-25",
+          "url": "https://liquipedia.net/fighters/BRICS_Tournament/2025"
+        },
+        {
+          "event": "BRICS Tournament 2024",
+          "place": 1,
+          "date": "2024-11-24",
+          "url": "https://liquipedia.net/fighters/BRICS_Tournament/2024"
+        }
+      ]
+    }
   },
   {
     "id": "xenomars",
@@ -10226,7 +12381,35 @@
   {
     "id": "yagami",
     "handle": "Yagami",
-    "featured": true
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "OzHadou Nationals 20",
+          "place": 2,
+          "date": "2026-09-26",
+          "url": "https://liquipedia.net/fighters/OzHadou_Nationals/20/T8"
+        },
+        {
+          "event": "Battle Arena Melbourne 16",
+          "place": 1,
+          "date": "2026-07-26",
+          "url": "https://liquipedia.net/fighters/Battle_Arena_Melbourne/16/T8"
+        },
+        {
+          "event": "Manila Madness 3",
+          "place": 2,
+          "date": "2024-11-24",
+          "url": "https://liquipedia.net/fighters/Manila_Madness/3"
+        },
+        {
+          "event": "Second Wind 2024",
+          "place": 2,
+          "date": "2024-07-24",
+          "url": "https://liquipedia.net/fighters/Second_Wind/2024/T8"
+        }
+      ]
+    }
   },
   {
     "id": "yaiba",
