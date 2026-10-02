@@ -81,13 +81,14 @@ import type { Expiry } from '../types/index';
 export const UNRELEASED: { id: string; releases: string; note?: string }[] = [
   {
     id: 'roger_jr',
-    releases: '2026-10-01',
+    releases: '2026-10-12',
     note:
-      'Season 3 pass character #3, window OCTOBER–DECEMBER 2026; this row fires at window ' +
-      'OPEN. Id provisional — the scrape decides. Bandai Namco scheduled his full gameplay ' +
-      'reveal trailer for EVO France on 2026-10-11, so a release date should be public ' +
-      'shortly after that; re-date this row to the day once it is, rather than leaving a ' +
-      'quarter-wide window in place.',
+      'Season 3 pass character #3, window OCTOBER–DECEMBER 2026. Id provisional — the scrape ' +
+      'decides. Fired at window OPEN on 2026-10-01 and was NOT playable on 2026-10-02 ' +
+      '(data:roster-check CURRENT: 42 ids in the official grid, none of them his), so it is ' +
+      're-dated to the day after the EVO France gameplay trailer (2026-10-11), the first point ' +
+      'a release date is likely to be public. When this fires, re-date it to that release day ' +
+      'rather than leaving a quarter-wide window in place.',
   },
   {
     id: 'yujiro',
