@@ -319,6 +319,11 @@
       "permanent": true
     },
     {
+      "source": "/tekken/players/legends-zafina",
+      "destination": "/tekken/players/legendszafina",
+      "permanent": true
+    },
+    {
       "source": "/tekken/players/lifeismyheaven",
       "destination": "/tekken/players/life-is-my-heaven",
       "permanent": true
