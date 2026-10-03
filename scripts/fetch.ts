@@ -5,13 +5,20 @@
 //
 // Run: npm run data:fetch   (tsx --env-file-if-exists=.env scripts/fetch.ts)
 
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { CHANNELS, FETCHED_CHANNELS } from './channels';
+import { aheadOfDump, newestUpload } from './freshness';
 import { apiGet, parseDuration, requireApiKey } from './youtube';
-import type { ChannelConfig, RawVideoRecord } from '../types/index';
+import type {
+  ChannelConfig,
+  ChannelKey,
+  DepartedEvidence,
+  MatchVideo,
+  RawVideoRecord,
+} from '../types/index';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -91,6 +98,52 @@ async function fetchChannel(ch: ChannelConfig): Promise<RawVideoRecord[]> {
   return records;
 }
 
+// ── departures: the one case the stale-raw guard cannot judge from data ──────
+// A channel that deletes its NEWEST upload and posts nothing after it leaves a
+// fresh dump looking exactly like a stale one (scripts/freshness.ts). So this
+// asks YouTube about the committed records newer than the dump — aheadOfDump,
+// the guard's own selection — and records the ones no longer public. On an
+// ordinary morning there are none, so it makes no call. One videos.list call
+// covers 50 ids.
+interface StatusResponse {
+  items: { id: string; status: { privacyStatus: string } }[];
+}
+
+async function confirmDepartures(
+  key: ChannelKey,
+  dump: RawVideoRecord[],
+  committed: MatchVideo[],
+): Promise<DepartedEvidence> {
+  const ahead = aheadOfDump(key, dump, committed).map((v) => v.id);
+  const ids: string[] = [];
+  for (let i = 0; i < ahead.length; i += 50) {
+    const batch = ahead.slice(i, i + 50);
+    const res: StatusResponse = await apiGet('videos', {
+      part: 'status',
+      id: batch.join(','),
+      maxResults: '50',
+    });
+    const live = new Set(
+      res.items.filter((v) => v.status.privacyStatus === 'public').map((v) => v.id),
+    );
+    ids.push(...batch.filter((x) => !live.has(x)));
+  }
+  return {
+    channel: key,
+    newestInDump: newestUpload(dump),
+    checkedAt: new Date().toISOString(),
+    ids,
+  };
+}
+
+/** The committed corpus, for the departure check only. Absent or unreadable is
+ *  treated as empty: no check runs, no departure is recorded, and the guard
+ *  stays strict. parse.ts refuses an unreadable videos.json itself. */
+const committed: MatchVideo[] = await readFile(join(ROOT, 'data', 'videos.json'), 'utf8')
+  .then((t) => JSON.parse(t) as MatchVideo[])
+  .then((v) => (Array.isArray(v) ? v : []))
+  .catch(() => []);
+
 // ── main ─────────────────────────────────────────────────────────────────────
 await mkdir(RAW_DIR, { recursive: true });
 const skipped = CHANNELS.filter((c) => c.index);
@@ -107,10 +160,23 @@ for (const ch of FETCHED_CHANNELS) {
   const t0 = Date.now();
   const records = await fetchChannel(ch);
   records.sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
+  // Asked BEFORE anything is written, so a check that throws leaves the
+  // previous dump and its departure file together, untouched. The old file
+  // still goes before the new dump lands, so the two are never from different
+  // fetches; parse.ts checks the binding as well.
+  const departed = await confirmDepartures(ch.id, records, committed);
+  const departedPath = join(RAW_DIR, `${ch.id}.departed.json`);
+  await rm(departedPath, { force: true });
   await writeFile(join(RAW_DIR, `${ch.id}.json`), JSON.stringify(records, null, 1) + '\n', 'utf8');
+  await writeFile(departedPath, JSON.stringify(departed, null, 1) + '\n', 'utf8');
   const dates = records.map((r) => r.publishedAt.slice(0, 10));
   console.log(
     `✔ ${ch.id} (${ch.name}): ${records.length} uploads, ${dates[dates.length - 1] ?? '—'} → ${dates[0] ?? '—'} (${((Date.now() - t0) / 1000).toFixed(1)}s)`,
   );
+  if (departed.ids.length)
+    console.log(
+      `  ↘ ${departed.ids.length} committed upload(s) newer than this dump are gone from ` +
+        `YouTube (deleted, private or unlisted): ${departed.ids.join(', ')}. parse prunes them.`,
+    );
 }
 console.log('Done. Next: npm run data:parse');

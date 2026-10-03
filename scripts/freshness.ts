@@ -51,6 +51,16 @@
 //    the dump's newest is unchanged. That is the prune the pipeline exists to
 //    publish and the guard must not block it.
 //
+// THAT LAST POINT HOLDS ONLY WHILE SOMETHING NEWER IS STILL IN THE DUMP. Delete
+// a channel's NEWEST upload, post nothing after it, and a dump fetched a minute
+// ago fails the test exactly as a month-old one does. Observed 2026-10-02 on
+// Strive, whose cron died in Parse with every dump fresh. Data alone cannot
+// tell the two apart, so scripts/fetch.ts asks YouTube about the committed
+// records newer than each dump (aheadOfDump, the same selection this guard
+// makes) and writes the ones that are gone to raw/<id>.departed.json
+// (types/index.ts DepartedEvidence). Those ids are skipped here, but only while
+// that file is bound to this exact dump (boundDepartures).
+//
 // SCOPED PER INTAKE, because a stale telly dump says nothing about highLevel.
 // UNLIKE SF6, this repo carries `intake` on MatchVideo, so a record names its
 // own intake and no channel→source token mapping is needed: SF6 has to go
@@ -64,7 +74,7 @@
 // drives it with hand-built arrays and proves every one of its behaviours in
 // milliseconds — which is what neither this repo nor 2XKO had before.
 
-import type { ChannelKey, MatchVideo, RawVideoRecord } from '../types/index';
+import type { ChannelKey, DepartedEvidence, MatchVideo, RawVideoRecord } from '../types/index';
 
 /** What a stale dump looks like, when it is one: the newest upload the dump
  *  holds, and the committed record that proves the dump predates it. */
@@ -74,25 +84,59 @@ export interface StaleEvidence {
   committedAt: string;
 }
 
+/** The newest publishedAt in a dump; '' for an empty one. */
+export function newestUpload(dump: RawVideoRecord[]): string {
+  let newest = '';
+  for (const r of dump) if (r.publishedAt > newest) newest = r.publishedAt;
+  return newest;
+}
+
+/** This intake's committed records that are NEWER than anything in the dump —
+ *  the records a stale dump would drop. One selection for both callers: the
+ *  guard below judges them, and scripts/fetch.ts asks YouTube about them. */
+export function aheadOfDump(
+  key: ChannelKey,
+  dump: RawVideoRecord[],
+  committed: MatchVideo[],
+): MatchVideo[] {
+  const newestInDump = newestUpload(dump);
+  if (!newestInDump) return [];
+  return committed.filter((v) => v.intake === key && v.publishedAt > newestInDump);
+}
+
+/** The departed ids to honour for this dump: the fetch's evidence when it was
+ *  written for this intake beside THIS dump, and nothing otherwise. */
+export function boundDepartures(
+  key: ChannelKey,
+  dump: RawVideoRecord[],
+  evidence: DepartedEvidence | null,
+): ReadonlySet<string> {
+  if (!evidence || evidence.channel !== key || !Array.isArray(evidence.ids)) return new Set();
+  if (evidence.newestInDump !== newestUpload(dump)) return new Set();
+  return new Set(evidence.ids);
+}
+
 /** null when the dump is fresh (or cannot be judged); the evidence when it is
  *  provably stale. Judging is impossible, and must not be guessed at, when the
- *  dump is empty or the intake has nothing committed yet — a first run. */
+ *  dump is empty or the intake has nothing committed yet — a first run. A
+ *  committed record the fetch confirmed gone (see boundDepartures) is a prune,
+ *  not proof of staleness. */
 export function staleEvidence(
   key: ChannelKey,
   dump: RawVideoRecord[],
   committed: MatchVideo[],
+  departed: DepartedEvidence | null = null,
 ): StaleEvidence | null {
-  let newestInDump = '';
-  for (const r of dump) if (r.publishedAt > newestInDump) newestInDump = r.publishedAt;
+  const newestInDump = newestUpload(dump);
   if (!newestInDump) return null; // empty dump: the caller already refuses that
 
+  const gone = boundDepartures(key, dump, departed);
   let newest: MatchVideo | undefined;
-  for (const v of committed) {
-    if (v.intake !== key) continue;
+  for (const v of aheadOfDump(key, dump, committed)) {
+    if (gone.has(v.id)) continue;
     if (!newest || v.publishedAt > newest.publishedAt) newest = v;
   }
-  if (!newest) return null; // nothing committed for this intake yet
-  if (newest.publishedAt <= newestInDump) return null;
+  if (!newest) return null; // nothing committed is newer than the dump
 
   return { newestInDump, committedId: newest.id, committedAt: newest.publishedAt };
 }
@@ -111,5 +155,9 @@ export function formatStaleRefusal(key: ChannelKey, e: StaleEvidence): string {
     ``,
     `  Refresh first:  npm run data:build   (fetch and parse, always together)`,
     `  Or override:    npm run data:parse -- --allow-stale`,
+    ``,
+    `  If that upload was deleted, made private or unlisted, the fetch confirms`,
+    `  it with YouTube and records it in raw/${key}.departed.json, and the`,
+    `  parse then prunes it instead of stopping here.`,
   ].join('\n');
 }

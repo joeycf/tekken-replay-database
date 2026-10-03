@@ -20,7 +20,7 @@ import { fileURLToPath } from 'node:url';
 import { CHANNELS, FETCHED_CHANNELS, stripTheaterSponsor } from './channels';
 import { crossCheck, formatCrossCheck, type WitnessArtifact, type WitnessFile } from './crosscheck';
 import { applyOverrides, emitGeneric } from './emit';
-import { formatStaleRefusal, staleEvidence } from './freshness';
+import { boundDepartures, formatStaleRefusal, staleEvidence } from './freshness';
 import { buildPatchTable } from './patches';
 import { buildAliasMatcher, extractRank, loadCharacters } from './roster';
 import { HANDLE_ALIASES, idKey, resolveKey, resolvePlayers, undeclaredCollisions } from './players';
@@ -34,6 +34,7 @@ import {
 import type {
   ChannelConfig,
   ChannelKey,
+  DepartedEvidence,
   MatchSide,
   MatchVideo,
   ReviewQueueItem,
@@ -414,9 +415,29 @@ const committedForKnown: MatchVideo[] = await readJson<MatchVideo[]>(join(DATA, 
 //
 // The index intake is not checked here: it is exempted at the `ch.index` branch
 // above and protected by its count pin instead.
+//
+// The fetch's departure evidence rides in beside each dump (scripts/freshness.ts
+// boundDepartures). Unreadable is treated as absent, which leaves the guard strict.
 if (!process.argv.includes('--allow-stale')) {
   for (const [key, dump] of dumps) {
-    const ev = staleEvidence(key, dump, committedForKnown);
+    const departed = await readJson<DepartedEvidence>(
+      join(ROOT, 'raw', `${key}.departed.json`),
+    ).catch((e: NodeJS.ErrnoException) => {
+      if (e.code !== 'ENOENT')
+        console.warn(
+          `  ⚠ raw/${key}.departed.json will not parse; ignored, so the stale-raw guard stays strict`,
+        );
+      return null;
+    });
+    const gone = boundDepartures(key, dump, departed);
+    if (departed && gone.size) {
+      console.log(
+        `  ↘ raw/${key}.json: ${gone.size} committed upload(s) newer than the dump left YouTube ` +
+          `(confirmed by data:fetch at ${departed.checkedAt}). Pruned, not read as staleness: ` +
+          [...gone].join(', '),
+      );
+    }
+    const ev = staleEvidence(key, dump, committedForKnown, departed);
     if (ev) {
       console.error(formatStaleRefusal(key, ev));
       process.exit(1);
