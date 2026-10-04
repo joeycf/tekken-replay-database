@@ -3185,7 +3185,7 @@
   },
   {
     "id": "fahf-f",
-    "handle": "Fahf_F"
+    "handle": "FahF F"
   },
   {
     "id": "fakeer-baddo",
@@ -4914,6 +4914,10 @@
     "handle": "Janavis"
   },
   {
+    "id": "jang",
+    "handle": "Jang"
+  },
+  {
     "id": "javascript",
     "handle": "JavaScript"
   },
@@ -6457,6 +6461,10 @@
         }
       ]
     }
+  },
+  {
+    "id": "legacy",
+    "handle": "Legacy"
   },
   {
     "id": "legend",
