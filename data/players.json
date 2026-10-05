@@ -1928,6 +1928,10 @@
     "handle": "Countermachine"
   },
   {
+    "id": "courtesy",
+    "handle": "Courtesy"
+  },
+  {
     "id": "cp-jona",
     "handle": "CP Jona"
   },
@@ -3494,6 +3498,10 @@
     "handle": "FRANZA"
   },
   {
+    "id": "freebie",
+    "handle": "Freebie"
+  },
+  {
     "id": "freezing-soul",
     "handle": "FREEZING SOUL"
   },
@@ -3993,7 +4001,7 @@
   },
   {
     "id": "greyhound",
-    "handle": "GreyHound"
+    "handle": "Greyhound"
   },
   {
     "id": "greyking",
@@ -5361,6 +5369,10 @@
   {
     "id": "just-frame",
     "handle": "Just Frame"
+  },
+  {
+    "id": "just-joker",
+    "handle": "Just Joker"
   },
   {
     "id": "justfog",
@@ -7507,7 +7519,7 @@
   },
   {
     "id": "morumi",
-    "handle": "MORUMI"
+    "handle": "Morumi"
   },
   {
     "id": "mosman",
@@ -7989,7 +8001,7 @@
   },
   {
     "id": "neronero",
-    "handle": "Neronero"
+    "handle": "NeroNero"
   },
   {
     "id": "nervous",
