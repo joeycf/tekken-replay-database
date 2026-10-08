@@ -1,14 +1,14 @@
 # Tekken pipeline report
 
-**16083 matches** parsed from 26089 uploads across 5 channels, plus 317 from 1 index · 2650 players · ranked sides 14591/32166 (45.4%)
+**16095 matches** parsed from 26102 uploads across 5 channels, plus 317 from 1 index · 2651 players · ranked sides 14607/32190 (45.4%)
 
 | channel | source | uploads | parsed | coverage |
 | --- | --- | ---: | ---: | ---: |
-| highLevel | highLevel | 4759 | 4726 | 99.3% |
-| telly | telly | 12889 | 7969 | 61.8% |
-| ranked | ranked | 2786 | 2765 | 99.2% |
+| highLevel | highLevel | 4762 | 4729 | 99.3% |
+| telly | telly | 12894 | 7974 | 61.8% |
+| ranked | ranked | 2790 | 2769 | 99.2% |
 | bneEsports | tournament | 2878 | 243 | 8.4% |
-| evoEvents | tournament | 2777 | 63 | 2.3% |
+| evoEvents | tournament | 2778 | 63 | 2.3% |
 | replayTheater _(carried)_ | tournament | — | 317 | — |
 
 ### Index intakes
@@ -27,11 +27,11 @@ _was carried unchanged and this pull's intake counts were not measured._
 _The cursor still advanced: a quiet day is the ordinary case here, not a_
 _failed one — the catalogue's tagged Tekken rows stop at 2025-03-16._
 
-Seasons: S1 6359 · S2 6058 · S3 3666
+Seasons: S1 6359 · S2 6058 · S3 3678
 
-Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1494 · 3.02 876 · unknown 10 (unknown = season contradicts the date: label-grace/override)
+Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1494 · 3.02 888 · unknown 10 (unknown = season contradicts the date: label-grace/override)
 
-Misses by reason: pre-launch 4456 · not-tekken8 2641 · short-duration 1684 · shorts 1129 · no-vs-title 248 · char-unresolved 160 · bad-handle 3 · live-or-upcoming 2
+Misses by reason: pre-launch 4456 · not-tekken8 2642 · short-duration 1684 · shorts 1129 · no-vs-title 248 · char-unresolved 160 · bad-handle 3 · live-or-upcoming 2
 
 Season-label conflicts (channel label ≠ date-derived season, outside the ±14d boundary grace; date wins): 147
 
@@ -86,7 +86,7 @@ after changing scripts/players.ts, or the old URLs 404.
 
 ## Tournament placements — Liquipedia Tier 1–2, CC BY-SA 3.0
 
-161 events with placements read; 90 of 2650 registry players carry a title (153 wins). 21 placed names are not in the registry yet — they are featured the day a replay of theirs is ingested, unless listed below as needing a human.
+161 events with placements read; 90 of 2651 registry players carry a title (153 wins). 21 placed names are not in the registry yet — they are featured the day a replay of theirs is ingested, unless listed below as needing a human.
 
 **Titled:** `mulgold` 12W/5R · `ulsan` 10W/6R · `atif-butt` 8W/7R · `arslan-ash` 9W/4R · `farzeen` 7W/4R · `lowhigh` 3W/8R · `rangchu` 4W/6R · `shadow` 4W/4R · `tetsu` 5W/2R · `jeondding` 0W/6R · `jodd` 3W/3R · `joka` 2W/4R · `kaneandtrench` 4W/2R · `raef` 4W/2R · `sin` 2W/4R · `gosain` 2W/3R · `ilias` 3W/2R · `joe-crush` 2W/3R · `kkokkoma` 3W/2R · `knee` 2W/3R · `the-jon` 3W/2R · `edge` 3W/1R · `keisuke` 0W/4R · `leemishima` 3W/1R · `nino` 3W/1R · `numan-ch` 3W/1R · `saint` 1W/3R · `tibetano` 2W/2R · `yagami` 1W/3R · `exodia` 1W/2R · `fear-of-silence` 2W/1R · `king-rey-jr` 1W/2R · `malgu` 1W/2R · `meo-il` 3W/0R · `pikah` 2W/1R · `qasim-meer` 1W/2R · `qudans` 2W/1R · `boosterblast` 0W/2R · `cherry-berry-mango` 1W/1R · `eyemusician` 0W/2R · `jdcr` 2W/0R · `kagemaru` 0W/2R · `kirakira` 1W/1R · `ninjakilla` 2W/0R · `usama-abbasi` 2W/0R · `xcc` 2W/0R · `abel-del-maestro` 0W/1R · `befamous` 0W/1R · `bode` 1W/0R · `breadman` 0W/1R · `chanel` 1W/0R · `chikurin` 1W/0R · `cuddle-core` 1W/0R · `danielmado` 1W/0R · `dante` 0W/1R · `dawood-sikandar` 1W/0R · `dbp` 0W/1R · `divineexorcist4` 0W/1R · `dombilimaymun` 0W/1R · `double` 1W/0R · `edddyy` 1W/0R · `genghis-d0n` 1W/0R · `hafiz-tanveer` 0W/1R · `haisha` 1W/0R · `hendo` 0W/1R · `how-foolish` 0W/1R · `ikari` 1W/0R · `jesandy` 1W/0R · `joonya` 0W/1R · `kaizokulars` 0W/1R · `kei` 1W/0R · `krissw` 0W/1R · `m-d-luffy-19` 0W/1R · `mohsin-shooter` 1W/0R · `neonkay64` 1W/0R · `ng-obscure` 1W/0R · `nigno` 0W/1R · `nobi` 1W/0R · `noel` 1W/0R · `nomar` 0W/1R · `nrc` 0W/1R · `roynichi` 0W/1R · `rskyluck` 0W/1R · `rv-cris` 1W/0R · `sergie-mazter` 0W/1R · `shounen` 1W/0R · `sourpiggy` 1W/0R · `strog` 1W/0R · `taiheiyo` 0W/1R · `tekken-master` 0W/1R
 
@@ -188,4 +188,4 @@ guessing this module refuses.
 - `4Pf63UozmxA` [highLevel] no-vs-title: T8 🔥 Kkokkoma (Dragunov) 🔥 Tekken 8
 - `RUDWRC5M738` [highLevel] no-vs-title: T8 🔥 Shadow 20z (Zafina) 🔥 Tekken 8
 
-_Generated 2026-10-07T14:00:03.011Z_
+_Generated 2026-10-08T14:07:33.541Z_
