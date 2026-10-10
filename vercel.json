@@ -344,6 +344,11 @@
       "permanent": true
     },
     {
+      "source": "/tekken/players/linia-pacifica",
+      "destination": "/tekken/players/liniapacifica",
+      "permanent": true
+    },
+    {
       "source": "/tekken/players/lirli",
       "destination": "/tekken/players/li-r-li",
       "permanent": true
