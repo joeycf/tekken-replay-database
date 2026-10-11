@@ -1814,8 +1814,8 @@
       "permanent": true
     },
     {
-      "source": "/tekken/players/voila-99",
-      "destination": "/tekken/players/voila99",
+      "source": "/tekken/players/voila99",
+      "destination": "/tekken/players/voila-99",
       "permanent": true
     },
     {

@@ -3233,7 +3233,7 @@
   },
   {
     "id": "farzeen",
-    "handle": "Farzeen 🇵🇰",
+    "handle": "Farzeen",
     "featured": true,
     "extra": {
       "titles": [
@@ -11003,6 +11003,10 @@
     "handle": "Sunchip"
   },
   {
+    "id": "sunny",
+    "handle": "Sunny"
+  },
+  {
     "id": "suou",
     "handle": "Suou"
   },
@@ -12166,8 +12170,8 @@
     "handle": "Voila"
   },
   {
-    "id": "voila99",
-    "handle": "Voila99"
+    "id": "voila-99",
+    "handle": "Voila 99"
   },
   {
     "id": "volleboid",

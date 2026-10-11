@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "id": "Dwv39k3nHyA",
+    "kind": "character-completion",
+    "channel": "evoEvents",
+    "title": "Evo France 2026: Buffalo Soldier vs Ulsan | TEKKEN 8 | Top 24 Losers Round 1",
+    "publishedAt": "2026-10-10T21:39:57Z",
+    "durationSec": 667,
+    "handles": [
+      "Buffalo Soldier",
+      "Ulsan"
+    ],
+    "reason": "no title or description on this channel names a character"
+  },
+  {
+    "id": "RiAlFFU7Mww",
+    "kind": "character-completion",
+    "channel": "evoEvents",
+    "title": "Evo France 2026: Ulsan vs Atif | TEKKEN 8 | Top 24 Losers Round 3",
+    "publishedAt": "2026-10-10T21:45:52Z",
+    "durationSec": 563,
+    "handles": [
+      "Ulsan",
+      "Atif"
+    ],
+    "reason": "no title or description on this channel names a character"
+  }
+]
