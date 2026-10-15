@@ -81,14 +81,15 @@ import type { Expiry } from '../types/index';
 export const UNRELEASED: { id: string; releases: string; note?: string }[] = [
   {
     id: 'roger_jr',
-    releases: '2026-10-12',
+    releases: '2026-11-11',
     note:
-      'Season 3 pass character #3, window OCTOBER–DECEMBER 2026. Id provisional — the scrape ' +
-      'decides. Fired at window OPEN on 2026-10-01 and was NOT playable on 2026-10-02 ' +
-      '(data:roster-check CURRENT: 42 ids in the official grid, none of them his), so it is ' +
-      're-dated to the day after the EVO France gameplay trailer (2026-10-11), the first point ' +
-      'a release date is likely to be public. When this fires, re-date it to that release day ' +
-      'rather than leaving a quarter-wide window in place.',
+      'Season 3 pass character #3. DATED: the EVO France gameplay trailer (2026-10-11) gave ' +
+      'early access for Season 3 pass owners from 11 November and general release on 16/17 ' +
+      'November (outlets differ by region). Gated on the EARLY-ACCESS day, because pass ' +
+      'owners upload footage from then. The id is confirmed: on 2026-10-15 ' +
+      'data:roster-check found `roger_jr` paged in the official grid (43 ids), still gated ' +
+      'here. Fired 2026-10-12 against the window-based date and was not playable yet. If ' +
+      'Bandai moves the date, re-date this row — do not delete it.',
   },
   {
     id: 'yujiro',
