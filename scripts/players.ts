@@ -17,7 +17,9 @@
  *                    ("Ninjakilla_212"), a typo, a spelling only another game
  *                    knows. Already existed in parse.ts for exactly this, but
  *                    was consulted ONLY in the review-queue prefill and never in
- *                    the id path; it lives here now and reaches both.
+ *                    the id path; it lives here now and reaches both. Also a
+ *                    PIN: a same-key entry fixes which spelling owns the id when
+ *                    the vote is close enough to flip it.
  *   DISTINCT_KEYS    one normalised key that is genuinely TWO people. Tekken is
  *                    the game that needs this: "T-Ara" (8 records) and "Tara"
  *                    (7) normalise together and are not obviously one person.
@@ -72,6 +74,15 @@ export const HANDLE_ALIASES = new Map<string, string>([
   // build a second page for the same competitor.
   //   Evo 2026 Losers Round 1 vs JeonDDing
   ['ninjakilla212', 'Ninjakilla'],
+  // A PIN, not a merge: every spelling here already shares the key `xcc`. The
+  // vote is close — titles write "X C C" 159×, "XCC" 82×, "Xcc" 4× — and on
+  // 2026-10-12 two new description spellings tipped the id from `xcc` to `x-c-c`,
+  // which moved a featured player with two BRICS titles off his indexed URL and
+  // held the cron for three days (the ledger dropped the rows that pointed at the
+  // old id). Liquipedia spells him XCC, but the pin has to be MIXED-CASE: the
+  // isMixed rung in resolvePlayers sorts before weight, so an all-caps pin would
+  // lose to "X c c" no matter how heavy it is.
+  ['xcc', 'Xcc'],
 ]);
 
 /**

@@ -56,6 +56,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { successor } from './ledger';
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const BASE = '/tekken';
 
@@ -153,20 +155,6 @@ function retiredWithoutRedirect(live: Set<string>, led: Record<string, string>):
   return false;
 }
 
-// Where a retired id's redirect should land: follow the ledger until it reaches
-// a live player. null when the trail ends in an id that is neither live nor
-// redirected (the player left the corpus outright), or loops.
-function successor(id: string, live: Set<string>, led: Record<string, string>): string | null {
-  const seen = new Set<string>();
-  let at = id;
-  while (!live.has(at)) {
-    if (seen.has(at) || led[at] === undefined) return null;
-    seen.add(at);
-    at = led[at];
-  }
-  return at;
-}
-
 /**
  * A ROW THAT CANNOT SHIP, named with its fix. A row goes bad two ways, and each
  * is a URL answering wrong:
@@ -206,12 +194,14 @@ function rowsThatCannotShip(live: Set<string>, led: Record<string, string>): str
 }
 
 /**
- * A ROW THAT LEFT THE LEDGER is a redirect that stopped, and parse.ts can do that
- * on its own despite "a row leaves it only by hand": its write keeps a row only
- * while the DESTINATION is live, so when a merge target is itself merged later
- * (x → y, then y → z) the x → y row is dropped rather than carried on to z, and
- * x's indexed URL 404s with the ledger and vercel.json in perfect agreement —
- * the one failure a sync check cannot see.
+ * A ROW THAT LEFT THE LEDGER is a redirect that stopped, with the ledger and
+ * vercel.json in perfect agreement — the one failure a sync check cannot see.
+ * parse.ts used to cause it on its own: its write kept a row only while the
+ * DESTINATION was live, so when a merge target was itself merged later (x → y,
+ * then y → z) the x → y row was dropped rather than carried on to z. That held
+ * this cron from 2026-10-12, when `xcc` flipped to `x-c-c`. parse.ts now
+ * carries such a row on (scripts/ledger.ts retargetLedger), so this check is the
+ * backstop for a hand edit or a writer that regresses, not the daily mechanism.
  *
  * Two kinds of drop are fine, and both are let through: the source is live again
  * (a flip — g-bob here on 2026-09-15, and both of Tōkon's, are every drop so far),

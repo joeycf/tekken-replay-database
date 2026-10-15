@@ -21,6 +21,7 @@ import { CHANNELS, FETCHED_CHANNELS, stripTheaterSponsor } from './channels';
 import { crossCheck, formatCrossCheck, type WitnessArtifact, type WitnessFile } from './crosscheck';
 import { applyOverrides, emitGeneric } from './emit';
 import { boundDepartures, formatStaleRefusal, staleEvidence } from './freshness';
+import { retargetLedger } from './ledger';
 import { buildPatchTable } from './patches';
 import { buildAliasMatcher, extractRank, loadCharacters } from './roster';
 import { HANDLE_ALIASES, idKey, resolveKey, resolvePlayers, undeclaredCollisions } from './players';
@@ -1194,7 +1195,9 @@ await writeFile(
  * a recomputed set would silently drop that redirect and the indexed URL would
  * 404 again with no diff to explain it.
  *
- * Feeds `npm run data:redirects`. A row leaves it only by hand.
+ * Feeds `npm run data:redirects`. A row leaves it only by hand, or when its
+ * trail ends in nobody; a row whose destination was merged away since is carried
+ * on to wherever that merge went (scripts/ledger.ts).
  */
 const priorRedirects: Record<string, string> = await readJsonSafe(
   join(DATA, 'player-redirects.json'),
@@ -1204,11 +1207,7 @@ for (const [canonical, absorbed] of mergeReport.merged) {
   for (const dead of absorbed) proposedRedirects[dead] = canonical;
 }
 const playerIdSet = new Set(players.map((p) => p.id));
-const redirectLedger = Object.fromEntries(
-  Object.entries(proposedRedirects)
-    .filter(([from, to]) => from !== to && playerIdSet.has(to))
-    .sort(([a], [b]) => a.localeCompare(b)),
-);
+const redirectLedger = retargetLedger(proposedRedirects, playerIdSet);
 
 // ── the carry pin, rewritten by a rebuild — AND IT ONLY GROWS ───────────────
 // Re-pin every cron-fetched intake REBUILT this run, from the final count —

@@ -30,6 +30,7 @@ import { CHANNELS } from './channels';
 import { aheadOfDump, staleEvidence } from './freshness';
 import { newerThanCursor } from './theater-delta';
 import { diffTekken, foldWavu, parseWavu, type Finding } from './patch-check';
+import { retargetLedger } from './ledger';
 import { loadPatchTable } from './patches';
 import type {
   ChannelKey,
@@ -592,11 +593,45 @@ function testCronGuard(): void {
   }
 }
 
+/** POSITIVE CONTROLS for the ledger's chain rule (scripts/ledger.ts).
+ *
+ *  The write used to keep a row only while its destination was live, so x → y
+ *  vanished the day y was merged into z, and the drift gate held the cron for
+ *  it (2026-10-12, `xcc` → `x-c-c`). Synthetic ids, so the controls survive any
+ *  real merge. */
+function testLedgerRetarget(): void {
+  console.log('\n— redirect ledger retarget (positive controls)');
+  const same = (a: Record<string, string>, b: Record<string, string>) =>
+    JSON.stringify(a) === JSON.stringify(b);
+
+  expect(
+    same(retargetLedger({ a: 'b', b: 'c' }, new Set(['c'])), { a: 'c', b: 'c' }),
+    'carries x → y on to z once y is merged into z',
+  );
+  expect(
+    same(retargetLedger({ x: 'y', y: 'x' }, new Set(['x'])), { y: 'x' }),
+    'a flip drops the row that would now point a live id at itself',
+  );
+  expect(
+    same(retargetLedger({ a: 'gone' }, new Set(['c'])), {}),
+    'drops a row whose trail ends in nobody',
+  );
+  expect(
+    same(retargetLedger({ a: 'b', b: 'a', c: 'a' }, new Set(['z'])), {}),
+    'drops rows that loop',
+  );
+  expect(
+    same(retargetLedger({ live: 'c' }, new Set(['live', 'c'])), { live: 'c' }),
+    'keeps a live-source row for the drift gate to refuse',
+  );
+}
+
 async function main(): Promise<void> {
   // Pure, Node-side, no browser: run before anything is served.
   testStaleGuard();
   testTheaterDelta();
   testPatchCheck();
+  testLedgerRetarget();
   testCronGuard();
 
   const { at, close } = await serve();
