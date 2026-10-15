@@ -24,5 +24,57 @@
       "Atif"
     ],
     "reason": "no title or description on this channel names a character"
+  },
+  {
+    "id": "bjZZGKK7234",
+    "kind": "character-completion",
+    "channel": "evoEvents",
+    "title": "Evo France 2026: LowHigh vs JeonDDing | TEKKEN 8 | Winners Finals",
+    "publishedAt": "2026-10-11T15:09:45Z",
+    "durationSec": 1107,
+    "handles": [
+      "LowHigh",
+      "JeonDDing"
+    ],
+    "reason": "no title or description on this channel names a character"
+  },
+  {
+    "id": "Ve0496JWGME",
+    "kind": "character-completion",
+    "channel": "evoEvents",
+    "title": "Evo France 2026: Jeondding vs LowHigh | TEKKEN 8 | Grand Finals",
+    "publishedAt": "2026-10-11T16:06:50Z",
+    "durationSec": 732,
+    "handles": [
+      "JeonDDing",
+      "LowHigh"
+    ],
+    "reason": "no title or description on this channel names a character"
+  },
+  {
+    "id": "LdKvxfHbNkc",
+    "kind": "character-completion",
+    "channel": "evoEvents",
+    "title": "Evo France 2026: LowHigh vs Ulsan | TEKKEN 8 | Losers Finals",
+    "publishedAt": "2026-10-11T16:41:31Z",
+    "durationSec": 599,
+    "handles": [
+      "LowHigh",
+      "Ulsan"
+    ],
+    "reason": "no title or description on this channel names a character"
+  },
+  {
+    "id": "k-NNtvv-XdM",
+    "kind": "character-completion",
+    "channel": "evoEvents",
+    "title": "Evo France 2026: Lowhigh vs Ulsan | TEKKEN 8 | Losers Finals",
+    "publishedAt": "2026-10-13T04:02:20Z",
+    "durationSec": 599,
+    "handles": [
+      "LowHigh",
+      "Ulsan"
+    ],
+    "reason": "no title or description on this channel names a character"
   }
 ]

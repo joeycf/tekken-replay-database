@@ -1149,6 +1149,10 @@
     "handle": "BLACK CAT"
   },
   {
+    "id": "black-moon",
+    "handle": "Black Moon"
+  },
+  {
     "id": "blackbird",
     "handle": "BlackBird"
   },
@@ -1543,6 +1547,10 @@
   {
     "id": "casino",
     "handle": "Casino"
+  },
+  {
+    "id": "casko",
+    "handle": "Casko"
   },
   {
     "id": "casti",
@@ -2269,6 +2277,10 @@
   {
     "id": "dbwod",
     "handle": "DBWOD"
+  },
+  {
+    "id": "dd-lee",
+    "handle": "DD Lee"
   },
   {
     "id": "ddp",
@@ -3735,6 +3747,10 @@
   {
     "id": "ghost",
     "handle": "GHOST"
+  },
+  {
+    "id": "ghostinho",
+    "handle": "Ghostinho"
   },
   {
     "id": "gigabite",
@@ -7080,6 +7096,10 @@
     "handle": "Marital"
   },
   {
+    "id": "marssama",
+    "handle": "Marssama"
+  },
+  {
     "id": "marty",
     "handle": "Marty"
   },
@@ -7373,6 +7393,10 @@
   {
     "id": "mister-batch",
     "handle": "Mister-batch"
+  },
+  {
+    "id": "mistrap",
+    "handle": "Mistrap"
   },
   {
     "id": "mitoman",
@@ -8420,6 +8444,10 @@
     "handle": "Num Game"
   },
   {
+    "id": "numan",
+    "handle": "Numan 🇵🇰"
+  },
+  {
     "id": "numan-ch",
     "handle": "Numan CH",
     "featured": true,
@@ -8555,6 +8583,10 @@
   {
     "id": "only-practice",
     "handle": "Only Practice"
+  },
+  {
+    "id": "onsaemiro",
+    "handle": "Onsaemiro"
   },
   {
     "id": "onyx",
@@ -8803,6 +8835,10 @@
   {
     "id": "pekos",
     "handle": "Pekos"
+  },
+  {
+    "id": "pepita",
+    "handle": "Pepita"
   },
   {
     "id": "pepper",
@@ -10793,6 +10829,10 @@
     "handle": "Sora"
   },
   {
+    "id": "soratju",
+    "handle": "SORATJU"
+  },
+  {
     "id": "sou",
     "handle": "Sou"
   },
@@ -11542,6 +11582,10 @@
   {
     "id": "tidusekyo",
     "handle": "Tidusekyo"
+  },
+  {
+    "id": "tiempo",
+    "handle": "Tiempo"
   },
   {
     "id": "tigermask",
