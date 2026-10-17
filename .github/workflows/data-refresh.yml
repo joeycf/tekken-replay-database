@@ -16,6 +16,7 @@ concurrency:
 
 jobs:
   refresh:
+    name: Refresh the archive — red means the live archive is stale or wrong
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -62,7 +63,7 @@ jobs:
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
 
-      - name: Parse and emit
+      - name: Parse and emit — red means a wrong archive was refused, nothing committed
         run: npm run data:parse
 
       # THE ROUTING IS REGENERATED HERE, SO IT LANDS IN THE SAME COMMIT AS THE
@@ -85,11 +86,12 @@ jobs:
       #
       # The retirement guard is NOT part of this: an id leaving the registry
       # because its only record was deleted upstream is routine, has nowhere to
-      # point, and must not hold a refresh. It stays post-deploy, below.
-      - name: Refuse redirect drift
+      # point, and must not hold a refresh. It runs in pending-work.yml after
+      # this run completes, against the commit this run started from.
+      - name: Refuse redirect drift — red means today's data is held
         run: npx tsx scripts/redirects.ts --drift
 
-      - name: Commit if changed
+      - name: Commit if changed — red means nothing was published
         run: |
           git config user.name "tekken-data-refresh[bot]"
           git config user.email "data-refresh@users.noreply.github.com"
@@ -165,50 +167,8 @@ jobs:
       # serves yesterday's payload, a handful of records behind); a served count
       # outside the collapse guard's own band is a FAILURE. The guard in
       # parse.ts protects the repository; this protects what visitors get.
-      # Deliberately BEFORE "Flag due expiries": that step is designed to go
-      # red, and a red step stops the ones after it.
-      - name: Post-deploy smoke check
+      # The last step. A red anywhere in this workflow now means ONE thing: the
+      # archive is stale or wrong, or visitors are served the wrong one. Steps
+      # that mean "a person has work" live in pending-work.yml.
+      - name: Post-deploy smoke check — red means visitors get the wrong archive
         run: npm run verify:deployed
-
-      - name: Flag due expiries
-        # Deliberately failing (scripts/expiries.ts).
-        # The data has already been committed, pushed and smoke-checked above, so
-        # a red run never costs a refresh — it only makes the pending work
-        # impossible to miss.
-        #
-        # This repo had NO such gate until 2026-09-09, and it is the one that has
-        # already been caught by exactly this failure mode once: the 2026-09-02
-        # sweep found its patch table 96 days stale, 258 replays under the wrong
-        # token. A roster goes stale the same silent way.
-        #
-        # Two Season 3 pass characters can trip it: Roger Jr. (window opens
-        # 2026-10-01) and Yujiro Hanma (window opens 2027-01-01). The pass is four
-        # characters and two have shipped, so after those two this gate is done
-        # unless Bandai Namco announces a Season 4.
-        # Clear it by doing the work, NOT by deleting this step.
-        run: npx tsx scripts/expiries.ts --check
-
-      - name: Flag stale redirects
-        # `if: always()` because the step above is DESIGNED to go red, and a red
-        # step stops the ones after it. These two gates are independent, and both
-        # have to be able to report on the same run.
-        #
-        # WHAT IS LEFT HERE IS THE RETIREMENT GUARD. Until 2026-09-28 this step
-        # also compared vercel.json with the ledger, and running after the push it
-        # could only go red once the 404 was already live: it went red on voila-99
-        # the morning it shipped (2026-09-27) and again the next, and the URL
-        # stayed dead until a human regenerated vercel.json. That half now runs
-        # before the commit ("Regenerate player
-        # redirects" and "Refuse redirect drift"), where it holds the data instead
-        # of reporting on it.
-        #
-        # What stays is `--check`'s other arm: an id that left data/players.json
-        # since the previous commit with no ledger row, whatever removed it. That
-        # has to stay post-deploy, because an id whose only record was deleted
-        # upstream leaves the registry routinely with no successor to point at,
-        # and a refusal before the commit would hold the day's data for it.
-        #
-        # Clear it the way its message says: a ledger row, or `--allow-retire`
-        # for an id that genuinely has no successor.
-        if: always()
-        run: npx tsx scripts/redirects.ts --check

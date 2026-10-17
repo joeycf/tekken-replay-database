@@ -30,7 +30,7 @@ import { CHANNELS } from './channels';
 import { aheadOfDump, staleEvidence } from './freshness';
 import { newerThanCursor } from './theater-delta';
 import { diffTekken, foldWavu, parseWavu, type Finding } from './patch-check';
-import { retargetLedger } from './ledger';
+import { retargetLedger, retiredWithoutRow } from './ledger';
 import { loadPatchTable } from './patches';
 import type {
   ChannelKey,
@@ -469,19 +469,110 @@ function testTheaterDelta(): void {
   );
 }
 
-function testCronGuard(): void {
-  console.log('\n— cron guard');
-  const wf = readFileSync(join(ROOT, '.github/workflows/data-refresh.yml'), 'utf8').split('\n');
-  const start = wf.findIndex((l) => l.includes('git config user.name'));
-  const guard = wf
-    .slice(start)
+/**
+ * THE COMMIT STEP'S SHELL, READ OUT OF THE WORKFLOW. Indentation-driven, not
+ * YAML-parsed: the body is every line indented ≥10 spaces after
+ * `git config user.name`, BOUNDED at the first non-blank line indented less —
+ * the next step's `- name:`, or a comment above it. It used to run to the end
+ * of the file, which meant an `env:` or `with:` on any LATER step was swept
+ * into the shell that runs below, and nothing named why; the bound is the fix,
+ * and the control in the cron-guard test is what keeps it one.
+ */
+function commitStepBody(lines: string[]): string {
+  const start = lines.findIndex((l) => l.includes('git config user.name'));
+  if (start === -1) return '';
+  const stop = lines.findIndex(
+    (l, i) => i > start && l.trim() !== '' && !l.startsWith('          '),
+  );
+  return lines
+    .slice(start, stop === -1 ? undefined : stop)
     .filter((l) => l.startsWith('          '))
     .map((l) => l.slice(10))
     .filter((l) => l.trim() !== 'git push') // scratch repo has no remote
     .join('\n');
+}
+
+function testCronGuard(): void {
+  console.log('\n— cron guard');
+  const wf = readFileSync(join(ROOT, '.github/workflows/data-refresh.yml'), 'utf8').split('\n');
+  expect(
+    wf.some((l) => l.includes('git config user.name')),
+    'workflow contains the commit guard block',
+  );
+  // Indentation-driven, not YAML-parsed (keep the run: body at exactly 10
+  // spaces), and bounded at the next step — see commitStepBody.
+  const guard = commitStepBody(wf);
   expect(
     guard.includes('git restore --staged --worktree data/report.md'),
     'workflow drops a timestamp-only report.md',
+  );
+  // Positive control for the bound: a later step with its own 10-space body
+  // must not leak into the guard.
+  const bounded = commitStepBody([
+    '      - name: Commit if changed',
+    '        run: |',
+    '          git config user.name "x"',
+    '          git add data/a.json',
+    '      # a comment between steps',
+    '      - name: A later step',
+    '        env:',
+    '          NOT_MINE: 1',
+    '        run: |',
+    '          echo not mine',
+  ]);
+  expect(
+    bounded.includes('git add data/a.json') &&
+      !bounded.includes('NOT_MINE') &&
+      !bounded.includes('not mine'),
+    'the commit-step extractor stops at the next step (a later env:/run: is not swept into the guard)',
+  );
+  // ── the two workflows agree ─────────────────────────────────────────────────
+  // pending-work.yml fires on data-refresh.yml's EXACT `name:` (workflow_run
+  // filters are globs over names), reads only, takes no secret, and is the only
+  // home of the steps that mean "a person has work". Each line is a control:
+  // rename either workflow, paste a TASK step back into the data run, or move
+  // the smoke check off the end, and this goes red.
+  const dr = wf.join('\n');
+  const pw = readFileSync(join(ROOT, '.github/workflows/pending-work.yml'), 'utf8');
+  const drName = /^name:[ \t]*(.+?)[ \t]*$/m.exec(dr)?.[1] ?? '';
+  expect(
+    drName === 'Daily data refresh',
+    `data-refresh.yml is named "Daily data refresh" (read "${drName}")`,
+  );
+  expect(
+    new RegExp(`^\\s*workflows:\\s*\\[\\s*["']${drName}["']\\s*\\]`, 'm').test(pw) &&
+      /^\s*types:\s*\[\s*completed\s*\]/m.test(pw),
+    'pending-work.yml fires on workflow_run of that exact name, type completed',
+  );
+  expect(
+    /^permissions:\n {2}contents: read$/m.test(pw) && !/secrets\./.test(pw),
+    'pending-work.yml reads only and takes no secret',
+  );
+  const TASK_STEPS = [
+    'Flag due expiries',
+    'Flag stale redirects',
+    'Flag retired ids with no redirect',
+    'Validate the patch table',
+  ];
+  expect(
+    TASK_STEPS.every((s) => !dr.includes(`- name: ${s}`)),
+    'no "a person has work" step is left in the data run',
+  );
+  expect(
+    pw.includes('- name: Flag due expiries') &&
+      pw.includes('- name: Platform freshness schedule is alive'),
+    "pending-work.yml carries the chores and the platform check's survival",
+  );
+  const stepNames = [...dr.matchAll(/^ {6}- name: (.+)$/gm)].map((m) => m[1]!);
+  expect(
+    stepNames.at(-1)?.startsWith('Post-deploy smoke check') === true,
+    "the smoke check is the data run's last step",
+  );
+  expect(
+    pw.includes('- name: Flag retired ids with no redirect') &&
+      /--retired-since/.test(pw) &&
+      /fetch-depth:\s*2/.test(pw),
+    'the retirement guard rides Pending work in --retired-since mode (fetch-depth 2 for the hand-dispatch fallback)',
   );
 
   // .md as well as .json: report.md is a pipeline output like any other, and a
@@ -626,12 +717,214 @@ function testLedgerRetarget(): void {
   );
 }
 
+/** THE RETIREMENT GUARD IN ITS PENDING-WORK MODE (scripts/redirects.ts
+ *  --retired-since <ref>), and the comparison under it (scripts/ledger.ts
+ *  retiredWithoutRow).
+ *
+ *  The guard's old home was `--check` in the data run's post-deploy step, on a
+ *  depth-1 checkout where HEAD~1 exists only once the run has committed: on every
+ *  other day it printed "skipped", returned true, and the step was green with
+ *  nothing compared. The mode under test takes a NAMED baseline and FAILS when
+ *  the checkout lacks it. The controls are the cases where a pass-by-skipping
+ *  would have hidden a 404, plus the write path a mistyped flag must never reach.
+ *
+ *  Real-history expectations are COMPUTED from git and today's ledger, never
+ *  hardcoded: 367ab82 (2026-09-01) dropped 245 "players" minted out of the
+ *  game's own name and the fix gave every one a row, so against its parent the
+ *  guard passes today; 30a509b (2026-07-20) holds ids that left with no row and
+ *  is a positive today. A row added by hand tomorrow flips either, and must not
+ *  go red here — the scratch repo below is the positive that cannot drift. */
+function testRetirementGuard(): void {
+  console.log('\n— retirement guard (--retired-since)');
+
+  // 1. The comparison, on fixtures.
+  const was = ['a', 'b', 'c'];
+  const none = new Set<string>();
+  expect(
+    JSON.stringify(retiredWithoutRow(was, new Set(['a']), { b: 'a' }, none)) === '["c"]',
+    'c left with no row and is named; b left with a row and is not',
+  );
+  expect(
+    retiredWithoutRow(was, new Set(['a']), { b: 'a' }, new Set(['c'])).length === 0,
+    '--allow-retire c waves it through',
+  );
+  expect(
+    retiredWithoutRow(was, new Set(['a', 'b', 'c']), { b: 'a' }, none).length === 0,
+    'nothing left, nothing named',
+  );
+
+  // The script, with its exit code and both streams: execSync throws on a
+  // non-zero exit and carries the streams on the error.
+  const run = (args: string[], cwd: string): { code: number; out: string; err: string } => {
+    const cmd = ['npx', 'tsx', 'scripts/redirects.ts', ...args].join(' ');
+    try {
+      return { code: 0, out: execSync(cmd, { cwd, stdio: 'pipe', encoding: 'utf8' }), err: '' };
+    } catch (e) {
+      const x = e as { status?: number | null; stdout?: string; stderr?: string };
+      return { code: x.status ?? -1, out: x.stdout ?? '', err: x.stderr ?? '' };
+    }
+  };
+
+  // 2. The real script against this checkout, read-only.
+  const head = run(['--retired-since', 'HEAD'], ROOT);
+  expect(
+    head.code === 0 && head.out.includes('every id retired since HEAD has a redirect'),
+    'baseline = HEAD: nothing retired, exit 0',
+  );
+  const missing = run(['--retired-since', '0000000'], ROOT);
+  expect(
+    missing.code === 1 && missing.err.includes('not in this checkout'),
+    'a baseline this checkout lacks FAILS (exit 1); it does not skip',
+  );
+  const typo = run(['--retired-sinc', 'HEAD'], ROOT);
+  expect(
+    typo.code === 1 && typo.err.includes('unknown flag'),
+    'a mistyped flag is refused (exit 1) instead of falling through to the write',
+  );
+
+  const liveNow = new Set(
+    (JSON.parse(readFileSync(join(ROOT, 'data/players.json'), 'utf8')) as { id: string }[]).map(
+      (p) => p.id,
+    ),
+  );
+  const ledgerNow = JSON.parse(
+    readFileSync(join(ROOT, 'data/player-redirects.json'), 'utf8'),
+  ) as Record<string, string>;
+  for (const [ref, what] of [
+    ['367ab82~1', 'parent of the 245-game-name drop'],
+    ['30a509b', '2026-07-20, before the ledger'],
+  ]) {
+    const ids = ((): string[] | null => {
+      try {
+        execSync(`git cat-file -e ${ref}`, { cwd: ROOT, stdio: 'pipe' });
+        const text = execSync(`git show ${ref}:data/players.json`, {
+          cwd: ROOT,
+          stdio: 'pipe',
+          encoding: 'utf8',
+        });
+        return (JSON.parse(text) as { id: string }[]).map((p) => p.id);
+      } catch {
+        return null;
+      }
+    })();
+    // A shallow clone fails here, loudly, instead of skipping the history
+    // controls: that is the guard's own rule.
+    expect(
+      ids !== null,
+      `${ref} is in this clone (a SHALLOW clone cannot run the history controls — git fetch --unshallow)`,
+    );
+    if (ids === null) continue;
+    const want = retiredWithoutRow(ids, liveNow, ledgerNow, none);
+    const r = run(['--retired-since', ref], ROOT);
+    if (want.length > 0) {
+      expect(
+        r.code === 1 &&
+          r.err.includes(`left data/players.json since ${ref} with no redirect`) &&
+          r.err.includes(want[0] ?? ''),
+        `${ref} (${what}): ${want.length} id(s) it held are gone with no row → refused, naming ${want[0]}`,
+      );
+    } else {
+      expect(
+        r.code === 0 &&
+          r.out.includes(
+            `every id retired since ${ref} has a redirect (${ids.length} → ${liveNow.size})`,
+          ),
+        `${ref} (${what}): every id it lost has a row → ✓ (${ids.length} → ${liveNow.size})`,
+      );
+    }
+  }
+
+  // 3. A scratch repo: retire one id and watch the guard follow it. The copy's
+  // script resolves ROOT from its own location, so it reads the copy's data.
+  // Its vercel.json carries NO player redirect: the write path would add every
+  // ledger row, so `git status` on it is the proof the write never ran.
+  const dir = mkdtempSync(join(tmpdir(), 'retired-since-'));
+  const sh = (cmd: string) => execSync(cmd, { cwd: dir, stdio: 'pipe', encoding: 'utf8' });
+  try {
+    mkdirSync(join(dir, 'scripts'));
+    mkdirSync(join(dir, 'data'));
+    for (const f of [
+      'scripts/redirects.ts',
+      'scripts/ledger.ts',
+      'package.json',
+      'tsconfig.json',
+      'tsconfig.base.json',
+      'tsconfig.pipeline.json',
+      'data/players.json',
+      'data/player-redirects.json',
+    ]) {
+      writeFileSync(join(dir, f), readFileSync(join(ROOT, f)));
+    }
+    writeFileSync(
+      join(dir, 'vercel.json'),
+      JSON.stringify({ redirects: [{ source: '/', destination: '/tekken', permanent: false }] }) +
+        '\n',
+    );
+    sh(`ln -s ${JSON.stringify(join(ROOT, 'node_modules'))} node_modules`);
+    sh('git init -q . && git config user.email t@t && git config user.name t');
+    sh('git add -A && git commit -qm base');
+    const start = sh('git rev-parse HEAD').trim();
+    const players = JSON.parse(readFileSync(join(dir, 'data/players.json'), 'utf8')) as {
+      id: string;
+    }[];
+    const led = JSON.parse(readFileSync(join(dir, 'data/player-redirects.json'), 'utf8')) as Record<
+      string,
+      string
+    >;
+    const targets = new Set(Object.values(led));
+    const victim = players.find((p) => led[p.id] === undefined && !targets.has(p.id))?.id ?? '';
+    const other = players.find((p) => p.id !== victim)?.id ?? '';
+    expect(victim !== '' && other !== '', 'the registry has an id with no ledger row to retire');
+    writeFileSync(
+      join(dir, 'data/players.json'),
+      JSON.stringify(players.filter((p) => p.id !== victim)),
+    );
+    sh('git commit -qam retire');
+    const untouched = () => sh('git status --porcelain -- vercel.json').trim() === '';
+
+    const r1 = run(['--retired-since', start], dir);
+    expect(
+      r1.code === 1 &&
+        r1.err.includes(`left data/players.json since ${start} with no redirect`) &&
+        r1.err.includes(`--retired-since ${start} --allow-retire ${victim}`),
+      `an id retired since the start commit with no row is refused, named (${victim}), with its --allow-retire line`,
+    );
+    const r2 = run(['--retired-since', start, '--allow-retire', victim], dir);
+    expect(r2.code === 0, '--allow-retire on that id passes it');
+    writeFileSync(
+      join(dir, 'data/player-redirects.json'),
+      JSON.stringify({ ...led, [victim]: other }, null, 2) + '\n',
+    );
+    const r3 = run(['--retired-since', start], dir);
+    expect(
+      r3.code === 0 && r3.out.includes(`every id retired since ${start} has a redirect`),
+      'a ledger row for it passes it',
+    );
+    const r4 = run(['--retired-since'], dir);
+    expect(
+      r4.code === 1 && r4.err.includes('needs a commit'),
+      '--retired-since with no commit is refused',
+    );
+    expect(untouched(), 'none of the runs above wrote vercel.json');
+    // The control's control: in this copy the no-flag default DOES write, so
+    // "untouched" above was a real test and not an empty one.
+    const w = run([], dir);
+    expect(
+      w.code === 0 && !untouched(),
+      'the no-flag default writes vercel.json here, so the line above meant something',
+    );
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
 async function main(): Promise<void> {
   // Pure, Node-side, no browser: run before anything is served.
   testStaleGuard();
   testTheaterDelta();
   testPatchCheck();
   testLedgerRetarget();
+  testRetirementGuard();
   testCronGuard();
 
   const { at, close } = await serve();
@@ -1634,6 +1927,7 @@ async function main(): Promise<void> {
     players: number;
     characters: number;
     updated: string;
+    engine?: string;
   };
   const newestReplay = videos.reduce((max, v) => (v.publishedAt > max ? v.publishedAt : max), '');
   expect(
@@ -1681,6 +1975,23 @@ async function main(): Promise<void> {
   expect(
     manifest.name === `${summary.name} Replay Database` && summary.game === 'tekken8',
     `summary identity agrees with the rendered GameConfig (game=${summary.game}, name=${summary.name})`,
+  );
+
+  // ── the deploy fingerprint (checklist 10i) ────────────────────────────────
+  // summary.json carries the engine tag emit read out of nuxt.config.ts, and
+  // verify:deployed compares the served tag with the pin. Both halves here: the
+  // pin is a concrete tag, and the shipped summary says exactly that tag.
+  const ENGINE_PIN =
+    /github:joeycf\/replay-engine#(v\d+\.\d+\.\d+)/.exec(
+      readFileSync(join(ROOT, 'nuxt.config.ts'), 'utf8'),
+    )?.[1] ?? '';
+  expect(
+    /^v\d+\.\d+\.\d+$/.test(ENGINE_PIN),
+    `nuxt.config.ts pins a concrete engine tag (read "${ENGINE_PIN}")`,
+  );
+  expect(
+    summary.engine === ENGINE_PIN,
+    `summary.engine is the pinned tag ${ENGINE_PIN} (summary says ${JSON.stringify(summary.engine)}) — checklist 10i`,
   );
 
   // ── observability wiring ──────────────────────────────────────────────────

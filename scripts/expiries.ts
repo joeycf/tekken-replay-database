@@ -18,17 +18,19 @@
  * THE SEVERITY DESIGN, matching the siblings — read before "fixing" anything:
  *
  *   scripts/characters.ts  (manual roster run)  → exits 1 on a missing token
- *   .github/workflows/…    (daily cron)         → a FINAL step, AFTER commit,
- *                                                 push and the deploy smoke
- *                                                 check, that exits 1
+ *   .github/workflows/pending-work.yml          → runs after every completed
+ *                                                 data run, whatever it
+ *                                                 concluded, and exits 1
  *
- * The cron step is deliberately LAST and deliberately failing. A hard exit
- * earlier would stop the daily refresh, which is strictly worse than the thing
- * it warns about: a day of stale data costs more than a day of a character
- * filed under no accent. So the data gets committed, pushed and smoke-checked
- * first, and only then does the run go red.
+ * The step is deliberately failing, and deliberately NOT in the data run. A hard
+ * exit there would stop the daily refresh, which is strictly worse than the
+ * thing it warns about: a day of stale data costs more than a day of a character
+ * filed under no accent. So the data run commits, pushes and smoke-checks on
+ * its own, and "Pending work" (workflow_run on its completion) goes red so the
+ * pending work is impossible to miss — and a held data run can no longer hide
+ * a due expiry behind it, which it did here on 2026-10-12 (Roger Jr.).
  *
- * THE RED WORKFLOW AND THE exit 1 ARE THE DESIGN, NOT A BUG. Clear them by
+ * THE RED PENDING-WORK RUN AND THE exit 1 ARE THE DESIGN, NOT A BUG. Clear them by
  * doing the work below — never by deleting the check.
  *
  * Run: npm run data:expiries   (tsx scripts/expiries.ts --check)
@@ -139,9 +141,9 @@ export function formatExpiries(due: Expiry[]): string {
 }
 
 // ── standalone `--check` ─────────────────────────────────────────────────────
-// The workflow's LAST step. It runs after the data has been committed, pushed
-// and smoke-checked, so a red run never costs a refresh — it only makes the
-// pending work impossible to ignore.
+// The "Pending work" workflow's step. It runs after the data run has completed
+// (committed, pushed and smoke-checked — or held), so a red run never costs a
+// refresh — it only makes the pending work impossible to ignore.
 const isMain = !!process.argv[1] && import.meta.url.endsWith(process.argv[1].split('/').pop()!);
 if (isMain && process.argv.includes('--check')) {
   const due = dueExpiries();

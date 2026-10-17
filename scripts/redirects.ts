@@ -41,14 +41,38 @@
  * missing in Tōkon before anyone looked, and `--check` living only inside
  * `npm run typecheck`, which the cron does not run, is why nobody did.
  *
+ * WHAT THE CRON'S OWN RETIREMENT STEP CHECKED, 2026-09-10 → 10-17: less than it
+ * looked. The data run ended with a post-deploy "Flag stale redirects" step that
+ * ran `--check` on actions/checkout's default depth-1 clone. Such a clone holds
+ * ONE commit, so HEAD~1 exists only once the run has made a commit of its own:
+ * on a commit day the guard compared the checkout's commit with the new one,
+ * which is the right pair, and on every other day — no data change, a hand
+ * dispatch — baseline() found no HEAD~1, printed "(no git baseline …
+ * retirement check skipped)", returned true, and the step went green having
+ * compared nothing. Every red the step ever showed (10-12..14) was the drift
+ * arms repeating the pre-commit gate's refusal. Nothing slipped through — no
+ * data commit since 09-10 has retired an id without a row, checked against
+ * history on 10-17 — but a guard whose skip is a pass is not a guard. That is
+ * what --retired-since fixes: the baseline is NAMED, and a checkout without it
+ * fails.
+ *
  * Run: npm run data:redirects   write vercel.json from the ledger (the cron's
  *                               "Regenerate player redirects" step)
  *      --drift                  verify, never write: bad rows, lost rows,
  *                               vercel.json out of step with the ledger (the
  *                               cron's pre-commit "Refuse redirect drift" step)
- *      --check                  all of --drift plus the retirement guard below
- *                               (npm run typecheck, and the cron's post-deploy
- *                               "Flag stale redirects" step)
+ *      --check                  all of --drift plus the retirement guard below,
+ *                               against HEAD~1 — or HEAD when the tree is dirty
+ *                               (npm run typecheck, on a full clone)
+ *      --retired-since <ref>    the retirement guard ALONE, against the registry
+ *                               at <ref>; a <ref> this checkout does not have is
+ *                               a failure, never a skip (the "Pending work"
+ *                               workflow's "Flag retired ids with no redirect"
+ *                               step, with <ref> = the commit the data run
+ *                               started from)
+ *      --allow-retire a,b       with either guard: these ids may retire with no
+ *                               redirect (a player whose last record left the
+ *                               corpus has nowhere to point)
  */
 
 import { execFileSync } from 'node:child_process';
@@ -56,7 +80,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { successor } from './ledger';
+import { retiredWithoutRow, successor } from './ledger';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const BASE = '/tekken';
@@ -83,6 +107,25 @@ const allowed = new Set(
   allowIdx === -1 ? [] : (process.argv[allowIdx + 1] ?? '').split(',').map((x) => x.trim()),
 );
 
+// --retired-since <ref>: the retirement guard alone, against a NAMED baseline.
+// Parsed here with the other flags, dispatched below — before --check, and
+// before the write.
+const sinceIdx = process.argv.indexOf('--retired-since');
+const since = sinceIdx === -1 ? null : (process.argv[sinceIdx + 1] ?? '');
+
+// A flag this script does not know is refused before anything is read, because
+// the no-flag default is the WRITE: `--chek`, or `--retired-sinc HEAD`, must end
+// in a refusal, never in a rewritten vercel.json on the way to checking nothing.
+const FLAGS = new Set(['--drift', '--check', '--retired-since', '--allow-retire']);
+const unknown = process.argv.slice(2).filter((a) => a.startsWith('--') && !FLAGS.has(a));
+if (unknown.length > 0) {
+  console.error(
+    `✖ unknown flag(s): ${unknown.join(' ')}\n` +
+      '  Run: npx tsx scripts/redirects.ts [--drift | --check | --retired-since <ref>] [--allow-retire a,b]',
+  );
+  process.exit(1);
+}
+
 // Read the LEDGER, never recompute from the corpus: the retired spellings are
 // gone from data/videos.json by the time this runs, and an id whose last record
 // was deleted upstream still needs its redirect. parse.ts maintains it.
@@ -90,17 +133,44 @@ const ledger = JSON.parse(
   await readFile(join(ROOT, 'data', 'player-redirects.json'), 'utf8'),
 ) as Record<string, string>;
 
+// The live registry, read only by the guards: the write path derives everything
+// from the ledger and has no use for it.
+async function liveIds(): Promise<Set<string>> {
+  const players = JSON.parse(await readFile(join(ROOT, 'data', 'players.json'), 'utf8')) as {
+    id: string;
+  }[];
+  return new Set(players.map((p) => p.id));
+}
+
 /**
  * YESTERDAY'S COPY OF A DATA FILE, and the baseline is git because there is no
- * other record of it: the working tree when the file is uncommitted (the moment
- * a change is about to be committed, which is when the cron's gates fire for
- * real), and HEAD~1 when it is not. Both are absent in a shallow or non-git
- * checkout, and callers SAY SO rather than passing quietly — a guard that
- * reports nothing is indistinguishable from a guard that found nothing.
+ * other record of it. Two ways to name it:
+ *   - GUESSED (no ref — --check and the lost-row check): the working tree when
+ *     the file is uncommitted (the moment a change is about to be committed,
+ *     which is when the cron's gates fire for real), and HEAD~1 when it is not.
+ *     Both are absent in a shallow or non-git checkout, and callers SAY SO
+ *     rather than passing quietly — a guard that reports nothing is
+ *     indistinguishable from a guard that found nothing. Saying so was not
+ *     enough, as the header records: a step that prints "skipped" and exits 0
+ *     is green.
+ *   - NAMED (ref — --retired-since): the caller says which commit, so a
+ *     checkout without it is an error in the call, not a reason to skip, and
+ *     null here makes the caller FAIL. The ref is verified as a commit first so
+ *     a sha this checkout never fetched, a typo, and a bare tree-ish all fail
+ *     the same way; a commit that is present but holds no copy of the file
+ *     throws, which is loud, and right.
  */
-function baseline(path: string): { where: string; text: string } | null {
+function baseline(path: string, ref?: string): { where: string; text: string } | null {
   const git = (...args: string[]): string =>
     execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+  if (ref !== undefined) {
+    try {
+      git('rev-parse', '--verify', '--quiet', `${ref}^{commit}`);
+    } catch {
+      return null;
+    }
+    return { where: ref, text: git('show', `${ref}:${path}`) };
+  }
   try {
     // Uncommitted edits mean HEAD still holds yesterday's; with a clean tree the
     // change is already committed, so yesterday's is HEAD~1.
@@ -122,27 +192,55 @@ function baseline(path: string): { where: string; text: string } | null {
  * them merged into anything, so nothing proposed a single redirect and this
  * check passed while 245 prerendered, sitemapped URLs turned into hard 404s.
  *
- * So --check compares the CURRENT registry against the previous one and refuses
- * any id that left it without a ledger row, whatever removed it.
+ * So this guard compares the CURRENT registry against a previous one — HEAD~1
+ * under --check, the named commit under --retired-since — and refuses any id
+ * that left it without a ledger row, whatever removed it. The comparison itself
+ * is scripts/ledger.ts retiredWithoutRow, so the e2e suite can drive it on
+ * fixtures; this function owns the baseline and the message.
  *
  * NOT IN --drift, deliberately. An id also leaves the registry when its only
  * record is deleted upstream, which is routine and has no successor to point
  * at, and a pre-commit refusal would hold the whole day's data for it. This
- * guard stays where it can go red without costing a refresh: typecheck, and the
- * cron's post-deploy "Flag stale redirects" step.
+ * guard stays where it can go red without costing a refresh: `npm run
+ * typecheck` (--check, against HEAD~1 on a full clone), and the "Pending work"
+ * workflow (.github/workflows/pending-work.yml), which runs after every data
+ * run, whatever that run concluded, and carries it as the step "Flag retired
+ * ids with no redirect": --retired-since with the baseline = the commit the data
+ * run STARTED from (github.event.workflow_run.head_sha, fetched into that
+ * checkout with `git fetch --depth=1 origin <sha>`). So the question there is
+ * exactly "what did today's data commit retire?" — no HEAD~1 guess, no
+ * re-report on a no-commit day (the baseline is then HEAD, 0 retired), and no
+ * gap when a human push lands between the two runs.
  */
-function retiredWithoutRedirect(live: Set<string>, led: Record<string, string>): boolean {
-  const base = baseline('data/players.json');
+function retiredWithoutRedirect(
+  live: Set<string>,
+  led: Record<string, string>,
+  since?: string,
+): boolean {
+  const base = baseline('data/players.json', since);
   if (!base) {
+    if (since !== undefined) {
+      // A named baseline that is not here is the caller's error, and the guard
+      // FAILS on it: passing here is exactly the green-with-nothing-compared
+      // the header describes.
+      console.error(
+        `✖ --retired-since ${since}: that commit is not in this checkout — fetch it first ` +
+          `(git fetch --depth=1 origin ${since})`,
+      );
+      return false;
+    }
     console.log('  (no git baseline for data/players.json — retirement check skipped)');
     return true;
   }
   const was = (JSON.parse(base.text) as { id: string }[]).map((p) => p.id);
-  const orphaned = was.filter((id) => !live.has(id) && led[id] === undefined && !allowed.has(id));
+  const orphaned = retiredWithoutRow(was, live, led, allowed);
   if (orphaned.length === 0) {
-    console.log(`✓ every id retired since ${base.where} has a redirect (${was.length} → ${live.size})`);
+    console.log(
+      `✓ every id retired since ${base.where} has a redirect (${was.length} → ${live.size})`,
+    );
     return true;
   }
+  const mode = since === undefined ? '--check' : `--retired-since ${since}`;
   console.error(
     `✖ ${orphaned.length} player id(s) left data/players.json since ${base.where} with no redirect:\n` +
       `    ${orphaned.slice(0, 8).join(', ')}${orphaned.length > 8 ? `, … and ${orphaned.length - 8} more` : ''}\n` +
@@ -150,7 +248,7 @@ function retiredWithoutRedirect(live: Set<string>, led: Record<string, string>):
       '  an indexed URL that now answers 404. Add a row to data/player-redirects.json\n' +
       '  (the ledger is append-only and parse.ts carries hand-added rows forward), then\n' +
       '  run `npm run data:redirects`. If one genuinely has no successor:\n' +
-      `  npx tsx scripts/redirects.ts --check --allow-retire ${orphaned.slice(0, 3).join(',')}${orphaned.length > 3 ? ',…' : ''}`,
+      `  npx tsx scripts/redirects.ts ${mode} --allow-retire ${orphaned.slice(0, 3).join(',')}${orphaned.length > 3 ? ',…' : ''}`,
   );
   return false;
 }
@@ -262,21 +360,36 @@ function outOfStep(): string[] {
   for (const [source, destination] of want) {
     const is = have.get(source);
     if (is === undefined) out.push(`vercel.json is missing  ${source} → ${destination}`);
-    else if (is !== destination) out.push(`vercel.json sends  ${source} → ${is}, but the ledger says ${destination}`);
+    else if (is !== destination)
+      out.push(`vercel.json sends  ${source} → ${is}, but the ledger says ${destination}`);
   }
   for (const [source, is] of have) {
-    if (!want.has(source)) out.push(`vercel.json still has  ${source} → ${is}, which no ledger row asks for`);
+    if (!want.has(source))
+      out.push(`vercel.json still has  ${source} → ${is}, which no ledger row asks for`);
   }
-  if (out.length === 0 && before !== after) out.push('vercel.json has every player redirect, but not in the generated form');
+  if (out.length === 0 && before !== after)
+    out.push('vercel.json has every player redirect, but not in the generated form');
   return out;
 }
 
+// --retired-since <ref>: ONLY the retirement guard, against a NAMED baseline, and
+// never a write. The "Pending work" workflow passes the commit its data run
+// STARTED from, so the question is exactly "what did today's data commit
+// retire?" (see retiredWithoutRedirect). Dispatched before --check and before
+// the write path at the bottom, and it exits here: nothing with this flag on its
+// command line can reach the write.
+if (since !== null) {
+  if (since === '' || since.startsWith('--')) {
+    console.error(
+      '✖ --retired-since needs a commit: npx tsx scripts/redirects.ts --retired-since <ref>',
+    );
+    process.exit(1);
+  }
+  process.exit(retiredWithoutRedirect(await liveIds(), ledger, since) ? 0 : 1);
+}
+
 if (check) {
-  const live = new Set(
-    (
-      JSON.parse(await readFile(join(ROOT, 'data', 'players.json'), 'utf8')) as { id: string }[]
-    ).map((p) => p.id),
-  );
+  const live = await liveIds();
   const bad = rowsThatCannotShip(live, ledger);
   const lostOrSkipped = lostRows(live, ledger);
   if (lostOrSkipped === null) {

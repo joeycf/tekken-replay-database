@@ -1,0 +1,134 @@
+name: Pending work
+
+# THE OTHER MEANING OF RED. "Daily data refresh" goes red when the archive is
+# stale or wrong. THIS workflow goes red when a person has work: a gated
+# character's window has opened, a season is unconfirmed, a patch table has
+# been quiet too long. The two used to share one job, and on 2026-10-12 Tekken's
+# data run stopped at "Refuse redirect drift", so the due expiry behind it never
+# ran — while from 10-07 Tōkon was red BY DESIGN next to the one run that was
+# holding data. One job, two meanings, and the by-design red had normalised
+# red. Now each workflow has one.
+#
+# It runs after EVERY completed "Daily data refresh", whatever that run
+# concluded: a held data run is exactly the morning a due expiry must still be
+# reported. Under workflow_run GITHUB_SHA is the last commit on the default
+# branch when the data run completed, so a plain checkout already sees the data
+# commit; `ref: main` makes a RE-RUN see the newest main too, which is how
+# "do the work, push, re-run" turns this green.
+#
+# Nothing here writes, nothing here needs a secret, nothing here reaches
+# YouTube or the vendor (the vendor-facing checkers are manual by design).
+on:
+  workflow_run:
+    # The exact `name:` on line 1 of data-refresh.yml. workflow_run matches by
+    # workflow NAME, as a glob; this string has no glob characters.
+    workflows: ['Daily data refresh']
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # Its own group: every data-refresh.yml on the platform uses `data-refresh`,
+  # and a shared group would queue behind or cancel against the data run.
+  group: pending-work
+  cancel-in-progress: false
+
+jobs:
+  pending:
+    name: Pending work — red means a person has a chore; the data is fine
+    runs-on: ubuntu-latest
+    steps:
+      # What the data run did, so this log reads on its own. "n/a" when
+      # dispatched by hand.
+      - name: Data run context
+        run: echo "Daily data refresh → ${ github.event.workflow_run.conclusion || 'n/a (dispatched by hand)' } ${ github.event.workflow_run.html_url }"
+
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          # HEAD~1 is the hand-dispatch fallback for the retirement guard below;
+          # a workflow_run pass fetches its exact baseline instead.
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          # matches engines.node (the platform's Node policy — STACK.md §1)
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Flag due expiries
+        # Deliberately failing (scripts/expiries.ts).
+        # The data has already been committed, pushed and smoke-checked by the
+        # data run that triggered this workflow, so a red run never costs a
+        # refresh — it only makes the pending work impossible to miss.
+        #
+        # This repo had NO such gate until 2026-09-09, and it is the one that has
+        # already been caught by exactly this failure mode once: the 2026-09-02
+        # sweep found its patch table 96 days stale, 258 replays under the wrong
+        # token. A roster goes stale the same silent way.
+        #
+        # Two Season 3 pass characters can trip it: Roger Jr. (early access
+        # 2026-11-11) and Yujiro Hanma (window opens 2027-01-01). The pass is four
+        # characters and two have shipped, so after those two this gate is done
+        # unless Bandai Namco announces a Season 4.
+        # Clear it by doing the work, NOT by deleting this step.
+        run: npx tsx scripts/expiries.ts --check
+
+      # THE RETIREMENT GUARD, IN ITS OWN MODE. Until this workflow existed it ran
+      # as `redirects.ts --check` in the data run's post-deploy step, on a depth-1
+      # checkout. What that meant, measured in a scratch depth-1 clone: on a day
+      # the run committed, HEAD~1 was the checkout's own root commit and the guard
+      # compared yesterday's registry with today's — the right pair; on a
+      # no-commit day, and on a hand dispatch, HEAD~1 did not exist, so it
+      # printed "retirement check skipped" and PASSED having compared nothing.
+      # Every red of that step (10-12 → 10-14) was the drift arms repeating the
+      # pre-commit gate's refusal. A guard whose skip is a pass is not a guard.
+      # Now the baseline is explicit: the commit the data run STARTED from
+      # (github.event.workflow_run.head_sha, fetched below), so the question is
+      # exactly "what did today's data commit retire?" — no HEAD~1 guess, nothing
+      # to re-report on a no-commit day, no gap when a human push lands between
+      # the two runs. The drift arms are not re-run here; they are the data run's
+      # pre-commit gate. A missing baseline FAILS this step instead of skipping.
+      #
+      # Clear it the way its message says: a ledger row, or `--allow-retire`
+      # for an id that genuinely has no successor.
+      - name: Flag retired ids with no redirect
+        if: always()
+        env:
+          # Empty when dispatched by hand; then the baseline is HEAD~1
+          # (fetch-depth 2 above).
+          SINCE: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if [ -n "$SINCE" ]; then git fetch -q --depth=1 origin "$SINCE"; fi
+          npx tsx scripts/redirects.ts --retired-since "${SINCE:-HEAD~1}"
+
+      # THE PLATFORM CHECK'S OWN SURVIVAL. replay-engine's "Platform freshness"
+      # is a scheduled workflow in a public repo, and GitHub disables those after
+      # 60 days without repository activity (a word the docs do not define).
+      # This workflow is workflow_run-triggered, which that rule never touches,
+      # so it is the right place to notice. Re-enable: Actions → Platform
+      # freshness → "Enable workflow" (or PUT …/actions/workflows/
+      # platform-freshness.yml/enable with a token that has actions: write).
+      - name: Platform freshness schedule is alive
+        if: always()
+        env:
+          GH_TOKEN: ${ github.token }
+          WORKFLOW_API: https://api.github.com/repos/joeycf/replay-engine/actions/workflows/platform-freshness.yml
+        run: |
+          # The API pretty-prints one key per line, so the state is read with sed and
+          # nothing this step needs is beyond curl and the shell. An unreadable answer
+          # (401/403 on another repo's endpoint, or a 404 before the workflow exists)
+          # has no "state" line; retry once without the token, then treat it as not alive.
+          read_state() { curl -sS -H "Accept: application/vnd.github+json" "$@" "$WORKFLOW_API" | sed -n 's/^ *"state": *"\([a-z_]*\)".*/\1/p' | head -1; }
+          state=$(read_state -H "Authorization: Bearer $GH_TOKEN")
+          [ -n "$state" ] || state=$(read_state)
+          [ -n "$state" ] || state=unreadable
+          if [ "$state" != "active" ]; then
+            echo "::error title=Platform freshness::replay-engine's Platform freshness schedule is '$state' — re-enable it in its Actions tab (public repos disable schedules after 60 idle days)."
+            exit 1
+          fi
+          echo "✓ Platform freshness schedule is active"

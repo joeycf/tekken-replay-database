@@ -102,7 +102,7 @@ Two other env vars matter locally, neither of them secret:
 | `npm run data:patch-check`                       | Diff `data/patchBoundaries.json` against wavu's Patches (Tekken 8) table — network, manual, never in the cron (see the patch-table runbook)                                                                                                   |
 | `npm run data:roster-check`                      | Diff `data/characters.json` against Bandai Namco's own character index — network, manual, never in the cron. Ends `roster-check: CURRENT / DRIFT / UNVERIFIED / UNREADABLE`                                                                   |
 | `npm run data:tournaments`                       | Liquipedia's Tier 1–2 winners/runners-up → `data/tournaments.json` — network, manual, never in the cron. Ends `tournaments: CURRENT / UPDATED / UNVERIFIED / UNREADABLE / UNSUPPORTED`; `-- --match` and `--check` are offline                |
-| `npm run data:expiries`                          | `--check` the self-expiring gates (announced characters coming due). Runs last in the cron and is **designed to go red**                                                                                                                      |
+| `npm run data:expiries`                          | `--check` the self-expiring gates (announced characters coming due). Runs in the "Pending work" workflow after every data run and is **designed to go red**                                                                                   |
 | `npm run typecheck`                              | App (`nuxt typecheck`) **and** pipeline (`tsc -p tsconfig.pipeline.json`) — both must pass                                                                                                                                                    |
 | `npm run lint` / `lint:fix`                      | ESLint over the whole repo                                                                                                                                                                                                                    |
 | `npm run format` / `format:check`                | Prettier                                                                                                                                                                                                                                      |
@@ -215,9 +215,30 @@ parse, `npm run data:redirects` rewrites `vercel.json` from
 player merges. Then `redirects.ts --drift` refuses to commit, holding the whole
 day's data, if a row cannot ship: a redirect into a 404, a redirect away from a
 live profile, or a redirect the ledger lost. The refusal names the row and its
-fix. The retirement guard (an id leaving the registry with no ledger row) stays
-in the post-deploy "Flag stale redirects" step, because an upstream deletion
-must not hold a refresh.
+fix. The retirement guard (an id leaving the registry with no ledger row) is
+not part of that refusal, because an upstream deletion must not hold a refresh.
+
+**The retirement guard runs in "Pending work", against a named baseline.**
+`.github/workflows/pending-work.yml` runs after every data run, whatever that
+run concluded, and its step "Flag retired ids with no redirect" runs
+`redirects.ts --retired-since <sha>` with `<sha>` = the commit the data run
+STARTED from (`github.event.workflow_run.head_sha`, fetched into the checkout
+with `git fetch --depth=1 origin <sha>`). So the question is exactly "what did
+today's data commit retire?": no `HEAD~1` guess, no re-report on a no-commit day
+(the baseline is then HEAD and it reports 0 retired), no gap when a human push
+lands between the two runs. A baseline the checkout does not have FAILS the
+step; it never skips. That rule is the lesson of the step it replaces: from
+2026-09-10 to 10-17 the guard ran as `redirects.ts --check` in the data run's
+own post-deploy "Flag stale redirects" step, on actions/checkout's default
+depth-1 clone, where `HEAD~1` exists only after the run itself has committed.
+On a commit day it compared the right pair; on every other day it printed
+"(no git baseline — retirement check skipped)" and the step went green having
+compared nothing, and every red the step ever showed was the drift arms
+repeating the pre-commit gate. Nothing was missed (no data commit since 09-10
+retired an id without a row), but a guard whose skip is a pass is not a guard.
+`npm run typecheck` still runs `--check`, against `HEAD~1` on a full clone. To
+run the guard by hand: `npx tsx scripts/redirects.ts --retired-since <ref>`,
+and `--allow-retire a,b` for an id that genuinely has no successor.
 
 The commit stages
 `data/{videos,replays,stats,players,summary,seasonBoundaries,player-redirects,patchGroups,review-queue,source-pins,theater-cursor,theater-disagreements}.json`,

@@ -69,6 +69,30 @@ export interface GenericReplay {
 const GAME_ID = 'tekken8';
 const GAME_NAME = 'Tekken 8';
 
+/**
+ * THE ENGINE PIN, READ OUT OF nuxt.config.ts (checklist 10i; Avatar's reader).
+ * The literal is production truth because Vercel leaves ENGINE_PATH unset: the
+ * `||` only short-circuits when Nuxt evaluates the config locally. Exactly one
+ * match is required — scripts/verify-deployed.ts compares the deployment's
+ * summary.engine with this pin, so two pins (or none) would make that
+ * comparison meaningless. Never import nuxt.config.ts or read an engine
+ * package.json for this: node_modules/.c12 holds several hashed clones.
+ */
+async function enginePin(root: string): Promise<string> {
+  const src = await readFile(join(root, 'nuxt.config.ts'), 'utf8');
+  const hits = [...src.matchAll(/github:joeycf\/replay-engine#(v\d+\.\d+\.\d+)/g)].map(
+    (m) => m[1]!,
+  );
+  const unique = [...new Set(hits)];
+  if (unique.length !== 1) {
+    throw new Error(
+      `emit: nuxt.config.ts pins ${unique.length} engine tag(s) (${unique.join(', ') || 'none'}) — ` +
+        `summary.json carries the deployed CODE version (checklist 10i), so there must be exactly one.`,
+    );
+  }
+  return unique[0]!;
+}
+
 /** Season number → the patch key the UI filters/timelines on. */
 const patchKey = (season: number): string => `S${season}`;
 
@@ -156,6 +180,7 @@ export async function emitGeneric(opts: {
 }): Promise<void> {
   const { records, characters, players, root } = opts;
   const DATA = join(root, 'data');
+  const engine = await enginePin(root);
 
   const stats = buildStats(records);
   const replays = records.map(toReplay);
@@ -279,6 +304,10 @@ export async function emitGeneric(opts: {
     players: genericStats.totals.players,
     characters: genericStats.totals.characters,
     updated: newest.slice(0, 10),
+    // THE CODE VERSION (checklist 10i): read from the pin, asserted by
+    // scripts/verify-deployed.ts against the deployment, so a pin-only change
+    // cannot pass the smoke check on unchanged data.
+    engine,
   };
   if (summary.replays !== replays.length)
     throw new Error(
@@ -290,6 +319,8 @@ export async function emitGeneric(opts: {
     );
   if (!/^\d{4}-\d{2}-\d{2}$/.test(summary.updated))
     throw new Error(`emit: summary.updated is not a replay date ("${summary.updated}")`);
+  if (!/^v\d+\.\d+\.\d+$/.test(summary.engine))
+    throw new Error(`emit: engine pin "${summary.engine}" is not a vX.Y.Z tag`);
 
   await writeFile(join(DATA, 'replays.json'), JSON.stringify(replays) + '\n', 'utf8');
   await writeFile(join(DATA, 'stats.json'), JSON.stringify(genericStats, null, 2) + '\n', 'utf8');
