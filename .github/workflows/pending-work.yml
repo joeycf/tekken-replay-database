@@ -43,7 +43,7 @@ jobs:
       # What the data run did, so this log reads on its own. "n/a" when
       # dispatched by hand.
       - name: Data run context
-        run: echo "Daily data refresh → ${ github.event.workflow_run.conclusion || 'n/a (dispatched by hand)' } ${ github.event.workflow_run.html_url }"
+        run: echo "Daily data refresh → ${{ github.event.workflow_run.conclusion || 'n/a (dispatched by hand)' }} ${{ github.event.workflow_run.html_url }}"
 
       - uses: actions/checkout@v4
         with:
@@ -58,7 +58,8 @@ jobs:
           node-version: 24
           cache: npm
 
-      - run: npm ci
+      - id: deps
+        run: npm ci
 
       - name: Flag due expiries
         # Deliberately failing (scripts/expiries.ts).
@@ -97,7 +98,9 @@ jobs:
       # Clear it the way its message says: a ledger row, or `--allow-retire`
       # for an id that genuinely has no successor.
       - name: Flag retired ids with no redirect
-        if: always()
+        # After an expiries red, yes; after a failed checkout or install, no —
+        # git and npx would only add a second, misleading red (10-18: exit 128).
+        if: always() && steps.deps.outcome == 'success'
         env:
           # Empty when dispatched by hand; then the baseline is HEAD~1
           # (fetch-depth 2 above).
@@ -116,7 +119,7 @@ jobs:
       - name: Platform freshness schedule is alive
         if: always()
         env:
-          GH_TOKEN: ${ github.token }
+          GH_TOKEN: ${{ github.token }}
           WORKFLOW_API: https://api.github.com/repos/joeycf/replay-engine/actions/workflows/platform-freshness.yml
         run: |
           # The API pretty-prints one key per line, so the state is read with sed and

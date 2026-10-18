@@ -548,6 +548,17 @@ function testCronGuard(): void {
     /^permissions:\n {2}contents: read$/m.test(pw) && !/secrets\./.test(pw),
     'pending-work.yml reads only and takes no secret',
   );
+  // Every Actions expression opens with `${{`. A collapsed `${ … }` is a bash
+  // "bad substitution" that fails the step before its command runs: on
+  // 2026-10-18 the context echo did exactly that in all eight Pending work
+  // runs, and no chore ran. Bash's own `${N}` has no space after the brace,
+  // so dollar-brace-whitespace is never legitimate in either file.
+  const halfBrace = /\$\{\s[^}\n]*\}?/g;
+  const halfBraces = [...pw.matchAll(halfBrace), ...dr.matchAll(halfBrace)].map((m) => m[0].trim());
+  expect(
+    halfBraces.length === 0,
+    `every \${ in both workflows opens a \${{ … }} expression (found ${halfBraces.length}: ${halfBraces.join(' · ') || 'none'})`,
+  );
   const TASK_STEPS = [
     'Flag due expiries',
     'Flag stale redirects',
