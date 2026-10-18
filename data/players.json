@@ -1497,6 +1497,10 @@
     "handle": "C-HUSH"
   },
   {
+    "id": "cachalon",
+    "handle": "Cachalon"
+  },
+  {
     "id": "cactus",
     "handle": "Cactus"
   },
@@ -5318,6 +5322,10 @@
         }
       ]
     }
+  },
+  {
+    "id": "joker-int",
+    "handle": "Joker Int"
   },
   {
     "id": "jona",
@@ -9352,6 +9360,10 @@
     "handle": "Raef 2.0"
   },
   {
+    "id": "raem",
+    "handle": "Raem"
+  },
+  {
     "id": "raf",
     "handle": "Raf"
   },
@@ -10511,6 +10523,10 @@
   {
     "id": "shizuku",
     "handle": "Shizuku"
+  },
+  {
+    "id": "shizzle",
+    "handle": "Shizzle"
   },
   {
     "id": "shnuki",
@@ -12320,6 +12336,10 @@
   {
     "id": "weka",
     "handle": "WEKA"
+  },
+  {
+    "id": "wenny",
+    "handle": "Wenny"
   },
   {
     "id": "westschmerz",
