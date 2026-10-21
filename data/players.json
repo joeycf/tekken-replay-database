@@ -1489,6 +1489,10 @@
     "handle": "Butterman"
   },
   {
+    "id": "bvtch",
+    "handle": "Bvtch"
+  },
+  {
     "id": "bxdr",
     "handle": "Bxdr"
   },
@@ -7074,6 +7078,21 @@
   {
     "id": "mankin",
     "handle": "Mankin"
+  },
+  {
+    "id": "manounou",
+    "handle": "Manounou",
+    "featured": true,
+    "extra": {
+      "titles": [
+        {
+          "event": "Komba Overcome",
+          "place": 1,
+          "date": "2026-02-26",
+          "url": "https://liquipedia.net/fighters/Komba_Overcome/2026/T8"
+        }
+      ]
+    }
   },
   {
     "id": "manrai",
@@ -12866,6 +12885,10 @@
   {
     "id": "zissou",
     "handle": "ZISSOU"
+  },
+  {
+    "id": "zlatan-ash",
+    "handle": "Zlatan Ash"
   },
   {
     "id": "zmov",
