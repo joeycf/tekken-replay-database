@@ -19,9 +19,9 @@ jobs:
     name: Refresh the archive — red means the live archive is stale or wrong
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           # matches engines.node (the platform's Node policy — STACK.md §1)
           node-version: 24
