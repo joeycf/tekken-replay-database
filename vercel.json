@@ -344,8 +344,8 @@
       "permanent": true
     },
     {
-      "source": "/tekken/players/linia-pacifica",
-      "destination": "/tekken/players/liniapacifica",
+      "source": "/tekken/players/liniapacifica",
+      "destination": "/tekken/players/linia-pacifica",
       "permanent": true
     },
     {
