@@ -1134,7 +1134,7 @@
   },
   {
     "id": "bitters",
-    "handle": "BitterS"
+    "handle": "Bitters"
   },
   {
     "id": "bjs",
@@ -5799,6 +5799,10 @@
     "handle": "Keikun"
   },
   {
+    "id": "keimoon",
+    "handle": "Keimoon"
+  },
+  {
     "id": "keio-san",
     "handle": "Keio-San"
   },
@@ -5990,6 +5994,10 @@
   {
     "id": "kingreyx",
     "handle": "KingReyX"
+  },
+  {
+    "id": "kingsman",
+    "handle": "Kingsman"
   },
   {
     "id": "kinpo",

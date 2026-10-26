@@ -319,6 +319,11 @@
       "permanent": true
     },
     {
+      "source": "/tekken/players/leehyun",
+      "destination": "/tekken/players/lee-hyun",
+      "permanent": true
+    },
+    {
       "source": "/tekken/players/legends-zafina",
       "destination": "/tekken/players/legendszafina",
       "permanent": true
