@@ -8217,6 +8217,10 @@
     "handle": "Nine Square"
   },
   {
+    "id": "niner",
+    "handle": "Niner"
+  },
+  {
     "id": "nines",
     "handle": "NINES"
   },
@@ -8925,7 +8929,7 @@
   },
   {
     "id": "phidx",
-    "handle": "Phidx"
+    "handle": "PhiDX"
   },
   {
     "id": "phine",
