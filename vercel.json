@@ -1837,6 +1837,11 @@
       "source": "/tekken/players/x-c-c",
       "destination": "/tekken/players/xcc",
       "permanent": true
+    },
+    {
+      "source": "/tekken/players/youjin-boy",
+      "destination": "/tekken/players/youjinboy",
+      "permanent": true
     }
   ]
 }

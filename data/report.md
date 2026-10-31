@@ -1,14 +1,14 @@
 # Tekken pipeline report
 
-**16429 matches** parsed from 26501 uploads across 5 channels, plus 317 from 1 index · 2687 players · ranked sides 15030/32858 (45.7%)
+**16444 matches** parsed from 26517 uploads across 5 channels, plus 317 from 1 index · 2687 players · ranked sides 15050/32888 (45.8%)
 
 | channel | source | uploads | parsed | coverage |
 | --- | --- | ---: | ---: | ---: |
-| highLevel | highLevel | 4851 | 4818 | 99.3% |
-| telly | telly | 13034 | 8107 | 62.2% |
-| ranked | ranked | 2892 | 2871 | 99.3% |
+| highLevel | highLevel | 4855 | 4822 | 99.3% |
+| telly | telly | 13040 | 8113 | 62.2% |
+| ranked | ranked | 2897 | 2876 | 99.3% |
 | bneEsports | tournament | 2892 | 253 | 8.7% |
-| evoEvents | tournament | 2832 | 63 | 2.2% |
+| evoEvents | tournament | 2833 | 63 | 2.2% |
 | replayTheater _(carried)_ | tournament | — | 317 | — |
 
 ### Index intakes
@@ -27,17 +27,17 @@ _was carried unchanged and this pull's intake counts were not measured._
 _The cursor still advanced: a quiet day is the ordinary case here, not a_
 _failed one — the catalogue's tagged Tekken rows stop at 2025-03-16._
 
-Seasons: S1 6359 · S2 6058 · S3 4012
+Seasons: S1 6359 · S2 6058 · S3 4027
 
-Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1494 · 3.02 1222 · unknown 10 (unknown = season contradicts the date: label-grace/override)
+Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1494 · 3.02 1237 · unknown 10 (unknown = season contradicts the date: label-grace/override)
 
-Misses by reason: pre-launch 4456 · not-tekken8 2688 · short-duration 1684 · shorts 1133 · no-vs-title 252 · char-unresolved 163 · live-or-upcoming 4 · bad-handle 3
+Misses by reason: pre-launch 4456 · not-tekken8 2689 · short-duration 1684 · shorts 1133 · no-vs-title 252 · char-unresolved 163 · live-or-upcoming 4 · bad-handle 3
 
 Season-label conflicts (channel label ≠ date-derived season, outside the ±14d boundary grace; date wins): 147
 
 Pending review: 6 (data/review-queue.json)
 
-Player identity: 113 identity(s) resolved from more than one spelling
+Player identity: 114 identity(s) resolved from more than one spelling
 
 Retired ids are 301-redirected from vercel.json — run `npm run data:redirects`
 after changing scripts/players.ts, or the old URLs 404.
@@ -82,7 +82,7 @@ after changing scripts/players.ts, or the old URLs 404.
 - `how-foolish` ← `howfoolish`
 - `imyourfather` ← `i-m-your-father` · `im-your-father`
 - `jacobkaas` ← `jacob-kaas`
-- …and 73 more
+- …and 74 more
 
 ## Tournament placements — Liquipedia Tier 1–2, CC BY-SA 3.0
 
@@ -188,4 +188,4 @@ guessing this module refuses.
 - `4Pf63UozmxA` [highLevel] no-vs-title: T8 🔥 Kkokkoma (Dragunov) 🔥 Tekken 8
 - `RUDWRC5M738` [highLevel] no-vs-title: T8 🔥 Shadow 20z (Zafina) 🔥 Tekken 8
 
-_Generated 2026-10-30T13:38:30.736Z_
+_Generated 2026-10-31T13:08:24.158Z_
