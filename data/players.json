@@ -3690,6 +3690,10 @@
     "handle": "Ganihari"
   },
   {
+    "id": "gantz",
+    "handle": "Gantz"
+  },
+  {
     "id": "garghina",
     "handle": "GARGHINA"
   },
@@ -4531,6 +4535,10 @@
   {
     "id": "holeman",
     "handle": "HOLEMAN"
+  },
+  {
+    "id": "hollow",
+    "handle": "Hollow"
   },
   {
     "id": "hollow-king",
@@ -11673,6 +11681,10 @@
   {
     "id": "tim",
     "handle": "Tim"
+  },
+  {
+    "id": "timbo",
+    "handle": "Timbo"
   },
   {
     "id": "tir",
