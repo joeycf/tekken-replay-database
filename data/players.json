@@ -9306,6 +9306,10 @@
     "handle": "Queen Aurora"
   },
   {
+    "id": "queen-diva",
+    "handle": "Queen Diva"
+  },
+  {
     "id": "queo",
     "handle": "Queo"
   },
@@ -12544,6 +12548,10 @@
   {
     "id": "xiao",
     "handle": "Xiao"
+  },
+  {
+    "id": "xiao-pridow",
+    "handle": "Xiao Pridow"
   },
   {
     "id": "xiong",
