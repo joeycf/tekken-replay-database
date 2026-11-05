@@ -5929,6 +5929,10 @@
     "handle": "Kilxiao"
   },
   {
+    "id": "kim-xiao",
+    "handle": "Kim Xiao"
+  },
+  {
     "id": "kimadam",
     "handle": "KIMADAM"
   },
@@ -8592,6 +8596,10 @@
     "handle": "Ohkami"
   },
   {
+    "id": "ok",
+    "handle": "OK"
+  },
+  {
     "id": "okage",
     "handle": "OKAGE"
   },
@@ -10643,6 +10651,10 @@
     "handle": "Shudy"
   },
   {
+    "id": "shunkko",
+    "handle": "Shunkko"
+  },
+  {
     "id": "shuvi",
     "handle": "Shuvi"
   },
@@ -12629,6 +12641,10 @@
         }
       ]
     }
+  },
+  {
+    "id": "yahits",
+    "handle": "Yahits"
   },
   {
     "id": "yaiba",

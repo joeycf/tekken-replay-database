@@ -1,9 +1,9 @@
 {
   "game": "tekken8",
   "name": "Tekken 8",
-  "replays": 16483,
-  "players": 2693,
+  "replays": 16529,
+  "players": 2697,
   "characters": 42,
-  "updated": "2026-11-03",
+  "updated": "2026-11-05",
   "engine": "v0.18.1"
 }
