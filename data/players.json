@@ -6648,7 +6648,7 @@
   },
   {
     "id": "liliyoon",
-    "handle": "LiliYoon"
+    "handle": "Liliyoon"
   },
   {
     "id": "lilypichu",
@@ -11409,6 +11409,10 @@
     "handle": "Tejj"
   },
   {
+    "id": "tekken-crash",
+    "handle": "Tekken Crash"
+  },
+  {
     "id": "tekken-master",
     "handle": "Tekken Master",
     "featured": true,
@@ -12337,6 +12341,10 @@
     "handle": "Voila 99"
   },
   {
+    "id": "vole99",
+    "handle": "VOLE99"
+  },
+  {
     "id": "volleboid",
     "handle": "VolleBoid"
   },
@@ -12568,6 +12576,10 @@
   {
     "id": "xiong",
     "handle": "XIONG"
+  },
+  {
+    "id": "xiuashiqitia",
+    "handle": "XIUASHIQITIA"
   },
   {
     "id": "xo",
