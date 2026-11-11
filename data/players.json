@@ -2812,6 +2812,10 @@
     "handle": "DTNIM"
   },
   {
+    "id": "duckdam",
+    "handle": "Duckdam"
+  },
+  {
     "id": "ducksik",
     "handle": "Ducksik"
   },
@@ -6660,7 +6664,7 @@
   },
   {
     "id": "liliyoon",
-    "handle": "Liliyoon"
+    "handle": "LiliYoon"
   },
   {
     "id": "lilypichu",
@@ -7938,6 +7942,10 @@
   {
     "id": "n-h",
     "handle": "N H"
+  },
+  {
+    "id": "n3r0",
+    "handle": "N3R0"
   },
   {
     "id": "n3ro",
