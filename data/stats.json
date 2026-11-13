@@ -1,12 +1,12 @@
 {
   "totals": {
-    "replays": 16638,
+    "replays": 16639,
     "characters": 42,
-    "players": 2709,
+    "players": 2710,
     "byPatch": {
       "S1": 6359,
       "S2": 6058,
-      "S3": 4221
+      "S3": 4222
     }
   },
   "characterUsage": {
@@ -28,11 +28,11 @@
     "hwoarang": 1244,
     "jack8": 639,
     "jin": 863,
-    "jun": 700,
+    "jun": 701,
     "kazuya": 2061,
     "king": 660,
     "kuma": 227,
-    "kunimitsu": 482,
+    "kunimitsu": 483,
     "lars": 516,
     "law": 779,
     "lee": 689,
@@ -153,11 +153,11 @@
       "hwoarang": 286,
       "jack8": 185,
       "jin": 149,
-      "jun": 145,
+      "jun": 146,
       "kazuya": 464,
       "king": 79,
       "kuma": 35,
-      "kunimitsu": 482,
+      "kunimitsu": 483,
       "lars": 92,
       "law": 144,
       "lee": 185,
@@ -4804,6 +4804,9 @@
       "claudio": 4,
       "jin": 1
     },
+    "korz": {
+      "kunimitsu": 1
+    },
     "kotzen": {
       "yoshimitsu": 1
     },
@@ -6212,7 +6215,7 @@
     },
     "nickromancer": {
       "anna": 2,
-      "jun": 1,
+      "jun": 2,
       "lili": 52,
       "nina": 5
     },
