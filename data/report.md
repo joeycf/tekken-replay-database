@@ -1,14 +1,14 @@
 # Tekken pipeline report
 
-**16639 matches** parsed from 26744 uploads across 5 channels, plus 317 from 1 index · 2710 players · ranked sides 15301/33278 (46.0%)
+**16643 matches** parsed from 26760 uploads across 5 channels, plus 317 from 1 index · 2710 players · ranked sides 15303/33286 (46.0%)
 
 | channel | source | uploads | parsed | coverage |
 | --- | --- | ---: | ---: | ---: |
-| highLevel | highLevel | 4922 | 4879 | 99.1% |
-| telly | telly | 13125 | 8184 | 62.4% |
-| ranked | ranked | 2958 | 2933 | 99.2% |
+| highLevel | highLevel | 4927 | 4879 | 99.0% |
+| telly | telly | 13131 | 8185 | 62.3% |
+| ranked | ranked | 2962 | 2936 | 99.1% |
 | bneEsports | tournament | 2904 | 263 | 9.1% |
-| evoEvents | tournament | 2835 | 63 | 2.2% |
+| evoEvents | tournament | 2836 | 63 | 2.2% |
 | replayTheater _(carried)_ | tournament | — | 317 | — |
 
 ### Index intakes
@@ -28,11 +28,11 @@ _The cursor did not move: the catalogue has taken no new Tekken entry since_
 _the last pull — quieter still, and equally ordinary. Its tagged Tekken rows_
 _stop at 2025-03-16._
 
-Seasons: S1 6359 · S2 6058 · S3 4222
+Seasons: S1 6359 · S2 6058 · S3 4226
 
-Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1494 · 3.02 1432 · unknown 10 (unknown = season contradicts the date: label-grace/override)
+Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1494 · 3.02 1436 · unknown 10 (unknown = season contradicts the date: label-grace/override)
 
-Misses by reason: pre-launch 4456 · not-tekken8 2691 · short-duration 1684 · shorts 1134 · no-vs-title 254 · char-unresolved 190 · live-or-upcoming 4 · bad-handle 3
+Misses by reason: pre-launch 4456 · not-tekken8 2692 · short-duration 1684 · shorts 1134 · no-vs-title 255 · char-unresolved 201 · bad-handle 3 · live-or-upcoming 3
 
 Season-label conflicts (channel label ≠ date-derived season, outside the ±14d boundary grace; date wins): 147
 
@@ -158,6 +158,11 @@ guessing this module refuses.
 
 ## Sample misses (first 30 that are not shorts/live)
 
+- `wX36x1i_Eks` [highLevel] char-unresolved: T8 🔥 MOMODOG (#1 Ranked Devil Jin) vs STEVEPI (Roger Jr.) 🔥 Tekken 8 High Level Gameplay
+- `3NzpyzZ_JrI` [highLevel] char-unresolved: T8 🔥 BOBBO (Roger Jr.) vs GORAN (Jun) 🔥 Tekken 8 High Level Gameplay
+- `zbtXTRCn1yI` [highLevel] char-unresolved: T8 🔥 LEEMISHIMA (#9 Ranked Roger Jr.) vs JVITORTKGOOD (Victor) 🔥 Tekken 8 High Level Gameplay
+- `2OgqoUC0CE4` [highLevel] char-unresolved: T8 🔥 DHOME (#9 Ranked Roger Jr.) vs J-PAIN 2.0 (Heihachi) 🔥 Tekken 8 High Level Gameplay
+- `GNjRAPffxE4` [highLevel] char-unresolved: T8 🔥 TETSU (Roger Jr.) vs ORACLE (#4 Ranked Shaheen) 🔥 Tekken 8 High Level Gameplay
 - `7yoW7IBZneU` [highLevel] char-unresolved: T8 🔥 THE PANZER (#8 Ranked Roger Jr.) vs THEMAINMAN (Kazuya) 🔥 Tekken 8 High Level Gameplay
 - `ZPdxtDHkyRg` [highLevel] char-unresolved: T8 🔥 DOMA (Roger Jr.) vs ZENITH (Hwoarang) 🔥 Tekken 8 High Level Gameplay
 - `UIze6c4OtRc` [highLevel] char-unresolved: T8 🔥 HENDO (Roger Jr.) vs SIVAD GRIMES (Fahkumram) 🔥 Tekken 8 High Level Gameplay
@@ -183,10 +188,5 @@ guessing this module refuses.
 - `6Ms4Ml7_iTU` [highLevel] no-vs-title: T8 🔥 JeonDDing' unstoppable Eddy! 🔥 Tekken 8 High Level Gameplay
 - `a8Agax5NUFA` [highLevel] bad-handle: T8 🔥 Jeondding (Eddy) vs 이새낀 닌자 그 자체 (#2 Ranked Raven) 🔥 Tekken 8 High Level Gameplay
 - `p7IrMkQuFYU` [highLevel] no-vs-title: T8 🔥 JeonDDing's Eddy Gordo is INSANE!  🔥 Tekken 8 High Level Gameplay
-- `tyABfxhl5Cg` [highLevel] no-vs-title: T8 🔥 Anakin (Eddy) First look! 🔥 Tekken 8 High Level Gameplay
-- `wOyY-wl5hXs` [highLevel] no-vs-title: T8 🔥 Rangchu (Eddy) vs Mulgold & Noob King & Gupimon 🔥 Tekken 8 High Level Gameplay
-- `e5gRNIrMW2E` [highLevel] no-vs-title: T8 🔥 JeonDDing (Eddy Gordo) First look! 🔥 Tekken 8 High Level Gameplay
-- `Acl6yLISNgg` [highLevel] no-vs-title: T8 🔥 Rangchu (Eddy Gordo) First look! 🔥 Tekken 8 High Level Gameplay
-- `MouW4DmD5UI` [highLevel] bad-handle: T8 🔥 CherryBerryMango (Jin) vs 티슈몽핀야고어택딸기잼임모탈 (#2 Ranked Raven) 🔥 Tekken 8 High Level Gameplay
 
-_Generated 2026-11-13T14:58:55.170Z_
+_Generated 2026-11-14T13:51:41.539Z_
