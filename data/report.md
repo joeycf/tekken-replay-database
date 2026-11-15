@@ -1,12 +1,12 @@
 # Tekken pipeline report
 
-**16643 matches** parsed from 26760 uploads across 5 channels, plus 317 from 1 index · 2710 players · ranked sides 15303/33286 (46.0%)
+**16651 matches** parsed from 26778 uploads across 5 channels, plus 317 from 1 index · 2712 players · ranked sides 15305/33302 (46.0%)
 
 | channel | source | uploads | parsed | coverage |
 | --- | --- | ---: | ---: | ---: |
-| highLevel | highLevel | 4927 | 4879 | 99.0% |
-| telly | telly | 13131 | 8185 | 62.3% |
-| ranked | ranked | 2962 | 2936 | 99.1% |
+| highLevel | highLevel | 4931 | 4880 | 99.0% |
+| telly | telly | 13140 | 8189 | 62.3% |
+| ranked | ranked | 2967 | 2939 | 99.1% |
 | bneEsports | tournament | 2904 | 263 | 9.1% |
 | evoEvents | tournament | 2836 | 63 | 2.2% |
 | replayTheater _(carried)_ | tournament | — | 317 | — |
@@ -24,15 +24,14 @@ the committed records are carried, and the run stays green.
 
 _The pull ran and found no new tournament entries, so the committed catalogue_
 _was carried unchanged and this pull's intake counts were not measured._
-_The cursor did not move: the catalogue has taken no new Tekken entry since_
-_the last pull — quieter still, and equally ordinary. Its tagged Tekken rows_
-_stop at 2025-03-16._
+_The cursor still advanced: a quiet day is the ordinary case here, not a_
+_failed one — the catalogue's tagged Tekken rows stop at 2025-03-16._
 
-Seasons: S1 6359 · S2 6058 · S3 4226
+Seasons: S1 6359 · S2 6058 · S3 4234
 
-Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1494 · 3.02 1436 · unknown 10 (unknown = season contradicts the date: label-grace/override)
+Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1494 · 3.02 1444 · unknown 10 (unknown = season contradicts the date: label-grace/override)
 
-Misses by reason: pre-launch 4456 · not-tekken8 2692 · short-duration 1684 · shorts 1134 · no-vs-title 255 · char-unresolved 201 · bad-handle 3 · live-or-upcoming 3
+Misses by reason: pre-launch 4456 · not-tekken8 2692 · short-duration 1684 · shorts 1134 · no-vs-title 256 · char-unresolved 211 · bad-handle 3 · live-or-upcoming 2
 
 Season-label conflicts (channel label ≠ date-derived season, outside the ±14d boundary grace; date wins): 147
 
@@ -87,7 +86,7 @@ after changing scripts/players.ts, or the old URLs 404.
 
 ## Tournament placements — Liquipedia Tier 1–2, CC BY-SA 3.0
 
-161 events with placements read; 91 of 2710 registry players carry a title (154 wins). 20 placed names are not in the registry yet — they are featured the day a replay of theirs is ingested, unless listed below as needing a human.
+161 events with placements read; 91 of 2712 registry players carry a title (154 wins). 20 placed names are not in the registry yet — they are featured the day a replay of theirs is ingested, unless listed below as needing a human.
 
 **Titled:** `mulgold` 12W/5R · `ulsan` 10W/6R · `atif-butt` 8W/7R · `arslan-ash` 9W/4R · `farzeen` 7W/4R · `lowhigh` 3W/8R · `rangchu` 4W/6R · `shadow` 4W/4R · `tetsu` 5W/2R · `jeondding` 0W/6R · `jodd` 3W/3R · `joka` 2W/4R · `kaneandtrench` 4W/2R · `raef` 4W/2R · `sin` 2W/4R · `gosain` 2W/3R · `ilias` 3W/2R · `joe-crush` 2W/3R · `kkokkoma` 3W/2R · `knee` 2W/3R · `the-jon` 3W/2R · `edge` 3W/1R · `keisuke` 0W/4R · `leemishima` 3W/1R · `nino` 3W/1R · `numan-ch` 3W/1R · `saint` 1W/3R · `tibetano` 2W/2R · `yagami` 1W/3R · `exodia` 1W/2R · `fear-of-silence` 2W/1R · `king-rey-jr` 1W/2R · `malgu` 1W/2R · `meo-il` 3W/0R · `pikah` 2W/1R · `qasim-meer` 1W/2R · `qudans` 2W/1R · `boosterblast` 0W/2R · `cherry-berry-mango` 1W/1R · `eyemusician` 0W/2R · `jdcr` 2W/0R · `kagemaru` 0W/2R · `kirakira` 1W/1R · `ninjakilla` 2W/0R · `usama-abbasi` 2W/0R · `xcc` 2W/0R · `abel-del-maestro` 0W/1R · `befamous` 0W/1R · `bode` 1W/0R · `breadman` 0W/1R · `chanel` 1W/0R · `chikurin` 1W/0R · `cuddle-core` 1W/0R · `danielmado` 1W/0R · `dante` 0W/1R · `dawood-sikandar` 1W/0R · `dbp` 0W/1R · `divineexorcist4` 0W/1R · `dombilimaymun` 0W/1R · `double` 1W/0R · `edddyy` 1W/0R · `genghis-d0n` 1W/0R · `hafiz-tanveer` 0W/1R · `haisha` 1W/0R · `hendo` 0W/1R · `how-foolish` 0W/1R · `ikari` 1W/0R · `jesandy` 1W/0R · `joonya` 0W/1R · `kaizokulars` 0W/1R · `kei` 1W/0R · `krissw` 0W/1R · `m-d-luffy-19` 0W/1R · `manounou` 1W/0R · `mohsin-shooter` 1W/0R · `neonkay64` 1W/0R · `ng-obscure` 1W/0R · `nigno` 0W/1R · `nobi` 1W/0R · `noel` 1W/0R · `nomar` 0W/1R · `nrc` 0W/1R · `roynichi` 0W/1R · `rskyluck` 0W/1R · `rv-cris` 1W/0R · `sergie-mazter` 0W/1R · `shounen` 1W/0R · `sourpiggy` 1W/0R · `strog` 1W/0R · `taiheiyo` 0W/1R · `tekken-master` 0W/1R
 
@@ -158,6 +157,9 @@ guessing this module refuses.
 
 ## Sample misses (first 30 that are not shorts/live)
 
+- `xrxBmxqJExk` [highLevel] char-unresolved: T8 🔥 GLACIATING (Roger Jr.) vs UNCQUALIZER (#2 Ranked Dragunov) 🔥 Tekken 8 High Level Gameplay
+- `tYBQuDJob2A` [highLevel] char-unresolved: T8 🔥 STEVEPI (Roger Jr.) vs SIN (Yoshimitsu) 🔥 Tekken 8 High Level Gameplay
+- `xfi_JZIldrY` [highLevel] char-unresolved: T8 🔥 HELPME (Roger Jr.) vs BREADMAN (Leroy) 🔥 Tekken 8 High Level Gameplay
 - `wX36x1i_Eks` [highLevel] char-unresolved: T8 🔥 MOMODOG (#1 Ranked Devil Jin) vs STEVEPI (Roger Jr.) 🔥 Tekken 8 High Level Gameplay
 - `3NzpyzZ_JrI` [highLevel] char-unresolved: T8 🔥 BOBBO (Roger Jr.) vs GORAN (Jun) 🔥 Tekken 8 High Level Gameplay
 - `zbtXTRCn1yI` [highLevel] char-unresolved: T8 🔥 LEEMISHIMA (#9 Ranked Roger Jr.) vs JVITORTKGOOD (Victor) 🔥 Tekken 8 High Level Gameplay
@@ -185,8 +187,5 @@ guessing this module refuses.
 - `uNAGsvJ6RhA` [highLevel] no-vs-title: T8 🔥 Ulsan (4th place at EVO 2024) + Lidia! 🔥 Tekken 8 Lidia Sobieski Day 2
 - `ea--S8NkK0g` [highLevel] no-vs-title: T8 🔥 Breadman (#1 Ranked Leroy) tries out Lidia 🔥 Tekken 8 Lidia Sobieski Day 1
 - `fG4DqeTHiLU` [highLevel] char-unresolved: T8 🔥 JeonDDing (Eddy/Reina) vs JDCR (Dragunov) 🔥 Tekken 8 High Level Gameplay
-- `6Ms4Ml7_iTU` [highLevel] no-vs-title: T8 🔥 JeonDDing' unstoppable Eddy! 🔥 Tekken 8 High Level Gameplay
-- `a8Agax5NUFA` [highLevel] bad-handle: T8 🔥 Jeondding (Eddy) vs 이새낀 닌자 그 자체 (#2 Ranked Raven) 🔥 Tekken 8 High Level Gameplay
-- `p7IrMkQuFYU` [highLevel] no-vs-title: T8 🔥 JeonDDing's Eddy Gordo is INSANE!  🔥 Tekken 8 High Level Gameplay
 
-_Generated 2026-11-14T13:51:41.539Z_
+_Generated 2026-11-15T14:22:53.656Z_

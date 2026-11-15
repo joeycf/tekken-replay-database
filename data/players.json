@@ -2919,6 +2919,10 @@
     "handle": "Eddyy"
   },
   {
+    "id": "edelgard",
+    "handle": "Edelgard"
+  },
+  {
     "id": "edge",
     "handle": "Edge",
     "featured": true,
@@ -11009,6 +11013,10 @@
   {
     "id": "spanian",
     "handle": "Spanian"
+  },
+  {
+    "id": "spb",
+    "handle": "SPB"
   },
   {
     "id": "speedkicks",
