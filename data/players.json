@@ -379,6 +379,10 @@
     "handle": "Amnesiac Kicks"
   },
   {
+    "id": "amoeba",
+    "handle": "Amoeba"
+  },
+  {
     "id": "amon",
     "handle": "Amon"
   },
@@ -3088,6 +3092,10 @@
     "handle": "Ertugrul"
   },
   {
+    "id": "espabila",
+    "handle": "Espabila"
+  },
+  {
     "id": "espada",
     "handle": "ESPADA"
   },
@@ -3831,6 +3839,10 @@
   {
     "id": "glaciating",
     "handle": "Glaciating"
+  },
+  {
+    "id": "gleb",
+    "handle": "Gleb"
   },
   {
     "id": "glinda",
@@ -4954,6 +4966,10 @@
     "handle": "J.Pain"
   },
   {
+    "id": "j-pain-2-0",
+    "handle": "J-pain 2.0"
+  },
+  {
     "id": "jaboikyran",
     "handle": "Jaboikyran"
   },
@@ -5481,6 +5497,10 @@
   {
     "id": "justoneman",
     "handle": "JustOneMan"
+  },
+  {
+    "id": "jvitortkgood",
+    "handle": "JVITORTKGOOD"
   },
   {
     "id": "jyotaro",
@@ -6676,7 +6696,7 @@
   },
   {
     "id": "liliyoon",
-    "handle": "LiliYoon"
+    "handle": "Liliyoon"
   },
   {
     "id": "lilypichu",
@@ -7593,6 +7613,10 @@
     "handle": "MOKO"
   },
   {
+    "id": "moku",
+    "handle": "Moku"
+  },
+  {
     "id": "momo",
     "handle": "Momo"
   },
@@ -7894,6 +7918,10 @@
   {
     "id": "mungguri",
     "handle": "MungGuri"
+  },
+  {
+    "id": "munoe",
+    "handle": "Munoe"
   },
   {
     "id": "musalli",
@@ -8780,6 +8808,10 @@
     "handle": "Overhaul"
   },
   {
+    "id": "oyashiro-rav",
+    "handle": "OYASHIRO RAV"
+  },
+  {
     "id": "oyjn",
     "handle": "OYJN"
   },
@@ -8832,12 +8864,20 @@
     "handle": "PALEET"
   },
   {
+    "id": "pallut",
+    "handle": "Pallut"
+  },
+  {
     "id": "pandayes",
     "handle": "Pandayes"
   },
   {
     "id": "pandey",
     "handle": "PANDEY"
+  },
+  {
+    "id": "panett",
+    "handle": "Panett"
   },
   {
     "id": "pangdoll",
@@ -9045,6 +9085,10 @@
   {
     "id": "piofsteve",
     "handle": "Piofsteve"
+  },
+  {
+    "id": "pip",
+    "handle": "Pip"
   },
   {
     "id": "pirororo",
@@ -9707,6 +9751,10 @@
   {
     "id": "reina-yes",
     "handle": "Reina Yes"
+  },
+  {
+    "id": "reka",
+    "handle": "REKA"
   },
   {
     "id": "relhiya",
@@ -10820,6 +10868,10 @@
     "handle": "SITUREN"
   },
   {
+    "id": "sivad-grimes",
+    "handle": "Sivad Grimes"
+  },
+  {
     "id": "sixtymixty",
     "handle": "SixtyMixty"
   },
@@ -11638,6 +11690,10 @@
     "handle": "The Most Awaited Match KEISUKE"
   },
   {
+    "id": "the-panzer",
+    "handle": "The Panzer"
+  },
+  {
     "id": "the-proswagonist",
     "handle": "The Proswagonist"
   },
@@ -12007,6 +12063,10 @@
     "handle": "TTG Myro"
   },
   {
+    "id": "ttosenpai",
+    "handle": "Ttosenpai"
+  },
+  {
     "id": "tttr",
     "handle": "TTTR"
   },
@@ -12061,6 +12121,10 @@
   {
     "id": "uiui",
     "handle": "UIUI"
+  },
+  {
+    "id": "uka",
+    "handle": "Uka"
   },
   {
     "id": "ukiyo",
@@ -12190,6 +12254,10 @@
   {
     "id": "ulsan-kkokkoma",
     "handle": "Ulsan & Kkokkoma"
+  },
+  {
+    "id": "ulsan-pinya",
+    "handle": "Ulsan, Pinya"
   },
   {
     "id": "uma-shika",
@@ -12713,6 +12781,10 @@
   {
     "id": "yais",
     "handle": "Yais"
+  },
+  {
+    "id": "yalmo",
+    "handle": "Yalmo"
   },
   {
     "id": "yamadamisago",

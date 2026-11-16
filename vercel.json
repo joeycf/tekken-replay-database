@@ -499,6 +499,11 @@
       "permanent": true
     },
     {
+      "source": "/tekken/players/river-side-house",
+      "destination": "/tekken/players/riversidehouse",
+      "permanent": true
+    },
+    {
       "source": "/tekken/players/saeyoung",
       "destination": "/tekken/players/sae-young",
       "permanent": true
@@ -1796,6 +1801,11 @@
     {
       "source": "/tekken/players/thejakeman",
       "destination": "/tekken/players/the-jakeman",
+      "permanent": true
+    },
+    {
+      "source": "/tekken/players/tri-bal",
+      "destination": "/tekken/players/tribal",
       "permanent": true
     },
     {
