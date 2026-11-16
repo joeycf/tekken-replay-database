@@ -33,7 +33,15 @@
     "3:00 PM / [CEST] Thu Aug 20 12:00 AM — one release, two calendar days, and",
     "wavu took the PDT side here where it took the CEST side for 3.01.01. Follow",
     "wavu: every row above is its first-release date verbatim, and second-guessing",
-    "it per-row is how a table starts disagreeing with the source it cites."
+    "it per-row is how a table starts disagreeing with the source it cites.",
+    "",
+    "3.03 IS AHEAD OF WAVU (added 2026-11-16): wavu's table was last edited",
+    "2026-10-14 and has no 3.03 line yet, so patch-check reports this row as",
+    "'on no wavu line (invented?)' until it does. Source: Bandai's notes for",
+    "Ver.3.03.01 (bandainamcoent.com/news/tekken-8-patch-notes-v3-03-01) —",
+    "applied [PST] Wed Nov 11 6:00 PM / [CET] Thu Nov 12 3:00 AM, i.e. 02:00 UTC",
+    "Nov 12, and it adds Roger Jr. (early access for Season 3 pass owners).",
+    "11-12 is the UTC day; when wavu lists the line, take ITS date."
   ],
   "patches": [
     { "version": "1.01", "start": "2024-01-26", "includes": ["1.01.04"], "note": "launch" },
@@ -59,6 +67,7 @@
     { "version": "2.08", "start": "2025-12-01", "includes": ["2.08.01"], "note": "Miary Zo" },
     { "version": "3.00", "start": "2026-03-17", "includes": ["3.00.01", "3.00.02"], "note": "Season 3" },
     { "version": "3.01", "start": "2026-05-28", "includes": ["3.01.01"], "note": "Kunimitsu" },
-    { "version": "3.02", "start": "2026-08-19", "includes": ["3.02.01", "3.02.02"], "note": "Bob" }
+    { "version": "3.02", "start": "2026-08-19", "includes": ["3.02.01", "3.02.02"], "note": "Bob" },
+    { "version": "3.03", "start": "2026-11-12", "includes": ["3.03.01"], "note": "Roger Jr." }
   ]
 }

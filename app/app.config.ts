@@ -90,6 +90,7 @@ export default defineAppConfig({
       paul: '#FF9C2E',
       raven: '#6E62B8',
       reina: '#C45CF0',
+      roger_jr: '#D2D332',
       shaheen: '#56C9A2',
       steve: '#2F82DC',
       victor: '#5A68E0',
@@ -145,8 +146,12 @@ export default defineAppConfig({
     // ComboForge cross-link on character pages (engine v0.11.0). ComboForge
     // files Tekken by FULL name, so most of the roster needs an explicit
     // suffix; the twelve mononyms (Azucena, Devil Jin, King, …) derive. Anna is
-    // the one null — a character ComboForge does not carry — and the band falls
+    // null — a character ComboForge does not carry — and the band falls
     // back to the Tekken 8 hub rather than emitting a deep link to nothing.
+    // roger_jr is null UNVERIFIED (2026-11-16): he shipped 11-11 and
+    // comboforge.gg answers this project's verifier with a 429 challenge, so
+    // nobody has seen whether ComboForge carries him. Check by hand, then
+    // derive or map him.
     // Built and gated with the engine's `npm run verify:comboforge`.
     //
     // THE NULL LIST IS PERISHABLE, and that is the point of gating it. It held
@@ -184,6 +189,7 @@ export default defineAppConfig({
         victor: 'victor-chevalier',
         xiaoyu: 'ling-xiaoyu',
         anna: null,
+        roger_jr: null,
       },
     },
   } satisfies GameConfig,

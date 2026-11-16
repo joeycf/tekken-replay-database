@@ -41,6 +41,7 @@ async function fetchBuffer(url: string): Promise<Buffer> {
 //    official full EN + JP names kept in `extra` for the character page ──────
 const SHORT_NAME_OVERRIDES: Record<string, string> = {
   jack8: 'Jack-8',
+  roger_jr: 'Roger Jr.', // the official EN name; the id derivation drops the period
 };
 const shortName = (id: string): string =>
   SHORT_NAME_OVERRIDES[id] ??
@@ -80,6 +81,7 @@ const CURATED_ALIASES: Record<string, string[]> = {
   miary_zo: ['miaryzo', 'miary'],
   nina: ['nina williams'],
   paul: ['paul phoenix'],
+  roger_jr: ['roger jr'],
   steve: ['steve fox'],
   victor: ['victor chevalier'],
   xiaoyu: ['ling xiaoyu'],

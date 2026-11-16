@@ -541,6 +541,21 @@
     }
   },
   {
+    "id": "roger_jr",
+    "name": "Roger Jr.",
+    "imgPortrait": "/img/characters/roger_jr-portrait.webp",
+    "imgSplash": "/img/characters/roger_jr-splash.webp",
+    "accent": "#D2D332",
+    "extra": {
+      "aliases": [
+        "roger jr.",
+        "roger jr"
+      ],
+      "full name": "Roger Jr.",
+      "japanese": "ロジャー Jr."
+    }
+  },
+  {
     "id": "shaheen",
     "name": "Shaheen",
     "imgPortrait": "/img/characters/shaheen-portrait.webp",

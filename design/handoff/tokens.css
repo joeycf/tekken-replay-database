@@ -40,7 +40,7 @@
   --warning: #F5B33C;
   --danger:  #FF4B3E;
 
-  /* --- Per-character accent slots (roster of 42, S3 2026) --- */
+  /* --- Per-character accent slots (roster of 43, S3 2026) --- */
   --char-alisa:      #FF9ED2;
   --char-anna:       #FF4E6E;
   --char-armor_king: #97A2B8;
@@ -77,6 +77,14 @@
   --char-paul:       #FF9C2E;
   --char-raven:      #6E62B8;
   --char-reina:      #C45CF0;
+  /* DERIVED 2026-11-16 (checklist 14c; a design session may replace it):
+     anchor = the shorts' yellow in the official key art
+     (images/character/roger_jr/img_01.png, OKLCH h 104, L .78, C .16), snapped
+     +6° into the roster's widest open gap (99°→128°). Δhue to the nearest:
+     fahkumram 11°, law 13°, bryan 18°. AA 11.5:1 on --bg-surface. The fur
+     (h ~70, 21% of the art) sits 5-6° from kuma/azucena; user-picked over it
+     and over a glove pink (#F96DA4). */
+  --char-roger_jr:   #D2D332;
   --char-shaheen:    #56C9A2;
   --char-steve:      #2F82DC;
   --char-victor:     #5A68E0;

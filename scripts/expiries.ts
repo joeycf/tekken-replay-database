@@ -69,30 +69,18 @@ import type { Expiry } from '../types/index';
  *   "4 Additional playable characters
  *      - Kunimitsu            (shipped 2026-05-28, patch 3.01)
  *      - Bob                  (shipped 2026-08-19, patch 3.02)
- *      - Roger Jr. (Oct-Dec 2026)
+ *      - Roger Jr.            (shipped 2026-11-11 PST, early access; patch 3.03)
  *      - Yujiro Hanma (Jan-Mar 2027)
  *    1 Additional battle stage
  *      - SUBSEA LOCKDOWN (Jan-Mar 2027)
  *    *Content will be fully available by 3/31/2027."
- * So the pass is four characters, two shipped, two pending — there is no fifth
+ * So the pass is four characters, three shipped, one pending — there is no fifth
  * Season 3 slot and no Season 4 announcement. Verified NOT playable on
  * 2026-09-09: a case-insensitive search of the live tk8.tekken-official.jp
  * character index returns zero hits for "roger" and zero for "yujiro"/"hanma",
  * against 42 image ids present.
  */
 export const UNRELEASED: { id: string; releases: string; note?: string }[] = [
-  {
-    id: 'roger_jr',
-    releases: '2026-11-11',
-    note:
-      'Season 3 pass character #3. DATED: the EVO France gameplay trailer (2026-10-11) gave ' +
-      'early access for Season 3 pass owners from 11 November and general release on 16/17 ' +
-      'November (outlets differ by region). Gated on the EARLY-ACCESS day, because pass ' +
-      'owners upload footage from then. The id is confirmed: on 2026-10-15 ' +
-      'data:roster-check found `roger_jr` paged in the official grid (43 ids), still gated ' +
-      'here. Fired 2026-10-12 against the window-based date and was not playable yet. If ' +
-      'Bandai moves the date, re-date this row — do not delete it.',
-  },
   {
     id: 'yujiro',
     releases: '2027-01-01',
