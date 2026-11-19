@@ -1,12 +1,12 @@
 # Tekken pipeline report
 
-**16761 matches** parsed from 26844 uploads across 5 channels, plus 317 from 1 index · 2735 players · ranked sides 15453/33522 (46.1%)
+**16782 matches** parsed from 26865 uploads across 5 channels, plus 317 from 1 index · 2735 players · ranked sides 15485/33564 (46.1%)
 
 | channel | source | uploads | parsed | coverage |
 | --- | --- | ---: | ---: | ---: |
-| highLevel | highLevel | 4946 | 4913 | 99.3% |
-| telly | telly | 13165 | 8234 | 62.5% |
-| ranked | ranked | 2982 | 2961 | 99.3% |
+| highLevel | highLevel | 4952 | 4919 | 99.3% |
+| telly | telly | 13175 | 8244 | 62.6% |
+| ranked | ranked | 2987 | 2966 | 99.3% |
 | bneEsports | tournament | 2914 | 273 | 9.4% |
 | evoEvents | tournament | 2837 | 63 | 2.2% |
 | replayTheater _(carried)_ | tournament | — | 317 | — |
@@ -27,9 +27,9 @@ _was carried unchanged and this pull's intake counts were not measured._
 _The cursor still advanced: a quiet day is the ordinary case here, not a_
 _failed one — the catalogue's tagged Tekken rows stop at 2025-03-16._
 
-Seasons: S1 6359 · S2 6058 · S3 4344
+Seasons: S1 6359 · S2 6058 · S3 4365
 
-Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1494 · 3.02 1430 · 3.03 124 · unknown 10 (unknown = season contradicts the date: label-grace/override)
+Patches: 1.01 578 · 1.02 560 · 1.03 470 · 1.04 676 · 1.05 588 · 1.06 658 · 1.07 354 · 1.08 453 · 1.09 709 · 1.10 385 · 1.11 440 · 1.12 245 · 1.13 243 · 2.00 876 · 2.01 479 · 2.02 682 · 2.03 515 · 2.04 467 · 2.05 736 · 2.06 865 · 2.08 1437 · 3.00 1287 · 3.01 1494 · 3.02 1430 · 3.03 145 · unknown 10 (unknown = season contradicts the date: label-grace/override)
 
 Misses by reason: pre-launch 4456 · not-tekken8 2693 · short-duration 1684 · shorts 1135 · no-vs-title 258 · char-unresolved 163 · bad-handle 3 · live-or-upcoming 2
 
@@ -188,4 +188,4 @@ guessing this module refuses.
 - `4Pf63UozmxA` [highLevel] no-vs-title: T8 🔥 Kkokkoma (Dragunov) 🔥 Tekken 8
 - `RUDWRC5M738` [highLevel] no-vs-title: T8 🔥 Shadow 20z (Zafina) 🔥 Tekken 8
 
-_Generated 2026-11-18T16:03:34.836Z_
+_Generated 2026-11-19T16:07:46.212Z_
