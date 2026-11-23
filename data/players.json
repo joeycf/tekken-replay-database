@@ -507,6 +507,10 @@
     "handle": "ARRIVE DERCI"
   },
   {
+    "id": "arsalan-w",
+    "handle": "Arsalan W"
+  },
+  {
     "id": "arslan-ash",
     "handle": "Arslan Ash",
     "featured": true,
@@ -2774,6 +2778,10 @@
   {
     "id": "dre",
     "handle": "Dre"
+  },
+  {
+    "id": "dread-prince",
+    "handle": "DREAD PRINCE"
   },
   {
     "id": "dreadman",
@@ -9819,6 +9827,10 @@
   {
     "id": "restaurant",
     "handle": "Restaurant"
+  },
+  {
+    "id": "restless",
+    "handle": "Restless"
   },
   {
     "id": "revenant",
