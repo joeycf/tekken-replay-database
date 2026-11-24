@@ -646,6 +646,10 @@
     "handle": "ASDF"
   },
   {
+    "id": "aselass",
+    "handle": "Aselass"
+  },
+  {
     "id": "asellas",
     "handle": "Asellas"
   },
@@ -1969,7 +1973,7 @@
   },
   {
     "id": "cp-jona",
-    "handle": "CP Jona"
+    "handle": "Cp Jona"
   },
   {
     "id": "cpdr",
@@ -2878,6 +2882,10 @@
   {
     "id": "dustiel",
     "handle": "Dustiel"
+  },
+  {
+    "id": "dw",
+    "handle": "DW"
   },
   {
     "id": "dw3765",
@@ -7643,6 +7651,10 @@
   {
     "id": "moku",
     "handle": "Moku"
+  },
+  {
+    "id": "mommy-mia",
+    "handle": "Mommy Mia"
   },
   {
     "id": "momo",

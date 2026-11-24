@@ -1804,6 +1804,11 @@
       "permanent": true
     },
     {
+      "source": "/tekken/players/thuh-real-mak",
+      "destination": "/tekken/players/thuhrealmak",
+      "permanent": true
+    },
+    {
       "source": "/tekken/players/tri-bal",
       "destination": "/tekken/players/tribal",
       "permanent": true
