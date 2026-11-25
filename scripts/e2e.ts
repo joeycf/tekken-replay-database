@@ -2048,18 +2048,19 @@ async function main(): Promise<void> {
       observability.includes('/tekken-insights/script.js'),
       `web analytics script src is /tekken-insights/script.js (got ${JSON.stringify(observability)})`,
     );
-    // Speed Insights stays on the stable path on purpose: single-project on
-    // Hobby, so its beacons must reach whichever project has it enabled
+    // Speed Insights is opt-in since engine v0.19.0 and this game sets no
+    // observability.speedInsights, so no vitals script may load (its beacons
+    // were billed requests to a shell project with the feature disabled)
     expect(
-      observability.includes('/_vercel/speed-insights/script.js'),
-      `speed insights script src is /_vercel/speed-insights/script.js (got ${JSON.stringify(observability)})`,
+      !observability.some((s) => s.includes('speed-insights')),
+      `no speed insights script (got ${JSON.stringify(observability)})`,
     );
     // THE REGRESSION ITSELF: a 16-hex baked path means the explicit endpoints
     // stopped winning over VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG
     const baked = [...observability, ...asked].filter((s) => /^\/[0-9a-f]{16}\//.test(s));
     expect(baked.length === 0, `no baked per-project hash path (got ${JSON.stringify(baked)})`);
     const stray = asked.filter(
-      (p) => !p.startsWith('/tekken-insights/') && !p.startsWith('/_vercel/speed-insights/'),
+      (p) => !p.startsWith('/tekken-insights/'),
     );
     expect(
       stray.length === 0,

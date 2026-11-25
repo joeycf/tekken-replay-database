@@ -22,15 +22,14 @@
    terminals — evokes the Tekken HUD without imitating the trademarked
    logotype); Archivo (variable) = the industrial grotesque UI face;
    JetBrains Mono = data/mono. font-display: swap ships inside the
-   fontsource CSS. ---------------------------------------------------------- */
+   fontsource CSS. JetBrains Mono comes from the engine's variable face (tailwind/theme-default.css,
+   weights 100-800); importing @fontsource's static copies as well made browsers
+   download both (removed for engine v0.19.0). ---------------------------------------------------------- */
 @import '@fontsource/rajdhani/400.css';
 @import '@fontsource/rajdhani/500.css';
 @import '@fontsource/rajdhani/600.css';
 @import '@fontsource/rajdhani/700.css';
 @import '@fontsource-variable/archivo';
-@import '@fontsource/jetbrains-mono/400.css';
-@import '@fontsource/jetbrains-mono/500.css';
-@import '@fontsource/jetbrains-mono/700.css';
 
 /* :root, NOT @theme — deliberately. This file is a plain app stylesheet: it
    never enters the engine's Tailwind root compile, so an `@theme` block here
