@@ -1799,6 +1799,11 @@
       "permanent": true
     },
     {
+      "source": "/tekken/players/the-main-man-swe",
+      "destination": "/tekken/players/themainmanswe",
+      "permanent": true
+    },
+    {
       "source": "/tekken/players/thejakeman",
       "destination": "/tekken/players/the-jakeman",
       "permanent": true
