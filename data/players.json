@@ -3264,6 +3264,10 @@
     "handle": "Fahf f"
   },
   {
+    "id": "fake",
+    "handle": "Fake"
+  },
+  {
     "id": "fakeer-baddo",
     "handle": "Fakeer Baddo"
   },
@@ -9260,6 +9264,10 @@
     "handle": "Ponakota"
   },
   {
+    "id": "pondering",
+    "handle": "PondeRing"
+  },
+  {
     "id": "poopoo",
     "handle": "POOPOO"
   },
@@ -10233,6 +10241,10 @@
   {
     "id": "sakigi",
     "handle": "Sakigi"
+  },
+  {
+    "id": "saldavangaranga",
+    "handle": "SalDaVangaranga"
   },
   {
     "id": "salmon",
